@@ -1,0 +1,10 @@
+.vs
+bin
+obj
+packages/*
+!*.csproj.user
+*.suo
+*.user
+
+node_modules
+internal-nlog-AspNetCore.txt
