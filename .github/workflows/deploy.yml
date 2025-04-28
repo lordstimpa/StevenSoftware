@@ -1,4 +1,4 @@
-name: Deploy to production: stevensoftware.se
+name: Deploy to production of stevensoftware.se
 
 on:
   push:
