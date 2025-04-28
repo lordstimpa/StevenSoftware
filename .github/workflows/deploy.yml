@@ -11,17 +11,25 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Set up SSH
-        uses: webfactory/ssh-agent@v0.5.3
+        uses: webfactory/ssh-agent@v0.9.0
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Debug SSH Setup
+        run: |
+          ssh-add -l
+          ssh -T stimpadalfall@ssh.stevensoftware.se
 
       - name: Deploy to Server
         run: |
           ssh -o StrictHostKeyChecking=no stimpadalfall@ssh.stevensoftware.se << 'EOF'
             cd stevensoftware/app/
             git pull origin main
-            docker-compose down && docker-compose up -d
+            docker-compose down
+            docker image rm stevensoftware/vue:latest || true  # Remove old image
+            docker-compose build --no-cache vue-frontend  # Force rebuild
+            docker-compose up -d
           EOF
