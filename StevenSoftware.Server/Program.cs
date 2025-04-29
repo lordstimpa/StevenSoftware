@@ -1,12 +1,23 @@
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
 builder.Services.AddControllers();
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
+builder.Services.AddCors(options =>
+{
+	options.AddPolicy("AllowSpecificOrigin", policy =>
+	{
+		policy.WithOrigins("https://stevensoftware.se", "https://localhost:60064")
+			  .AllowAnyHeader()
+			  .AllowAnyMethod();
+	});
+});
+
 var app = builder.Build();
+app.UseCors("AllowSpecificOrigin");
 
 app.UseDefaultFiles();
 app.MapStaticAssets();
@@ -14,10 +25,17 @@ app.MapStaticAssets();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.MapOpenApi();
+	app.MapOpenApi();
+	app.UseSwagger();
+    app.UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "StevenSoftware API V1");
+        c.RoutePrefix = "api-docs";
+    });
 }
-
 app.UseHttpsRedirection();
+
+app.UseCors("AllowSpecificOrigin");
 
 app.UseAuthorization();
 
