@@ -22,17 +22,12 @@ app.UseCors("AllowSpecificOrigin");
 app.UseDefaultFiles();
 app.MapStaticAssets();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+app.MapOpenApi();
+app.UseSwagger();
+app.UseSwaggerUI(c =>
 {
-	app.MapOpenApi();
-	app.UseSwagger();
-    app.UseSwaggerUI(c =>
-    {
-        c.SwaggerEndpoint("/swagger/v1/swagger.json", "StevenSoftware API V1");
-        c.RoutePrefix = "api-docs";
-    });
-}
+	c.SwaggerEndpoint("/swagger/v1/swagger.json", "StevenSoftware API V1");
+});
 app.UseHttpsRedirection();
 
 app.UseCors("AllowSpecificOrigin");
