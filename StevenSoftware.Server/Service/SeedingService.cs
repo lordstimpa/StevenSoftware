@@ -6,12 +6,10 @@ namespace StevenSoftware.Server.Services
 	public class SeedingService
 	{
 		private readonly IConfiguration _config;
-		private readonly UserManager<ApplicationUserModel> _userManager;
 
-		public SeedingService(IConfiguration configuration, UserManager<ApplicationUserModel> userManager)
+		public SeedingService(IConfiguration configuration)
 		{
 			_config = configuration;
-			_userManager = userManager;
 		}
 
 		public async Task SeedAdminUser(IServiceProvider serviceProvider)
@@ -19,12 +17,12 @@ namespace StevenSoftware.Server.Services
 			using var scope = serviceProvider.CreateScope();
 			var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUserModel>>();
 
-			var adminEmail = _config["Seed:Email"];
-			var adminPassword = _config["Seed:Password"];
+			var adminEmail = _config["Admin:Email"];
+			var adminPassword = _config["Admin:Password"];
 
 			if (string.IsNullOrEmpty(adminEmail) || string.IsNullOrEmpty(adminPassword))
 			{
-				throw new Exception("Seed:Email or Seed:Password not configured in appsettings.json");
+				throw new Exception("Admin:Email or Admin:Password not configured in appsettings.json");
 			}
 
 			if (await userManager.FindByEmailAsync(adminEmail) == null)

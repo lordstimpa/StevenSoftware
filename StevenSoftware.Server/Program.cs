@@ -96,6 +96,8 @@ using (var scope = app.Services.CreateScope())
 	await seedingService.SeedAdminUser(scope.ServiceProvider);
 }
 
+Console.WriteLine($"Running in {builder.Environment.EnvironmentName} environment");
+
 app.UseCors("AllowSpecificOrigin");
 app.UseSwagger();
 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "StevenSoftware API v1"));
