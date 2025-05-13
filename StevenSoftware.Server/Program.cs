@@ -92,8 +92,22 @@ var app = builder.Build();
 
 using (var scope = app.Services.CreateScope())
 {
-    var seedingService = scope.ServiceProvider.GetRequiredService<SeedingService>();
-	await seedingService.SeedAdminUser(scope.ServiceProvider);
+    var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+
+    try
+    {
+        var canQueryUsers = await dbContext.Database.ExecuteSqlRawAsync("SELECT 1 FROM \"AspNetUsers\" LIMIT 1") == 1;
+
+        if (canQueryUsers)
+        {
+            var seedingService = scope.ServiceProvider.GetRequiredService<SeedingService>();
+            await seedingService.SeedAdminUser(scope.ServiceProvider);
+        }
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"Skipping seeding: {ex.Message}");
+    }
 }
 
 Console.WriteLine($"Running in {builder.Environment.EnvironmentName} environment");
