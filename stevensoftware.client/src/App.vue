@@ -1,10 +1,11 @@
 <template>
-  <div class="m-4">
+  <div class="w-full h-screen flex flex-col items-center"
+       style="background-image: linear-gradient(to left bottom, #181818, #1a1925, #1a1932, #181a40, #121a4e);">
+
     <Navbar />
 
-    <div class="p-6 max-w-4xl mx-auto">
-      <router-view />
-    </div>
+    <router-view />
+
   </div>
 </template>
 

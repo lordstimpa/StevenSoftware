@@ -8,7 +8,7 @@ using System.Security.Claims;
 namespace StevenSoftware.Server.Controllers
 {
 	[ApiController]
-	[Route("api/account")]
+    [Route("account")]
 	public class AccountController : ControllerBase
 	{
 		private readonly UserManager<ApplicationUserModel> _userManager;
@@ -21,7 +21,7 @@ namespace StevenSoftware.Server.Controllers
 		}
 
 		[AllowAnonymous]
-		[HttpPost("login")]
+        [HttpPost("login")]
 		public async Task<IActionResult> Login([FromBody] LoginDto loginDto)
 		{
 			var user = await _userManager.FindByEmailAsync(loginDto.Email);
@@ -35,8 +35,8 @@ namespace StevenSoftware.Server.Controllers
 		}
 
 		[Authorize]
-		[HttpGet("getuser")]
-		public async Task<IActionResult> GetUser()
+        [HttpGet("getuser")]
+        public async Task<IActionResult> GetUser()
 		{
 			Console.WriteLine("Claims in User:");
 			foreach (var claim in User.Claims)

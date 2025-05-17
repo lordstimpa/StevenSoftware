@@ -1,19 +1,24 @@
 <template>
-  <div class="text-center mb-8">
-    <h1 class="text-4xl font-bold text-gray-800">Steven Software</h1>
-    <p class="text-xl text-gray-600">This website is a work in progress...</p>
-  </div>
-  <div class="text-center">
-    <h2 class="text-2xl font-semibold text-gray-800">
-      API status:
-      <span :class="{
+  <div class="flex-1 flex justify-center gap-10 mb-30">
+    <div class="flex flex-col justify-center">
+      <h1 class="text-6xl text-white font-bold">Steven Software</h1>
+      <p class="text-xl text-white">This website is a work in progress...</p>
+
+      <h2 class="text-2xl font-semibold text-white">
+        API status:
+        <span :class="{
             'text-green-500 font-bold': healthStatus === 'Healthy',
             'text-red-500 font-bold': healthStatus === 'Unhealthy',
             'text-yellow-500': healthStatus === 'Error'
         }">
-        {{ healthStatus }}
-      </span>
-    </h2>
+          {{ healthStatus }}
+        </span>
+      </h2>
+    </div>
+
+    <div class="flex-1 flex flex-col justify-center">
+      <img src="../assets/vecteezy_3d-programmer.png" class="w-xl"/>
+    </div>
   </div>
 </template>
 

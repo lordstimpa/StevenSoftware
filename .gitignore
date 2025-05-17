@@ -9,3 +9,4 @@ packages/*
 
 node_modules
 internal-nlog-AspNetCore.txt
+/StevenSoftware.Server/wait-for-it.sh
