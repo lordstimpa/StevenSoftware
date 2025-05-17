@@ -8,8 +8,8 @@ using System.Security.Claims;
 namespace StevenSoftware.Server.Controllers
 {
 	[ApiController]
-    [Route("account")]
-	public class AccountController : ControllerBase
+    [Route("api/account")]
+    public class AccountController : ControllerBase
 	{
 		private readonly UserManager<ApplicationUserModel> _userManager;
 		private readonly JwtTokenService _jwtTokenService;
