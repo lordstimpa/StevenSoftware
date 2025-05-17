@@ -8,7 +8,7 @@ using System.Security.Claims;
 namespace StevenSoftware.Server.Controllers
 {
 	[ApiController]
-    [Route("api/account")]
+    [Route("account")]
     public class AccountController : ControllerBase
 	{
 		private readonly UserManager<ApplicationUserModel> _userManager;
