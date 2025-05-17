@@ -3,8 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 namespace StevenSoftware.Server.Controllers
 {
 	[ApiController]
-	[Route("api/health")]
-	public class HealthController : ControllerBase
+    [Route("health")]
+    public class HealthController : ControllerBase
 	{
 		private readonly ILogger<HealthController> _logger;
 
@@ -13,8 +13,8 @@ namespace StevenSoftware.Server.Controllers
 			_logger = logger;
 		}
 
-		[HttpGet("ApiHealth")]
-		public IActionResult ApiHealth()
+        [HttpGet("apihealth")]
+        public IActionResult ApiHealth()
 		{
 			return Ok(new { status = "Healthy" });
 		}

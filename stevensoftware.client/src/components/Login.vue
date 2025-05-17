@@ -1,10 +1,11 @@
 <template>
-  <div class="rounded-md p-6">
+  <div class="w-full h-screen flex flex-col justify-center items-center mb-30 text-white">
+
     <div class="mb-8 text-center">
-      <h2 class="text-5xl">Login</h2>
+      <h1 class="text-6xl font-bold">Login</h1>
     </div>
 
-    <form @submit="login" class="flex flex-col gap-4">
+    <form @submit="login" class="flex flex-col gap-10 w-2xl">
       <div class="flex flex-col">
         <label class="font-bold" for="email">Email</label>
         <input class="bg-white px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"

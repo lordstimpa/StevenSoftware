@@ -1,12 +1,22 @@
 FROM mcr.microsoft.com/dotnet/sdk:9.0-preview AS ef-migrator
 
-WORKDIR /app
+RUN apt-get update && \
+    apt-get install -y curl && \
+    curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && \
+    apt-get install -y nodejs && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
-COPY . .
+RUN node --version && npm --version
 
 RUN dotnet tool install --global dotnet-ef
 ENV PATH="$PATH:/root/.dotnet/tools"
 
-RUN dotnet restore
+WORKDIR /app
 
-CMD ["dotnet", "ef", "database", "update", "--project", "/app/StevenSoftware.Server/StevenSoftware.Server.csproj"]
+COPY . .
+
+RUN dotnet restore StevenSoftware.Server.csproj
+RUN dotnet build StevenSoftware.Server.csproj --no-restore
+
+CMD ["dotnet", "ef", "database", "update", "--project", "/app/StevenSoftware.Server/StevenSoftware.Server.csproj", "--startup-project", "/app/StevenSoftware.Server/StevenSoftware.csproj"]
