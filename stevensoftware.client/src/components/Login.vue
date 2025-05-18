@@ -8,7 +8,7 @@
     <form @submit="login" class="flex flex-col gap-10 w-2xl">
       <div class="flex flex-col">
         <label class="font-bold" for="email">Email</label>
-        <input class="bg-white px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+        <input class="bg-white text-black px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
                type="email"
                id="email"
                v-model="email"
@@ -17,7 +17,7 @@
 
       <div class="flex flex-col">
         <label class="font-bold" for="password">Password</label>
-        <input class="bg-white px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+        <input class="bg-white text-black px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
                type="password"
                id="password"
                v-model="password"

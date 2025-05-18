@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace StevenSoftware.Server.Controllers
 {
 	[ApiController]
-    [Route("health")]
+    [Route("api/health")]
     public class HealthController : ControllerBase
 	{
 		private readonly ILogger<HealthController> _logger;
