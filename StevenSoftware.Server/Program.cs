@@ -117,6 +117,14 @@ app.UseCors("AllowSpecificOrigin");
 app.UseSwagger();
 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "StevenSoftware API v1"));
 app.UseHttpsRedirection();
+
+app.Use(async (context, next) =>
+{
+    Console.WriteLine($"Incoming request path: {context.Request.Path}");
+    await next();
+});
+
+
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
