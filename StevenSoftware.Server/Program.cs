@@ -91,23 +91,30 @@ builder.Services.AddScoped<SeedingService>();
 
 var app = builder.Build();
 
-using (var scope = app.Services.CreateScope())
-{
-    var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+var maxRetries = 5;
+var retryCount = 0;
+var delay = TimeSpan.FromSeconds(5);
 
+while (retryCount < maxRetries)
+{
     try
     {
-        var canQueryUsers = await dbContext.Database.ExecuteSqlRawAsync("SELECT 1 FROM \"AspNetUsers\" LIMIT 1") == 1;
+        using var scope = app.Services.CreateScope();
+        var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
 
-        if (canQueryUsers)
-        {
-            var seedingService = scope.ServiceProvider.GetRequiredService<SeedingService>();
-            await seedingService.SeedAdminUser(scope.ServiceProvider);
-        }
+        dbContext.Database.Migrate();
+
+        var seedingService = scope.ServiceProvider.GetRequiredService<SeedingService>();
+        await seedingService.SeedAdminUser(scope.ServiceProvider);
+
+        break;
     }
     catch (Exception ex)
     {
-        Console.WriteLine($"Skipping seeding: {ex.Message}");
+        retryCount++;
+        Console.WriteLine($"Seeding failed (attempt {retryCount}): {ex.Message}");
+        if (retryCount == maxRetries) throw;
+        await Task.Delay(delay);
     }
 }
 
@@ -118,15 +125,10 @@ app.UseSwagger();
 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "StevenSoftware API v1"));
 app.UseHttpsRedirection();
 
-app.Use(async (context, next) =>
-{
-    Console.WriteLine($"Incoming request path: {context.Request.Path}");
-    await next();
-});
-
-
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.UsePathBase("/api");
 app.MapControllers();
 
 app.Run();
