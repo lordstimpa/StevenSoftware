@@ -1,39 +1,52 @@
 <template>
-  <div class="w-full h-screen flex flex-col justify-center items-center mb-30 text-white">
-
-    <div class="mb-8 text-center">
-      <h1 class="text-6xl font-bold">Login</h1>
-    </div>
-
-    <form @submit="login" class="flex flex-col gap-10 w-2xl">
-      <div class="flex flex-col">
-        <label class="font-bold" for="email">Email</label>
-        <input class="bg-white text-black px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
-               type="email"
-               id="email"
-               v-model="email"
-               placeholder="email@hotmail.com" />
+  <div class="flex-1 flex justify-center items-center mb-30 text-white">
+    <div class="flex flex-col justify-center p-8 rounded-xl bg-slate-900 shadow-xl w-2xl">
+      <div class="mb-8 text-center border-b border-slate-700 pb-4">
+        <h1 class="text-4xl font-bold">Login</h1>
       </div>
 
-      <div class="flex flex-col">
-        <label class="font-bold" for="password">Password</label>
-        <input class="bg-white text-black px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
-               type="password"
-               id="password"
-               v-model="password"
-               placeholder="••••••••" />
-        <div class="flex justify-evenly mt-2">
-          <router-link to="/" class="hover:underline">Create new user</router-link>
-          <router-link to="/" class="hover:underline">Forgot my password</router-link>
+      <form @submit="login" class="flex flex-col gap-6">
+        <div class="flex flex-col">
+          <label class="font-semibold text-slate-400 mb-1" for="email">Email</label>
+          <input
+            class="bg-slate-800 text-slate-100 px-4 py-2 border border-slate-700 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            type="email"
+            id="email"
+            v-model="email"
+            placeholder="email@hotmail.com"
+          />
         </div>
-      </div>
 
-      <div class="flex justify-end">
-        <button type="submit" class="text-lg text-white bg-indigo-500 hover:bg-indigo-600 cursor-pointer px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
-          Login
-        </button>
-      </div>
-    </form>
+        <div class="flex flex-col">
+          <label class="font-semibold text-slate-400 mb-1" for="password">Password</label>
+          <input
+            class="bg-slate-800 text-slate-100 px-4 py-2 border border-slate-700 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            type="password"
+            id="password"
+            v-model="password"
+            placeholder="••••••••"
+          />
+
+          <div class="flex justify-between text-sm text-indigo-300 mt-2">
+            <router-link to="/" class="hover:text-indigo-200 hover:underline"
+              >Create new user</router-link
+            >
+            <router-link to="/" class="hover:text-indigo-200 hover:underline"
+              >Forgot my password</router-link
+            >
+          </div>
+        </div>
+
+        <div class="flex justify-end">
+          <button
+            type="submit"
+            class="text-lg cursor-pointer font-semibold text-white bg-gradient-to-r from-indigo-500 to-blue-500 hover:from-indigo-600 hover:to-blue-600 px-5 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
+          >
+            Login
+          </button>
+        </div>
+      </form>
+    </div>
   </div>
 </template>
 
@@ -46,6 +59,7 @@
   const email = ref('');
   const password = ref('');
   const error = ref('');
+
   const router = useRouter();
   const userStore = useUserStore();
 
