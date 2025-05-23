@@ -3,26 +3,28 @@ import { get } from '../tools/api';
 
 export const useUserStore = defineStore('user', {
   state: () => ({
-    user: null,
+    user: {
+      firstName: '',
+      lastName: '',
+      email: '',
+    },
   }),
   actions: {
     async fetchUser() {
       const token = localStorage.getItem('jwt');
-      if (!token) {
-        console.error('No JWT found in localStorage');
-        return;
-      }
 
-      const response = await get(`${import.meta.env.VITE_API_URL}/account/getuser`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      if (token) {
+        const response = await get(`${import.meta.env.VITE_API_URL}/account/getuser`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
 
-      if (response) {
-        this.user = response;
-      } else {
-        console.error('Failed to fetch user');
+        if (response) {
+          this.user = response;
+        } else {
+          console.error('Failed to fetch user');
+        }
       }
     },
     logout() {
