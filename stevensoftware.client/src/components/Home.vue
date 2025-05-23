@@ -6,33 +6,29 @@
 
       <h2 class="text-2xl font-semibold text-white">
         API status:
-        <span :class="{
+        <span
+          :class="{
             'text-green-500 font-bold': healthStatus === 'Healthy',
             'text-red-500 font-bold': healthStatus === 'Unhealthy',
-            'text-yellow-500': healthStatus === 'Error'
-        }">
+            'text-yellow-500': healthStatus === 'Error',
+          }"
+        >
           {{ healthStatus }}
         </span>
       </h2>
     </div>
 
     <div class="flex-1 flex flex-col justify-center">
-      <img src="../assets/vecteezy_3d-programmer.png" class="w-xl"/>
+      <img src="../assets/vecteezy_3d-programmer.png" class="w-xl" />
     </div>
   </div>
 </template>
 
 <script setup>
-  import { ref, computed, onMounted } from 'vue';
-  import axios from 'axios';
-  import { get } from '../tools/api'
+  import { ref, onMounted } from 'vue';
+  import { get } from '../tools/api';
 
   const healthStatus = ref(null);
-
-  const healthClass = computed(() => {
-    if (healthStatus.value === 'Healthy') return 'healthy';
-    return 'unhealthy';
-  });
 
   const apiUrl = import.meta.env.VITE_API_URL;
 
