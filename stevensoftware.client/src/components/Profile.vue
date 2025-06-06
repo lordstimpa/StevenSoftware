@@ -8,7 +8,7 @@
         </h1>
       </div>
 
-      <form @submit="editUser" v-if="!isEditingPassword" class="flex flex-col gap-10 w-2xl">
+      <form @submit="updateUser" v-if="!isEditingPassword" class="flex flex-col gap-10 w-2xl">
         <div class="flex flex-row gap-10">
           <div class="flex flex-col w-full">
             <label class="font-semibold text-slate-400 mb-1" for="firstName">First name</label>
@@ -175,12 +175,12 @@
     isEditingPassword.value = isEditingPassword.value ? false : true;
   }
 
-  const editUser = async (e) => {
+  const updateUser = async (e) => {
     e.preventDefault();
 
     const token = localStorage.getItem('jwt');
     const response = await post(
-      `${import.meta.env.VITE_API_URL}/account/edituser`,
+      `${import.meta.env.VITE_API_URL}/account/updateUser`,
       {
         firstName: user.value.firstName,
         lastName: user.value.lastName,
@@ -205,7 +205,7 @@
     if (newPassword.value === confirmPassword.value) {
       const token = localStorage.getItem('jwt');
       const response = await post(
-        `${import.meta.env.VITE_API_URL}/account/edituserpassword`,
+        `${import.meta.env.VITE_API_URL}/account/updateuserpassword`,
         {
           currentPassword: currentPassword.value,
           newPassword: newPassword.value,

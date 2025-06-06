@@ -12,10 +12,10 @@ namespace StevenSoftware.Server.Controllers
     [Route("api/account")]
     public class AccountController : ControllerBase
 	{
-		private readonly UserManager<ApplicationUserModel> _userManager;
+		private readonly UserManager<ApplicationUser> _userManager;
 		private readonly JwtTokenService _jwtTokenService;
 
-		public AccountController(UserManager<ApplicationUserModel> userManager, JwtTokenService jwtTokenService)
+		public AccountController(UserManager<ApplicationUser> userManager, JwtTokenService jwtTokenService)
 		{
 			_userManager = userManager;
 			_jwtTokenService = jwtTokenService;
@@ -27,44 +27,44 @@ namespace StevenSoftware.Server.Controllers
 		{
 			var user = await _userManager.FindByEmailAsync(loginDto.Email);
 			if (user == null)
-				return Unauthorized(new { Message = "Invalid email" });
+				return Unauthorized(new { Message = "Invalid email." });
 
             if (!await _userManager.CheckPasswordAsync(user, loginDto.Password))
-                return Unauthorized(new { Message = "Invalid password" });
+                return Unauthorized(new { Message = "Invalid password." });
 
 			var token = await _jwtTokenService.CreateTokenAsync(user);
 
 			return Ok(token);
 		}
 
-		[Authorize]
+		[Authorize(Roles = "Admin")]
         [HttpGet("getuser")]
         public async Task<IActionResult> GetUser()
 		{
 			var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 			if (string.IsNullOrEmpty(userId))
-				return BadRequest(new { Message = "User ID not found" });
+				return BadRequest(new { Message = "User ID not found." });
 
 			var user = await _userManager.FindByIdAsync(userId);
 			if (user == null)
-				return NotFound(new { Message = "User not found" });
+				return NotFound(new { Message = "User not found." });
 
 			return Ok(new { user.Id, user.Email, user.UserName, user.FirstName, user.LastName });
 		}
 
-        [Authorize]
-        [HttpPost("edituser")]
-        public async Task<IActionResult> EditUser([FromBody] UserDto userDto)
+        [Authorize(Roles = "Admin")]
+        [HttpPost("updateuser")]
+        public async Task<IActionResult> UpdateUser([FromBody] UserDto userDto)
         {
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
             if (string.IsNullOrEmpty(userId))
-                return BadRequest(new { Message = "User ID not found" });
+                return BadRequest(new { Message = "User ID not found." });
 
             var user = await _userManager.FindByIdAsync(userId);
 
             if (user == null)
-                return NotFound(new { Message = "User not found" });
+                return NotFound(new { Message = "User not found." });
 
             if (!string.IsNullOrWhiteSpace(userDto.FirstName))
                 user.FirstName = userDto.FirstName;
@@ -81,7 +81,7 @@ namespace StevenSoftware.Server.Controllers
                 {
                     return BadRequest(new
                     {
-                        Message = "Failed to update email",
+                        Message = "Failed to update email.",
                         Errors = setEmailResult.Errors.Concat(setUserNameResult.Errors)
                     });
                 }
@@ -90,24 +90,24 @@ namespace StevenSoftware.Server.Controllers
             var result = await _userManager.UpdateAsync(user);
 
             if (!result.Succeeded)
-                return BadRequest(new { Message = "Failed to update user" });
+                return BadRequest(new { Message = "Failed to update user." });
 
-            return Ok(new { Message = "User updated successfully", user });
+            return Ok(new { Message = "User updated successfully.", user });
         }
 
-        [Authorize]
-        [HttpPost("edituserpassword")]
-        public async Task<IActionResult> EditUserPassword([FromBody] PasswordDto passwordDto)
+        [Authorize(Roles = "Admin")]
+        [HttpPost("updateuserpassword")]
+        public async Task<IActionResult> UpdateUserPassword([FromBody] PasswordDto passwordDto)
         {
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
             if (string.IsNullOrEmpty(userId))
-                return BadRequest(new { Message = "User ID not found" });
+                return BadRequest(new { Message = "User ID not found." });
 
             var user = await _userManager.FindByIdAsync(userId);
 
             if (user == null)
-                return NotFound(new { Message = "User not found" });
+                return NotFound(new { Message = "User not found." });
 
             if (string.IsNullOrWhiteSpace(passwordDto.CurrentPassword) || string.IsNullOrWhiteSpace(passwordDto.NewPassword))
                 return BadRequest(new { Message = "Both current and new passwords are required." });
@@ -116,10 +116,10 @@ namespace StevenSoftware.Server.Controllers
 
             if (!result.Succeeded)
             {
-                return BadRequest(new { Message = "Failed to change password" });
+                return BadRequest(new { Message = "Failed to change password." });
             }
 
-            return Ok(new { Message = "Password updated successfully" });
+            return Ok(new { Message = "Password updated successfully." });
         }
     }
 }
