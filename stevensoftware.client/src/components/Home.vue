@@ -1,5 +1,5 @@
 <template>
-  <div class="flex-1 flex justify-center gap-10 mb-30">
+  <div class="w-full flex-1 flex justify-center gap-10 mb-30">
     <div class="flex flex-col justify-center">
       <h1 class="text-6xl text-white font-bold">Steven Software</h1>
       <p class="text-xl text-white">This website is a work in progress...</p>
@@ -18,7 +18,7 @@
       </h2>
     </div>
 
-    <div class="flex-1 flex flex-col justify-center">
+    <div class="flex flex-col justify-center">
       <img src="../assets/vecteezy_3d-programmer.png" class="w-xl" />
     </div>
   </div>

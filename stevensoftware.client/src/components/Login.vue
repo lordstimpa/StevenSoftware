@@ -7,7 +7,7 @@
 
       <form @submit="login" class="flex flex-col gap-6">
         <div class="flex flex-col">
-          <label class="font-semibold text-slate-400 mb-1" for="email">Email</label>
+          <label class="font-semibold text-slate-400 mb-2" for="email">Email</label>
           <input
             class="bg-slate-800 text-slate-100 px-4 py-2 border border-slate-700 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
             type="email"
@@ -18,7 +18,7 @@
         </div>
 
         <div class="flex flex-col">
-          <label class="font-semibold text-slate-400 mb-1" for="password">Password</label>
+          <label class="font-semibold text-slate-400 mb-2" for="password">Password</label>
           <input
             class="bg-slate-800 text-slate-100 px-4 py-2 border border-slate-700 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
             type="password"
