@@ -8,7 +8,7 @@
         </h1>
       </div>
 
-      <form @submit="updateUser" v-if="!isEditingPassword" class="flex flex-col gap-10 w-2xl">
+      <form @submit="updateUser" v-if="!isEditingPassword" class="flex flex-col gap-10 w-4xl">
         <div class="flex flex-row gap-10">
           <div class="flex flex-col w-full">
             <label class="font-semibold text-slate-400 mb-1" for="firstName">First name</label>
@@ -51,9 +51,10 @@
               <button
                 type="button"
                 @click="toggleChangeEmail"
-                class="mt-7 cursor-pointer text-sm text-indigo-300 hover:text-indigo-200 hover:underline"
+                class="mt-7 cursor-pointer text-indigo-300 hover:text-indigo-200 hover:underline"
               >
-                Change email
+                <span v-if="!isEditingEmail">Change email</span>
+                <span v-else>Back</span>
               </button>
             </div>
           </div>
@@ -66,7 +67,7 @@
             <button
               type="button"
               @click="toggleChangePassword"
-              class="cursor-pointer text-sm text-indigo-300 hover:text-indigo-200 hover:underline"
+              class="cursor-pointer text-indigo-300 hover:text-indigo-200 hover:underline"
             >
               Change password
             </button>
@@ -83,7 +84,7 @@
         </div>
       </form>
 
-      <form @submit="changePassword" v-if="isEditingPassword" class="flex flex-col gap-10 w-2xl">
+      <form @submit="changePassword" v-if="isEditingPassword" class="flex flex-col gap-10 w-4xl">
         <div class="flex flex-col w-full">
           <label class="font-semibold text-slate-400 mb-1" for="currentPassword"
             >Current password</label
@@ -125,7 +126,7 @@
           <button
             type="button"
             @click="toggleChangePassword"
-            class="text-lg cursor-pointer font-semibold text-white bg-gradient-to-r from-indigo-500 to-blue-500 hover:from-indigo-600 hover:to-blue-600 px-5 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
+            class="text-lg cursor-pointer font-semibold text-white bg-slate-700 hover:bg-slate-600 px-5 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-slate-500 transition"
           >
             Back
           </button>

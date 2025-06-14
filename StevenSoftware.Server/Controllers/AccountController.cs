@@ -37,7 +37,7 @@ namespace StevenSoftware.Server.Controllers
 			return Ok(token);
 		}
 
-		[Authorize(Roles = "Admin")]
+		[Authorize]
         [HttpGet("getuser")]
         public async Task<IActionResult> GetUser()
 		{
@@ -52,7 +52,7 @@ namespace StevenSoftware.Server.Controllers
 			return Ok(new { user.Id, user.Email, user.UserName, user.FirstName, user.LastName });
 		}
 
-        [Authorize(Roles = "Admin")]
+        [Authorize]
         [HttpPost("updateuser")]
         public async Task<IActionResult> UpdateUser([FromBody] UserDto userDto)
         {

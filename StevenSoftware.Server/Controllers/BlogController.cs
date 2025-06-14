@@ -41,7 +41,7 @@ namespace StevenSoftware.Server.Controllers
             return Ok(result.Data);
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize]
         [HttpPost("updateblogpost")]
         public async Task<IActionResult> UpdateBlogPost([FromBody] BlogPostDto blogDto, CancellationToken cancellationToken)
         {
@@ -57,7 +57,7 @@ namespace StevenSoftware.Server.Controllers
             return Ok(result.Data);
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize]
         [HttpDelete("deleteblogpost/{id}")]
         public async Task<IActionResult> DeleteBlogPost(int blogPostId, CancellationToken cancellationToken)
         {
