@@ -24,9 +24,9 @@ namespace StevenSoftware.Server.Controllers
             var result = await _blogService.GetBlogPostById(id, cancellationToken);
 
             if (!result.Success)
-                return BadRequest(new { Message = result.ErrorMessage });
+                return BadRequest(new { result.Message });
 
-            return Ok(result.Data);
+            return Ok(result);
         }
 
         [AllowAnonymous]
@@ -36,14 +36,14 @@ namespace StevenSoftware.Server.Controllers
             var result = await _blogService.GetBlogPosts(pageNumber, cancellationToken);
 
             if (!result.Success)
-                return BadRequest(new { Message = result.ErrorMessage });
+                return BadRequest(new { result.Message });
 
-            return Ok(result.Data);
+            return Ok(result);
         }
 
         [Authorize]
         [HttpPost("updateblogpost")]
-        public async Task<IActionResult> UpdateBlogPost([FromBody] BlogPostDto blogDto, CancellationToken cancellationToken)
+        public async Task<IActionResult> UpdateBlogPost([FromBody] BlogPostUpdateDto blogDto, CancellationToken cancellationToken)
         {
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             if (string.IsNullOrEmpty(userId))
@@ -51,26 +51,26 @@ namespace StevenSoftware.Server.Controllers
 
             var result = await _blogService.UpdateBlogPost(blogDto, userId, cancellationToken);
 
-            if (!result.Success) 
-                return BadRequest(new { Message = result.ErrorMessage });
+            if (!result.Success)
+                return BadRequest(new { result.Message });
 
-            return Ok(result.Data);
+            return Ok(result);
         }
 
         [Authorize]
         [HttpDelete("deleteblogpost/{id}")]
-        public async Task<IActionResult> DeleteBlogPost(int blogPostId, CancellationToken cancellationToken)
+        public async Task<IActionResult> DeleteBlogPost(int id, CancellationToken cancellationToken)
         {
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             if (string.IsNullOrEmpty(userId))
                 return BadRequest(new { Message = "User ID not found." });
 
-            var result = await _blogService.DeleteBlogPost(blogPostId, userId, cancellationToken);
+            var result = await _blogService.DeleteBlogPost(id, userId, cancellationToken);
 
             if (!result.Success)
-                return BadRequest(new { Message = result.ErrorMessage });
+                return BadRequest(new { result.Message });
 
-            return Ok(result.Data);
+            return Ok(result);
         }
     }
 }

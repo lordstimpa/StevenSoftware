@@ -28,12 +28,12 @@
           />
 
           <div class="flex justify-between text-sm text-indigo-300 mt-2">
-            <router-link to="/" class="hover:text-indigo-200 hover:underline"
-              >Create new user</router-link
-            >
-            <router-link to="/" class="hover:text-indigo-200 hover:underline"
-              >Forgot my password</router-link
-            >
+            <RouterLink to="/" class="hover:text-indigo-200 hover:underline"
+              >Create new user
+            </RouterLink>
+            <RouterLink to="/" class="hover:text-indigo-200 hover:underline">
+              Forgot my password
+            </RouterLink>
           </div>
         </div>
 

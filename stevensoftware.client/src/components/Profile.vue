@@ -195,6 +195,7 @@
     );
 
     if (response) {
+      isEditingEmail.value = false;
       displayToast.value = true;
       toastMessage.value = response.message;
     }
@@ -219,6 +220,7 @@
       );
 
     if (response) {
+      isEditingPassword.value = false;
       displayToast.value = true;
       toastMessage.value = response.message;
     }
