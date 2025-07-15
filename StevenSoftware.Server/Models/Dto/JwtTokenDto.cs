@@ -1,4 +1,4 @@
-﻿namespace StevenSoftware.Server.Models
+﻿namespace StevenSoftware.Server.Models.Dto
 {
 	public class JwtTokenDto
 	{

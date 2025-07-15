@@ -20,4 +20,14 @@ const post = async (url, data = {}, config = {}) => {
   }
 };
 
-export { get, post };
+const _delete = async (url, config = {}) => {
+  try {
+    const response = await axios.delete(url, config);
+    return response.status === 200 ? response.data : null;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};
+
+export { get, post, _delete };

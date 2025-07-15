@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using StevenSoftware.Server.Models;
+using StevenSoftware.Server.Models.Dto;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 
@@ -9,15 +10,15 @@ namespace StevenSoftware.Server.Services
 	public class JwtTokenService
 	{
 		private readonly IConfiguration _config;
-		private readonly UserManager<ApplicationUserModel> _userManager;
+		private readonly UserManager<ApplicationUser> _userManager;
 
-		public JwtTokenService(IConfiguration configuration, UserManager<ApplicationUserModel> userManager)
+		public JwtTokenService(IConfiguration configuration, UserManager<ApplicationUser> userManager)
 		{
 			_config = configuration;
 			_userManager = userManager;
 		}
 
-		public async Task<JwtTokenDto> CreateTokenAsync(ApplicationUserModel user)
+		public async Task<JwtTokenDto> CreateTokenAsync(ApplicationUser user)
 		{
 			var claims = new[]
 			{

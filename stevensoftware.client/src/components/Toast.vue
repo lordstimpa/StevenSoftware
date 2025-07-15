@@ -9,15 +9,17 @@
   >
     <div 
       v-if="props.visible"
-      class="fixed top-0 right-0 m-5 text-lg font-semibold text-slate-100 px-5 py-2 rounded-md bg-slate-800 shadow-xl"
+      class="fixed top-20 right-0 m-5 text-lg font-semibold text-slate-100 px-6 py-5 rounded-md bg-slate-800 shadow-xl"
     >
       {{ props.message }}
+      <X @click="emit('update:visible', false)" class="cursor-pointer absolute top-1 right-1 text-slate-100 w-5 h-5" />
     </div>
   </transition>
 </template>
 
 <script setup>
   import { watch } from 'vue'
+  import { X } from 'lucide-vue-next';
 
   const props = defineProps({
     message: String,

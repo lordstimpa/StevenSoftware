@@ -15,7 +15,7 @@ namespace StevenSoftware.Server.Services
 		public async Task SeedAdminUser(IServiceProvider serviceProvider)
 		{
 			using var scope = serviceProvider.CreateScope();
-			var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUserModel>>();
+			var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
 
 			var adminEmail = _config["Admin:Email"];
 			var adminPassword = _config["Admin:Password"];
@@ -27,7 +27,7 @@ namespace StevenSoftware.Server.Services
 
 			if (await userManager.FindByEmailAsync(adminEmail) == null)
 			{
-				var adminUser = new ApplicationUserModel
+				var adminUser = new ApplicationUser
 				{
 					UserName = adminEmail,
 					Email = adminEmail

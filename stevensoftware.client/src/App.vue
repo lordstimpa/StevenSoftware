@@ -1,6 +1,6 @@
 <template>
   <div
-    class="w-full h-screen flex flex-col items-center"
+    class="w-full min-h-screen flex flex-col"
     style="
       background-image: linear-gradient(
         to left bottom,
@@ -14,7 +14,7 @@
   >
     <Navbar />
 
-    <router-view />
+    <RouterView />
   </div>
 
   <div>

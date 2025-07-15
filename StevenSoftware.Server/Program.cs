@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using StevenSoftware.Server.Database;
 using StevenSoftware.Server.Models;
+using StevenSoftware.Server.Service;
 using StevenSoftware.Server.Services;
 using System.Security.Claims;
 
@@ -53,7 +54,7 @@ builder.Services.AddCors(options =>
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.AddIdentity<ApplicationUserModel, IdentityRole>(options =>
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
 {
     options.Password.RequireDigit = false;
     options.Password.RequiredLength = 6;
@@ -88,6 +89,7 @@ builder.Services.AddAuthentication(options =>
 
 builder.Services.AddScoped<JwtTokenService>();
 builder.Services.AddScoped<SeedingService>();
+builder.Services.AddScoped<BlogService>();
 
 var app = builder.Build();
 
