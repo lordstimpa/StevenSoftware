@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using StevenSoftware.Server.Database;
 using StevenSoftware.Server.Models;
+using StevenSoftware.Server.Service;
 using StevenSoftware.Server.Services;
 using System.Security.Claims;
 
@@ -88,6 +89,7 @@ builder.Services.AddAuthentication(options =>
 
 builder.Services.AddScoped<JwtTokenService>();
 builder.Services.AddScoped<SeedingService>();
+builder.Services.AddScoped<BlogService>();
 
 var app = builder.Build();
 

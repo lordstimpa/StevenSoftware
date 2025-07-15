@@ -1,6 +1,6 @@
 <template>
   <div
-    class="w-full h-screen flex flex-col"
+    class="w-full min-h-screen flex flex-col"
     style="
       background-image: linear-gradient(
         to left bottom,
