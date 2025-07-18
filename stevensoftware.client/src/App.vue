@@ -1,19 +1,6 @@
 <template>
-  <div
-    class="w-full min-h-screen flex flex-col"
-    style="
-      background-image: linear-gradient(
-        to left bottom,
-        #181818,
-        #1a1925,
-        #1a1932,
-        #181a40,
-        #121a4e
-      );
-    "
-  >
+  <div class="w-full min-h-screen flex flex-col">
     <Navbar />
-
     <RouterView />
   </div>
 
