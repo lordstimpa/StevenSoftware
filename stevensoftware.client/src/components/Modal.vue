@@ -25,7 +25,8 @@
             leave-to="opacity-0 scale-95"
           >
             <DialogPanel
-              class="w-full max-w-3xl transform overflow-hidden rounded-2xl bg-slate-900 p-8 text-left shadow-xl transition-all text-white"
+              class="w-full max-w-3xl transform overflow-hidden rounded-2xl p-8 text-left shadow-xl transition-all text-white"
+              style="background: radial-gradient(50% 50% at 50% 50%, #1A1F31 0%, #141A2A 40%, #0B0F1A 100%);"
             >
               <DialogTitle v-if="title" class="text-3xl font-bold mb-6 border-b border-slate-700 pb-4">
                 {{ title }}

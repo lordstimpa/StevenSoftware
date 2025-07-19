@@ -10,6 +10,7 @@ using System.Security.Claims;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddHttpClient();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
@@ -87,9 +88,11 @@ builder.Services.AddAuthentication(options =>
 	options.MapInboundClaims = false;
 });
 
-builder.Services.AddScoped<JwtTokenService>();
-builder.Services.AddScoped<SeedingService>();
+builder.Services.AddScoped<AccountService>();
 builder.Services.AddScoped<BlogService>();
+builder.Services.AddScoped<JwtTokenService>();
+builder.Services.AddScoped<MailingService>();
+builder.Services.AddScoped<SeedingService>();
 
 var app = builder.Build();
 

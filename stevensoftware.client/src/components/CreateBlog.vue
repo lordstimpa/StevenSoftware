@@ -1,6 +1,6 @@
 <template>
   <div class="p-10 text-white flex flex-col items-center justify-center gap-8">
-    <div class="flex flex-col max-w-screen-lg w-full p-8 rounded-xl bg-slate-900 shadow-xl">
+    <div class="flex flex-col max-w-screen-lg w-full p-8 rounded-xl shadow-xl" style="background: radial-gradient(50% 50% at 50% 50%, #1A1F31 0%, #141A2A 40%, #0B0F1A 100%);">
       <div class="flex justify-between mb-8 border-b border-slate-700 pb-4">
         <h1 class="text-4xl font-bold">Create new blog post</h1>
       </div>
@@ -58,7 +58,7 @@
       </form>
     </div>
 
-    <div class="flex flex-col max-w-screen-lg w-full p-8 rounded-xl bg-slate-900 shadow-xl">
+    <div class="flex flex-col max-w-screen-lg w-full p-8 rounded-xl shadow-xl" style="background: radial-gradient(50% 50% at 50% 50%, #1A1F31 0%, #141A2A 40%, #0B0F1A 100%);">
       <div class="flex justify-between mb-8 border-b border-slate-700 pb-4">
         <h1 class="text-4xl font-bold">Preview of blog post</h1>
       </div>

@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent="onSubmit" class="border border-slate-700 rounded p-6">
+  <form @submit.prevent="updateBlogPost" class="border border-slate-700 rounded p-6">
     <div v-if="isEditMode" class="bg-yellow-500/80 rounded-md p-4 mb-6 text-slate-900">
       <p>
         Content supports **Markdown** syntax — like *italic*, **bold**, etc.
@@ -106,6 +106,7 @@
   import Modal from './Modal.vue';
   import { marked } from 'marked';
   import DOMPurify from 'dompurify';
+  import { formatDateTime } from '../tools/helpers.js';
 
   const showModal = ref(false);
   const isEditMode = ref(false);
@@ -115,12 +116,17 @@
     user: Object
   });
 
+  const renderedContent = computed(() =>
+    props.blogPost.content ? DOMPurify.sanitize(marked.parse(props.blogPost.content)) : ''
+  );
+
+  const emit = defineEmits(['refreshBlogPosts']);
+
+  // Validation
   const schema = yup.object({
     title: yup.string().required('Title is required').min(3, 'Title must be at least 3 characters'),
     content: yup.string().required('Content is required').min(10, 'Content must be at least 10 characters'),
   });
-
-  const emit = defineEmits(['refreshBlogPosts']);
 
   const { handleSubmit } = useForm({
     validationSchema: schema,
@@ -129,21 +135,16 @@
   const { value: title, errorMessage: titleError, handleBlur: titleBlur } = useField('title');
   const { value: content, errorMessage: contentError, handleBlur: contentBlur } = useField('content');
 
-  const renderedContent = computed(() =>
-    props.blogPost.content ? DOMPurify.sanitize(marked.parse(props.blogPost.content)) : ''
-  );
-
   watch(() => props.blogPost, (post) => {
     title.value = post?.title || '';
     content.value = post?.content || '';
-    console.log(props.blogPost);
   }, { immediate: true });
 
   function toggleEditMode() {
     isEditMode.value = isEditMode.value ? false : true;
   }
 
-  const onSubmit = handleSubmit(async (values) => {
+  const updateBlogPost = handleSubmit(async (values) => {
     const token = localStorage.getItem('jwt');
     const response = await post(
       `${import.meta.env.VITE_API_URL}/blog/updateblogpost`,
@@ -179,21 +180,4 @@
       emit('refreshBlogPosts', response.message);
     }
   };
-
-  function formatDateTime(timestamp) {
-    if (!timestamp) return '';
-
-    const date = new Date(timestamp);
-
-    const options = {
-      year: 'numeric',
-      month: 'short',
-      day: '2-digit',
-      hour: '2-digit',
-      minute: '2-digit',
-      hour12: false,
-    };
-
-    return date.toLocaleString('sv-SE', options).replace(',', ' -');
-  }
 </script>

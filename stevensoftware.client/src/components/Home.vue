@@ -24,22 +24,22 @@
   </div>
 
   <div class="w-full flex justify-center items-center gap-10 h-[320px]" style="background: #141A2A">
-    <div class="border text-white border-blue-900 w-[240px] h-[210px] flex flex-col justify-evenly p-4 rounded-md" style="background: #1A1F31">
+    <div class="border text-white border-indigo-900 w-[240px] h-[210px] flex flex-col justify-evenly p-4 rounded-md shadow-xl" style="background: #1A1F31">
       <p class="text-2xl font-bold">Web App Development</p>
       <p class="text-sm text-gray-300">I build modern web apps using tools tailored to your needs — responsive, reliable, and built to scale.</p>
     </div>
 
-    <div class="border text-white border-blue-900 w-[240px] h-[210px] flex flex-col justify-evenly p-4 rounded-md" style="background: #1A1F31">
+    <div class="border text-white border-green-900 w-[240px] h-[210px] flex flex-col justify-evenly p-4 rounded-md shadow-xl" style="background: #1A1F31">
       <p class="text-2xl font-bold">Code Upgrades</p>
       <p class="text-sm text-gray-300">Upgrading or cleaning up legacy code? I can modernize, refactor, and maintain your existing codebase with care.</p>
     </div>
 
-    <div class="border text-white border-blue-900 w-[240px] h-[210px] flex flex-col justify-evenly p-4 rounded-md" style="background: #1A1F31">
+    <div class="border text-white border-blue-900 w-[240px] h-[210px] flex flex-col justify-evenly p-4 rounded-md shadow-xl" style="background: #1A1F31">
       <p class="text-2xl font-bold">DevOps & Hosting</p>
       <p class="text-sm text-gray-300">Need hosting set up or CI/CD pipelines configured? I’ll get your project running smoothly across different environments.</p>
     </div>
 
-    <div class="border text-white border-blue-900 w-[240px] h-[210px] flex flex-col justify-evenly p-4 rounded-md" style="background: #1A1F31">
+    <div class="border text-white border-yellow-900 w-[240px] h-[210px] flex flex-col justify-evenly p-4 rounded-md shadow-xl" style="background: #1A1F31">
       <p class="text-2xl font-bold">Custom Work</p>
       <p class="text-sm text-gray-300">From landing pages to domain setup or website fixes — I can help you get things working the way they should.</p>
     </div>
@@ -91,7 +91,7 @@
   </div>
 
   <div class="w-full flex justify-center items-center h-[700px] gap-20" style="background: #141A2A">
-    <div class="border text-white border-blue-900 w-[550px] h-[500px] flex flex-col rounded-md p-10 gap-8"
+    <div class="border text-white border-blue-900 w-[550px] h-[500px] flex flex-col rounded-md p-10 gap-8 shadow-xl"
       style="background: radial-gradient(50% 50% at 50% 50%, #1A1F31 0%, #141A2A 40%, #0B0F1A 100%);">
       <div class="flex flex-col gap-2">
         <p class="text-white text-5xl text-center font-bold">Who Is Steven?</p>
@@ -107,7 +107,7 @@
     </div>
 
     <div>
-      <img src="../assets/Group 269.svg" class="size-125">
+      <img src="../assets/IMG_20240824_171927816_HDR_2.jpg" class="size-125 rounded-full border-3 border-white shadow-xl">
     </div>
   </div>
 
@@ -117,18 +117,35 @@
       <p class="text-gray-400 italic">Latest updates from my very own blog, feel free to visit to get the latest from me!</p>
     </div>
 
-    <div class="flex items-center justify-center">
-      <div v-for="blog in blogPosts" class="border text-white border-blue-900 w-[400px] h-[280px] flex flex-col justify-between p-8 rounded-md" 
-        style="background: radial-gradient(50% 50% at 50% 50%, #1A1F31 0%, #141A2A 40%, #0B0F1A 100%);">
-        <div>
-          <p class="text-2xl font-bold pb-2">{{ blog.title }}</p>
-          <p class="text-xs text-gray-400">{{ formatDateTime(blog.createdAt) }}</p>
+    <div class="relative w-full flex justify-center items-center">
+      <button @click="scrollLeft" class="text-white hover:text-gray-400 hover:cursor-pointer transition z-10 p-2">
+        <ChevronLeft class="size-12"/>
+      </button>
+
+      <div
+        ref="carousel"
+        class="flex overflow-x-hidden no-scrollbar scroll-smooth gap-5 w-[1240px]"
+      >
+        <div
+          v-for="blog in blogPosts"
+          :key="blog.id"
+          class="shrink-0 w-[400px] h-[280px] border border-blue-900 text-white flex flex-col justify-between p-8 rounded-md"
+          style="background: radial-gradient(50% 50% at 50% 50%, #1A1F31 0%, #141A2A 40%, #0B0F1A 100%)"
+        >
+          <div>
+            <p class="text-2xl font-bold pb-2">{{ blog.title }}</p>
+            <p class="text-xs text-gray-400">{{ formatDateTime(blog.createdAt) }}</p>
+          </div>
+          <div class="prose prose-invert text-sm max-w-none">
+            {{ getPlainPreview(blog.content) }}
+          </div>
+          <p class="text-sm font-semibold text-end">Read more..</p>
         </div>
-        <div class="prose prose-invert text-sm max-w-none">
-          {{ getPlainPreview(blog.content) }}
-        </div>
-        <p class="text-sm font-semibold text-end">Read more..</p>
       </div>
+
+      <button @click="scrollRight" class="text-white hover:text-gray-400 hover:cursor-pointer transition z-10 p-2">
+        <ChevronRight class="size-12" />
+      </button>
     </div>
   </div>
 
@@ -138,12 +155,12 @@
       <p class="text-gray-300 italic text-center">Whether you’ve got a small fix or a big idea — I’d love to hear about it.</p>
     </div>
 
-    <form @submit="onSubmit" class="flex flex-col gap-5 w-[700px]">
+    <form @submit.prevent="sendMail" class="flex flex-col gap-5 w-[700px]">
       <div class="flex gap-10">
         <div class="flex flex-col w-full">
           <label class="font-semibold text-gray-300 mb-2" for="firstName">First name*</label>
           <input
-            :class="['mb-2 bg-slate-800 text-slate-100 px-4 py-2 border rounded-md focus:outline-none focus:ring-2',
+            :class="['bg-slate-800 text-slate-100 px-4 py-2 border rounded-md focus:outline-none focus:ring-2',
               firstNameError ? 'border-red-500 ring-red-500' : 'border-slate-700 focus:ring-indigo-500']"
             type="text"
             @blur="firstNameBlur"
@@ -169,7 +186,7 @@
       <div class="flex flex-col">
         <label class="font-semibold text-gray-300 mb-2" for="email">Email*</label>
         <input
-          :class="['mb-2 bg-slate-800 text-slate-100 px-4 py-2 border rounded-md focus:outline-none focus:ring-2',
+          :class="['bg-slate-800 text-slate-100 px-4 py-2 border rounded-md focus:outline-none focus:ring-2',
             emailError ? 'border-red-500 ring-red-500' : 'border-slate-700 focus:ring-indigo-500']"
           type="email"
           id="email"
@@ -207,16 +224,25 @@
 
 <script setup>
   import { ref, onMounted } from 'vue';
-  import { get } from '../tools/api';
+  import { get, post } from '../tools/api';
   import { useForm, useField } from 'vee-validate';
   import * as yup from 'yup';
+  import { ChevronLeft, ChevronRight } from 'lucide-vue-next';
+  import { formatDateTime } from '../tools/helpers.js';
 
   const blogPosts = ref([]);
+  const carousel = ref(null);
+  const cardWidth = ref(420);
 
+  // Validation
   const mail = yup.object({
     firstName: yup.string().required('First name is required').min(2, 'First name must be at least 2 characters'),
     email: yup.string().required('Email is required').email('Enter a valid email'),
     message: yup.string().required('Message is required').min(10, 'Message must be at least 10 characters'),
+  });
+
+  const { handleSubmit } = useForm({
+    validationSchema: mail,
   });
 
   const { value: firstName, errorMessage: firstNameError, handleBlur: firstNameBlur } = useField('firstName');
@@ -224,12 +250,20 @@
   const { value: email, errorMessage: emailError, handleBlur: emailBlur } = useField('email');
   const { value: message, errorMessage: messageError, handleBlur: messageBlur } = useField('message');
 
-  const { handleSubmit } = useForm({
-    validationSchema: mail,
-  });
+  const sendMail = handleSubmit(async (values) => {
+    const response = await post(`${import.meta.env.VITE_API_URL}/mail/sendmail`, {
+      firstName: values.firstName,
+      lastName: values.lastName ?? '',
+      email: values.email,
+      message: values.message,
+    });
+    console.log(response);
 
-  const onSubmit = handleSubmit(async (values) => {
-    const token = localStorage.getItem('jwt');
+    if (!response.error) {
+      alert("Message sent successfully!");
+    } else {
+      alert("Failed to send message.");
+    }
   });
 
   const getBlogs = async () => {
@@ -242,7 +276,6 @@
 
     if (response) {
       blogPosts.value = response.data.blogPosts;
-      console.log(blogPosts.value);
     }
   };
 
@@ -252,22 +285,17 @@
     return truncated;
   }
 
-  function formatDateTime(timestamp) {
-    if (!timestamp) return '';
+  const scrollLeft = () => {
+    if (carousel.value) {
+      carousel.value.scrollBy({ left: -cardWidth.value, behavior: 'smooth' });
+    }
+  };
 
-    const date = new Date(timestamp);
-
-    const options = {
-      year: 'numeric',
-      month: 'short',
-      day: '2-digit',
-      hour: '2-digit',
-      minute: '2-digit',
-      hour12: false,
-    };
-
-    return date.toLocaleString('sv-SE', options).replace(',', ' -');
-  }
+  const scrollRight = () => {
+    if (carousel.value) {
+      carousel.value.scrollBy({ left: cardWidth.value, behavior: 'smooth' });
+    }
+  };
 
   onMounted(() => {
     getBlogs();

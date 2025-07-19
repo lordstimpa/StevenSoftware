@@ -1,6 +1,6 @@
 <template>
   <div class="p-10 text-white flex justify-center w-full">
-    <div class="flex flex-col p-8 rounded-xl bg-slate-900 shadow-xl max-w-screen-xl w-full">
+    <div class="flex flex-col p-8 rounded-xl shadow-xl max-w-screen-xl w-full" style="background: radial-gradient(50% 50% at 50% 50%, #1A1F31 0%, #141A2A 40%, #0B0F1A 100%);">
       <div class="flex justify-between mb-8 border-b border-slate-700 pb-4">
         <div class="flex flex-col gap-2">
           <h1 class="text-4xl font-bold">Blog</h1>
@@ -83,6 +83,7 @@
   import { storeToRefs } from 'pinia';
   import { Plus, CircleDot, ChevronLeft, ChevronRight } from 'lucide-vue-next';
   import Toast from '../components/Toast.vue';
+  import { formatDateTime } from '../tools/helpers.js';
   
   const isLoading = ref(false);
   const blogPosts = ref([]);
@@ -119,23 +120,6 @@
     displayToast.value = true;
     toastMessage.value = message;
     getBlogs();
-  }
-
-  function formatDateTime(timestamp) {
-    if (!timestamp) return '';
-
-    const date = new Date(timestamp);
-
-    const options = {
-      year: 'numeric',
-      month: 'short',
-      day: '2-digit',
-      hour: '2-digit',
-      minute: '2-digit',
-      hour12: false,
-    };
-
-    return date.toLocaleString('sv-SE', options).replace(',', ' -');
   }
 
   onMounted(() => {
