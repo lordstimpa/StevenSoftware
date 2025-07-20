@@ -10,10 +10,12 @@ namespace StevenSoftware.Server.Controllers
     public class MailingController : ControllerBase
     {
         private readonly MailingService _mailingService;
+        private readonly AccountService _accountService;
 
-        public MailingController(MailingService mailingService)
+        public MailingController(MailingService mailingService, AccountService accountService)
         {
             _mailingService = mailingService;
+            _accountService = accountService;
         }
 
         [AllowAnonymous]
@@ -22,14 +24,24 @@ namespace StevenSoftware.Server.Controllers
         {
             try
             {
+                if (string.IsNullOrWhiteSpace(mailDto.RecaptchaToken))
+                {
+                    return BadRequest(new { Message = "Missing reCAPTCHA token." });
+                }
+
+                var isCaptchaValid = await _accountService.VerifyCaptcha(mailDto.RecaptchaToken);
+                if (!isCaptchaValid)
+                {
+                    return BadRequest(new { Message = "Suspicious behavior detected. Please try again later." });
+                }
+
                 await _mailingService.SendEmailAsync(mailDto);
-                return Ok(new { Message = "Mail sent successfully." });
+                return Ok(new { Message = "Mail sent successfully. I usually respond within 24 hours." });
             }
             catch (Exception ex)
             {
                 return StatusCode(500, new { Message = "Failed to send mail", Error = ex.Message });
             }
         }
-
     }
 }

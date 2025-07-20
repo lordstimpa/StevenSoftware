@@ -25,7 +25,6 @@ const post = async (url, data = {}, config = {}) => {
   }
 };
 
-
 const _delete = async (url, config = {}) => {
   try {
     const response = await axios.delete(url, config);

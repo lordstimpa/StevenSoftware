@@ -1,6 +1,7 @@
 <template>
   <div class="p-10 text-white flex justify-center w-full">
-    <div class="flex flex-col p-8 rounded-xl shadow-xl max-w-screen-xl w-full" style="background: radial-gradient(50% 50% at 50% 50%, #1A1F31 0%, #141A2A 40%, #0B0F1A 100%);">
+    <div class="flex flex-col p-8 rounded-xl shadow-xl max-w-screen-xl w-full" 
+      style="background: radial-gradient(50% 50% at 50% 50%, #202534 0%, #1A1F2E 40%, #141925 100%);">
       <div class="flex justify-between mb-8 border-b border-slate-700 pb-4">
         <div class="flex flex-col gap-2">
           <h1 class="text-4xl font-bold">Blog</h1>
@@ -26,7 +27,7 @@
       </div>
 
       <div v-if="totalBlogPosts <= 0 && !isLoading">
-        <div class="bg-yellow-500/80 rounded-md p-4 mb-6 text-slate-900">
+        <div class="bg-yellow-500/70 rounded-md p-4 mb-6 text-slate-900">
           <p>
             Currently there are no published blogposts. Come back in the nearest future.
           </p>
@@ -48,13 +49,13 @@
       <div class="flex justify-center pt-8 gap-6 border-slate-700 border-t">
         <ChevronLeft 
           @click="currentPageNumber > 1 && getBlogs(currentPageNumber - 1)" 
-          class="w-8 h-8 hover:cursor-pointer text-white"
+          class="w-8 h-8 hover:cursor-pointer text-white hover:text-indigo-200 transition"
           :class="{ 'text-slate-400 cursor-default': currentPageNumber === 1 || totalPages === 1 }" />
 
         <div v-for="page in totalPages">
           <span
             @click="getBlogs(page)"
-            class="text-xl hover:cursor-pointer"
+            class="text-xl hover:cursor-pointer hover:text-indigo-200 transition"
             :class="{
               'underline font-bold': page === currentPageNumber,
               'text-slate-400': page !== currentPageNumber,
@@ -65,7 +66,7 @@
 
         <ChevronRight 
           @click="currentPageNumber < totalPages && getBlogs(currentPageNumber + 1)" 
-          class="w-8 h-8 hover:cursor-pointer text-white"
+          class="w-8 h-8 hover:cursor-pointer text-white hover:text-indigo-200 transition"
           :class="{ 'text-slate-400 cursor-default': currentPageNumber === totalPages || totalPages === 1 }" />
       </div>
     </div>

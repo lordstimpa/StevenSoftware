@@ -29,7 +29,9 @@ namespace StevenSoftware.Server.Service
             {
                 Id = blogPost.Id,
                 Title = blogPost.Title,
+                Summary = blogPost.Summary,
                 Content = blogPost.Content,
+                CoverImage = blogPost.CoverImage,
                 CreatedAt = blogPost.CreatedAt,
                 UpdatedAt = blogPost.UpdatedAt,
                 Author = new UserDto
@@ -61,7 +63,9 @@ namespace StevenSoftware.Server.Service
             {
                 Id = post.Id,
                 Title = post.Title,
+                Summary = post.Summary,
                 Content = post.Content,
+                CoverImage = post.CoverImage,
                 CreatedAt = post.CreatedAt,
                 UpdatedAt = post.UpdatedAt,
                 Author = new UserDto
@@ -92,7 +96,9 @@ namespace StevenSoftware.Server.Service
                     return ServiceResult<BlogPostGetDto>.Fail("You are not authorized to edit this blog post.");
 
                 existingBlogPost.Data.Title = blogPostDto.Title;
+                existingBlogPost.Data.Summary = blogPostDto.Summary;
                 existingBlogPost.Data.Content = blogPostDto.Content;
+                existingBlogPost.Data.CoverImage = blogPostDto.CoverImage;
                 existingBlogPost.Data.UpdatedAt = DateTime.UtcNow;
 
                 _dbContext.Update(existingBlogPost.Data);
@@ -105,7 +111,9 @@ namespace StevenSoftware.Server.Service
                 var newBlogPost = new BlogPost 
                 { 
                     Title = blogPostDto.Title,
+                    Summary = blogPostDto.Summary,
                     Content = blogPostDto.Content,
+                    CoverImage = blogPostDto.CoverImage,
                     UpdatedAt = DateTime.UtcNow,
                     CreatedAt = DateTime.UtcNow,
                     AuthorId = userId
@@ -118,7 +126,9 @@ namespace StevenSoftware.Server.Service
                 {
                     Id = newBlogPost.Id,
                     Title = newBlogPost.Title,
+                    Summary = newBlogPost.Summary,
                     Content = newBlogPost.Content,
+                    CoverImage = newBlogPost.CoverImage,
                     CreatedAt = newBlogPost.CreatedAt,
                     UpdatedAt = newBlogPost.UpdatedAt,
                     AuthorId = newBlogPost.AuthorId,
@@ -150,7 +160,9 @@ namespace StevenSoftware.Server.Service
             {
                 Id = blogPost.Id,
                 Title = blogPost.Title,
+                Summary = blogPost.Summary,
                 Content = blogPost.Content,
+                CoverImage = blogPost.CoverImage,
                 CreatedAt = blogPost.CreatedAt,
                 UpdatedAt = blogPost.UpdatedAt,
                 AuthorId = blogPost.AuthorId,

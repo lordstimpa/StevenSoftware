@@ -125,6 +125,7 @@ while (retryCount < maxRetries)
 
 Console.WriteLine($"Running in {builder.Environment.EnvironmentName} environment");
 
+app.UseStaticFiles();
 app.UseCors("AllowSpecificOrigin");
 app.UseSwagger();
 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "StevenSoftware API v1"));

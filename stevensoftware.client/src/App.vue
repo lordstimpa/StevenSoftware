@@ -1,6 +1,6 @@
 <template>
   <div class="w-full min-h-screen flex flex-col"
-    style="background: radial-gradient(50% 50% at 50% 50%, #1A1F31 0%, #141A2A 40%, #0B0F1A 100%);">
+    style="background-color: #0B0F1A;">
     <Navbar />
     <RouterView />
   </div>

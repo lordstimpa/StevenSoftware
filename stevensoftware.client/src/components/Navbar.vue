@@ -1,15 +1,15 @@
 <template>
-  <div class="bg-slate-900 w-full flex justify-center">
+  <div class="w-full flex justify-center">
     <div class="w-9/10 flex justify-between p-4">
       <div class="flex justify-between flex gap-8">
-        <RouterLink to="/" class="text-lg p-2 rounded-md">
-          <p class="text-white font-bold">Steven Software</p>
+        <RouterLink to="/" class="text-lg p-2 rounded-md text-white font-semibold hover:text-indigo-200 transition">
+          Steven Software
         </RouterLink>
 
         <span class="text-lg text-white p-2">|</span>
 
-        <RouterLink to="/blog" class="text-lg p-2 rounded-md">
-          <p class="text-white font-semibold">Blog</p>
+        <RouterLink to="/blog" class="text-lg p-2 rounded-md text-white font-semibold hover:text-indigo-200 transition">
+          Blog
         </RouterLink>
       </div>
 
@@ -24,9 +24,9 @@
       <div v-if="user?.userName" class="flex gap-8">
         <RouterLink
           to="/profile"
-          class="text-lg px-3 py-2 rounded-md focus:outline-none focus:ring-indigo-500"
+          class="text-lg px-3 py-2 rounded-md focus:outline-none focus:ring-indigo-500 font-semibold text-white hover:text-indigo-200 transition"
         >
-          <p class="text-white">{{ user.userName }}</p>
+          {{ user.userName }}
         </RouterLink>
 
         <button

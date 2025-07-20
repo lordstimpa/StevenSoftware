@@ -1,6 +1,7 @@
 <template>
   <div class="flex-1 flex justify-center items-center mb-30 text-white">
-    <div class="flex flex-col justify-center p-8 rounded-xl shadow-xl x-full" style="background: radial-gradient(50% 50% at 50% 50%, #1A1F31 0%, #141A2A 40%, #0B0F1A 100%);">
+    <div class="flex flex-col justify-center p-8 rounded-xl shadow-xl x-full" 
+      style="background: radial-gradient(50% 50% at 50% 50%, #202534 0%, #1A1F2E 40%, #141925 100%);">
       <div class="mb-8 border-b border-slate-700 pb-4">
         <h1 class="text-4xl font-bold">
           <span v-if="!isEditingPassword">Profile</span>
@@ -51,7 +52,7 @@
               <button
                 type="button"
                 @click="toggleChangeEmail"
-                class="mt-7 cursor-pointer text-indigo-300 hover:text-indigo-200 hover:underline"
+                class="mt-7 cursor-pointer text-indigo-300 hover:text-indigo-200 transition hover:underline"
               >
                 <span v-if="!isEditingEmail">Change email</span>
                 <span v-else>Back</span>
@@ -67,7 +68,7 @@
             <button
               type="button"
               @click="toggleChangePassword"
-              class="cursor-pointer text-indigo-300 hover:text-indigo-200 hover:underline"
+              class="cursor-pointer text-indigo-300 hover:text-indigo-200 transition hover:underline"
             >
               Change password
             </button>

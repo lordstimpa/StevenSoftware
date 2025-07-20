@@ -1,12 +1,13 @@
 <template>
   <div class="flex-1 flex justify-center items-center mb-30 text-white">
-    <div class="flex flex-col justify-center p-8 rounded-xl shadow-xl w-2xl" style="background: radial-gradient(50% 50% at 50% 50%, #1A1F31 0%, #141A2A 40%, #0B0F1A 100%);">
+    <div class="flex flex-col justify-center p-8 rounded-xl shadow-xl w-2xl" 
+      style="background: radial-gradient(50% 50% at 50% 50%, #202534 0%, #1A1F2E 40%, #141925 100%);">
       <div class="mb-8 text-center border-b border-slate-700 pb-4">
         <h1 class="text-4xl font-bold">Login</h1>
       </div>
 
       <form @submit="login" class="flex flex-col">
-        <div v-if="error" class="bg-red-500/80 rounded-md p-4 mb-6 text-white">
+        <div v-if="error" class="bg-red-500/70 rounded-md p-4 mb-6 text-white">
           <p>{{ error }}</p>
         </div>
 
@@ -86,7 +87,7 @@
     const response = await post(`${import.meta.env.VITE_API_URL}/account/login`, {
       email: email.value,
       password: password.value,
-      recaptchaToken: captchaToken,
+      recaptchaToken: captchaToken
     });
 
     if (response && !response.error && response.accessToken) {

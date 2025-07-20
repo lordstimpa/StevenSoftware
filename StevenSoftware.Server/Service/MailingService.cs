@@ -1,4 +1,5 @@
-﻿using MailKit.Net.Smtp;
+﻿using DotNetEnv;
+using MailKit.Net.Smtp;
 using MimeKit;
 using StevenSoftware.Server.Models.Dto;
 
@@ -8,10 +9,12 @@ namespace StevenSoftware.Server.Service
     {
 
         private readonly IConfiguration _config;
+        private readonly IHostEnvironment _env;
 
-        public MailingService(IConfiguration config)
+        public MailingService(IConfiguration config, IHostEnvironment env)
         {
             _config = config;
+            _env = env;
         }
 
         public async Task SendEmailAsync(MailDto dto)
@@ -19,6 +22,7 @@ namespace StevenSoftware.Server.Service
             var message = new MimeMessage();
             message.From.Add(MailboxAddress.Parse(_config["Email:From"]));
             message.To.Add(MailboxAddress.Parse(_config["Email:To"]));
+            message.ReplyTo.Add(new MailboxAddress($"{dto.FirstName} {dto.LastName}", dto.Email));
             message.Subject = $"New message from {dto.FirstName} {dto.LastName}";
 
             message.Body = new TextPart("plain")
@@ -27,8 +31,20 @@ namespace StevenSoftware.Server.Service
             };
 
             using var client = new SmtpClient();
-            await client.ConnectAsync(_config["Email:SmtpServer"], 1025, MailKit.Security.SecureSocketOptions.None);
-            // await client.AuthenticateAsync(_config["Email:Username"], _config["Email:Password"]);
+
+            var smtpServer = _config["Email:SmtpServer"];
+            var port = int.Parse(_config["Email:Port"] ?? "587");
+
+            if (_env.IsDevelopment())
+            {
+                await client.ConnectAsync(smtpServer, port, MailKit.Security.SecureSocketOptions.None);
+            }
+            else
+            {
+                await client.ConnectAsync(smtpServer, port, MailKit.Security.SecureSocketOptions.StartTls);
+                await client.AuthenticateAsync(_config["Email:Username"], _config["Email:Password"]);
+            }
+
             await client.SendAsync(message);
             await client.DisconnectAsync(true);
         }

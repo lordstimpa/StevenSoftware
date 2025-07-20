@@ -10,7 +10,8 @@
         </div>
         <div>
           <button
-            class="text-lg font-semibold text-white bg-gradient-to-r from-indigo-500 to-blue-500 hover:from-indigo-600 hover:to-blue-600 hover:to-bg-gradient-to-r px-10 py-4 rounded-xl hover:cursor-pointer focus:ring-indigo-500 transition"
+            @click="scrollToContact"
+            class="text-lg font-semibold text-white bg-gradient-to-r from-indigo-500 to-blue-500 hover:from-indigo-600 hover:to-blue-600 hover:to-bg-gradient-to-r px-8 py-3 rounded-xl hover:cursor-pointer focus:ring-indigo-500 transition"
           >
           Contact Me
           </button>
@@ -113,23 +114,26 @@
 
   <div class="w-full flex flex-col justify-center gap-10 h-[550px]" style="background: #1A1F31">
     <div class="w-full flex flex-col justify-center items-center gap-2">
-      <p class=" text-white text-center text-5xl font-bold w-[800px]">Want to know more? Visit my blog!</p>
+      <RouterLink to="/blog" class="text-white text-center text-5xl font-bold w-[800px] hover:text-indigo-200 transition">
+        Want to know more? Visit my blog!
+      </RouterLink>
       <p class="text-gray-400 italic">Latest updates from my very own blog, feel free to visit to get the latest from me!</p>
     </div>
 
     <div class="relative w-full flex justify-center items-center">
-      <button @click="scrollLeft" class="text-white hover:text-gray-400 hover:cursor-pointer transition z-10 p-2">
+      <button v-if="blogPosts.length > 2" @click="scrollLeft" class="text-white hover:text-indigo-200 hover:cursor-pointer transition z-10 p-2">
         <ChevronLeft class="size-12"/>
       </button>
 
-      <div
-        ref="carousel"
-        class="flex overflow-x-hidden no-scrollbar scroll-smooth gap-5 w-[1240px]"
-      >
+      <div ref="carousel"
+        :class="[
+          'flex overflow-x-hidden no-scrollbar scroll-smooth gap-5 w-[1020px]',
+          blogPosts.length < 2 ? 'justify-center' : 'justify-start'
+        ]">
         <div
           v-for="blog in blogPosts"
           :key="blog.id"
-          class="shrink-0 w-[400px] h-[280px] border border-blue-900 text-white flex flex-col justify-between p-8 rounded-md"
+          class="shrink-0 w-[500px] h-[300px] border border-blue-900 text-white flex flex-col justify-between p-8 rounded-md"
           style="background: radial-gradient(50% 50% at 50% 50%, #1A1F31 0%, #141A2A 40%, #0B0F1A 100%)"
         >
           <div>
@@ -137,25 +141,35 @@
             <p class="text-xs text-gray-400">{{ formatDateTime(blog.createdAt) }}</p>
           </div>
           <div class="prose prose-invert text-sm max-w-none">
-            {{ getPlainPreview(blog.content) }}
+            {{ blog.summary }}
           </div>
-          <p class="text-sm font-semibold text-end">Read more..</p>
+          <RouterLink to="/blog" class="text-sm font-semibold text-end hover:text-indigo-200 transition hover:underline">
+            Read more..
+          </RouterLink>
         </div>
       </div>
 
-      <button @click="scrollRight" class="text-white hover:text-gray-400 hover:cursor-pointer transition z-10 p-2">
+      <button v-if="blogPosts.length > 2" @click="scrollRight" class="text-white hover:text-indigo-200 hover:cursor-pointer transition z-10 p-2">
         <ChevronRight class="size-12" />
       </button>
     </div>
   </div>
 
-  <div class="w-full flex flex-col justify-center items-center h-[900px] gap-20" style="background: #0B0F1A">
+  <div ref="contactSection" class="w-full flex flex-col justify-center items-center h-[900px] gap-20" style="background: #0B0F1A">
     <div class="flex flex-col gap-5">
       <p class="text-white text-6xl font-bold">Want to work together?</p>
       <p class="text-gray-300 italic text-center">Whether you’ve got a small fix or a big idea — I’d love to hear about it.</p>
     </div>
 
     <form @submit.prevent="sendMail" class="flex flex-col gap-5 w-[700px]">
+      <div v-if="mailErrorMessage" class="bg-red-500/70 rounded-md p-4 text-white">
+        <p>{{ mailErrorMessage }}</p>
+      </div>
+
+      <div v-if="!mailErrorMessage && mailSuccessMessage" class="bg-green-500/70 rounded-md p-4 text-white">
+        <p>{{ mailSuccessMessage }}</p>
+      </div>
+
       <div class="flex gap-10">
         <div class="flex flex-col w-full">
           <label class="font-semibold text-gray-300 mb-2" for="firstName">First name*</label>
@@ -212,6 +226,7 @@
 
       <div class="flex justify-end">
         <button
+          v-if="!mailErrorMessage && !mailSuccessMessage"
           type="submit"
           class="text-lg cursor-pointer font-semibold text-white bg-gradient-to-r from-indigo-500 to-blue-500 hover:from-indigo-600 hover:to-blue-600 px-5 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
         >
@@ -230,15 +245,21 @@
   import { ChevronLeft, ChevronRight } from 'lucide-vue-next';
   import { formatDateTime } from '../tools/helpers.js';
 
+  const recaptchaSiteKey = import.meta.env.VITE_RECAPTCHA_SITE_KEY;
+
   const blogPosts = ref([]);
+  const contactSection = ref(null);
   const carousel = ref(null);
-  const cardWidth = ref(420);
+  const cardWidth = ref(520);
+  const recaptchaReady = ref(false);
+  const mailSuccessMessage = ref("");
+  const mailErrorMessage = ref("")
 
   // Validation
   const mail = yup.object({
-    firstName: yup.string().required('First name is required').min(2, 'First name must be at least 2 characters'),
-    email: yup.string().required('Email is required').email('Enter a valid email'),
-    message: yup.string().required('Message is required').min(10, 'Message must be at least 10 characters'),
+    firstName: yup.string().required('First name is required').min(2, 'First name must be at least 2 characters').max(1000, 'First name cannot have more than 1000 characters'),
+    email: yup.string().required('Email is required').email('Enter a valid email').max(350, 'Email cannot have more than 350 characters'),
+    message: yup.string().required('Message is required').min(10, 'Message must be at least 10 characters').max(2000, 'Message cannot have more than 2000 characters'),
   });
 
   const { handleSubmit } = useForm({
@@ -251,18 +272,24 @@
   const { value: message, errorMessage: messageError, handleBlur: messageBlur } = useField('message');
 
   const sendMail = handleSubmit(async (values) => {
+    let captchaToken = null;
+
+    if (typeof grecaptcha !== 'undefined' && recaptchaReady.value) {
+      captchaToken = await grecaptcha.execute(recaptchaSiteKey, { action: 'sendMail' });
+    }
+
     const response = await post(`${import.meta.env.VITE_API_URL}/mail/sendmail`, {
       firstName: values.firstName,
       lastName: values.lastName ?? '',
       email: values.email,
       message: values.message,
+      recaptchaToken: captchaToken
     });
-    console.log(response);
 
     if (!response.error) {
-      alert("Message sent successfully!");
+      mailSuccessMessage.value = response.message;
     } else {
-      alert("Failed to send message.");
+      mailErrorMessage.value = response.message;
     }
   });
 
@@ -279,12 +306,6 @@
     }
   };
 
-  const getPlainPreview = (content) => {
-    const stripped = content.replace(/(<([^>]+)>)/gi, '');
-    const truncated = stripped.length > 150 ? stripped.slice(0, 150) + '…' : stripped;
-    return truncated;
-  }
-
   const scrollLeft = () => {
     if (carousel.value) {
       carousel.value.scrollBy({ left: -cardWidth.value, behavior: 'smooth' });
@@ -297,7 +318,22 @@
     }
   };
 
+  const scrollToContact = () => {
+    contactSection.value?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   onMounted(() => {
     getBlogs();
+
+    const script = document.createElement('script');
+    script.src = `https://www.google.com/recaptcha/api.js?render=${recaptchaSiteKey}`;
+    script.async = true;
+    script.defer = true;
+    script.onload = () => {
+      grecaptcha.ready(() => {
+        recaptchaReady.value = true;
+      });
+    };
+    document.head.appendChild(script);
   });
 </script>
