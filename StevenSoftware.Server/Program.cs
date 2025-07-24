@@ -10,6 +10,7 @@ using System.Security.Claims;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddHttpClient();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
@@ -87,9 +88,12 @@ builder.Services.AddAuthentication(options =>
 	options.MapInboundClaims = false;
 });
 
-builder.Services.AddScoped<JwtTokenService>();
-builder.Services.AddScoped<SeedingService>();
+builder.Services.AddScoped<AccountService>();
 builder.Services.AddScoped<BlogService>();
+builder.Services.AddScoped<JwtTokenService>();
+builder.Services.AddScoped<MailingService>();
+builder.Services.AddScoped<MediaService>();
+builder.Services.AddScoped<SeedingService>();
 
 var app = builder.Build();
 
@@ -122,6 +126,7 @@ while (retryCount < maxRetries)
 
 Console.WriteLine($"Running in {builder.Environment.EnvironmentName} environment");
 
+app.UseStaticFiles();
 app.UseCors("AllowSpecificOrigin");
 app.UseSwagger();
 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "StevenSoftware API v1"));

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using StevenSoftware.Server.Models;
 using StevenSoftware.Server.Models.Dto;
+using StevenSoftware.Server.Service;
 using StevenSoftware.Server.Services;
 using System.Security.Claims;
 
@@ -14,30 +15,44 @@ namespace StevenSoftware.Server.Controllers
 	{
 		private readonly UserManager<ApplicationUser> _userManager;
 		private readonly JwtTokenService _jwtTokenService;
+        private readonly AccountService _accountService;
+        private static Dictionary<string, (DateTime lastAttempt, int attempts)> _loginAttempts = new();
 
-		public AccountController(UserManager<ApplicationUser> userManager, JwtTokenService jwtTokenService)
+        public AccountController(UserManager<ApplicationUser> userManager, JwtTokenService jwtTokenService, AccountService accountService)
 		{
 			_userManager = userManager;
 			_jwtTokenService = jwtTokenService;
+            _accountService = accountService;
 		}
 
-		[AllowAnonymous]
+        [AllowAnonymous]
         [HttpPost("login")]
-		public async Task<IActionResult> Login([FromBody] LoginDto loginDto)
-		{
-			var user = await _userManager.FindByEmailAsync(loginDto.Email);
-			if (user == null)
-				return Unauthorized(new { Message = "Invalid email." });
+        public async Task<IActionResult> Login([FromBody] LoginDto loginDto)
+        {
+            if (string.IsNullOrWhiteSpace(loginDto.RecaptchaToken))
+            {
+                return BadRequest(new { Message = "Missing reCAPTCHA token." });
+            }
 
-            if (!await _userManager.CheckPasswordAsync(user, loginDto.Password))
-                return Unauthorized(new { Message = "Invalid password." });
+            var isCaptchaValid = await _accountService.VerifyCaptcha(loginDto.RecaptchaToken);
+            if (!isCaptchaValid)
+            {
+                return BadRequest(new { Message = "Suspicious login behavior detected. Please try again later." });
+            }
 
-			var token = await _jwtTokenService.CreateTokenAsync(user);
+            var user = await _userManager.FindByEmailAsync(loginDto.Email);
+            if (user == null || !await _userManager.CheckPasswordAsync(user, loginDto.Password))
+            {
+                return Unauthorized(new { Message = "Invalid email or password." });
+            }
 
-			return Ok(token);
-		}
+            var token = await _jwtTokenService.CreateTokenAsync(user);
 
-		[Authorize]
+            return Ok(token);
+        }
+
+
+        [Authorize]
         [HttpGet("getuser")]
         public async Task<IActionResult> GetUser()
 		{

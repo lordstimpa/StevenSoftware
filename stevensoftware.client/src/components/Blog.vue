@@ -1,10 +1,13 @@
 <template>
   <div class="p-10 text-white flex justify-center w-full">
-    <div class="flex flex-col p-8 rounded-xl bg-slate-900 shadow-xl max-w-screen-xl w-full">
-      <div class="flex justify-between mb-8 border-b border-slate-700 pb-4">
+    <div
+      class="flex flex-col p-8 rounded-xl shadow-xl max-w-screen-xl w-full"
+      style="background: radial-gradient(50% 50% at 50% 50%, #202534 0%, #1a1f2e 40%, #141925 100%)"
+    >
+      <div class="flex justify-between mb-8 border-b-3 border-slate-700 pb-4">
         <div class="flex flex-col gap-2">
           <h1 class="text-4xl font-bold">Blog</h1>
-          <p class="text-xs text-slate-400">Total blogposts: {{ totalBlogPosts }}</p>
+          <p class="text-slate-400">Total blogposts: {{ totalBlogPosts }}</p>
         </div>
 
         <div class="flex gap-8 items-center">
@@ -17,93 +20,107 @@
             Create Blog Post
           </RouterLink>
 
-          <input
+          <!--<input
             type="text"
             placeholder="Search keywords..."
             class="px-4 py-2 border border-slate-700 bg-slate-800 text-slate-100 rounded-md"
-          />
+          />-->
         </div>
       </div>
 
-      <div v-if="totalBlogPosts <= 0 && !isLoading">
-        <div class="bg-yellow-500/80 rounded-md p-4 mb-6 text-slate-900">
-          <p>
-            Currently there are no published blogposts. Come back in the nearest future.
-          </p>
+      <div v-if="totalBlogPosts <= 0 && !isLoadingBlogposts">
+        <div class="bg-yellow-500/70 rounded-md p-4 mb-6 text-slate-900">
+          <p>Currently there are no published blogposts. Come back in the nearest future.</p>
         </div>
       </div>
 
-      <div v-for="blogPost in blogPosts" class="relative flex gap-4 border-slate-700 border-l pt-8 pb-8">
+      <div v-if="isLoadingBlogposts" class="w-full h-[600px] flex justify-center items-center">
+        <div
+          class="w-16 h-16 border-8 border-indigo-500 border-t-transparent rounded-full animate-spin animate-[pulse_1.2s_ease-in-out_infinite]"
+        ></div>
+      </div>
+
+      <div
+        v-else
+        v-for="blogPost in blogPosts"
+        class="relative flex gap-4 border-slate-700 border-l pt-8 pb-8"
+      >
         <div class="flex flex-col gap-6 w-3/10 h-full relative pl-8">
           <CircleDot class="absolute top-0 translate-y-[4px] -left-2 w-4 h-4 text-slate-400" />
-          <p>{{ formatDateTime(blogPost.createdAt) }}</p>
-          <p class="text-slate-400 text-sm w-auto self-start border-slate-700 border p-2 rounded-sm">{{blogPost.author.firstName}}</p>
+          <p class="font-medium">{{ formatDateTime(blogPost.createdAt) }}</p>
+          <p
+            class="text-slate-400 text-sm w-auto self-start border-slate-700 border p-2 rounded-sm"
+          >
+            {{ blogPost.author.firstName }}
+          </p>
         </div>
 
         <div class="w-7/10 h-full rounded-sm">
-          <BlogPost :blogPost="blogPost" :user="user" @refreshBlogPosts="getBlogsAndShowToast"/>
+          <BlogPostCard :blogPost="blogPost" :user="user" />
         </div>
       </div>
 
       <div class="flex justify-center pt-8 gap-6 border-slate-700 border-t">
-        <ChevronLeft 
-          @click="currentPageNumber > 1 && getBlogs(currentPageNumber - 1)" 
-          class="w-8 h-8 hover:cursor-pointer text-white"
-          :class="{ 'text-slate-400 cursor-default': currentPageNumber === 1 || totalPages === 1 }" />
+        <ChevronLeft
+          @click="currentPageNumber > 1 && getBlogs(currentPageNumber - 1)"
+          class="w-8 h-8 hover:cursor-pointer text-white hover:text-indigo-200 transition"
+          :class="{ 'text-slate-400 cursor-default': currentPageNumber === 1 || totalPages === 1 }"
+        />
 
         <div v-for="page in totalPages">
           <span
             @click="getBlogs(page)"
-            class="text-xl hover:cursor-pointer"
+            class="text-xl hover:cursor-pointer hover:text-indigo-200 transition"
             :class="{
               'underline font-bold': page === currentPageNumber,
               'text-slate-400': page !== currentPageNumber,
-            }">
+            }"
+          >
             {{ page }}
           </span>
         </div>
 
-        <ChevronRight 
-          @click="currentPageNumber < totalPages && getBlogs(currentPageNumber + 1)" 
-          class="w-8 h-8 hover:cursor-pointer text-white"
-          :class="{ 'text-slate-400 cursor-default': currentPageNumber === totalPages || totalPages === 1 }" />
+        <ChevronRight
+          @click="currentPageNumber < totalPages && getBlogs(currentPageNumber + 1)"
+          class="w-8 h-8 hover:cursor-pointer text-white hover:text-indigo-200 transition"
+          :class="{
+            'text-slate-400 cursor-default': currentPageNumber === totalPages || totalPages === 1,
+          }"
+        />
       </div>
     </div>
   </div>
-      
-  <Toast :message="toastMessage" v-model:visible="displayToast" @update:visible="displayToast = $event" />
 </template>
 
 <script setup>
-  import BlogPost from '../components/BlogPost.vue'
+  import BlogPostCard from './BlogPostCard.vue';
   import { ref, onMounted } from 'vue';
-  import { useRoute } from 'vue-router';
   import { get } from '../tools/api';
   import { useUserStore } from '../stores/UserStore';
   import { storeToRefs } from 'pinia';
   import { Plus, CircleDot, ChevronLeft, ChevronRight } from 'lucide-vue-next';
-  import Toast from '../components/Toast.vue';
-  
-  const isLoading = ref(false);
+  import { formatDateTime } from '../tools/helpers.js';
+
+  const isLoadingBlogposts = ref(false);
   const blogPosts = ref([]);
   const totalBlogPosts = ref(0);
   const currentPageNumber = ref(1);
   const totalPages = ref(1);
-  const displayToast = ref(false);
-  const toastMessage = ref('');
 
-  const route = useRoute();
   const userStore = useUserStore();
   const { user } = storeToRefs(userStore);
 
   const getBlogs = async (pageNum) => {
-    isLoading.value = true;
+    isLoadingBlogposts.value = true;
     const token = localStorage.getItem('jwt');
-    const response = await get(`${import.meta.env.VITE_API_URL}/blog/getblogposts?pageNumber=${pageNum ?? currentPageNumber.value}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const response = await get(
+      `${import.meta.env.VITE_API_URL}/blog/getblogposts?pageNumber=${pageNum ?? currentPageNumber.value}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
 
     if (response) {
       blogPosts.value = response.data.blogPosts;
@@ -112,38 +129,10 @@
       totalBlogPosts.value = response.data.totalCount;
       totalPages.value = totalBlogPosts.value === 0 ? 1 : Math.ceil(totalBlogPosts.value / 10);
     }
-    isLoading.value = false;
+    isLoadingBlogposts.value = false;
   };
 
-  function getBlogsAndShowToast(message) {
-    displayToast.value = true;
-    toastMessage.value = message;
-    getBlogs();
-  }
-
-  function formatDateTime(timestamp) {
-    if (!timestamp) return '';
-
-    const date = new Date(timestamp);
-
-    const options = {
-      year: 'numeric',
-      month: 'short',
-      day: '2-digit',
-      hour: '2-digit',
-      minute: '2-digit',
-      hour12: false,
-    };
-
-    return date.toLocaleString('sv-SE', options).replace(',', ' -');
-  }
-
   onMounted(() => {
-    const message = route?.state?.toastMessage;
-    if (message) {
-      toastMessage.value = message;
-      showToast.value = true;
-    }
     getBlogs();
   });
 </script>

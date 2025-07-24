@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Hosting;
 using StevenSoftware.Server.Database;
 using StevenSoftware.Server.Helper;
 using StevenSoftware.Server.Models;
@@ -10,10 +9,13 @@ namespace StevenSoftware.Server.Service
     public class BlogService
     {
         private readonly ApplicationDbContext _dbContext;
+        private readonly MediaService _mediaService;
 
-        public BlogService(ApplicationDbContext dbContext)
+
+        public BlogService(ApplicationDbContext dbContext, MediaService mediaService)
         {
             _dbContext = dbContext;
+            _mediaService = mediaService;
         }   
 
         public async Task<ServiceResult<BlogPostGetDto>> GetBlogPostById(int blogPostId, CancellationToken cancellationToken)
@@ -29,7 +31,9 @@ namespace StevenSoftware.Server.Service
             {
                 Id = blogPost.Id,
                 Title = blogPost.Title,
+                Summary = blogPost.Summary,
                 Content = blogPost.Content,
+                CoverImage = blogPost.CoverImage,
                 CreatedAt = blogPost.CreatedAt,
                 UpdatedAt = blogPost.UpdatedAt,
                 Author = new UserDto
@@ -40,6 +44,14 @@ namespace StevenSoftware.Server.Service
 
             return ServiceResult<BlogPostGetDto>.Ok(blogPostGetDto, "Successfully fetched blog post.");
         }
+
+        public async Task<BlogPost?> GetBlogPostModelById(int blogPostId, CancellationToken cancellationToken)
+        {
+            return await _dbContext.BlogPosts
+                .Include(x => x.Author)
+                .FirstOrDefaultAsync(x => x.Id == blogPostId, cancellationToken);
+        }
+
 
         public async Task<ServiceResult<BlogPostGetListDto>> GetBlogPosts(int pageNumber, CancellationToken cancellationToken)
         {
@@ -61,7 +73,9 @@ namespace StevenSoftware.Server.Service
             {
                 Id = post.Id,
                 Title = post.Title,
+                Summary = post.Summary,
                 Content = post.Content,
+                CoverImage = post.CoverImage,
                 CreatedAt = post.CreatedAt,
                 UpdatedAt = post.UpdatedAt,
                 Author = new UserDto
@@ -82,30 +96,51 @@ namespace StevenSoftware.Server.Service
 
         public async Task<ServiceResult<BlogPostGetDto>> UpdateBlogPost(BlogPostUpdateDto blogPostDto, string userId, CancellationToken cancellationToken)
         {
-            var existingBlogPost = await GetBlogPostById(blogPostDto.Id, cancellationToken);
+            var existingBlogPost = await GetBlogPostModelById(blogPostDto.Id, cancellationToken);
 
-            if (existingBlogPost != null && existingBlogPost.Data != null)
+            if (existingBlogPost != null)
             {
-                var blogPost = existingBlogPost.Data;
+                if (string.IsNullOrEmpty(blogPostDto.CoverImage))
+                {
+                    var fileName = Path.GetFileName(existingBlogPost.CoverImage);
+                    if (!string.IsNullOrEmpty(fileName))
+                        _mediaService.DeleteMediaByFileName(fileName);
+                }
 
-                if (blogPost.AuthorId != userId)
-                    return ServiceResult<BlogPostGetDto>.Fail("You are not authorized to edit this blog post.");
+                existingBlogPost.Title = blogPostDto.Title;
+                existingBlogPost.Summary = blogPostDto.Summary;
+                existingBlogPost.Content = blogPostDto.Content;
+                existingBlogPost.CoverImage = blogPostDto.CoverImage;
+                existingBlogPost.UpdatedAt = DateTime.UtcNow;
 
-                existingBlogPost.Data.Title = blogPostDto.Title;
-                existingBlogPost.Data.Content = blogPostDto.Content;
-                existingBlogPost.Data.UpdatedAt = DateTime.UtcNow;
-
-                _dbContext.Update(existingBlogPost.Data);
+                _dbContext.Update(existingBlogPost);
                 await _dbContext.SaveChangesAsync(cancellationToken);
 
-                return ServiceResult<BlogPostGetDto>.Ok(existingBlogPost.Data, "Successfully updated blog post.");
+                var blogPostGetDto = new BlogPostGetDto()
+                {
+                    Id = existingBlogPost.Id,
+                    Title = existingBlogPost.Title,
+                    Summary = existingBlogPost.Summary,
+                    Content = existingBlogPost.Content,
+                    CoverImage = existingBlogPost.CoverImage,
+                    CreatedAt = existingBlogPost.CreatedAt,
+                    UpdatedAt = existingBlogPost.UpdatedAt,
+                    Author = new UserDto
+                    {
+                        FirstName = existingBlogPost.Author?.FirstName ?? "",
+                    }
+                };
+
+                return ServiceResult<BlogPostGetDto>.Ok(new BlogPostGetDto(), "Successfully updated blog post.");
             }
             else
             {
                 var newBlogPost = new BlogPost 
                 { 
                     Title = blogPostDto.Title,
+                    Summary = blogPostDto.Summary,
                     Content = blogPostDto.Content,
+                    CoverImage = blogPostDto.CoverImage,
                     UpdatedAt = DateTime.UtcNow,
                     CreatedAt = DateTime.UtcNow,
                     AuthorId = userId
@@ -118,7 +153,9 @@ namespace StevenSoftware.Server.Service
                 {
                     Id = newBlogPost.Id,
                     Title = newBlogPost.Title,
+                    Summary = newBlogPost.Summary,
                     Content = newBlogPost.Content,
+                    CoverImage = newBlogPost.CoverImage,
                     CreatedAt = newBlogPost.CreatedAt,
                     UpdatedAt = newBlogPost.UpdatedAt,
                     AuthorId = newBlogPost.AuthorId,
@@ -137,8 +174,9 @@ namespace StevenSoftware.Server.Service
             if (blogPost == null)
                 return ServiceResult<BlogPostGetDto>.Fail("Blog post could not be found.");
 
-            if (blogPost.AuthorId != userId)
-                return ServiceResult<BlogPostGetDto>.Fail("You are not authorized to delete this blog post.");
+            var fileName = Path.GetFileName(blogPost.CoverImage);
+            if (!string.IsNullOrEmpty(fileName))
+                _mediaService.DeleteMediaByFileName(fileName);
 
             _dbContext.BlogPosts.Remove(blogPost);
             var affectedRow = await _dbContext.SaveChangesAsync(cancellationToken);
@@ -150,7 +188,9 @@ namespace StevenSoftware.Server.Service
             {
                 Id = blogPost.Id,
                 Title = blogPost.Title,
+                Summary = blogPost.Summary,
                 Content = blogPost.Content,
+                CoverImage = blogPost.CoverImage,
                 CreatedAt = blogPost.CreatedAt,
                 UpdatedAt = blogPost.UpdatedAt,
                 AuthorId = blogPost.AuthorId,

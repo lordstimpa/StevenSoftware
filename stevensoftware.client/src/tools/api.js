@@ -13,10 +13,15 @@ const get = async (url, config = {}) => {
 const post = async (url, data = {}, config = {}) => {
   try {
     const response = await axios.post(url, data, config);
-    return response.status === 200 ? response.data : null;
+    return response.data;
   } catch (error) {
     console.error(error);
-    return null;
+
+    if (error.response && error.response.data && error.response.data.message) {
+      return { error: true, message: error.response.data.message };
+    }
+
+    return { error: true, message: 'An unexpected error occurred.' };
   }
 };
 

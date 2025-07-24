@@ -11,7 +11,12 @@ namespace StevenSoftware.Server.Models
         public string Title { get; set; }
 
         [Required]
+        public string Summary { get; set; }
+
+        [Required]
         public string Content { get; set; }
+
+        public string CoverImage { get; set; }
 
         public DateTime CreatedAt { get; set; }
 

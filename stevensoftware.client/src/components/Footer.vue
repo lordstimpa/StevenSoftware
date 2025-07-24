@@ -1,6 +1,6 @@
 <template>
-  <div class="w-full h-20 bg-black flex justify-center items-center">
-    <p class="text-white">© 2025 Steven Software. Hosted proudly on my own server.</p>
+  <div class="w-full h-40 flex justify-center items-center" style="background-color: #06080f">
+    <p class="text-white">© 2025 Steven Software. Proudly hosted on my own server.</p>
   </div>
 </template>
 
