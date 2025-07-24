@@ -1,7 +1,9 @@
 <template>
   <div class="flex-1 flex justify-center items-center mb-30 text-white">
-    <div class="flex flex-col justify-center p-8 rounded-xl shadow-xl x-full" 
-      style="background: radial-gradient(50% 50% at 50% 50%, #202534 0%, #1A1F2E 40%, #141925 100%);">
+    <div
+      class="flex flex-col justify-center p-8 rounded-xl shadow-xl x-full"
+      style="background: radial-gradient(50% 50% at 50% 50%, #202534 0%, #1a1f2e 40%, #141925 100%)"
+    >
       <div class="mb-8 border-b border-slate-700 pb-4">
         <h1 class="text-4xl font-bold">
           <span v-if="!isEditingPassword">Profile</span>
@@ -142,7 +144,11 @@
     </div>
   </div>
 
-  <Toast :message="toastMessage" v-model:visible="displayToast" @update:visible="displayToast = $event" />
+  <Toast
+    :message="toastMessage"
+    v-model:visible="displayToast"
+    @update:visible="displayToast = $event"
+  />
 </template>
 
 <script setup>
@@ -220,11 +226,11 @@
         }
       );
 
-    if (response) {
-      isEditingPassword.value = false;
-      displayToast.value = true;
-      toastMessage.value = response.message;
-    }
+      if (response) {
+        isEditingPassword.value = false;
+        displayToast.value = true;
+        toastMessage.value = response.message;
+      }
     } else {
       displayToast.value = true;
       toastMessage.value = 'Could not confirm new password';

@@ -2,13 +2,19 @@
   <div class="w-full flex justify-center">
     <div class="w-9/10 flex justify-between p-4">
       <div class="flex justify-between flex gap-8">
-        <RouterLink to="/" class="text-lg p-2 rounded-md text-white font-semibold hover:text-indigo-200 transition">
+        <RouterLink
+          to="/"
+          class="text-lg p-2 rounded-md text-white font-semibold hover:text-indigo-200 transition"
+        >
           Steven Software
         </RouterLink>
 
         <span class="text-lg text-white p-2">|</span>
 
-        <RouterLink to="/blog" class="text-lg p-2 rounded-md text-white font-semibold hover:text-indigo-200 transition">
+        <RouterLink
+          to="/blog"
+          class="text-lg p-2 rounded-md text-white font-semibold hover:text-indigo-200 transition"
+        >
           Blog
         </RouterLink>
       </div>
@@ -46,9 +52,10 @@
 
     <template #footer>
       <div class="flex justify-between">
-        <button 
-          @click="showModal = false" 
-          class="text-lg cursor-pointer font-semibold text-white bg-slate-700 hover:bg-slate-600 px-5 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-slate-500 transition">
+        <button
+          @click="showModal = false"
+          class="text-lg cursor-pointer font-semibold text-white bg-slate-700 hover:bg-slate-600 px-5 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-slate-500 transition"
+        >
           Close
         </button>
         <button

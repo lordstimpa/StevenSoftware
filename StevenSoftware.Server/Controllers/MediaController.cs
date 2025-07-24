@@ -1,39 +1,44 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using StevenSoftware.Server.Service;
 
 namespace StevenSoftware.Server.Controllers
 {
     [ApiController]
     [Route("api/media")]
-    public class MeidaController : ControllerBase
+    public class MediaController : ControllerBase
     {
-        private readonly string _imageFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads");
+        private readonly MediaService _mediaService;
 
-        [HttpPost]
-        [Route("uploadimage")]
-        public async Task<IActionResult> UploadImage(IFormFile image)
+        public MediaController(MediaService mediaService)
         {
-            if (image == null || image.Length == 0)
-                return BadRequest("No image uploaded.");
+            _mediaService = mediaService;
+        }
 
-            var ext = Path.GetExtension(image.FileName).ToLower();
-            var allowedExts = new[] { ".jpg", ".jpeg", ".png", ".webp" };
-            if (Array.IndexOf(allowedExts, ext) < 0)
-                return BadRequest("Only JPG, PNG, or WEBP files are allowed.");
+        [Authorize]
+        [HttpPost("uploadimage")]
+        public async Task<IActionResult> UploadImage(IFormFile image, CancellationToken cancellationToken)
+        {
+            var result = await _mediaService.UploadImageAsync(image, cancellationToken);
+            if (!result.Success)
+                return BadRequest(new { error = result.Error });
 
-            if (!Directory.Exists(_imageFolder))
-                Directory.CreateDirectory(_imageFolder);
+            return Ok(new { imageUrl = result.ImageUrl, message = "File uploaded successfully." });
+        }
 
-            var fileName = Guid.NewGuid() + ext;
-            var filePath = Path.Combine(_imageFolder, fileName);
+        [Authorize]
+        [HttpDelete("deletemedia/{fileName}")]
+        public IActionResult DeleteMedia(string fileName)
+        {
+            if (string.IsNullOrWhiteSpace(fileName))
+                return BadRequest("Filename is required.");
 
-            using (var stream = new FileStream(filePath, FileMode.Create))
-            {
-                await image.CopyToAsync(stream);
-            }
+            var actualFileName = Path.GetFileName(fileName);
+            var deleted = _mediaService.DeleteMediaByFileName(actualFileName);
+            if (!deleted)
+                return NotFound("File not found or could not be deleted.");
 
-            var imageUrl = $"/uploads/{fileName}";
-
-            return Ok(new { imageUrl });
+            return Ok(new { message = "File deleted successfully." });
         }
     }
 }

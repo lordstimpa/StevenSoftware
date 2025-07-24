@@ -1,21 +1,33 @@
 <template>
   <div class="p-10 text-white flex flex-col items-center justify-center gap-8">
-    <div class="flex flex-col max-w-screen-lg w-full p-8 rounded-xl shadow-xl" 
-      style="background: radial-gradient(50% 50% at 50% 50%, #202534 0%, #1A1F2E 40%, #141925 100%);">
+    <div
+      class="flex flex-col max-w-screen-lg w-full p-8 rounded-xl shadow-xl"
+      style="background: radial-gradient(50% 50% at 50% 50%, #202534 0%, #1a1f2e 40%, #141925 100%)"
+    >
       <div class="flex justify-between mb-8 border-b border-slate-700 pb-4">
         <h1 class="text-4xl font-bold">Create new blog post</h1>
       </div>
 
       <div class="bg-yellow-500/70 rounded-md p-4 mb-6 text-slate-900">
+        <p>Content supports **Markdown** syntax — like *italic*, **bold**, etc.</p>
         <p>
-          Content supports **Markdown** syntax — like *italic*, **bold**, etc.
+          See a markdown
+          <a
+            class="underline font-bold"
+            href="https://www.markdownguide.org/cheat-sheet/"
+            target="_blank"
+            >cheat sheet</a
+          >
         </p>
-        <p>See a markdown <a class="underline font-bold" href="https://www.markdownguide.org/cheat-sheet/" target="_blank">cheat sheet</a></p>
       </div>
 
       <form @submit.prevent="createBlogPost">
         <div class="flex flex-col mb-4">
-          <ImageUpload @uploaded="handleImageUpload"  />
+          <ImageUpload
+            existingImage=""
+            @uploaded="handleImageUpload"
+            @removed="handleImageRemoval"
+          />
         </div>
 
         <div class="flex flex-col mb-4">
@@ -23,8 +35,10 @@
           <input
             v-model="title"
             @blur="titleBlur"
-            :class="['w-full bg-slate-800 text-slate-100 px-4 py-2 rounded-md focus:outline-none focus:ring-2',
-              titleError ? 'border-red-500 ring-red-500' : 'border-slate-700 focus:ring-indigo-500']"
+            :class="[
+              'w-full bg-slate-800 text-slate-100 px-4 py-2 rounded-md focus:outline-none focus:ring-2',
+              titleError ? 'border-red-500 ring-red-500' : 'border-slate-700 focus:ring-indigo-500',
+            ]"
             type="text"
             id="blogTitle"
             placeholder="Blog title"
@@ -38,8 +52,12 @@
             v-model="summary"
             @blur="summaryBlur"
             rows="3"
-            :class="['w-full bg-slate-800 text-slate-100 px-4 py-2 rounded-md focus:outline-none focus:ring-2',
-              summaryError ? 'border-red-500 ring-red-500' : 'border-slate-700 focus:ring-indigo-500']"
+            :class="[
+              'w-full bg-slate-800 text-slate-100 px-4 py-2 rounded-md focus:outline-none focus:ring-2',
+              summaryError
+                ? 'border-red-500 ring-red-500'
+                : 'border-slate-700 focus:ring-indigo-500',
+            ]"
             type="text"
             id="blogSummary"
             placeholder="Blog summary"
@@ -53,8 +71,12 @@
             v-model="content"
             @blur="contentBlur"
             rows="15"
-            :class="['w-full bg-slate-800 text-slate-100 px-4 py-2 rounded-md focus:outline-none focus:ring-2',
-              contentError ? 'border-red-500 ring-red-500' : 'border-slate-700 focus:ring-indigo-500']"
+            :class="[
+              'w-full bg-slate-800 text-slate-100 px-4 py-2 rounded-md focus:outline-none focus:ring-2',
+              contentError
+                ? 'border-red-500 ring-red-500'
+                : 'border-slate-700 focus:ring-indigo-500',
+            ]"
             id="blogContent"
             placeholder="Blog content"
           ></textarea>
@@ -79,8 +101,10 @@
       </form>
     </div>
 
-    <div class="flex flex-col max-w-screen-lg w-full p-8 rounded-xl shadow-xl" 
-      style="background: radial-gradient(50% 50% at 50% 50%, #202534 0%, #1A1F2E 40%, #141925 100%);">
+    <div
+      class="flex flex-col max-w-screen-lg w-full p-8 rounded-xl shadow-xl"
+      style="background: radial-gradient(50% 50% at 50% 50%, #202534 0%, #1a1f2e 40%, #141925 100%)"
+    >
       <div class="flex justify-between mb-8 border-b border-slate-700 pb-4">
         <h1 class="text-4xl font-bold">Preview of blog post</h1>
       </div>
@@ -90,7 +114,7 @@
       </div>
 
       <div>
-        <div class="prose prose-invert max-w-none"v-html="renderedContent"></div>
+        <div class="prose prose-invert max-w-none" v-html="renderedContent"></div>
       </div>
     </div>
   </div>
@@ -104,7 +128,7 @@
   import * as yup from 'yup';
   import { marked } from 'marked';
   import DOMPurify from 'dompurify';
-  import ImageUpload from './ImageUpload.vue'
+  import ImageUpload from './ImageUpload.vue';
 
   const schema = yup.object({
     title: yup.string().required('Title is required').min(3, 'Title must be at least 3 characters'),
@@ -135,7 +159,7 @@
         title: values.title,
         summary: values.summary,
         content: values.content,
-        coverImage: coverImage.value
+        coverImage: coverImage.value,
       },
       {
         headers: {
@@ -147,9 +171,6 @@
     if (response) {
       router.push({
         path: '/blog',
-        state: {
-          toastMessage: response.message,
-        },
       });
     } else {
       alert('Blog post creation failed.');
@@ -158,5 +179,9 @@
 
   function handleImageUpload(url) {
     coverImage.value = url;
+  }
+
+    function handleImageRemoval() {
+    coverImage.value = '';
   }
 </script>

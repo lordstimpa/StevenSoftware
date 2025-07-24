@@ -1,6 +1,5 @@
 <template>
-  <div class="w-full min-h-screen flex flex-col"
-    style="background-color: #0B0F1A;">
+  <div class="w-full min-h-screen flex flex-col" style="background-color: #0b0f1a">
     <Navbar />
     <RouterView />
   </div>

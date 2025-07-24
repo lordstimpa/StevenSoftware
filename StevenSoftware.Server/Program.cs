@@ -92,6 +92,7 @@ builder.Services.AddScoped<AccountService>();
 builder.Services.AddScoped<BlogService>();
 builder.Services.AddScoped<JwtTokenService>();
 builder.Services.AddScoped<MailingService>();
+builder.Services.AddScoped<MediaService>();
 builder.Services.AddScoped<SeedingService>();
 
 var app = builder.Build();
