@@ -7,21 +7,28 @@ namespace StevenSoftware.Server.Service
     {
         private readonly IConfiguration _config;
         private readonly HttpClient _httpClient;
+        private readonly ILogger<AccountService> _logger;
 
-        public AccountService(IConfiguration configuration, HttpClient httpClient)
+        public AccountService(IConfiguration configuration, HttpClient httpClient, ILogger<AccountService> logger)
         {
             _config = configuration;
             _httpClient = httpClient;
+            _logger = logger;
         }
 
         public async Task<bool> VerifyCaptcha(string token)
         {
             var secret = _config["GoogleReCaptcha:SecretKey"];
+
             try
             {
                 var response = await _httpClient.PostAsync($"https://www.google.com/recaptcha/api/siteverify?secret={secret}&response={token}", null);
 
-                if (!response.IsSuccessStatusCode) return false;
+                if (!response.IsSuccessStatusCode)
+                {
+                    _logger.LogWarning("reCAPTCHA verification failed with status code {StatusCode}", response.StatusCode);
+                    return false;
+                }
 
                 var jsonString = await response.Content.ReadAsStringAsync();
                 var captchaResult = JsonSerializer.Deserialize<RecaptchaResponseDto>(jsonString, new JsonSerializerOptions
@@ -31,10 +38,13 @@ namespace StevenSoftware.Server.Service
 
                 var minScore = double.TryParse(_config["GoogleReCaptcha:MinScore"], out var score) ? score : 0.7;
 
-                return (captchaResult?.Success ?? false) && (captchaResult.Score >= minScore);
+                var isValid = (captchaResult?.Success ?? false) && (captchaResult.Score >= minScore);
+
+                return isValid;
             }
-            catch
+            catch (Exception ex)
             {
+                _logger.LogError(ex, "Error verifying reCAPTCHA token");
                 return false;
             }
         }
