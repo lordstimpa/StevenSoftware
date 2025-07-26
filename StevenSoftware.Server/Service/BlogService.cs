@@ -10,13 +10,14 @@ namespace StevenSoftware.Server.Service
     {
         private readonly ApplicationDbContext _dbContext;
         private readonly MediaService _mediaService;
+        private readonly ILogger<BlogService> _logger;
 
-
-        public BlogService(ApplicationDbContext dbContext, MediaService mediaService)
+        public BlogService(ApplicationDbContext dbContext, MediaService mediaService, ILogger<BlogService> logger)
         {
             _dbContext = dbContext;
             _mediaService = mediaService;
-        }   
+            _logger = logger;
+        }
 
         public async Task<ServiceResult<BlogPostGetDto>> GetBlogPostById(int blogPostId, CancellationToken cancellationToken)
         {
@@ -25,7 +26,10 @@ namespace StevenSoftware.Server.Service
                 .FirstOrDefaultAsync(x => x.Id == blogPostId, cancellationToken);
 
             if (blogPost == null)
+            {
+                _logger.LogWarning("Blog post with ID {BlogPostId} not found", blogPostId);
                 return ServiceResult<BlogPostGetDto>.Fail("Blog post could not be found.");
+            }
 
             var blogPostGetDto = new BlogPostGetDto()
             {
@@ -57,7 +61,10 @@ namespace StevenSoftware.Server.Service
         {
             var totalCount = await _dbContext.BlogPosts.CountAsync(cancellationToken);
             if (totalCount <= 0)
+            {
+                _logger.LogWarning("No blog posts found");
                 return ServiceResult<BlogPostGetListDto>.Fail("Blog posts could not be found.");
+            }
 
             var blogPosts = await _dbContext.BlogPosts
                 .Include(x => x.Author)
@@ -67,7 +74,10 @@ namespace StevenSoftware.Server.Service
                 .ToListAsync(cancellationToken);
 
             if (blogPosts == null)
+            {
+                _logger.LogWarning("Blog posts could not be found on page {PageNumber}", pageNumber);
                 return ServiceResult<BlogPostGetListDto>.Fail("Blog posts could not be found.");
+            }
 
             var blogPostDtos = blogPosts.Select(post => new BlogPostGetDto
             {
@@ -172,7 +182,10 @@ namespace StevenSoftware.Server.Service
                 .FirstOrDefaultAsync(x => x.Id == blogPostId, cancellationToken);
 
             if (blogPost == null)
+            {
+                _logger.LogWarning("Blog post with ID {BlogPostId} not found", blogPostId);
                 return ServiceResult<BlogPostGetDto>.Fail("Blog post could not be found.");
+            }
 
             var fileName = Path.GetFileName(blogPost.CoverImage);
             if (!string.IsNullOrEmpty(fileName))
@@ -182,7 +195,10 @@ namespace StevenSoftware.Server.Service
             var affectedRow = await _dbContext.SaveChangesAsync(cancellationToken);
 
             if (affectedRow == 0)
+            {
+                _logger.LogWarning("Failed to delete blog post with ID {BlogPostId}", blogPostId);
                 return ServiceResult<BlogPostGetDto>.Fail("Failed to delete the blog post.");
+            }
 
             var blogPostGetDto = new BlogPostGetDto()
             {

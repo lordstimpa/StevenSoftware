@@ -10,11 +10,13 @@ namespace StevenSoftware.Server.Service
 
         private readonly IConfiguration _config;
         private readonly IHostEnvironment _env;
+        private readonly ILogger<MailingService> _logger;
 
-        public MailingService(IConfiguration config, IHostEnvironment env)
+        public MailingService(IConfiguration config, IHostEnvironment env, ILogger<MailingService> logger)
         {
             _config = config;
             _env = env;
+            _logger = logger;
         }
 
         public async Task SendEmailAsync(MailDto dto)
@@ -43,19 +45,26 @@ namespace StevenSoftware.Server.Service
 
             var smtpServer = _config["Email:SmtpServer"];
             var port = int.Parse(_config["Email:Port"] ?? "587");
-
-            if (_env.IsDevelopment())
+            try
             {
-                await client.ConnectAsync(smtpServer, port, MailKit.Security.SecureSocketOptions.None);
-            }
-            else
-            {
-                await client.ConnectAsync(smtpServer, port, MailKit.Security.SecureSocketOptions.StartTls);
-                await client.AuthenticateAsync(_config["Email:Username"], _config["Email:Password"]);
-            }
+                if (_env.IsDevelopment())
+                {
+                    await client.ConnectAsync(smtpServer, port, MailKit.Security.SecureSocketOptions.None);
+                }
+                else
+                {
+                    await client.ConnectAsync(smtpServer, port, MailKit.Security.SecureSocketOptions.StartTls);
+                    await client.AuthenticateAsync(_config["Email:Username"], _config["Email:Password"]);
+                }
 
-            await client.SendAsync(message);
-            await client.DisconnectAsync(true);
+                await client.SendAsync(message);
+                await client.DisconnectAsync(true);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error sending email from {From} to {To}", dto.Email, _config["Email:To"]);
+                throw;
+            }
         }
     }
 }

@@ -1,14 +1,16 @@
-﻿using StevenSoftware.Server.Models;
+﻿using Microsoft.Extensions.Logging;
 
 namespace StevenSoftware.Server.Service
 {
     public class MediaService
     {
         private readonly string _imageFolder;
+        private readonly ILogger<MediaService> _logger;
 
-        public MediaService(IWebHostEnvironment env)
+        public MediaService(IWebHostEnvironment env, ILogger<MediaService> logger)
         {
             _imageFolder = Path.Combine(env.ContentRootPath, "wwwroot", "uploads");
+            _logger = logger;
         }
 
         public async Task<(bool Success, string? ImageUrl, string? Error)> UploadImageAsync(IFormFile image, CancellationToken cancellationToken = default)
@@ -46,13 +48,13 @@ namespace StevenSoftware.Server.Service
                 await using var stream = new FileStream(filePath, FileMode.Create);
                 await image.CopyToAsync(stream, cancellationToken);
 
-                Console.WriteLine("Saving image to: " + _imageFolder);
                 var imageUrl = $"/uploads/{fileName}";
                 _logger.LogInformation("Image uploaded successfully: {ImageUrl}", imageUrl);
                 return (true, imageUrl, null);
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, "Error saving image to {FilePath}", filePath);
                 return (false, null, $"Error saving file: {ex.Message}");
             }
         }
@@ -81,8 +83,9 @@ namespace StevenSoftware.Server.Service
                 _logger.LogInformation("File deleted: {FilePath}", filePath);
                 return true;
             }
-            catch
+            catch (Exception ex)
             {
+                _logger.LogError(ex, "Error deleting image from {FilePath}", filePath);
                 return false;
             }
         }
