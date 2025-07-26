@@ -33,6 +33,7 @@ namespace StevenSoftware.Server.Service
                 await using var stream = new FileStream(filePath, FileMode.Create);
                 await image.CopyToAsync(stream, cancellationToken);
 
+                Console.WriteLine("Saving image to: " + _imageFolder);
                 var imageUrl = $"/uploads/{fileName}";
                 return (true, imageUrl, null);
             }

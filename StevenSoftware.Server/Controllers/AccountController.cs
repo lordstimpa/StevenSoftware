@@ -46,11 +46,10 @@ namespace StevenSoftware.Server.Controllers
                 return Unauthorized(new { Message = "Invalid email or password." });
             }
 
-            var token = await _jwtTokenService.CreateTokenAsync(user);
+            var token = _jwtTokenService.CreateTokenAsync(user);
 
             return Ok(token);
         }
-
 
         [Authorize]
         [HttpGet("getuser")]

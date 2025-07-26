@@ -18,7 +18,7 @@ namespace StevenSoftware.Server.Services
 			_userManager = userManager;
 		}
 
-		public async Task<JwtTokenDto> CreateTokenAsync(ApplicationUser user)
+		public JwtTokenDto CreateTokenAsync(ApplicationUser user)
 		{
 			var claims = new[]
 			{
