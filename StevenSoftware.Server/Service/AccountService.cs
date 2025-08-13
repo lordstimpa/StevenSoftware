@@ -36,11 +36,7 @@ namespace StevenSoftware.Server.Service
                     PropertyNameCaseInsensitive = true
                 });
 
-                var minScore = double.TryParse(_config["GoogleReCaptcha:MinScore"], out var score) ? score : 0.7;
-
-                var isValid = (captchaResult?.Success ?? false) && (captchaResult.Score >= minScore);
-
-                return isValid;
+                return captchaResult?.Success ?? false;
             }
             catch (Exception ex)
             {

@@ -21,15 +21,6 @@ namespace StevenSoftware.Server.Service
 
         public async Task SendEmailAsync(MailDto dto)
         {
-            _logger.LogInformation(
-                "Sending email with values: FirstName='{FirstName}', LastName='{LastName}', Email='{Email}', Message='{Message}', RecaptchaToken='{Token}'",
-                dto.FirstName ?? "NULL",
-                dto.LastName ?? "NULL",
-                dto.Email ?? "NULL",
-                dto.Message ?? "NULL",
-                dto.RecaptchaToken ?? "NULL"
-            );
-
             var message = new MimeMessage();
             message.From.Add(MailboxAddress.Parse(_config["Email:From"]));
             message.To.Add(MailboxAddress.Parse(_config["Email:To"]));
