@@ -52,9 +52,10 @@
           </div>-->
         </div>
 
-        <div class="flex justify-end mt-8">
+        <div v-show="emailValid" class="flex items-center justify-between mt-8">
+          <div class="g-recaptcha" data-theme="dark" data-callback="onRecaptchaSuccess" data-expired-callback="onRecaptchaExpired" :data-sitekey="recaptchaSiteKey"></div>
           <button
-            v-if="emailValid"
+            :disabled="!captchaDone"
             type="submit"
             class="text-lg cursor-pointer font-semibold text-white bg-gradient-to-r from-indigo-500 to-blue-500 hover:from-indigo-600 hover:to-blue-600 px-5 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
           >
@@ -78,17 +79,25 @@
   const emailValid = ref(false);
   const password = ref('');
   const error = ref('');
-  const recaptchaReady = ref(false);
+  const captchaDone = ref(false);
 
   const router = useRouter();
   const userStore = useUserStore();
 
+  window.onRecaptchaSuccess = () => {
+    captchaDone.value = true;
+  };
+  window.onRecaptchaExpired = () => {
+    captchaDone.value = false;
+  };
+
   const login = async (e) => {
     e.preventDefault();
-    let captchaToken = null;
 
-    if (typeof grecaptcha !== 'undefined' && recaptchaReady.value) {
-      captchaToken = await grecaptcha.execute(recaptchaSiteKey, { action: 'login' });
+    const captchaToken = grecaptcha.getResponse();
+    if (!captchaToken) {
+      error.value = 'Please complete the CAPTCHA.';
+      return;
     }
 
     const response = await post(`${import.meta.env.VITE_API_URL}/account/login`, {
@@ -115,14 +124,9 @@
 
   onMounted(() => {
     const script = document.createElement('script');
-    script.src = `https://www.google.com/recaptcha/api.js?render=${recaptchaSiteKey}`;
+    script.src = 'https://www.google.com/recaptcha/api.js';
     script.async = true;
     script.defer = true;
-    script.onload = () => {
-      grecaptcha.ready(() => {
-        recaptchaReady.value = true;
-      });
-    };
     document.head.appendChild(script);
   });
 </script>

@@ -24,8 +24,6 @@ namespace StevenSoftware.Server.Service
             var ext = Path.GetExtension(image.FileName).ToLowerInvariant();
             var allowedExts = new[] { ".jpg", ".jpeg", ".png", ".webp" };
 
-            _logger.LogInformation("Image extension: {Extension}", ext);
-
             if (!allowedExts.Contains(ext))
             {
                 _logger.LogWarning("Image extension not allowed: {Extension}", ext);
@@ -34,14 +32,11 @@ namespace StevenSoftware.Server.Service
 
             if (!Directory.Exists(_imageFolder))
             {
-                _logger.LogInformation("Image folder does not exist. Creating: {ImageFolder}", _imageFolder);
                 Directory.CreateDirectory(_imageFolder);
             }
 
             var fileName = $"{Guid.NewGuid()}{ext}";
             var filePath = Path.Combine(_imageFolder, fileName);
-
-            _logger.LogInformation("Saving image to: {FilePath}", filePath);
 
             try
             {
@@ -49,7 +44,6 @@ namespace StevenSoftware.Server.Service
                 await image.CopyToAsync(stream, cancellationToken);
 
                 var imageUrl = $"/uploads/{fileName}";
-                _logger.LogInformation("Image uploaded successfully: {ImageUrl}", imageUrl);
                 return (true, imageUrl, null);
             }
             catch (Exception ex)
@@ -61,8 +55,6 @@ namespace StevenSoftware.Server.Service
 
         public bool DeleteMediaByFileName(string fileName)
         {
-            _logger.LogInformation("DeleteMediaByFileName called with: {FileName}", fileName);
-
             if (string.IsNullOrWhiteSpace(fileName))
             {
                 _logger.LogWarning("FileName is null or whitespace.");
@@ -80,7 +72,6 @@ namespace StevenSoftware.Server.Service
             try
             {
                 File.Delete(filePath);
-                _logger.LogInformation("File deleted: {FilePath}", filePath);
                 return true;
             }
             catch (Exception ex)

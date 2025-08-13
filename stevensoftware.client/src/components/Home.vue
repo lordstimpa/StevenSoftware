@@ -238,7 +238,7 @@
 
   <div
     ref="contactSection"
-    class="w-full flex flex-col justify-center items-center h-[900px] gap-20"
+    class="w-full flex flex-col justify-center items-center h-[1000px] gap-20"
     style="background: #0b0f1a"
   >
     <div class="flex flex-col gap-5">
@@ -322,9 +322,10 @@
         <p v-if="messageError" class="text-red-400 text-sm mt-1">{{ messageError }}</p>
       </div>
 
-      <div class="flex justify-end">
+      <div v-show="!mailErrorMessage && !mailSuccessMessage" class="flex items-center justify-between">
+        <div class="g-recaptcha" data-theme="dark" data-callback="onRecaptchaSuccess" data-expired-callback="onRecaptchaExpired" :data-sitekey="recaptchaSiteKey"></div>
         <button
-          v-if="!mailErrorMessage && !mailSuccessMessage"
+          :disabled="!captchaDone"
           type="submit"
           class="text-lg cursor-pointer font-semibold text-white bg-gradient-to-r from-indigo-500 to-blue-500 hover:from-indigo-600 hover:to-blue-600 px-5 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
         >
@@ -350,51 +351,38 @@
   const contactSection = ref(null);
   const carousel = ref(null);
   const cardWidth = ref(520);
-  const recaptchaReady = ref(false);
   const mailSuccessMessage = ref('');
   const mailErrorMessage = ref('');
+  const captchaDone = ref(false);
+
+  window.onRecaptchaSuccess = () => {
+    captchaDone.value = true;
+  };
+  window.onRecaptchaExpired = () => {
+    captchaDone.value = false;
+  };
 
   // Validation
   const mail = yup.object({
-    firstName: yup
-      .string()
-      .required('First name is required')
-      .min(2, 'First name must be at least 2 characters')
-      .max(1000, 'First name cannot have more than 1000 characters'),
-    email: yup
-      .string()
-      .required('Email is required')
-      .email('Enter a valid email')
-      .max(350, 'Email cannot have more than 350 characters'),
-    message: yup
-      .string()
-      .required('Message is required')
-      .min(10, 'Message must be at least 10 characters')
-      .max(2000, 'Message cannot have more than 2000 characters'),
+    firstName: yup.string().required('First name is required').min(2, 'First name must be at least 2 characters').max(1000, 'First name cannot have more than 1000 characters'),
+    email: yup.string().required('Email is required').email('Enter a valid email').max(350, 'Email cannot have more than 350 characters'),
+    message: yup.string().required('Message is required').min(10, 'Message must be at least 10 characters').max(2000, 'Message cannot have more than 2000 characters'),
   });
 
   const { handleSubmit } = useForm({
     validationSchema: mail,
   });
 
-  const {
-    value: firstName,
-    errorMessage: firstNameError,
-    handleBlur: firstNameBlur,
-  } = useField('firstName');
+  const { value: firstName, errorMessage: firstNameError, handleBlur: firstNameBlur } = useField('firstName');
   const { value: lastName } = useField('lastName');
   const { value: email, errorMessage: emailError, handleBlur: emailBlur } = useField('email');
-  const {
-    value: message,
-    errorMessage: messageError,
-    handleBlur: messageBlur,
-  } = useField('message');
+  const { value: message, errorMessage: messageError, handleBlur: messageBlur } = useField('message');
 
   const sendMail = handleSubmit(async (values) => {
-    let captchaToken = null;
-
-    if (typeof grecaptcha !== 'undefined' && recaptchaReady.value) {
-      captchaToken = await grecaptcha.execute(recaptchaSiteKey, { action: 'sendMail' });
+    const captchaToken = grecaptcha.getResponse();
+    if (!captchaToken) {
+      error.value = 'Please complete the CAPTCHA.';
+      return;
     }
 
     const response = await post(`${import.meta.env.VITE_API_URL}/mail/sendmail`, {
@@ -450,14 +438,9 @@
     getBlogs();
 
     const script = document.createElement('script');
-    script.src = `https://www.google.com/recaptcha/api.js?render=${recaptchaSiteKey}`;
+    script.src = 'https://www.google.com/recaptcha/api.js';
     script.async = true;
     script.defer = true;
-    script.onload = () => {
-      grecaptcha.ready(() => {
-        recaptchaReady.value = true;
-      });
-    };
     document.head.appendChild(script);
   });
 </script>

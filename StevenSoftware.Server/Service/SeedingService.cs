@@ -43,10 +43,6 @@ namespace StevenSoftware.Server.Services
                     throw new Exception("Failed to create admin user: " + errorMessages);
                 }
             }
-            else
-            {
-                _logger.LogInformation("Admin user with email {Email} already exists. Skipping creation.", adminEmail);
-            }
         }
 	}
 }
