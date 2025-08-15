@@ -7,9 +7,15 @@ namespace StevenSoftware.Server.Service
         private readonly string _imageFolder;
         private readonly ILogger<MediaService> _logger;
 
-        public MediaService(IWebHostEnvironment env, ILogger<MediaService> logger)
+        public MediaService(IConfiguration config, IWebHostEnvironment env, ILogger<MediaService> logger)
         {
-            _imageFolder = Path.Combine(env.ContentRootPath, "wwwroot", "uploads");
+            _imageFolder = config["UploadsPath"]
+                           ?? Environment.GetEnvironmentVariable("UPLOADS_PATH")
+                           ?? Path.Combine(env.ContentRootPath, "wwwroot", "uploads");
+
+            if (!Directory.Exists(_imageFolder))
+                Directory.CreateDirectory(_imageFolder);
+
             _logger = logger;
         }
 
