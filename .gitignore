@@ -10,5 +10,4 @@ packages/*
 node_modules
 internal-nlog-AspNetCore.txt
 /StevenSoftware.Server/wait-for-it.sh
-/StevenSoftware.Server/appsettings.Development.json
-StevenSoftware.Server/appsettings.json
+StevenSoftware.Server/appsettings*.json
