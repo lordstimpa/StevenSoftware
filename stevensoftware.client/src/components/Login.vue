@@ -1,7 +1,6 @@
 <template>
-  <div class="flex-1 flex justify-center items-center mb-30 text-white">
-    <div
-      class="flex flex-col justify-center p-8 rounded-xl shadow-xl w-2xl"
+  <div class="flex-1 flex justify-center px-4 items-center mb-30 text-white py-10 px-4">
+    <div class="flex flex-col justify-center p-8 rounded-xl shadow-xl w-2xl"
       style="background: radial-gradient(50% 50% at 50% 50%, #202534 0%, #1a1f2e 40%, #141925 100%)"
     >
       <div class="mb-8 text-center border-b border-slate-700 pb-4">
@@ -52,12 +51,12 @@
           </div>-->
         </div>
 
-        <div v-show="emailValid" class="flex items-center justify-between mt-8">
+        <div v-show="emailValid" class="flex flex-col items-center justify-between mt-8 sm:flex-row">
           <div class="g-recaptcha" data-theme="dark" data-callback="onRecaptchaSuccess" data-expired-callback="onRecaptchaExpired" :data-sitekey="recaptchaSiteKey"></div>
           <button
             :disabled="!captchaDone"
             type="submit"
-            class="text-lg cursor-pointer font-semibold text-white bg-gradient-to-r from-indigo-500 to-blue-500 hover:from-indigo-600 hover:to-blue-600 px-5 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
+            class="mt-8 sm:mt-0 text-lg cursor-pointer font-semibold text-white bg-gradient-to-r from-indigo-500 to-blue-500 hover:from-indigo-600 hover:to-blue-600 px-5 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 transition disabled:opacity-50 disabled:cursor-not-allowed"
           >
             Login
           </button>

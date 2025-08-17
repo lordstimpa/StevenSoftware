@@ -1,33 +1,25 @@
 <template>
-  <div class="p-10 text-white flex flex-col items-center justify-center gap-8">
-    <div
-      class="flex flex-col max-w-screen-lg w-full p-8 rounded-xl shadow-xl"
+  <div class="py-10 px-4 text-white flex flex-col items-center justify-center gap-8">
+    <div class="flex flex-col max-w-screen-lg w-full px-4 py-8 md:p-8 rounded-xl shadow-xl"
       style="background: radial-gradient(50% 50% at 50% 50%, #202534 0%, #1a1f2e 40%, #141925 100%)"
     >
       <div class="flex justify-between mb-8 border-b border-slate-700 pb-4">
-        <h1 class="text-4xl font-bold">Create new blog post</h1>
+        <h1 class="text-2xl md:text-4xl font-bold">Create new blog post</h1>
       </div>
 
       <div class="bg-yellow-500/70 rounded-md p-4 mb-6 text-slate-900">
         <p>Content supports **Markdown** syntax — like *italic*, **bold**, etc.</p>
         <p>
           See a markdown
-          <a
-            class="underline font-bold"
-            href="https://www.markdownguide.org/cheat-sheet/"
-            target="_blank"
-            >cheat sheet</a
-          >
+          <a class="underline font-bold" href="https://www.markdownguide.org/cheat-sheet/" target="_blank">
+            cheat sheet
+          </a>
         </p>
       </div>
 
       <form @submit.prevent="createBlogPost">
         <div class="flex flex-col mb-4">
-          <ImageUpload
-            existingImage=""
-            @uploaded="handleImageUpload"
-            @removed="handleImageRemoval"
-          />
+          <ImageUpload existingImage="" @uploaded="handleImageUpload" @removed="handleImageRemoval"/>
         </div>
 
         <div class="flex flex-col mb-4">
@@ -91,8 +83,7 @@
             Back
           </RouterLink>
 
-          <button
-            type="submit"
+          <button type="submit"
             class="text-lg cursor-pointer font-semibold text-white bg-gradient-to-r from-indigo-500 to-blue-500 hover:from-indigo-600 hover:to-blue-600 px-5 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
           >
             Save
@@ -101,16 +92,15 @@
       </form>
     </div>
 
-    <div
-      class="flex flex-col max-w-screen-lg w-full p-8 rounded-xl shadow-xl"
+    <div class="flex flex-col max-w-screen-lg w-full px-4 py-8 md:p-8 rounded-xl shadow-xl"
       style="background: radial-gradient(50% 50% at 50% 50%, #202534 0%, #1a1f2e 40%, #141925 100%)"
     >
       <div class="flex justify-between mb-8 border-b border-slate-700 pb-4">
-        <h1 class="text-4xl font-bold">Preview of blog post</h1>
+        <h1 class="text-2xl md:text-4xl font-bold">Preview of blog post</h1>
       </div>
 
       <div class="mb-4">
-        <div class="text-5xl font-bold text-white whitespace-pre-line">{{ title ?? '' }}</div>
+        <div class="mb-2 text-2xl md:text-4xl font-bold text-white whitespace-pre-line">{{ title ?? '' }}</div>
       </div>
 
       <div>
