@@ -1,13 +1,12 @@
 <template>
-  <div v-if="blogPost" class="p-10 text-white flex justify-center w-full">
-    <div
-      class="flex flex-col p-8 rounded-xl shadow-xl max-w-screen-xl w-full"
+  <div v-if="blogPost" class="py-10 px-4 text-white flex justify-center w-full">
+    <div class="flex flex-col px-4 py-8 md:p-8 rounded-xl shadow-xl max-w-screen-xl w-full"
       style="background: radial-gradient(50% 50% at 50% 50%, #202534 0%, #1a1f2e 40%, #141925 100%)"
     >
       <div class="flex justify-between mb-8 border-b-3 border-slate-700 pb-4">
         <div class="flex flex-col gap-2">
-          <h1 class="text-4xl font-bold">Blog</h1>
-          <div class="flex gap-2">
+          <h1 class="text-2xl md:text-4xl font-bold">Blog</h1>
+          <div class="flex gap-2 text-xs md:text-md">
             <RouterLink
               to="/blog"
               class="cursor-pointer text-indigo-300 hover:text-indigo-200 transition hover:underline"
@@ -57,39 +56,25 @@
           </Menu>
         </div>
 
-        <img
-          v-if="blogPost.coverImage"
-          :src="`${baseUrl}${blogPost.coverImage}`"
-          alt="Cover image"
-          class="w-full h-64 object-cover mb-8"
-        />
+        <img v-if="blogPost.coverImage" :src="`${baseUrl}${blogPost.coverImage}`" alt="Cover image" class="w-full h-64 object-cover mb-8"/>
 
         <div class="mb-8 pb-4 border-b-3 border-slate-700">
-          <div class="w-full flex justify-between">
+          <div class="w-full flex flex-col md:flex-row justify-between">
             <div>
-              <h1 class="pb-4 text-5xl text-white">{{ blogPost.title }}</h1>
-              <p class="text-slate-400 text-sm italic mt-2">
-                Freelance Fullstack Developer — <span class="text-white">Steven Software</span>
-              </p>
+              <h1 class="pb-4 text-2xl md:text-4xl text-white">{{ blogPost.title }}</h1>
+              <p class="text-slate-400 text-xs md:text-sm italic mt-2">Freelance Fullstack Developer — <span class="text-white">Steven Software</span></p>
             </div>
-            <div class="flex flex-col gap-2 w-80">
-              <p class="text-right text-slate-400 text-sm font-medium">
-                Created: {{ formatDateTime(blogPost.createdAt) }}
-              </p>
-              <p class="text-right text-slate-400 text-sm font-medium">
-                Updated: {{ formatDateTime(blogPost.updatedAt) }}
-              </p>
-              <div class="text-slate-400 text-sm mt-3 text-end">
+            <div class="flex flex-col gap-2 w-full md:w-80 mt-8 md:mt-0">
+              <p class="text-right text-slate-400 font-medium text-xs md:text-sm">Created: {{ formatDateTime(blogPost.createdAt) }}</p>
+              <p class="text-right text-slate-400 font-medium text-xs md:text-sm">Updated: {{ formatDateTime(blogPost.updatedAt) }}</p>
+              <div class="text-slate-400 text-xs md:text-sm mt-3 text-end">
                 <span class="border-slate-700 border p-2 rounded-sm">{{blogPost.author.firstName}}</span>
               </div>
             </div>
           </div>
         </div>
 
-        <div
-          class="pb-10 prose prose-invert max-w-none text-gray-300"
-          v-html="renderedContent"
-        ></div>
+        <div class="pb-10 prose prose-invert max-w-none text-gray-300" v-html="renderedContent"></div>
       </div>
 
       <form v-else @submit.prevent="updateBlogPost">

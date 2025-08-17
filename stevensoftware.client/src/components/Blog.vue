@@ -1,13 +1,12 @@
 <template>
-  <div class="p-10 text-white flex justify-center w-full">
-    <div
-      class="flex flex-col p-8 rounded-xl shadow-xl max-w-screen-xl w-full"
+  <div class="py-10 px-4 text-white flex justify-center w-full">
+    <div class="flex flex-col px-4 py-8 md:p-8 rounded-xl shadow-xl max-w-screen-xl w-full"
       style="background: radial-gradient(50% 50% at 50% 50%, #202534 0%, #1a1f2e 40%, #141925 100%)"
     >
       <div class="flex justify-between mb-8 border-b-3 border-slate-700 pb-4">
         <div class="flex flex-col gap-2">
-          <h1 class="text-4xl font-bold">Blog</h1>
-          <p class="text-slate-400">Total blogposts: {{ totalBlogPosts }}</p>
+          <h1 class="text-2xl md:text-4xl font-bold">Blog</h1>
+          <p class="text-xs md:text-md text-slate-400">Total blogposts: {{ totalBlogPosts }}</p>
         </div>
 
         <div class="flex gap-8 items-center">
@@ -35,27 +34,22 @@
       </div>
 
       <div v-if="isLoadingBlogposts" class="w-full h-[600px] flex justify-center items-center">
-        <div
-          class="w-16 h-16 border-8 border-indigo-500 border-t-transparent rounded-full animate-spin animate-[pulse_1.2s_ease-in-out_infinite]"
-        ></div>
+        <div class="w-16 h-16 border-8 border-indigo-500 border-t-transparent rounded-full animate-spin animate-[pulse_1.2s_ease-in-out_infinite]"></div>
       </div>
 
-      <div
-        v-else
+      <div v-else
         v-for="blogPost in blogPosts"
-        class="relative flex gap-4 border-slate-700 border-l pt-8 pb-8"
+        class="relative flex gap-4 border-slate-700 md:border-l pt-8 pb-8"
       >
-        <div class="flex flex-col gap-6 w-3/10 h-full relative pl-8">
+        <div class="hidden md:flex flex-col gap-6 w-3/10 h-full relative pl-8">
           <CircleDot class="absolute top-0 translate-y-[4px] -left-2 w-4 h-4 text-slate-400" />
           <p class="font-medium">{{ formatDateTime(blogPost.createdAt) }}</p>
-          <p
-            class="text-slate-400 text-sm w-auto self-start border-slate-700 border p-2 rounded-sm"
-          >
+          <p class="text-slate-400 text-sm w-auto self-start border-slate-700 border p-2 rounded-sm">
             {{ blogPost.author.firstName }}
           </p>
         </div>
 
-        <div class="w-7/10 h-full rounded-sm">
+        <div class="w-full md:w-7/10 h-full rounded-sm">
           <BlogPostCard :blogPost="blogPost" :user="user" />
         </div>
       </div>

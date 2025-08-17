@@ -1,19 +1,21 @@
 <template>
   <div
-    class="w-full flex justify-center h-[920px] gap-20"
+    class="w-full flex flex-col-reverse lg:flex-row justify-center items-center h-auto lg:h-[920px] gap-10 lg:gap-10 py-10 px-4"
     style="background: radial-gradient(50% 50% at 50% 50%, #1a1f31 0%, #141a2a 40%, #0b0f1a 100%)"
   >
-    <div class="flex flex-col justify-center gap-10">
-      <h1 class="text-7xl font-bold text-white">Steven Software</h1>
+    <div class="flex flex-col justify-center gap-10 lg:w-[550px] text-center lg:text-left">
+      <h1 class="text-left text-4xl sm:text-5xl lg:text-6xl font-bold text-white">
+        Steven Software
+      </h1>
       <div class="border-l-3 p-5 flex flex-col gap-10 border-white">
-        <div class="text-white">
-          <p class="text-xl">“From Code to Deployment.”</p>
-          <p class="text-xl">Fullstack Web Dev with .Net, Vue, and more.</p>
+        <div class="text-white space-y-2">
+          <p class="text-lg text-left sm:text-xl">“From Code to Deployment.”</p>
+          <p class="text-lg text-left sm:text-xl">Fullstack Web Dev with .Net, Vue, and more.</p>
         </div>
-        <div>
+        <div class="flex justify-end lg:justify-start">
           <button
             @click="scrollToContact"
-            class="text-lg font-semibold text-white bg-gradient-to-r from-indigo-500 to-blue-500 hover:from-indigo-600 hover:to-blue-600 hover:to-bg-gradient-to-r px-8 py-3 rounded-xl hover:cursor-pointer focus:ring-indigo-500 transition"
+            class="text-lg font-semibold text-white bg-gradient-to-r from-indigo-500 to-blue-500 hover:from-indigo-600 hover:to-blue-600 px-8 py-3 rounded-xl transition"
           >
             Contact Me
           </button>
@@ -21,14 +23,21 @@
       </div>
     </div>
 
-    <div class="flex flex-col justify-center">
-      <img src="../assets/undraw_stars_5pgw.svg" class="w-xl" />
+    <div class="flex justify-center lg:w-[550px] lg:justify-center lg:items-center">
+      <img
+        src="../assets/undraw_stars_5pgw.svg"
+        class="w-[300px] md:w-[400px] lg:w-[500px]"
+        alt="Hero Illustration"
+      />
     </div>
   </div>
 
-  <div class="w-full flex justify-center items-center gap-10 h-[320px]" style="background: #141a2a">
+  <div
+    class="w-full flex flex-wrap justify-center items-center gap-6 py-10 px-6"
+    style="background: #141a2a"
+  >
     <div
-      class="border text-white border-indigo-900 w-[240px] h-[210px] flex flex-col justify-evenly p-4 rounded-md shadow-xl"
+      class="border text-white border-indigo-900 w-full sm:w-[240px] h-[210px] flex flex-col justify-evenly p-4 rounded-md shadow-xl"
       style="background: #1a1f31"
     >
       <p class="text-2xl font-bold">Web App Development</p>
@@ -39,7 +48,7 @@
     </div>
 
     <div
-      class="border text-white border-green-900 w-[240px] h-[210px] flex flex-col justify-evenly p-4 rounded-md shadow-xl"
+      class="border text-white border-green-900 w-full sm:w-[240px] h-[210px] flex flex-col justify-evenly p-4 rounded-md shadow-xl"
       style="background: #1a1f31"
     >
       <p class="text-2xl font-bold">Code Upgrades</p>
@@ -50,7 +59,7 @@
     </div>
 
     <div
-      class="border text-white border-blue-900 w-[240px] h-[210px] flex flex-col justify-evenly p-4 rounded-md shadow-xl"
+      class="border text-white border-blue-900 w-full sm:w-[240px] h-[210px] flex flex-col justify-evenly p-4 rounded-md shadow-xl"
       style="background: #1a1f31"
     >
       <p class="text-2xl font-bold">DevOps & Hosting</p>
@@ -61,7 +70,7 @@
     </div>
 
     <div
-      class="border text-white border-yellow-900 w-[240px] h-[210px] flex flex-col justify-evenly p-4 rounded-md shadow-xl"
+      class="border text-white border-yellow-900 w-full sm:w-[240px] h-[210px] flex flex-col justify-evenly p-4 rounded-md shadow-xl"
       style="background: #1a1f31"
     >
       <p class="text-2xl font-bold">Custom Work</p>
@@ -72,72 +81,76 @@
     </div>
   </div>
 
-  <div class="w-full flex flex-col justify-evenly h-[600px]" style="background: #0b0f1a">
-    <div class="w-full flex flex-col justify-center items-center gap-4">
-      <p class="text-white text-6xl font-bold">How does it work?</p>
-      <p class="text-gray-300">A simple 4-step process to take your project from idea to live.</p>
+  <div class="w-full flex flex-col justify-evenly py-16 px-6 bg-[#0b0f1a]">
+    <div class="w-full flex flex-col justify-center items-center gap-4 mb-12">
+      <p class="text-white text-4xl sm:text-5xl md:text-6xl font-bold text-center">
+        How does it work?
+      </p>
+      <p class="text-gray-300 text-center max-w-2xl">
+        A simple 4-step process to take your project from idea to live.
+      </p>
     </div>
 
-    <div class="flex justify-center gap-5">
-      <div class="flex flex-col items-center gap-3 w-[250px]">
-        <img src="../assets/undraw_talking-on-the-phone_lc9v.svg" class="size-35" />
-        <p class="text-white text-xl">1. Tell Me What You Need</p>
-        <p class="text-gray-300 italic text-center">
+    <div class="flex flex-col md:flex-row justify-center items-center gap-8 md:gap-6 flex-wrap">
+      <div class="flex flex-col items-center gap-3 w-full sm:w-[250px]">
+        <img src="../assets/undraw_talking-on-the-phone_lc9v.svg" class="w-20 h-20 sm:w-28 sm:h-28" />
+        <p class="text-white text-xl text-center">1. Tell Me What You Need</p>
+        <p class="text-gray-300 italic text-center text-sm sm:text-base">
           You reach out with your idea, problem, or project goals.
         </p>
       </div>
 
-      <div class="flex items-center h-[140px]">
-        <img src="../assets/Arrow 2.svg" class="size-13" />
+      <div class="hidden md:flex items-center justify-center h-[140px]">
+        <img src="../assets/Arrow 2.svg" class="w-12 h-12" />
       </div>
 
-      <div class="flex flex-col items-center gap-3 w-[250px]">
-        <img src="../assets/Group 267.svg" class="size-35" />
-        <p class="text-white text-xl">2. Get a Custom Quote</p>
-        <p class="text-gray-300 italic text-center">
+      <div class="flex flex-col items-center gap-3 w-full sm:w-[250px]">
+        <img src="../assets/Group 267.svg" class="w-20 h-20 sm:w-28 sm:h-28" />
+        <p class="text-white text-xl text-center">2. Get a Custom Quote</p>
+        <p class="text-gray-300 italic text-center text-sm sm:text-base">
           You’ll receive a clear scope, timeline, and price.
         </p>
       </div>
 
-      <div class="flex items-center h-[140px]">
-        <img src="../assets/Arrow 2.svg" class="size-13" />
+      <div class="hidden md:flex items-center justify-center h-[140px]">
+        <img src="../assets/Arrow 2.svg" class="w-12 h-12" />
       </div>
 
-      <div class="flex flex-col items-center gap-3 w-[250px]">
-        <img src="../assets/Group 268.svg" class="size-35" />
-        <p class="text-white text-xl">3. Development Begins</p>
-        <p class="text-gray-300 italic text-center">
+      <div class="flex flex-col items-center gap-3 w-full sm:w-[250px]">
+        <img src="../assets/Group 268.svg" class="w-20 h-20 sm:w-28 sm:h-28" />
+        <p class="text-white text-xl text-center">3. Development Begins</p>
+        <p class="text-gray-300 italic text-center text-sm sm:text-base">
           I get to work — keeping you updated along the way.
         </p>
       </div>
 
-      <div class="flex items-center h-[140px]">
-        <img src="../assets/Arrow 2.svg" class="size-13" />
+      <div class="hidden md:flex items-center justify-center h-[140px]">
+        <img src="../assets/Arrow 2.svg" class="w-12 h-12" />
       </div>
 
-      <div class="flex flex-col items-center gap-3 w-[250px]">
-        <img src="../assets/Group 269.svg" class="size-35" />
-        <p class="text-white text-xl">4. Launch & Support</p>
-        <p class="text-gray-300 italic text-center">
+      <div class="flex flex-col items-center gap-3 w-full sm:w-[250px]">
+        <img src="../assets/Group 269.svg" class="w-20 h-20 sm:w-28 sm:h-28" />
+        <p class="text-white text-xl text-center">4. Launch & Support</p>
+        <p class="text-gray-300 italic text-center text-sm sm:text-base">
           Your project goes live — and I help you get it there.
         </p>
       </div>
     </div>
   </div>
 
-  <div class="w-full flex justify-center items-center h-[700px] gap-20" style="background: #141a2a">
+  <div class="w-full flex flex-col-reverse lg:flex-row justify-center items-center gap-10 lg:gap-20 py-16 px-6 bg-[#141a2a]">
     <div
-      class="border text-white border-blue-900 w-[550px] h-[500px] flex flex-col rounded-md p-10 gap-8 shadow-xl"
+      class="border text-white border-blue-900 w-full lg:w-[550px] flex flex-col rounded-md p-8 sm:p-10 gap-8 shadow-xl"
       style="background: radial-gradient(50% 50% at 50% 50%, #1a1f31 0%, #141a2a 40%, #0b0f1a 100%)"
     >
       <div class="flex flex-col gap-2">
-        <p class="text-white text-5xl text-center font-bold">Who Is Steven?</p>
-        <p class="text-gray-400 text-sm italic text-center">
+        <p class="text-white text-3xl sm:text-4xl md:text-5xl text-center font-bold">Who Is Steven?</p>
+        <p class="text-gray-400 text-sm sm:text-base italic text-center">
           A bit about me, what I do, and why I love building software.
         </p>
       </div>
 
-      <div class="flex flex-col gap-3 text-gray-300">
+      <div class="flex flex-col gap-3 text-gray-300 text-sm sm:text-base">
         <p>
           I’m Steven - a <strong class="text-white">fullstack developer</strong> with experience in
           developing custom web projects from planning to production.
@@ -159,45 +172,47 @@
       </div>
     </div>
 
-    <div>
+    <div class="flex justify-center lg:justify-start w-full lg:w-auto">
       <img
         src="../assets/IMG_20240824_171927816_HDR_2.jpg"
-        class="size-125 rounded-full border-3 border-white shadow-xl"
+        class="w-40 h-40 sm:w-64 sm:h-64 lg:w-[500px] lg:h-[500px] rounded-full border-4 border-white shadow-xl object-cover"
+        alt="Steven"
       />
     </div>
   </div>
 
-  <div class="w-full flex flex-col justify-center gap-10 h-[570px]" style="background: #1a1f31">
-    <div class="w-full flex flex-col justify-center items-center gap-2">
+  <div class="w-full flex flex-col justify-center gap-10 py-16 px-4 sm:px-6 lg:px-8 bg-[#1a1f31]">
+    <div class="w-full flex flex-col justify-center items-center gap-2 text-center">
       <RouterLink
         to="/blog"
-        class="text-white text-center text-5xl font-bold w-[800px] hover:text-indigo-200 transition"
+        class="text-white text-3xl sm:text-4xl lg:text-5xl font-bold max-w-[90%] sm:max-w-[800px] hover:text-indigo-200 transition"
       >
         Want to know more? Visit my blog!
       </RouterLink>
-      <p class="text-gray-400 italic">
+      <p class="text-gray-400 italic text-sm sm:text-base max-w-[700px]">
         Latest updates from my very own blog, feel free to visit to get the latest from me!
       </p>
     </div>
 
-    <div v-if="isLoadingBlogposts.value" class="w-full h-[320px] flex justify-center items-center">
+    <div v-if="isLoadingBlogposts.value" class="w-full h-[200px] sm:h-[320px] flex justify-center items-center">
       <div
-        class="w-16 h-16 border-8 border-indigo-500 border-t-transparent rounded-full animate-spin animate-[pulse_1.2s_ease-in-out_infinite]"
+        class="w-12 h-12 sm:w-16 sm:h-16 border-8 border-indigo-500 border-t-transparent rounded-full animate-spin animate-[pulse_1.2s_ease-in-out_infinite]"
       ></div>
     </div>
+
     <div v-else class="relative w-full flex justify-center items-center">
       <button
         v-if="blogPosts.length > 2"
         @click="scrollLeft"
-        class="text-white hover:text-indigo-200 hover:cursor-pointer transition z-10 p-2"
+        class="hidden sm:flex text-white hover:text-indigo-200 hover:cursor-pointer transition z-10 p-2"
       >
-        <ChevronLeft class="size-12" />
+        <ChevronLeft class="w-8 h-8 sm:w-12 sm:h-12" />
       </button>
 
       <div
         ref="carousel"
         :class="[
-          'flex overflow-hidden no-scrollbar scroll-smooth gap-5 w-[1020px]',
+          'flex overflow-x-auto sm:overflow-hidden scroll-smooth gap-5 w-full max-w-[1020px] px-2',
           blogPosts.length < 2 ? 'justify-center' : 'justify-start',
         ]"
       >
@@ -205,16 +220,16 @@
           :to="`/blog/${blog.id}`"
           v-for="blog in blogPosts"
           :key="blog.id"
-          class="shrink-0 w-[500px] h-[320px] border border-blue-900 text-white flex flex-col justify-between p-8 rounded-md hover:cursor-pointer hover:brightness-120 transition"
+          class="shrink-0 w-[85%] sm:w-[400px] lg:w-[500px] h-[250px] sm:h-[320px] border border-blue-900 text-white flex flex-col justify-between p-6 sm:p-8 rounded-md hover:cursor-pointer hover:brightness-110 transition"
           style="
             background: radial-gradient(50% 50% at 50% 50%, #1a1f31 0%, #141a2a 40%, #0b0f1a 100%);
           "
         >
           <div>
-            <p class="text-2xl font-bold pb-2">{{ blog.title }}</p>
+            <p class="text-xl sm:text-2xl font-bold pb-2">{{ blog.title }}</p>
             <p class="text-xs text-gray-400">{{ formatDateTime(blog.createdAt) }}</p>
           </div>
-          <div class="prose prose-invert mt-4 text-sm/6">
+          <div class="prose prose-invert mt-4 text-sm line-clamp-3">
             {{ blog.summary }}
           </div>
           <RouterLink
@@ -229,38 +244,36 @@
       <button
         v-if="blogPosts.length > 2"
         @click="scrollRight"
-        class="text-white hover:text-indigo-200 hover:cursor-pointer transition z-10 p-2"
+        class="hidden sm:flex text-white hover:text-indigo-200 hover:cursor-pointer transition z-10 p-2"
       >
-        <ChevronRight class="size-12" />
+        <ChevronRight class="w-8 h-8 sm:w-12 sm:h-12" />
       </button>
     </div>
   </div>
 
   <div
     ref="contactSection"
-    class="w-full flex flex-col justify-center items-center h-[1000px] gap-20"
+    class="w-full flex flex-col justify-center items-center py-16 px-4 sm:px-6 lg:px-8 gap-16"
     style="background: #0b0f1a"
   >
-    <div class="flex flex-col gap-5">
-      <p class="text-white text-6xl font-bold">Want to work together?</p>
-      <p class="text-gray-300 italic text-center">
+    <div class="flex flex-col gap-5 text-center max-w-3xl">
+      <p class="text-white text-4xl sm:text-5xl lg:text-6xl font-bold">
+        Want to work together?
+      </p>
+      <p class="text-gray-300 italic text-base sm:text-lg">
         Whether you’ve got a small fix or a big idea — I’d love to hear about it.
       </p>
     </div>
 
-    <form @submit.prevent="sendMail" class="flex flex-col gap-5 w-[700px]">
+    <form @submit.prevent="sendMail" class="flex flex-col gap-5 w-full max-w-3xl">
       <div v-if="mailErrorMessage" class="bg-red-500/70 rounded-md p-4 text-white">
         <p>{{ mailErrorMessage }}</p>
       </div>
-
-      <div
-        v-if="!mailErrorMessage && mailSuccessMessage"
-        class="bg-green-500/70 rounded-md p-4 text-white"
-      >
+      <div v-if="!mailErrorMessage && mailSuccessMessage" class="bg-green-500/70 rounded-md p-4 text-white">
         <p>{{ mailSuccessMessage }}</p>
       </div>
 
-      <div class="flex gap-10">
+      <div class="flex flex-col sm:flex-row gap-5">
         <div class="flex flex-col w-full">
           <label class="font-semibold text-gray-300 mb-2" for="firstName">First name*</label>
           <input
@@ -312,7 +325,7 @@
         <textarea
           v-model="message"
           @blur="messageBlur"
-          rows="10"
+          rows="6"
           :class="[
             'w-full bg-slate-800 text-slate-100 px-4 py-2 rounded-md focus:outline-none focus:ring-2',
             messageError ? 'border-red-500 ring-red-500' : 'border-slate-700 focus:ring-indigo-500',
@@ -322,12 +335,12 @@
         <p v-if="messageError" class="text-red-400 text-sm mt-1">{{ messageError }}</p>
       </div>
 
-      <div v-show="!mailErrorMessage && !mailSuccessMessage" class="flex items-center justify-between">
+      <div v-show="!mailErrorMessage && !mailSuccessMessage" class="flex flex-col sm:flex-row items-center justify-between gap-5">
         <div class="g-recaptcha" data-theme="dark" data-callback="onRecaptchaSuccess" data-expired-callback="onRecaptchaExpired" :data-sitekey="recaptchaSiteKey"></div>
         <button
           :disabled="!captchaDone"
           type="submit"
-          class="text-lg cursor-pointer font-semibold text-white bg-gradient-to-r from-indigo-500 to-blue-500 hover:from-indigo-600 hover:to-blue-600 px-5 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
+          class="text-lg cursor-pointer font-semibold text-white bg-gradient-to-r from-indigo-500 to-blue-500 hover:from-indigo-600 hover:to-blue-600 px-6 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 transition disabled:opacity-50 disabled:cursor-not-allowed"
         >
           Send mail
         </button>

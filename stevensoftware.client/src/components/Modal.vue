@@ -25,7 +25,7 @@
             leave-to="opacity-0 scale-95"
           >
             <DialogPanel
-              class="w-full max-w-3xl transform overflow-hidden rounded-2xl p-8 text-left shadow-xl transition-all text-white"
+              class="w-full max-w-3xl transform overflow-hidden rounded-2xl px-4 py-8 md:p-8 text-left shadow-xl transition-all text-white"
               style="
                 background: radial-gradient(
                   50% 50% at 50% 50%,

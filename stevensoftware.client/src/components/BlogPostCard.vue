@@ -4,7 +4,7 @@
     role="button"
     tabindex="0"
     @keyup.enter="goToPost"
-    class="border border-slate-700 rounded p-6 cursor-pointer shadow-xl hover:scale-102 hover:brightness-120 transition"
+    class="border border-slate-700 rounded p-4 md:p-6 cursor-pointer shadow-xl hover:scale-102 hover:brightness-120 transition"
     style="background: radial-gradient(50% 50% at 50% 50%, #1a1f31 0%, #141a2a 40%, #0b0f1a 100%)"
   >
     <img
@@ -13,17 +13,17 @@
       alt="Cover image"
       class="w-full h-64 object-cover mb-8"
     />
-    <h1 class="pb-8 text-5xl">{{ props.blogPost.title }}</h1>
-    <p class="pb-10 text-lg text-gray-300">{{ props.blogPost.summary }}</p>
+    <h1 class="pb-8 text-2xl md:text-4xl">{{ props.blogPost.title }}</h1>
+    <p class="pb-10 text-sm md:text-lg text-gray-300">{{ props.blogPost.summary }}</p>
 
-    <div class="flex justify-between">
+    <div class="flex flex-col md:flex-row justify-between items-end">
       <RouterLink
         to="/blog"
-        class="text-lg cursor-pointer font-semibold text-white bg-gradient-to-r from-indigo-500 to-blue-500 hover:from-indigo-600 hover:to-blue-600 px-5 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
+        class="mb-4 md:mb-0 text-lg cursor-pointer font-semibold text-white bg-gradient-to-r from-indigo-500 to-blue-500 hover:from-indigo-600 hover:to-blue-600 px-5 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
       >
-        Read blog post
+        Read
       </RouterLink>
-      <p class="text-slate-400 text-sm font-medium mr-6 mt-2">
+      <p class="text-slate-400 text-xs md:text-sm font-medium">
         Updated: {{ formatDateTime(props.blogPost.updatedAt) }}
       </p>
     </div>

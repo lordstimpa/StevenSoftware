@@ -1,18 +1,17 @@
 <template>
-  <div class="flex-1 flex justify-center items-center mb-30 text-white">
-    <div
-      class="flex flex-col justify-center p-8 rounded-xl shadow-xl x-full"
+  <div class="flex-1 flex justify-center items-center mb-30 text-white py-10 px-4">
+    <div class="flex flex-col justify-center px-4 py-8 md:p-8 rounded-xl shadow-xl max-w-screen-lg w-full"
       style="background: radial-gradient(50% 50% at 50% 50%, #202534 0%, #1a1f2e 40%, #141925 100%)"
     >
       <div class="mb-8 border-b border-slate-700 pb-4">
-        <h1 class="text-4xl font-bold">
+        <h1 class="text-2xl md:text-4xl font-bold">
           <span v-if="!isEditingPassword">Profile</span>
           <span v-else>Edit Password</span>
         </h1>
       </div>
 
-      <form @submit="updateUser" v-if="!isEditingPassword" class="flex flex-col gap-10 w-4xl">
-        <div class="flex flex-row gap-10">
+      <form @submit="updateUser" v-if="!isEditingPassword" class="flex flex-col gap-10">
+        <div class="flex flex-col md:flex-row gap-10">
           <div class="flex flex-col w-full">
             <label class="font-semibold text-slate-400 mb-1" for="firstName">First name</label>
             <input
@@ -87,7 +86,7 @@
         </div>
       </form>
 
-      <form @submit="changePassword" v-if="isEditingPassword" class="flex flex-col gap-10 w-4xl">
+      <form @submit="changePassword" v-if="isEditingPassword" class="flex flex-col gap-10">
         <div class="flex flex-col w-full">
           <label class="font-semibold text-slate-400 mb-1" for="currentPassword"
             >Current password</label
