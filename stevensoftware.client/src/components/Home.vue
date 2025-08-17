@@ -15,7 +15,7 @@
         <div class="flex justify-end lg:justify-start">
           <button
             @click="scrollToContact"
-            class="text-lg font-semibold text-white bg-gradient-to-r from-indigo-500 to-blue-500 hover:from-indigo-600 hover:to-blue-600 px-8 py-3 rounded-xl transition"
+            class="text-lg cursor-pointer font-semibold text-white bg-gradient-to-r from-indigo-500 to-blue-500 hover:from-indigo-600 hover:to-blue-600 px-6 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
           >
             Contact Me
           </button>

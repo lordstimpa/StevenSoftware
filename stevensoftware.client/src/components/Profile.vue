@@ -49,11 +49,11 @@
               />
             </div>
 
-            <div class="flex justify-end w-full">
+            <div class="flex justify-end w-full items-end">
               <button
                 type="button"
                 @click="toggleChangeEmail"
-                class="mt-7 cursor-pointer text-indigo-300 hover:text-indigo-200 transition hover:underline"
+                class="p-2 cursor-pointer text-indigo-300 text hover:text-indigo-200 transition hover:underline"
               >
                 <span v-if="!isEditingEmail">Change email</span>
                 <span v-else>Back</span>
@@ -61,7 +61,7 @@
             </div>
           </div>
 
-          <div class="flex flex-row justify-between">
+          <div class="flex flex-row justify-between items-end">
             <div>
               <p class="font-semibold text-slate-400 mb-1">Password</p>
               <p class="font-semibold">••••••••</p>
@@ -69,7 +69,7 @@
             <button
               type="button"
               @click="toggleChangePassword"
-              class="cursor-pointer text-indigo-300 hover:text-indigo-200 transition hover:underline"
+              class="p-2 cursor-pointer text-indigo-300 hover:text-indigo-200 transition hover:underline"
             >
               Change password
             </button>

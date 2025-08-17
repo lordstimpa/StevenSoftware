@@ -18,11 +18,11 @@
       </RouterLink>
 
       <div v-if="user?.userName" class="hidden lg:flex gap-8">
-        <RouterLink to="/profile" class="text-lg px-3 py-2 rounded-md focus:outline-none focus:ring-indigo-500 font-semibold text-white hover:text-indigo-200 transition">
+        <RouterLink to="/profile" class="text-lg p-2 rounded-md text-white font-semibold hover:text-indigo-200 transition">
           {{ user.userName }}
         </RouterLink>
 
-        <button @click="showModal = true" class="cursor-pointer text-lg font-semibold text-white bg-gradient-to-r from-indigo-500 to-blue-500 hover:from-indigo-600 hover:to-blue-600 hover:to-bg-gradient-to-r px-5 py-2 rounded-3xl focus:ring-indigo-500 transition">
+        <button @click="showModal = true" class="cursor-pointer text-lg font-semibold text-white bg-gradient-to-r from-indigo-500 to-blue-500 hover:from-indigo-600 hover:to-blue-600 px-5 py-2 rounded-3xl focus:ring-2 focus:ring-indigo-500 transition">
           <p>Logout</p>
         </button>
       </div>
@@ -54,11 +54,11 @@
       </RouterLink>
 
       <template v-else>
-        <RouterLink to="/profile" class="text-2xl font-semibold hover:text-indigo-300" @click="closeMenuInstant">
+        <RouterLink to="/profile" class="p-2 text-2xl font-semibold hover:text-indigo-300" @click="closeMenuInstant">
           {{ user.userName }}
         </RouterLink>
 
-        <button @click="() => { closeMenuInstant(); showModal = true; }" class="text-2xl font-semibold hover:text-indigo-300">
+        <button @click="() => { closeMenuInstant(); showModal = true; }" class="p-2 text-2xl font-semibold hover:text-indigo-300">
           Logout
         </button>
       </template>

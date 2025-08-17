@@ -62,16 +62,18 @@
         />
 
         <div v-for="page in totalPages">
-          <span
-            @click="getBlogs(page)"
-            class="text-xl hover:cursor-pointer hover:text-indigo-200 transition"
-            :class="{
-              'underline font-bold': page === currentPageNumber,
-              'text-slate-400': page !== currentPageNumber,
-            }"
-          >
-            {{ page }}
-          </span>
+          <button
+              @click="getBlogs(page)"
+              :disabled="page === currentPageNumber"
+              class="text-xl transition px-2 hover:cursor-pointer"
+              :class="{
+                'underline font-bold text-white': page === currentPageNumber,
+                'text-slate-400 hover:text-indigo-200': page !== currentPageNumber,
+                'disabled': 1 <= totalPages
+              }"
+            >
+              {{ page }}
+            </button>
         </div>
 
         <ChevronRight
