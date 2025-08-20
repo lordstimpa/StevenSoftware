@@ -8,6 +8,10 @@
 
         <span class="hidden lg:inline-block text-lg text-white p-2">|</span>
 
+        <RouterLink to="/case-studies" class="hidden lg:inline-block text-lg p-2 rounded-md text-white font-semibold hover:text-indigo-200 transition">
+          Case Studies
+        </RouterLink>
+
         <RouterLink to="/blog" class="hidden lg:inline-block text-lg p-2 rounded-md text-white font-semibold hover:text-indigo-200 transition">
           Blog
         </RouterLink>
@@ -40,9 +44,13 @@
         animateMenu ? 'transition-all duration-500' : ''
       ]"
   >
-    <div class="flex flex-col items-center justify-center gap-8 text-white p-10">
+    <div class="flex flex-col items-center justify-center gap-8 text-white p-10 bg-slate-800">
       <RouterLink to="/" class="p-2 text-2xl font-semibold hover:text-indigo-300" @click="closeMenuInstant">
         Home
+      </RouterLink>
+
+      <RouterLink to="/case-studies" class="p-2 text-2xl font-semibold hover:text-indigo-300" @click="closeMenuInstant">
+        Case Studies
       </RouterLink>
 
       <RouterLink to="/blog" class="p-2 text-2xl font-semibold hover:text-indigo-300" @click="closeMenuInstant">
