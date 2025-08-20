@@ -15,7 +15,7 @@
     <div class="flex flex-col md:flex-row justify-between items-end">
       <RouterLink
         to="/blog"
-        class="mb-4 md:mb-0 text-lg cursor-pointer font-semibold text-white bg-gradient-to-r from-indigo-500 to-blue-500 hover:from-indigo-600 hover:to-blue-600 px-5 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
+        class="mb-4 md:mb-0 text-md cursor-pointer font-semibold text-white bg-gradient-to-r from-indigo-500 to-blue-500 hover:from-indigo-600 hover:to-blue-600 px-5 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
       >
         Read
       </RouterLink>

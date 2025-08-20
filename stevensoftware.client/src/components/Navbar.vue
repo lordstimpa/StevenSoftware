@@ -44,7 +44,7 @@
         animateMenu ? 'transition-all duration-500' : ''
       ]"
   >
-    <div class="flex flex-col items-center justify-center gap-8 text-white p-10">
+    <div class="flex flex-col items-center justify-center gap-8 text-white p-10 bg-slate-800">
       <RouterLink to="/" class="p-2 text-2xl font-semibold hover:text-indigo-300" @click="closeMenuInstant">
         Home
       </RouterLink>
