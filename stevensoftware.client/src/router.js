@@ -6,6 +6,7 @@ import CaseStudies from './components/CaseStudies/CaseStudies.vue'
 import Blog from './components/Blog/Blog.vue';
 import BlogPost from './components/Blog/BlogPost.vue';
 import CreateBlog from './components/Blog/CreateBlog.vue';
+import Services from './components/Services.vue'
 
 const routes = [
   { path: '/', name: 'Home', component: Home },
@@ -15,6 +16,7 @@ const routes = [
   { path: '/blog', name: 'Blog', component: Blog },
   { path: '/blog/:blogPostId', name: 'BlogPost', component: BlogPost, props: true },
   { path: '/createblog', name: 'CreateBlog', component: CreateBlog },
+  { path: '/services', name: 'Services', component: Services }
 ];
 
 const router = createRouter({

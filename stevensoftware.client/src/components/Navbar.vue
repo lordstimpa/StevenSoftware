@@ -1,12 +1,16 @@
 <template>
-  <div class="w-full flex justify-center">
-    <div class="w-11/12 flex justify-between items-center p-4">
-      <div class="flex justify-between flex gap-8">
+  <div class="w-full flex justify-center" style="background:radial-gradient(50% 50% at 50% 50%, #202534 0%, #1a1f2e 40%, #141925 100%);">
+    <div class="w-full lg:w-11/12 flex justify-between items-center p-4">
+      <div class="flex justify-between gap-8">
         <RouterLink to="/" class="text-lg p-2 rounded-md text-white font-semibold hover:text-indigo-200 transition">
           Steven Software
         </RouterLink>
 
         <span class="hidden lg:inline-block text-lg text-white p-2">|</span>
+
+        <RouterLink to="/services" class="hidden lg:inline-block text-lg p-2 rounded-md text-white font-semibold hover:text-indigo-200 transition">
+          Services
+        </RouterLink>
 
         <RouterLink to="/case-studies" class="hidden lg:inline-block text-lg p-2 rounded-md text-white font-semibold hover:text-indigo-200 transition">
           Case Studies
@@ -47,6 +51,10 @@
     <div class="flex flex-col items-center justify-center gap-8 text-white p-10 bg-slate-800">
       <RouterLink to="/" class="p-2 text-2xl font-semibold hover:text-indigo-300" @click="closeMenuInstant">
         Home
+      </RouterLink>
+
+      <RouterLink to="/services" class="p-2 text-2xl font-semibold hover:text-indigo-300" @click="closeMenuInstant">
+        Services
       </RouterLink>
 
       <RouterLink to="/case-studies" class="p-2 text-2xl font-semibold hover:text-indigo-300" @click="closeMenuInstant">

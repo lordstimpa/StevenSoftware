@@ -1,5 +1,5 @@
 <template>
-  <div class="py-10 px-4 text-white flex justify-center w-full">
+  <div class="pt-10 px-4 text-white flex justify-center w-full">
     <div class="flex flex-col px-4 py-8 lg:p-8 rounded-xl shadow-xl max-w-screen-xl w-full"
       style="background: radial-gradient(50% 50% at 50% 50%, #202534 0%, #1a1f2e 40%, #141925 100%)"
     >
@@ -53,10 +53,13 @@
       </div>
     </div>
   </div>
+
+  <Contact />
 </template>
 
 <script setup>
   import CaseStudiesCard from './CaseStudiesCard.vue';
+  import Contact from '../Contact.vue';
   import { useUserStore } from '../../stores/UserStore';
   import { storeToRefs } from 'pinia';
   import { CircleDot } from 'lucide-vue-next';
