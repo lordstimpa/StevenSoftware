@@ -250,7 +250,9 @@
     </div>
   </div>
 
-  <Contact ref="contactSection" />
+  <div ref="contactSection">
+      <Contact />
+  </div>
 </template>
 
 <script setup>
