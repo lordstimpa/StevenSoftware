@@ -58,12 +58,27 @@
 </template>
 
 <script setup>
-  import CaseStudiesCard from './CaseStudiesCard.vue';
-  import Contact from '../Contact.vue';
+  import { useHead } from '@vueuse/head';
   import { useUserStore } from '../../stores/UserStore';
   import { storeToRefs } from 'pinia';
   import { CircleDot } from 'lucide-vue-next';
+  import CaseStudiesCard from './CaseStudiesCard.vue';
+  import Contact from '../Contact.vue';
 
   const userStore = useUserStore();
   const { user } = storeToRefs(userStore);
+
+  useHead({
+    title: 'Case Studies | Steven Software',
+    meta: [
+      { name: 'description', content: 'Explore Steven Software’s portfolio of web development projects, showcasing .NET, Vue, React, and more.' },
+      { name: 'keywords', content: 'web development, case studies, portfolio, Vue, React, .NET, fullstack developer' },
+      { property: 'og:title', content: 'Case Studies | Steven Software' },
+      { property: 'og:description', content: 'Explore Steven Software’s portfolio of web development projects, showcasing .NET, Vue, React, and more.' },
+      { property: 'og:type', content: 'website' },
+      { name: 'twitter:card', content: 'summary_large_image' },
+      { name: 'twitter:title', content: 'Case Studies | Steven Software' },
+      { name: 'twitter:description', content: 'Explore Steven Software’s portfolio of web development projects, showcasing .NET, Vue, React, and more.' },
+    ],
+  });
 </script>

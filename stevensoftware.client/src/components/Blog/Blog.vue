@@ -89,6 +89,7 @@
 </template>
 
 <script setup>
+  import { useHead } from '@vueuse/head';
   import BlogPostCard from './BlogPostCard.vue';
   import { ref, onMounted } from 'vue';
   import { get } from '../../tools/api';
@@ -130,5 +131,30 @@
 
   onMounted(() => {
     getBlogs();
+  });
+
+  useHead({
+    title: 'Blog | Steven Software',
+    meta: [
+      {
+        name: 'description',
+        content: 'Read the latest blog posts about web development, .Net, Vue, DevOps, and custom software from Steven Software.',
+      },
+      { property: 'og:type', content: 'website' },
+      { property: 'og:title', content: 'Blog | Steven Software – Custom Software Development' },
+      {
+        property: 'og:description',
+        content: 'Read the latest blog posts about web development, .Net, Vue, DevOps, and custom software from Steven Software.',
+      },
+      { property: 'og:url', content: 'https://stevensoftware.se/blog' },
+      { property: 'og:image', content: 'https://stevensoftware.se/2025-08-28.png' },
+      { name: 'twitter:card', content: 'summary_large_image' },
+      { name: 'twitter:title', content: 'Blog | Steven Software – Custom Software Development' },
+      {
+        name: 'twitter:description',
+        content: 'Read the latest blog posts about web development, .Net, Vue, DevOps, and custom software from Steven Software.',
+      },
+      { name: 'twitter:image', content: 'https://stevensoftware.se/2025-08-28.png' },
+    ],
   });
 </script>

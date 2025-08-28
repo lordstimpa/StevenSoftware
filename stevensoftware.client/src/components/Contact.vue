@@ -1,9 +1,9 @@
 <template>
   <div class="w-full flex flex-col justify-center items-center py-16 px-4 sm:px-6 lg:px-8 gap-16" style="background: #0b0f1a">
     <div class="flex flex-col gap-5 text-center max-w-3xl">
-      <p class="text-white text-4xl sm:text-5xl lg:text-6xl font-bold">
+      <h2 class="text-white text-4xl sm:text-5xl lg:text-6xl font-bold">
         Want to work together?
-      </p>
+      </h2>
       <p class="text-gray-300 italic text-base sm:text-lg">
         Whether you’ve got a small fix or a big idea — I’d love to hear about it.
       </p>

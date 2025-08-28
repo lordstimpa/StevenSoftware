@@ -10,7 +10,7 @@
       </div>
 
       <div class="flex flex-col gap-2 pt-8 lg:pl-8">
-        <h1 class="text-2xl md:text-4xl">Services provided</h1>
+        <h2 class="text-2xl md:text-4xl">Services provided</h2>
       </div>
 
       <div class="flex flex-wrap justify-center gap-12 py-8 w-full">
@@ -61,7 +61,7 @@
       </div>
 
       <div class="flex flex-col pt-8 lg:pl-8">
-        <h1 class="text-2xl md:text-4xl">The four simple steps</h1>
+        <h2 class="text-2xl md:text-4xl">The four simple steps</h2>
       </div>
 
       <div class="flex flex-col justify-center items-center py-8 w-full">
@@ -144,6 +144,7 @@
 </template>
 
 <script setup>
+  import { useHead } from '@vueuse/head';
   import { useUserStore } from '../stores/UserStore';
   import { storeToRefs } from 'pinia';
   import Contact from './Contact.vue'
@@ -151,4 +152,17 @@
   const userStore = useUserStore();
   const { user } = storeToRefs(userStore);
 
+  useHead({
+    title: 'Services | Steven Software',
+    meta: [
+      { name: 'description', content: 'Professional web app development, code upgrades, DevOps & hosting, and custom work services by Steven Software.' },
+      { name: 'keywords', content: 'web development, services, fullstack developer, DevOps, code upgrades, custom apps' },
+      { property: 'og:title', content: 'Services | Steven Software' },
+      { property: 'og:description', content: 'Professional web app development, code upgrades, DevOps & hosting, and custom work services by Steven Software.' },
+      { property: 'og:type', content: 'website' },
+      { name: 'twitter:card', content: 'summary_large_image' },
+      { name: 'twitter:title', content: 'Services | Steven Software' },
+      { name: 'twitter:description', content: 'Professional web app development, code upgrades, DevOps & hosting, and custom work services by Steven Software.' },
+    ],
+  });
 </script>
