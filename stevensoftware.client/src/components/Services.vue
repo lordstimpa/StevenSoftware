@@ -67,7 +67,7 @@
       <div class="flex flex-col justify-center items-center py-8 w-full">
 
         <div class="w-full lg:w-10/12 flex flex-col-reverse sm:flex-row justify-between md:gap-8 py-6 md:py-12 md:pr-8 md:p-12 rounded-tr-[200px] md:border-t md:border-r">
-          <div class="flex flex-col justify-center items-center sm-items-left w-full md:w-7/12 lg:ml-12">
+          <div class="flex flex-col justify-center items-center md:items-start w-full md:w-7/12 lg:ml-12">
             <p class="text-white font-semibold text-xl md:text-3xl">1. Tell Me What You Need</p>
             <p class="text-gray-300 italic text-sm sm:text-base">
               You reach out with your idea, problem, or project goals.
@@ -87,7 +87,7 @@
           <div class="flex justify-center w-full sm:w-5/12 mb-6 md:mb-0">
             <img src="../assets/Group 267.svg" class="w-40 h-40 sm:w-50 sm:h-50" />
           </div>
-          <div class="flex flex-col justify-center items-center sm-items-left w-full md:w-7/12 sm:ml-12">
+          <div class="flex flex-col justify-center items-center md:items-start w-full md:w-7/12 sm:ml-12">
             <p class="text-white font-semibold text-xl md:text-3xl">2. Get a Custom Quote</p>
             <p class="text-gray-300 italic text-sm sm:text-base">
               You’ll receive a clear scope, timeline, and price.
@@ -101,7 +101,7 @@
         </div>
 
         <div class="w-full lg:w-10/12 flex flex-col-reverse sm:flex-row justify-between md:gap-8 py-6 md:py-12 md:pr-8 md:p-12 rounded-tr-[200px] md:border-t md:border-r">
-          <div class="flex flex-col justify-center items-center sm-items-left w-full md:w-7/12 lg:ml-12">
+          <div class="flex flex-col justify-center items-center md:items-start w-full md:w-7/12 lg:ml-12">
             <p class="text-white font-semibold text-xl md:text-3xl">3. Development Begins</p>
             <p class="text-gray-300 italic text-sm sm:text-base">
               I get to work — keeping you updated along the way.
@@ -122,7 +122,7 @@
           <div class="flex justify-center w-full sm:w-5/12 mb-6 md:mb-0">
             <img src="../assets/Group 269.svg" class="w-40 h-40 sm:w-50 sm:h-50" />
           </div>
-          <div class="flex flex-col justify-center items-center sm-items-left w-full md:w-7/12 sm:ml-12">
+          <div class="flex flex-col justify-center items-center md:items-start w-full md:w-7/12 sm:ml-12">
             <p class="text-white font-semibold text-xl md:text-3xl">4. Launch & Support</p>
             <p class="text-gray-300 italic text-sm sm:text-base">
               Your project goes live — and I help you get it there.
