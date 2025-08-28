@@ -198,6 +198,7 @@
 </template>
 
 <script setup>
+  import { useHead } from '@vueuse/head';
   import { ref, watch, onMounted, computed } from 'vue';
   import { useRoute } from 'vue-router';
   import { get, post, _delete } from '../../tools/api.js';
@@ -341,5 +342,25 @@
 
   onMounted(() => {
     getBlogPost();
+  });
+
+  watch(blogPost, (post) => {
+    if (post) {
+      useHead({
+        title: post.title + ' | Steven Software',
+        meta: [
+          { name: 'description', content: post.summary || 'Read this blog on Steven Software' },
+          { name: 'keywords', content: 'web development, vue, .net, fullstack, software, blog' },
+          { property: 'og:title', content: post.title },
+          { property: 'og:description', content: post.summary },
+          { property: 'og:type', content: 'article' },
+          { property: 'og:image', content: post.coverImage ? `${baseUrl}${post.coverImage}` : '' },
+          { name: 'twitter:card', content: 'summary_large_image' },
+          { name: 'twitter:title', content: post.title },
+          { name: 'twitter:description', content: post.summary },
+          { name: 'twitter:image', content: post.coverImage ? `${baseUrl}${post.coverImage}` : '' },
+        ],
+      });
+    }
   });
 </script>
