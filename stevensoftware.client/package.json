@@ -6,7 +6,6 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build --mode production",
-    "postbuild": "npm run sitemap",
     "preview": "vite preview",
     "lint": "eslint . --fix",
     "format": "prettier --write \"**/*.{js,ts,vue,html,css,scss,json}\"",
