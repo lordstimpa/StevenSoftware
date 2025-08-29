@@ -3,13 +3,14 @@
 import fs from "fs";
 import https from "https";
 import fetch from "node-fetch";
-import "dotenv/config";
+import dotenv from "dotenv";
+
+dotenv.config({
+  path: process.env.NODE_ENV === "production" ? ".env.production" : ".env",
+});
 
 const API_URL = `${process.env.VITE_API_URL}/blog/getblogposts?pageNumber=1`;
-const BASE_URL = process.env.VITE_URL.replace(
-  "localhost:7271",
-  "stevensoftware.se"
-);
+const BASE_URL = process.env.VITE_URL;
 
 const httpsAgent = new https.Agent({
   rejectUnauthorized: false,
