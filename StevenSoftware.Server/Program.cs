@@ -101,31 +101,16 @@ builder.Services.AddScoped<SeedingService>();
 
 var app = builder.Build();
 
-var maxRetries = 5;
-var retryCount = 0;
-var delay = TimeSpan.FromSeconds(5);
-
-while (retryCount < maxRetries)
+using (var scope = app.Services.CreateScope())
 {
-    try
-    {
-        using var scope = app.Services.CreateScope();
-        var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    await dbContext.Database.MigrateAsync();
+}
 
-        dbContext.Database.Migrate();
-
-        var seedingService = scope.ServiceProvider.GetRequiredService<SeedingService>();
-        await seedingService.SeedAdminUser(scope.ServiceProvider);
-
-        break;
-    }
-    catch (Exception ex)
-    {
-        retryCount++;
-        Console.WriteLine($"Seeding failed (attempt {retryCount}): {ex.Message}");
-        if (retryCount == maxRetries) throw;
-        await Task.Delay(delay);
-    }
+using (var scope = app.Services.CreateScope())
+{
+    var seeder = scope.ServiceProvider.GetRequiredService<SeedingService>();
+    await seeder.SeedAdminUser(scope.ServiceProvider);
 }
 
 Console.WriteLine($"Running in {builder.Environment.EnvironmentName} environment");
