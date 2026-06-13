@@ -19,26 +19,25 @@
             type="email"
             id="email"
             v-model="email"
-            @blur="checkEmailFormat"
             placeholder="email@hotmail.com"
           />
         </div>
 
-        <p v-if="email && !emailValid" class="text-sm text-red-400 mt-1">
+        <p v-show="email && !emailValid" class="text-sm text-red-400 mt-1">
           Please enter a valid email address.
         </p>
 
         <div class="flex flex-col mt-6">
-          <label v-if="emailValid" class="font-semibold text-slate-400 mb-2" for="password"
+          <label v-show="emailValid" class="font-semibold text-slate-400 mb-2" for="password"
             >Password</label
           >
           <input
-            v-if="emailValid"
             class="bg-slate-800 text-slate-100 px-4 py-2 border border-slate-700 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
             type="password"
             id="password"
             v-model="password"
             placeholder="••••••••"
+            :disabled="!emailValid"
           />
 
           <!--<div class="flex justify-between text-sm text-indigo-300 mt-2">
@@ -67,7 +66,7 @@
 </template>
 
 <script setup>
-  import { ref, onMounted } from 'vue';
+  import { ref, onMounted, watch} from 'vue';
   import { useRouter } from 'vue-router';
   import { post } from '../tools/api';
   import { useUserStore } from '../stores/UserStore';
@@ -90,6 +89,11 @@
     captchaDone.value = false;
   };
 
+  watch(email, (val) => {
+    const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    emailValid.value = pattern.test(val);
+  });
+
   const login = async (e) => {
     e.preventDefault();
 
@@ -105,8 +109,8 @@
       recaptchaToken: captchaToken,
     });
 
-    if (response && !response.error && response.accessToken) {
-      localStorage.setItem('jwt', response.accessToken);
+    if (response.success == true) {
+      localStorage.setItem('jwt', response.data.accessToken);
       await userStore.fetchUser();
 
       error.value = '';

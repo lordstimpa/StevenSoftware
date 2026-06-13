@@ -21,7 +21,7 @@ export const useUserStore = defineStore('user', {
         });
 
         if (response) {
-          this.user = response;
+          this.user = response.data;
         } else {
           console.error('Failed to fetch user');
         }
