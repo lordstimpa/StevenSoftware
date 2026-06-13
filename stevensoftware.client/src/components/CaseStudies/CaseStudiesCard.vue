@@ -3,11 +3,11 @@
     style="background: radial-gradient(50% 50% at 50% 50%, #1a1f31 0%, #141a2a 40%, #0b0f1a 100%)"
   >
     <div class="relative w-full aspect-[16/9] rounded-sm overflow-hidden hover:cursor-pointer" @click="toggleContent">
-      <img v-if="props.caseStudyId == 1" src="../../assets/steven-software.gif" alt="Case study gif"
+      <img v-if="props.caseStudyId == 1" src="/steven-software.gif" alt="Case study gif"
         :class="['w-full h-full object-cover transition-opacity duration-500', showContent ? 'opacity-30' : 'opacity-100']"
         style="filter: contrast(110%) brightness(95%) saturate(90%);" />
 
-      <img v-if="props.caseStudyId == 2" src="../../assets/org-spelforening.gif" alt="Case study gif"
+      <img v-if="props.caseStudyId == 2" src="/org-spelforening.gif" alt="Case study gif"
         :class="['w-full h-full object-cover transition-opacity duration-500', showContent ? 'opacity-30' : 'opacity-100']"
         style="filter: contrast(110%) brightness(95%) saturate(90%);" />
 

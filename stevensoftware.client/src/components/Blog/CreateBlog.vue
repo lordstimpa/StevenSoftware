@@ -143,7 +143,7 @@
   const createBlogPost = handleSubmit(async (values) => {
     const token = localStorage.getItem('jwt');
     const response = await post(
-      `${import.meta.env.VITE_API_URL}/blog/updateblogpost`,
+      `${import.meta.env.VITE_API_URL}/api/blog/updateblogpost`,
       {
         id: 0,
         title: values.title,

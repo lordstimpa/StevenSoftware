@@ -61,7 +61,7 @@
   const token = localStorage.getItem('jwt');
   const server = {
     process: {
-      url: `${import.meta.env.VITE_API_URL}/media/uploadimage`,
+      url: `${import.meta.env.VITE_API_URL}/api/media/uploadimage`,
       method: 'POST',
       headers: {
         Authorization: `Bearer ${token}`,
@@ -102,7 +102,7 @@
     if (!uploadedFileName) return;
 
     const res = await _delete(
-      `${import.meta.env.VITE_API_URL}/media/deletemedia/${uploadedFileName}`,
+      `${import.meta.env.VITE_API_URL}/api/media/deletemedia/${uploadedFileName}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,

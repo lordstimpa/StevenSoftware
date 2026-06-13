@@ -67,9 +67,6 @@
             <div class="flex flex-col gap-2 w-full md:w-80 mt-8 md:mt-0">
               <p class="text-right text-slate-400 font-medium text-xs md:text-sm">Created: {{ formatDateTime(blogPost.createdAt) }}</p>
               <p class="text-right text-slate-400 font-medium text-xs md:text-sm">Updated: {{ formatDateTime(blogPost.updatedAt) }}</p>
-              <div class="text-slate-400 text-xs md:text-sm mt-3 text-end">
-                <span class="border-slate-700 border p-2 rounded-sm">{{blogPost.author.firstName}}</span>
-              </div>
             </div>
           </div>
         </div>
@@ -286,14 +283,14 @@
   const getBlogPost = async () => {
     isLoading.value = true;
     const token = localStorage.getItem('jwt');
-    const response = await get(`${import.meta.env.VITE_API_URL}/blog/getblogpost/${blogPostId}`, {
+    const response = await get(`${import.meta.env.VITE_API_URL}/api/blog/getblogpost/${blogPostId}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
 
     if (response) {
-      blogPost.value = response.data;
+      blogPost.value = response;
     }
     isLoading.value = false;
   };
@@ -301,7 +298,7 @@
   const updateBlogPost = handleSubmit(async (values) => {
     const token = localStorage.getItem('jwt');
     const response = await post(
-      `${import.meta.env.VITE_API_URL}/blog/updateblogpost`,
+      `${import.meta.env.VITE_API_URL}/api/blog/updateblogpost`,
       {
         id: blogPostId,
         title: values.title,
@@ -325,7 +322,7 @@
   const deleteBlogPost = async () => {
     const token = localStorage.getItem('jwt');
     const response = await _delete(
-      `${import.meta.env.VITE_API_URL}/blog/deleteblogpost/${blogPostId}`,
+      `${import.meta.env.VITE_API_URL}/api/blog/deleteblogpost/${blogPostId}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
