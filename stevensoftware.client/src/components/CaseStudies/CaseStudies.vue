@@ -1,11 +1,12 @@
 <template>
-  <div class="pt-10 px-4 text-white flex justify-center w-full">
-    <div class="flex flex-col px-4 py-8 lg:p-8 rounded-xl shadow-xl max-w-screen-xl w-full"
-      style="background: radial-gradient(50% 50% at 50% 50%, #202534 0%, #1a1f2e 40%, #141925 100%)"
-    >
-      <div class="flex justify-between mb-8 border-b-3 border-slate-700 pb-4">
+  <div class="py-[76px] px-4 text-slate-900 flex justify-center w-full bg-slate-100">
+    <div class="mt-6 flex flex-col px-4 py-10 md:p-10 rounded-2xl shadow-md max-w-screen-xl w-full bg-white border border-slate-200">
+
+      <div class="flex justify-between mb-8 border-b border-slate-200 pb-4">
         <div class="flex flex-col gap-2">
-          <h1 class="text-2xl lg:text-4xl font-bold">Case Studies</h1>
+          <h1 class="text-4xl lg:text-5xl font-bold text-slate-900">
+            Case Studies
+          </h1>
         </div>
       </div>
 
@@ -13,16 +14,19 @@
         <div class="w-16 h-16 border-8 border-indigo-500 border-t-transparent rounded-full animate-spin animate-[pulse_1.2s_ease-in-out_infinite]"></div>
       </div>
 
-      <div class="relative flex gap-4 border-slate-700 lg:border-l pt-8 pb-8">
-        <div class="hidden lg:flex flex-col gap-6 w-3/10 h-full relative pl-8">
+      <div class="relative flex gap-4 border-slate-200 lg:border-l pt-8 pb-8">
+
+        <div class="hidden lg:flex flex-col gap-6 w-3/10 h-full relative pl-8 text-slate-700">
+
           <CircleDot class="absolute top-0 translate-y-[4px] -left-2 w-4 h-4 text-slate-400" />
-          <p class="font-medium">2024 - 2025</p>
+
+          <p class="font-medium text-slate-800">2024 - 2025</p>
 
           <div class="flex flex-wrap gap-2">
-            <p class="text-slate-400 text-sm border-slate-700 border p-2 rounded-sm">.NET</p>
-            <p class="text-slate-400 text-sm border-slate-700 border p-2 rounded-sm">Vue</p>
-            <p class="text-slate-400 text-sm border-slate-700 border p-2 rounded-sm">PostgreSQL</p>
-            <p class="text-slate-400 text-sm border-slate-700 border p-2 rounded-sm">Homelab</p>
+            <p class="text-slate-600 text-sm border border-slate-200 bg-slate-100 p-2 rounded-sm">.NET</p>
+            <p class="text-slate-600 text-sm border border-slate-200 bg-slate-100 p-2 rounded-sm">Vue</p>
+            <p class="text-slate-600 text-sm border border-slate-200 bg-slate-100 p-2 rounded-sm">PostgreSQL</p>
+            <p class="text-slate-600 text-sm border border-slate-200 bg-slate-100 p-2 rounded-sm">Homelab</p>
           </div>
         </div>
 
@@ -31,16 +35,19 @@
         </div>
       </div>
 
-      <div class="relative flex gap-4 border-slate-700 lg:border-l pt-8 pb-8">
-        <div class="hidden lg:flex flex-col gap-6 w-3/10 h-full relative pl-8">
+      <div class="relative flex gap-4 border-slate-200 lg:border-l pt-8 pb-8">
+
+        <div class="hidden lg:flex flex-col gap-6 w-3/10 h-full relative pl-8 text-slate-700">
+
           <CircleDot class="absolute top-0 translate-y-[4px] -left-2 w-4 h-4 text-slate-400" />
-          <p class="font-medium">2023 - 2024</p>
+
+          <p class="font-medium text-slate-800">2023 - 2024</p>
 
           <div class="flex flex-wrap gap-2">
-            <p class="text-slate-400 text-sm border-slate-700 border p-2 rounded-sm">.NET</p>
-            <p class="text-slate-400 text-sm border-slate-700 border p-2 rounded-sm">React</p>
-            <p class="text-slate-400 text-sm border-slate-700 border p-2 rounded-sm">Azure</p>
-            <p class="text-slate-400 text-sm border-slate-700 border p-2 rounded-sm">Cloud hosting</p>
+            <p class="text-slate-600 text-sm border border-slate-200 bg-slate-100 p-2 rounded-sm">.NET</p>
+            <p class="text-slate-600 text-sm border border-slate-200 bg-slate-100 p-2 rounded-sm">React</p>
+            <p class="text-slate-600 text-sm border border-slate-200 bg-slate-100 p-2 rounded-sm">Azure</p>
+            <p class="text-slate-600 text-sm border border-slate-200 bg-slate-100 p-2 rounded-sm">Cloud hosting</p>
           </div>
         </div>
 
@@ -49,8 +56,6 @@
         </div>
       </div>
 
-      <div class="flex justify-center pt-8 gap-6 border-slate-700 border-t">
-      </div>
     </div>
   </div>
 

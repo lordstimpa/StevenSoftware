@@ -1,83 +1,72 @@
 <template>
-  <div class="w-full flex justify-center" style="background:radial-gradient(50% 50% at 50% 50%, #202534 0%, #1a1f2e 40%, #141925 100%);">
-    <div class="w-full lg:w-11/12 flex justify-between items-center p-4">
+  <div class="fixed top-0 left-0 right-0 z-50 flex justify-center">
+    <div class="absolute inset-0 border-b border-none backdrop-blur-md transition-colors duration-700 ease-out"
+         :class="[
+            isHome
+              ? (scrolled ? 'bg-slate-900/95 shadow-md' : 'bg-transparent')
+              : 'bg-slate-900'
+          ]" />
+
+    <div class="relative w-full lg:w-11/12 flex justify-between items-center p-4">
+
       <div class="flex justify-between gap-8">
-        <RouterLink to="/" class="text-lg p-2 rounded-md text-white font-semibold hover:text-indigo-200 transition">
+        <RouterLink to="/" class="text-lg p-2 rounded-md text-white font-semibold hover:text-slate-300 transition">
           Steven Software
         </RouterLink>
 
         <span class="hidden lg:inline-block text-lg text-white p-2">|</span>
 
-        <RouterLink to="/services" class="hidden lg:inline-block text-lg p-2 rounded-md text-white font-semibold hover:text-indigo-200 transition">
+        <RouterLink to="/services" class="hidden lg:inline-block text-lg p-2 rounded-md text-white font-semibold hover:text-slate-300 transition">
           Services
         </RouterLink>
 
-        <RouterLink to="/case-studies" class="hidden lg:inline-block text-lg p-2 rounded-md text-white font-semibold hover:text-indigo-200 transition">
+        <RouterLink to="/case-studies" class="hidden lg:inline-block text-lg p-2 rounded-md text-white font-semibold hover:text-slate-300 transition">
           Case Studies
         </RouterLink>
 
-        <RouterLink to="/blog" class="hidden lg:inline-block text-lg p-2 rounded-md text-white font-semibold hover:text-indigo-200 transition">
+        <RouterLink to="/blog" class="hidden lg:inline-block text-lg p-2 rounded-md text-white font-semibold hover:text-slate-300 transition">
           Blog
         </RouterLink>
       </div>
 
-      <RouterLink v-if="!user?.userName" to="/login" class="hidden lg:inline-block text-lg font-semibold text-white bg-gradient-to-r from-indigo-500 to-blue-500 hover:from-indigo-600 hover:to-blue-600 hover:to-bg-gradient-to-r px-5 py-2 rounded-3xl focus:ring-indigo-500 transition">
-        <p>Login</p>
-      </RouterLink>
+      <div v-if="!user?.userName" class="hidden lg:flex gap-4">
+        <a href="tel:+46739700463" class="flex items-center gap-2 text-lg p-2 rounded-md text-white font-semibold hover:text-slate-300 transition">
+          <span>Call</span>
+        </a>
+
+        <a href="mailto:steven.dalfall@gmail.com" class="flex items-center gap-2 text-lg font-semibold text-white bg-indigo-600 hover:bg-indigo-700 px-5 py-2 rounded-3xl transition">
+          <span>Email</span>
+        </a>
+      </div>
 
       <div v-if="user?.userName" class="hidden lg:flex gap-8">
-        <RouterLink to="/profile" class="text-lg p-2 rounded-md text-white font-semibold hover:text-indigo-200 transition">
+        <RouterLink to="/profile" class="text-lg p-2 rounded-md text-white font-semibold hover:text-slate-300 transition">
           {{ user.userName }}
         </RouterLink>
 
-        <button @click="showModal = true" class="cursor-pointer text-lg font-semibold text-white bg-gradient-to-r from-indigo-500 to-blue-500 hover:from-indigo-600 hover:to-blue-600 px-5 py-2 rounded-3xl focus:ring-2 focus:ring-indigo-500 transition">
-          <p>Logout</p>
+        <button @click="showModal = true" class="text-lg font-semibold text-white bg-indigo-600 hover:bg-indigo-700 px-5 py-2 rounded-3xl transition cursor-pointer">
+          Logout
         </button>
       </div>
 
-      <button @click="toggleMenu" class="lg:hidden w-8 h-8 flex items-center justify-center text-white focus:outline-none relative">
-        <Menu v-show="!mobileOpen" class="w-7 h-7 text-white transition-transform duration-300" :class="{'rotate-90 scale-0': mobileOpen}" />
-        <X v-show="mobileOpen" class="w-7 h-7 text-white transition-transform duration-300" :class="{'rotate-90 scale-0': !mobileOpen}" />
+      <button @click="toggleMenu" class="lg:hidden w-8 h-8 flex items-center justify-center text-white">
+        <Menu v-show="!mobileOpen" class="w-7 h-7" />
+        <X v-show="mobileOpen" class="w-7 h-7" />
       </button>
+
     </div>
   </div>
 
   <div class="overflow-hidden w-full z-50 bg-slate-900"
-      :class="[
-        mobileOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0',
-        animateMenu ? 'transition-all duration-500' : ''
-      ]"
-  >
+       :class="[
+          mobileOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0',
+          animateMenu ? 'transition-all duration-500' : ''
+        ]">
     <div class="flex flex-col items-center justify-center gap-8 text-white p-10 bg-slate-800">
-      <RouterLink to="/" class="p-2 text-2xl font-semibold hover:text-indigo-300" @click="closeMenuInstant">
-        Home
-      </RouterLink>
-
-      <RouterLink to="/services" class="p-2 text-2xl font-semibold hover:text-indigo-300" @click="closeMenuInstant">
-        Services
-      </RouterLink>
-
-      <RouterLink to="/case-studies" class="p-2 text-2xl font-semibold hover:text-indigo-300" @click="closeMenuInstant">
-        Case Studies
-      </RouterLink>
-
-      <RouterLink to="/blog" class="p-2 text-2xl font-semibold hover:text-indigo-300" @click="closeMenuInstant">
-        Blog
-      </RouterLink>
-
-      <RouterLink v-if="!user?.userName" to="/login" class="p-2 text-2xl font-semibold hover:text-indigo-300" @click="closeMenuInstant">
-        Login
-      </RouterLink>
-
-      <template v-else>
-        <RouterLink to="/profile" class="p-2 text-2xl font-semibold hover:text-indigo-300" @click="closeMenuInstant">
-          {{ user.userName }}
-        </RouterLink>
-
-        <button @click="() => { closeMenuInstant(); showModal = true; }" class="p-2 text-2xl font-semibold hover:text-indigo-300">
-          Logout
-        </button>
-      </template>
+      <RouterLink to="/" @click="closeMenuInstant">Home</RouterLink>
+      <RouterLink to="/services" @click="closeMenuInstant">Services</RouterLink>
+      <RouterLink to="/case-studies" @click="closeMenuInstant">Case Studies</RouterLink>
+      <RouterLink to="/blog" @click="closeMenuInstant">Blog</RouterLink>
     </div>
   </div>
 
@@ -100,7 +89,8 @@
 </template>
 
 <script setup>
-  import { ref, nextTick } from 'vue';
+  import { ref, nextTick, onMounted, onUnmounted, computed } from 'vue';
+  import { useRoute } from 'vue-router';
   import { storeToRefs } from 'pinia';
   import { useUserStore } from '@/stores/UserStore';
   import { Menu, X } from 'lucide-vue-next'
@@ -109,6 +99,10 @@
   const userStore = useUserStore();
   const { user } = storeToRefs(userStore);
 
+  const route = useRoute();
+  const isHome = computed(() => route.path === '/');
+
+  const scrolled = ref(false);
   const showModal = ref(false);
   const mobileOpen = ref(false);
   const animateMenu = ref(false);
@@ -123,9 +117,23 @@
     mobileOpen.value = !mobileOpen.value;
   };
 
+  const handleScroll = () => {
+    if (!isHome.value) return;
+    scrolled.value = window.scrollY > 10;
+  };
+
   const closeMenuInstant = async () => {
     animateMenu.value = false;
     await nextTick();
     mobileOpen.value = false;
   };
+
+  onMounted(() => {
+    handleScroll();
+    window.addEventListener('scroll', handleScroll);
+  });
+
+  onUnmounted(() => {
+    window.removeEventListener('scroll', handleScroll);
+  });
 </script>

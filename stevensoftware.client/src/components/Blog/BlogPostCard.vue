@@ -1,25 +1,29 @@
 <template>
-  <div @click="goToPost" role="button" tabindex="0" @keyup.enter="goToPost"
-    class="border border-slate-700 rounded p-4 md:p-6 cursor-pointer shadow-xl hover:scale-102 hover:brightness-120 transition"
-    style="background: radial-gradient(50% 50% at 50% 50%, #1a1f31 0%, #141a2a 40%, #0b0f1a 100%)"
-  >
-    <img
-      v-if="props.blogPost.coverImage"
-      :src="`${baseUrl}${props.blogPost.coverImage}`"
-      alt="Cover image"
-      class="w-full h-64 object-cover mb-8"
-    />
-    <h1 class="pb-8 text-2xl md:text-4xl">{{ props.blogPost.title }}</h1>
-    <p class="pb-10 text-sm md:text-lg text-gray-300">{{ props.blogPost.summary }}</p>
+  <div @click="goToPost"
+       role="button"
+       tabindex="0"
+       @keyup.enter="goToPost"
+       class="border border-slate-200 rounded p-4 md:p-6 cursor-pointer shadow-md hover:scale-102 hover:brightness-105 transition bg-white">
+    <img v-if="props.blogPost.coverImage"
+         :src="`${baseUrl}${props.blogPost.coverImage}`"
+         alt="Cover image"
+         class="w-full h-64 object-cover mb-8 rounded-md border border-slate-200" />
+
+    <h1 class="pb-8 text-2xl md:text-4xl text-slate-900">
+      {{ props.blogPost.title }}
+    </h1>
+
+    <p class="pb-10 text-sm md:text-lg text-slate-600">
+      {{ props.blogPost.summary }}
+    </p>
 
     <div class="flex flex-col md:flex-row justify-between items-end">
-      <RouterLink
-        to="/blog"
-        class="mb-4 md:mb-0 text-md cursor-pointer font-semibold text-white bg-gradient-to-r from-indigo-500 to-blue-500 hover:from-indigo-600 hover:to-blue-600 px-5 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
-      >
+      <RouterLink to="/blog"
+                  class="mb-4 md:mb-0 text-md cursor-pointer font-semibold text-white bg-indigo-600 hover:bg-indigo-700 px-5 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-slate-300 transition">
         Read
       </RouterLink>
-      <p class="text-slate-400 text-xs md:text-sm font-medium">
+
+      <p class="text-slate-500 text-xs md:text-sm font-medium">
         Updated: {{ formatDateTime(props.blogPost.updatedAt) }}
       </p>
     </div>

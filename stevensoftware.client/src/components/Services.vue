@@ -1,142 +1,191 @@
 <template>
-  <div class="pt-10 px-4 text-white flex justify-center w-full">
-    <div class="flex flex-col px-4 py-8 md:p-8 rounded-xl shadow-xl max-w-screen-xl w-full"
-      style="background: radial-gradient(50% 50% at 50% 50%, #202534 0%, #1a1f2e 40%, #141925 100%)"
-    >
-      <div class="flex justify-between mb-8 border-b-3 border-slate-700 pb-4">
-        <div class="flex flex-col">
-          <h1 class="text-2xl md:text-4xl font-bold">Services</h1>
-        </div>
+  <div class="py-[76px] px-4 text-slate-900 flex justify-center w-full bg-slate-100">
+    <div class="mt-6 flex flex-col px-4 py-10 md:p-10 rounded-2xl shadow-md max-w-screen-xl w-full bg-white border border-slate-200">
+      <div class="flex flex-col gap-3 border-b border-slate-200 pb-6">
+        <h1 class="text-4xl md:text-5xl font-bold text-slate-900">
+          Services
+        </h1>
       </div>
 
-      <div class="flex flex-col gap-2 pt-8 lg:pl-8">
-        <h2 class="text-2xl md:text-4xl">Services provided</h2>
+      <div class="flex flex-col gap-3 pt-10 lg:pl-6 max-w-3xl">
+        <h2 class="text-2xl md:text-4xl font-bold text-slate-900 leading-tight">
+          What I help you with
+        </h2>
+
+        <p class="text-slate-600 text-sm md:text-base leading-relaxed">
+          I take websites that aren’t performing and turn them into systems that bring in steady leads and customers.
+        </p>
       </div>
 
-      <div class="flex flex-wrap justify-center gap-12 py-8 w-full">
-        <div class="border text-white border-indigo-900 w-full md:w-10/12 flex flex-col gap-4 p-8 rounded-md shadow-xl"
-          style="background: #1a1f31"
-        >
-          <p class="text-2xl font-bold">Web App Development</p>
-          <p class="text-md text-gray-300">
-            I build modern, responsive web apps from scratch — tailored to your goals and ready to scale.
+      <div class="mt-14 w-full flex justify-center">
+        <div class="w-full lg:w-11/12 border border-slate-200 rounded-2xl p-8 md:p-10 bg-slate-900/5 shadow-sm flex flex-col gap-6">
+
+          <p class="text-2xl md:text-3xl font-bold text-slate-900">
+            Your website should bring you customers — not just exist
           </p>
-          <p class="text-md text-gray-300">Core of the application includes:</p>
-          <ul class="list-disc list-inside text-gray-300 text-md flex flex-col gap-2">
-            <li>Clean, maintainable architecture that grows with your project</li>
-            <li>Robust backend & API design for reliable performance</li>
-            <li>Intuitive frontend UI/UX that keeps users engaged</li>
-            <li>Clear documentation so your team can pick it up easily</li>
-          </ul>
-        </div>
 
-        <div class="flex flex-col lg:flex-row gap-12 w-full md:w-10/12">
-          <div class="border text-white border-green-900 w-full lg:w-4/12 flex flex-col flex-1 justify-evenly gap-4 p-8 rounded-md shadow-xl"
-            style="background: #1a1f31"
-          >
-            <p class="text-2xl font-bold text-center">Code Upgrades</p>
-            <p class="text-md text-gray-300">
-              Got messy or outdated code? I’ll refactor, upgrade, and clean it up — so it runs faster and is easier to maintain.
+          <p class="text-slate-600 leading-relaxed">
+            Most websites look fine, but don’t actually convert visitors into inquiries.
+            I fix that by improving clarity, trust, speed, and the path from visit to contact.
+          </p>
+
+          <div class="mt-2">
+            <p class="text-slate-900 font-semibold mb-3">
+              What I focus on:
             </p>
-          </div>
 
-          <div class="border text-white border-blue-900 w-full lg:w-4/12 flex flex-col flex-1 justify-evenly gap-4 p-8 rounded-md shadow-xl"
-            style="background: #1a1f31"
-          >
-            <p class="text-2xl font-bold text-center">DevOps & Hosting</p>
-            <p class="text-md text-gray-300">
-              Setting up a proper CI/CD pipeline for smooth deployments to all the enviornments. Configuring a webserver, DNS and hosting for your app to be available online.
-            </p>
-          </div>
-
-          <div class="border text-white border-yellow-900 w-full lg:w-4/12 flex flex-col flex-1 justify-evenly gap-4 p-8 rounded-md shadow-xl"
-            style="background: #1a1f31"
-          >
-            <p class="text-2xl font-bold text-center">Custom Work</p>
-            <p class="text-md text-gray-300">
-              Need a landing page, domain setup, or a few fixes here and there? I’ve got you covered for the smaller stuff too for a fixed price.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <div class="flex flex-col pt-8 lg:pl-8">
-        <h2 class="text-2xl md:text-4xl">The four simple steps</h2>
-      </div>
-
-      <div class="flex flex-col justify-center items-center py-8 w-full">
-
-        <div class="w-full lg:w-10/12 flex flex-col-reverse sm:flex-row justify-between md:gap-8 py-6 md:py-12 md:pr-8 md:p-12 rounded-tr-[200px] md:border-t md:border-r">
-          <div class="flex flex-col justify-center items-center md:items-start w-full md:w-7/12 lg:ml-12">
-            <p class="text-white font-semibold text-xl md:text-3xl">1. Tell Me What You Need</p>
-            <p class="text-gray-300 italic text-sm sm:text-base">
-              You reach out with your idea, problem, or project goals.
-            </p>
-            <ul class="list-disc list-inside text-gray-300 mt-6 text-sm md:text-lg flex flex-col gap-2">
-              <li>We hold a meeting were we discuss your needs</li>
-              <li>We define your goals & priorities and provide a basic plan</li>
-              <li>You choose the tools/tech (if you have preferences)</li>
-            </ul> 
-          </div>
-          <div class="flex justify-center w-full sm:w-5/12 mb-6 sm:mt-6 sm:mb-0 md:mt-0">
-            <img src="/undraw_talking-on-the-phone_lc9v.svg" class="w-40 h-40 sm:w-50 sm:h-50" />
-          </div>
-        </div>
-
-        <div class="w-full lg:w-10/12 flex flex-col sm:flex-row justify-between md:gap-8 py-6 md:py-12 md:pl-8 md:p-12 rounded-tl-[200px] md:border-t md:border-l">
-          <div class="flex justify-center w-full sm:w-5/12 mb-6 md:mb-0">
-            <img src="/Group 267.svg" class="w-40 h-40 sm:w-50 sm:h-50" />
-          </div>
-          <div class="flex flex-col justify-center items-center md:items-start w-full md:w-7/12 sm:ml-12">
-            <p class="text-white font-semibold text-xl md:text-3xl">2. Get a Custom Quote</p>
-            <p class="text-gray-300 italic text-sm sm:text-base">
-              You’ll receive a clear scope, timeline, and price.
-            </p>
-            <ul class="list-disc list-inside text-gray-300 mt-6 text-sm md:text-lg flex flex-col gap-2">
-              <li>I will provide a scope & timeline</li>
-              <li>We agree on milestones & you decide on the budget</li>
-              <li>Make adjustments if needed</li>
-            </ul> 
-          </div>
-        </div>
-
-        <div class="w-full lg:w-10/12 flex flex-col-reverse sm:flex-row justify-between md:gap-8 py-6 md:py-12 md:pr-8 md:p-12 rounded-tr-[200px] md:border-t md:border-r">
-          <div class="flex flex-col justify-center items-center md:items-start w-full md:w-7/12 lg:ml-12">
-            <p class="text-white font-semibold text-xl md:text-3xl">3. Development Begins</p>
-            <p class="text-gray-300 italic text-sm sm:text-base">
-              I get to work — keeping you updated along the way.
-            </p>
-            <ul class="list-disc list-inside text-gray-300 mt-6 text-sm md:text-lg flex flex-col gap-2">
-              <li>I break project into tasks and create a task board</li>
-              <li>You will have access to the task board to see live progress</li>
-              <li>I will provide weekly/daily updates</li>
-              <li>Feedback incorporated quickly</li>
+            <ul class="grid grid-cols-1 md:grid-cols-2 gap-3 text-slate-600 text-sm md:text-base">
+              <li>Make your offer instantly clear within seconds</li>
+              <li>Build trust through structure and modern design</li>
+              <li>Improve speed so people don’t leave early</li>
+              <li>Guide visitors naturally toward contacting you</li>
             </ul>
           </div>
-          <div class="flex justify-center w-full sm:w-5/12 mt-6 md:mt-0">
-            <img src="/Group 268.svg" class="w-40 h-40 sm:w-50 sm:h-50" />
-          </div>
+
+        </div>
+      </div>
+
+      <div class="mt-14 grid grid-cols-1 md:grid-cols-3 gap-8 lg:w-11/12 mx-auto">
+
+        <div class="border border-slate-200 rounded-xl p-7 bg-slate-900/5 shadow-sm hover:shadow-md transition flex flex-col gap-3">
+          <p class="text-xl font-bold text-slate-900">
+            Fix Underperforming Websites
+          </p>
+          <p class="text-slate-600 text-sm leading-relaxed">
+            If your site feels outdated, confusing, or slow — I restructure and modernize it so it finally works for your business.
+          </p>
         </div>
 
-        <div class="w-full lg:w-10/12 flex flex-col sm:flex-row justify-between md:gap-8 py-6 md:py-12 md:pl-8 md:p-12 rounded-tl-[200px] md:border-t md:border-l">
-          <div class="flex justify-center w-full sm:w-5/12 mb-6 md:mb-0">
-            <img src="/Group 269.svg" class="w-40 h-40 sm:w-50 sm:h-50" />
-          </div>
-          <div class="flex flex-col justify-center items-center md:items-start w-full md:w-7/12 sm:ml-12">
-            <p class="text-white font-semibold text-xl md:text-3xl">4. Launch & Support</p>
-            <p class="text-gray-300 italic text-sm sm:text-base">
-              Your project goes live — and I help you get it there.
-            </p>
-            <ul class="list-disc list-inside text-gray-300 mt-6 text-sm md:text-lg flex flex-col gap-2">
-              <li>Deployment to production</li>
-              <li>Post-launch testing & fixes</li>
-              <li>Optional ongoing support</li>
-            </ul>
-          </div>        
+        <div class="border border-slate-200 rounded-xl p-7 bg-slate-900/5 shadow-sm hover:shadow-md transition flex flex-col gap-3">
+          <p class="text-xl font-bold text-slate-900">
+            Make Your Site Reliable & Fast
+          </p>
+          <p class="text-slate-600 text-sm leading-relaxed">
+            I handle the technical side so your website loads quickly, runs smoothly, and doesn’t break when you need it most.
+          </p>
+        </div>
+
+        <div class="border border-slate-200 rounded-xl p-7 bg-slate-900/5 shadow-sm hover:shadow-md transition flex flex-col gap-3">
+          <p class="text-xl font-bold text-slate-900">
+            Small Improvements That Matter
+          </p>
+          <p class="text-slate-600 text-sm leading-relaxed">
+            From fixes to new pages, I help you improve your website step by step — without unnecessary complexity.
+          </p>
         </div>
 
       </div>
-      <div class="flex justify-center pt-8 gap-6 border-slate-700 border-t"></div>
+
+      <div class="flex flex-col pt-16 lg:pl-8">
+        <h2 class="text-2xl md:text-4xl font-bold text-slate-900">
+          How it works
+        </h2>
+
+        <p class="text-slate-600 mt-2 max-w-2xl">
+          A simple process to understand your website and turn it into something that brings in more customers.
+        </p>
+      </div>
+
+      <div class="flex flex-col justify-center items-center py-12 w-full gap-12">
+        <div class="w-full lg:w-10/12 flex flex-col-reverse sm:flex-row justify-between items-center gap-8 bg-slate-900/5 border border-slate-200 shadow-sm rounded-2xl px-6 md:px-12 py-10">
+          <div class="flex flex-col justify-center items-center md:items-start w-full md:w-7/12 lg:ml-12">
+            <p class="font-semibold text-xl md:text-3xl text-slate-900">
+              1. You Tell Me What’s Going On
+            </p>
+
+            <p class="text-slate-600 italic text-sm sm:text-base mt-2">
+              We look at your current website, goals, and what feels like it’s not working.
+            </p>
+
+            <ul class="list-disc list-inside text-slate-600 mt-6 text-sm md:text-lg flex flex-col gap-2">
+              <li>What your website is supposed to achieve</li>
+              <li>Where you're currently losing visitors</li>
+              <li>What success looks like for you</li>
+            </ul>
+          </div>
+
+          <div class="flex justify-center w-full sm:w-5/12">
+            <div class="w-44 h-44 rounded-full bg-white border border-slate-200 shadow-sm flex items-center justify-center">
+              <img src="/undraw_talking-on-the-phone_lc9v.svg" class="w-34 h-34" />
+            </div>
+          </div>
+        </div>
+
+        <div class="w-full lg:w-10/12 flex flex-col sm:flex-row justify-between items-center gap-8 bg-slate-900/5 border border-slate-200 shadow-sm rounded-2xl px-6 md:px-12 py-10">
+          <div class="flex justify-center w-full sm:w-5/12">
+            <div class="w-44 h-44 rounded-full bg-white border border-slate-200 shadow-sm flex items-center justify-center">
+              <img src="/Group 267.svg" class="w-28 h-28" />
+            </div>
+          </div>
+
+          <div class="flex flex-col justify-center items-center md:items-start w-full md:w-7/12">
+            <p class="font-semibold text-xl md:text-3xl text-slate-900">
+              2. I Find What’s Holding You Back
+            </p>
+
+            <p class="text-slate-600 italic text-sm sm:text-base mt-2">
+              I review your site and identify what’s stopping visitors from becoming customers.
+            </p>
+
+            <ul class="list-disc list-inside text-slate-600 mt-6 text-sm md:text-lg flex flex-col gap-2">
+              <li>Clarity of your message and offer</li>
+              <li>How easy it is to contact you</li>
+              <li>Speed, structure, and user experience</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="w-full lg:w-10/12 flex flex-col-reverse sm:flex-row justify-between items-center gap-8 bg-slate-900/5 border border-slate-200 shadow-sm rounded-2xl px-6 md:px-12 py-10">
+          <div class="flex flex-col justify-center items-center md:items-start w-full md:w-7/12 lg:ml-12">
+            <p class="font-semibold text-xl md:text-3xl text-slate-900">
+              3. Your Website Gets Improved
+            </p>
+
+            <p class="text-slate-600 italic text-sm sm:text-base mt-2">
+              Changes are made to make your website clearer, faster, and more effective.
+            </p>
+
+            <ul class="list-disc list-inside text-slate-600 mt-6 text-sm md:text-lg flex flex-col gap-2">
+              <li>Better structure and layout</li>
+              <li>Stronger messaging and flow</li>
+              <li>Improved performance and usability</li>
+            </ul>
+          </div>
+
+          <div class="flex justify-center w-full sm:w-5/12">
+            <div class="w-44 h-44 rounded-full bg-white border border-slate-200 shadow-sm flex items-center justify-center">
+              <img src="/Group 268.svg" class="w-34 h-34" />
+            </div>
+          </div>
+        </div>
+
+        <div class="w-full lg:w-10/12 flex flex-col sm:flex-row justify-between items-center gap-8 bg-slate-900/5 border border-slate-200 shadow-sm rounded-2xl px-6 md:px-12 py-10">
+          <div class="flex justify-center w-full sm:w-5/12">
+            <div class="w-44 h-44 rounded-full bg-white border border-slate-200 shadow-sm flex items-center justify-center">
+              <img src="/Group 269.svg" class="w-28 h-28" />
+            </div>
+          </div>
+
+          <div class="flex flex-col justify-center items-center md:items-start w-full md:w-7/12">
+            <p class="font-semibold text-xl md:text-3xl text-slate-900">
+              4. More Inquiries Start Coming In
+            </p>
+
+            <p class="text-slate-600 italic text-sm sm:text-base mt-2">
+              Your website starts working as a system that attracts and converts visitors.
+            </p>
+
+            <ul class="list-disc list-inside text-slate-600 mt-6 text-sm md:text-lg flex flex-col gap-2">
+              <li>More people understand what you offer</li>
+              <li>More visitors take action</li>
+              <li>More qualified leads reach out</li>
+            </ul>
+          </div>
+
+        </div>
+
+      </div>
+
     </div>
   </div>
 

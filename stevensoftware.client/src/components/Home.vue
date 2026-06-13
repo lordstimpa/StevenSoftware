@@ -1,261 +1,341 @@
 <template>
-  <div class="relative w-full flex flex-col-reverse lg:flex-row justify-center items-center gap-10 py-10 px-4 overflow-hidden min-h-[600px]" style="height: calc(100vh - 76px);">
-
-    <video class="absolute inset-0 w-full h-full object-cover z-0" autoplay muted loop playsinline preload="auto">
-      <source src="/hero-bg.mp4" type="video/mp4" />
-    </video>
+  <div class="relative w-full flex flex-col-reverse lg:flex-row justify-center items-center gap-10 px-4 sm:px-6 py-16 lg:py-24 min-h-screen lg:min-h-[100vh] overflow-hidden">
+    <div class="absolute inset-0 bg-slate-950 z-0"></div>
+    <div class="absolute inset-0 z-0">
+      <video ref="heroVideo"
+             class="w-full h-full object-cover transition-[opacity,filter,transform] duration-[2000ms] ease-out"
+             :class="videoReady
+            ? 'opacity-100 blur-0 scale-100'
+            : 'opacity-0 blur-md scale-105'"
+             autoplay
+             muted
+             loop
+             playsinline
+             preload="auto"
+             @loadeddata="onVideoReady">
+        <source src="/hero-bg.mp4" type="video/mp4" />
+      </video>
+    </div>
 
     <div class="absolute inset-0 z-10 pointer-events-none">
-      <div class="absolute inset-0 bg-black/60"></div>
-      <div class="absolute inset-0 bg-gradient-to-r from-black via-transparent to-black"></div>
-      <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/40"></div>
+      <div class="absolute inset-0 bg-black/40"></div>
+      <div class="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/60"></div>
     </div>
-    <div class="relative z-20 flex flex-col-reverse lg:flex-row justify-center items-center w-full gap-10">
 
-      <div class="flex flex-col justify-center gap-10 lg:w-[550px] text-center lg:text-left">
-        <h1 class="text-left text-4xl sm:text-5xl lg:text-6xl font-bold text-white">
-          Steven Software
+    <div class="relative z-20 flex flex-col-reverse lg:flex-row justify-center items-center w-full gap-8 lg:gap-10">
+
+      <div class="flex flex-col justify-center gap-5 w-full lg:w-[650px]
+                text-center lg:text-left
+                bg-black/50 backdrop-blur-lg
+                border border-white/10
+                rounded-2xl p-5 sm:p-8 lg:p-10 shadow-2xl">
+
+        <h1 class="text-3xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight">
+          Turn Your Website Into a <span class="text-indigo-400">Lead Machine</span>
         </h1>
 
-        <div class="border-l-3 p-5 flex flex-col gap-10 border-white">
-          <div class="text-white space-y-2">
-            <p class="text-lg text-left sm:text-xl">“From Code to Deployment.”</p>
-            <p class="text-lg text-left sm:text-xl">Fullstack Web Dev with .Net, Vue, and more.</p>
+        <div class="flex flex-col gap-4">
+          <p class="text-base sm:text-lg lg:text-xl font-medium text-slate-100">
+            I help businesses turn their website into a consistent source of customers —
+            through better design, SEO, and conversion-focused improvements.
+          </p>
+
+          <p class="text-base sm:text-lg lg:text-xl text-slate-200">
+            If your site isn’t generating leads, it’s not working hard enough.
+          </p>
+
+          <div class="bg-white/5 border border-white/10 rounded-lg p-3 sm:p-4">
+            <p class="text-xs sm:text-sm lg:text-base text-slate-200 leading-relaxed">
+              ✔ Modern websites that build trust instantly<br />
+              ✔ Contact forms that actually get inquiries<br />
+              ✔ SEO improvements that bring organic traffic<br />
+              ✔ Performance upgrades for better rankings
+            </p>
           </div>
 
-          <div class="flex justify-end lg:justify-start">
-            <button @click="scrollToContact"
-                    class="text-lg cursor-pointer font-semibold text-white bg-gradient-to-r from-indigo-500 to-blue-500 hover:from-indigo-600 hover:to-blue-600 px-6 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 transition">
-              Contact Me
+          <div class="flex flex-col sm:flex-row gap-3 w-full">
+            <button @click="scrollToContact" class="w-full sm:flex-1 text-base sm:text-lg font-semibold text-white bg-indigo-600 hover:bg-indigo-700 px-5 py-3 rounded-md transition shadow-lg cursor-pointer">
+              Get More Leads
             </button>
+
+            <a href="mailto:steven.dalfall@gmail.com" class="w-full sm:flex-1 text-base sm:text-lg font-semibold text-white/90 border border-white/20 hover:bg-white/10 px-5 py-3 rounded-md transition cursor-pointer text-center">
+              Send a Quick Email
+            </a>
+
           </div>
+
+          <p class="text-slate-300 text-xs sm:text-sm italic">
+            No pressure — I’ll tell you what’s holding your site back.
+          </p>
         </div>
       </div>
-
-      <div class="flex justify-center lg:w-[550px] lg:justify-center lg:items-center">
-        <img src="/undraw_stars_5pgw.svg"
-             class="w-[300px] md:w-[400px] lg:w-[500px]"
-             alt="Hero Illustration" />
+      <div class="hidden lg:flex justify-center w-[550px]">
       </div>
+
     </div>
   </div>
 
-  <div
-    class="w-full flex flex-wrap justify-center items-center gap-6 py-10 px-6"
-    style="background: #141a2a"
-  >
+  <div class="w-full flex flex-wrap justify-center items-stretch gap-10 py-24 px-6 bg-slate-100">
+
     <div v-animate
-      class="border text-white border-indigo-900 w-full sm:w-[270px] h-[230px] flex flex-col justify-evenly p-6 rounded-md shadow-xl"
-      style="background: #1a1f31"
-    >
-      <p class="text-2xl font-bold">Web App Development</p>
-      <p class="text-sm text-gray-300">
-        I build modern web apps using tools tailored to your needs — responsive, reliable, and built
-        to scale.
+         class="border border-slate-200 w-full sm:w-[270px] flex flex-col justify-start p-7 rounded-md shadow-md bg-white hover:shadow-lg transition min-h-[260px]">
+
+      <p class="text-2xl font-bold text-slate-900 leading-tight">
+        Lead-Driven Web Development
+      </p>
+
+      <p class="text-sm text-slate-600 mt-2 leading-relaxed">
+        I build modern websites and web apps designed to do one thing: turn visitors into paying customers.
+        Fast, responsive, and conversion-focused from day one.
       </p>
     </div>
 
     <div v-animate
-      class="border text-white border-green-900 w-full sm:w-[270px] h-[230px] flex flex-col justify-evenly p-6 rounded-md shadow-xl"
-      style="background: #1a1f31"
-    >
-      <p class="text-2xl font-bold">Code Upgrades</p>
-      <p class="text-sm text-gray-300">
-        Upgrading or cleaning up legacy code? I can modernize, refactor, and maintain your existing
-        codebase with care.
+         class="border border-slate-200 w-full sm:w-[270px] flex flex-col justify-start p-7 rounded-md shadow-md bg-white hover:shadow-lg transition min-h-[260px]">
+
+      <p class="text-2xl font-bold text-slate-900 leading-tight">
+        Website Optimization & Upgrades
+      </p>
+
+      <p class="text-sm text-slate-600 mt-2 leading-relaxed">
+        If your site feels outdated or underperforming, I modernize it into a fast, credible system that builds trust and increases inquiries.
       </p>
     </div>
 
     <div v-animate
-      class="border text-white border-blue-900 w-full sm:w-[270px] h-[230px] flex flex-col justify-evenly p-6 rounded-md shadow-xl"
-      style="background: #1a1f31"
-    >
-      <p class="text-2xl font-bold">DevOps & Hosting</p>
-      <p class="text-sm text-gray-300">
-        Need hosting set up or CI/CD pipelines configured? I’ll get your project running smoothly
-        across different environments.
+         class="border border-slate-200 w-full sm:w-[270px] flex flex-col justify-start p-7 rounded-md shadow-md bg-white hover:shadow-lg transition min-h-[260px]">
+
+      <p class="text-2xl font-bold text-slate-900 leading-tight">
+        SEO & Performance Growth
+      </p>
+
+      <p class="text-sm text-slate-600 mt-2 leading-relaxed">
+        Get found on Google and load faster than competitors. I improve rankings, speed, and structure so more customers actually discover you.
       </p>
     </div>
 
     <div v-animate
-      class="border text-white border-yellow-900 w-full sm:w-[270px] h-[230px] flex flex-col justify-evenly p-6 rounded-md shadow-xl"
-      style="background: #1a1f31"
-    >
-      <p class="text-2xl font-bold">Custom Work</p>
-      <p class="text-sm text-gray-300">
-        From landing pages to domain setup or website fixes — I can help you get things working the
-        way they should.
+         class="border border-slate-200 w-full sm:w-[270px] flex flex-col justify-start p-7 rounded-md shadow-md bg-white hover:shadow-lg transition min-h-[260px]">
+
+      <p class="text-2xl font-bold text-slate-900 leading-tight">
+        Conversion & Contact Systems
       </p>
+
+      <p class="text-sm text-slate-600 mt-2 leading-relaxed">
+        I set up smart contact forms, landing pages, and funnels that remove friction and turn traffic into real business inquiries.
+      </p>
+    </div>
+
+  </div>
+
+  <div class="w-full flex flex-col justify-center py-28 px-6 bg-slate-50">
+
+    <div v-animate="'fade-up'"
+         class="w-full flex flex-col justify-center items-center gap-5 mb-20">
+
+      <p class="text-slate-900 text-4xl sm:text-5xl md:text-6xl font-bold text-center">
+        How it works
+      </p>
+
+      <p class="text-slate-600 text-center max-w-2xl text-lg">
+        A simple process to improve your website and turn it into a consistent source of leads.
+      </p>
+    </div>
+
+    <div class="flex flex-col md:flex-row justify-center items-stretch gap-10 md:gap-6">
+
+      <div v-animate="'fade-up'"
+           class="flex flex-col items-center text-center gap-3 w-full sm:w-[250px]">
+
+        <div class="w-44 h-44 rounded-full bg-white border border-slate-200 shadow-sm flex items-center justify-center">
+          <img src="/undraw_talking-on-the-phone_lc9v.svg" class="w-34 h-34" />
+        </div>
+
+        <p class="text-indigo-600 font-bold text-sm tracking-wider">STEP 01</p>
+
+        <p class="text-slate-900 text-xl font-semibold leading-tight">
+          You Tell Me What’s Going On
+        </p>
+
+        <p class="text-slate-600 text-sm leading-relaxed">
+          We look at your current website, goals, and what’s stopping you from getting more leads.
+        </p>
+      </div>
+
+      <div class="hidden md:flex items-center justify-center opacity-40">
+        <img src="/Arrow 2.svg" class="w-10 h-10" />
+      </div>
+
+      <div v-animate="'fade-up'"
+           class="flex flex-col items-center text-center gap-3 w-full sm:w-[250px]">
+
+        <div class="w-44 h-44 rounded-full bg-white border border-slate-200 shadow-sm flex items-center justify-center">
+          <img src="/Group 267.svg" class="w-28 h-28" />
+        </div>
+
+        <p class="text-indigo-600 font-bold text-sm tracking-wider">STEP 02</p>
+
+        <p class="text-slate-900 text-xl font-semibold leading-tight">
+          I Identify What’s Blocking Growth
+        </p>
+
+        <p class="text-slate-600 text-sm leading-relaxed">
+          I analyze your site, SEO, structure, and conversion flow to find what’s costing you customers.
+        </p>
+      </div>
+
+      <div class="hidden md:flex items-center justify-center opacity-40">
+        <img src="/Arrow 2.svg" class="w-10 h-10" />
+      </div>
+
+      <div v-animate="'fade-up'"
+           class="flex flex-col items-center text-center gap-3 w-full sm:w-[250px]">
+
+        <div class="w-44 h-44 rounded-full bg-white border border-slate-200 shadow-sm flex items-center justify-center">
+          <img src="/Group 268.svg" class="w-34 h-34" />
+        </div>
+
+        <p class="text-indigo-600 font-bold text-sm tracking-wider">STEP 03</p>
+
+        <p class="text-slate-900 text-xl font-semibold leading-tight">
+          Improvements Are Made
+        </p>
+
+        <p class="text-slate-600 text-sm leading-relaxed">
+          Your website gets upgraded with better design, structure, speed, and conversion flow.
+        </p>
+      </div>
+
+      <div class="hidden md:flex items-center justify-center opacity-40">
+        <img src="/Arrow 2.svg" class="w-10 h-10" />
+      </div>
+
+      <div v-animate="'fade-up'"
+           class="flex flex-col items-center text-center gap-3 w-full sm:w-[250px]">
+
+        <div class="w-44 h-44 rounded-full bg-white border border-slate-200 shadow-sm flex items-center justify-center">
+          <img src="/Group 269.svg" class="w-28 h-28" />
+        </div>
+
+        <p class="text-indigo-600 font-bold text-sm tracking-wider">STEP 04</p>
+
+        <p class="text-slate-900 text-xl font-semibold leading-tight">
+          More Leads Start Coming In
+        </p>
+
+        <p class="text-slate-600 text-sm leading-relaxed">
+          Your website becomes a system that attracts and converts visitors into real inquiries.
+        </p>
+      </div>
+
     </div>
   </div>
 
-  <div class="w-full flex flex-col justify-evenly py-16 px-6 bg-[#0b0f1a]">
-    <div v-animate="'fade-up'" class="w-full flex flex-col justify-center items-center gap-4 mb-12">
-      <p class="text-white text-4xl sm:text-5xl md:text-6xl font-bold text-center">
-        How does it work?
-      </p>
-      <p class="text-gray-300 text-center max-w-2xl">
-        A simple 4-step process to take your project from idea to live.
-      </p>
-    </div>
-
-    <div class="flex flex-col md:flex-row justify-center items-center gap-8 md:gap-6 flex-wrap">
-      <div v-animate="'fade-up'" class="flex flex-col items-center gap-3 w-full sm:w-[250px]">
-        <img src="/undraw_talking-on-the-phone_lc9v.svg" class="w-20 h-20 sm:w-28 sm:h-28" />
-        <p class="text-white text-xl text-center">1. Tell Me What You Need</p>
-        <p class="text-gray-300 italic text-center text-sm sm:text-base">
-          You reach out with your idea, problem, or project goals.
-        </p>
-      </div>
-
-      <div v-animate="'fade-up'" class="hidden md:flex items-center justify-center h-[140px]">
-        <img src="/Arrow 2.svg" class="w-12 h-12" />
-      </div>
-
-      <div v-animate="'fade-up'" class="flex flex-col items-center gap-3 w-full sm:w-[250px]">
-        <img src="/Group 267.svg" class="w-20 h-20 sm:w-28 sm:h-28" />
-        <p class="text-white text-xl text-center">2. Get a Custom Quote</p>
-        <p class="text-gray-300 italic text-center text-sm sm:text-base">
-          You’ll receive a clear scope, timeline, and price.
-        </p>
-      </div>
-
-      <div v-animate="'fade-up'" class="hidden md:flex items-center justify-center h-[140px]">
-        <img src="/Arrow 2.svg" class="w-12 h-12" />
-      </div>
-
-      <div v-animate="'fade-up'" class="flex flex-col items-center gap-3 w-full sm:w-[250px]">
-        <img src="/Group 268.svg" class="w-20 h-20 sm:w-28 sm:h-28" />
-        <p class="text-white text-xl text-center">3. Development Begins</p>
-        <p class="text-gray-300 italic text-center text-sm sm:text-base">
-          I get to work — keeping you updated along the way.
-        </p>
-      </div>
-
-      <div v-animate="'fade-up'" class="hidden md:flex items-center justify-center h-[140px]">
-        <img src="/Arrow 2.svg" class="w-12 h-12" />
-      </div>
-
-      <div v-animate="'fade-up'" class="flex flex-col items-center gap-3 w-full sm:w-[250px]">
-        <img src="/Group 269.svg" class="w-20 h-20 sm:w-28 sm:h-28" />
-        <p class="text-white text-xl text-center">4. Launch & Support</p>
-        <p class="text-gray-300 italic text-center text-sm sm:text-base">
-          Your project goes live — and I help you get it there.
-        </p>
-      </div>
-    </div>
-  </div>
-
-  <div class="w-full flex flex-col-reverse lg:flex-row justify-center items-center gap-10 lg:gap-20 py-16 px-6 bg-[#141a2a]">
+  <div class="w-full flex flex-col-reverse lg:flex-row justify-center items-center gap-12 lg:gap-20 py-28 px-6 bg-slate-100">
     <div v-animate="'fade-left'"
-      class="border text-white border-blue-900 w-full lg:w-[550px] flex flex-col rounded-md p-8 sm:p-10 gap-8 shadow-xl"
-      style="background: radial-gradient(50% 50% at 50% 50%, #1a1f31 0%, #141a2a 40%, #0b0f1a 100%)"
-    >
-      <div class="flex flex-col gap-2">
-        <p class="text-white text-3xl sm:text-4xl md:text-5xl text-center font-bold">Who Is Steven?</p>
-        <p class="text-gray-400 text-sm sm:text-base italic text-center">
-          A bit about me, what I do, and why I love building software.
+         class="border border-slate-200 w-full lg:w-[550px] flex flex-col rounded-xl p-8 sm:p-10 gap-6 shadow-md bg-white">
+
+      <div class="flex flex-col gap-2 mb-4">
+        <p class="text-slate-900 text-3xl sm:text-4xl md:text-5xl text-center font-bold">
+          Why work with me?
+        </p>
+
+        <p class="text-slate-600 text-sm sm:text-base italic text-center">
+          A focused approach to turning websites into consistent sources of leads.
         </p>
       </div>
 
-      <div class="flex flex-col gap-3 text-gray-300 text-sm sm:text-base">
+      <div class="flex flex-col gap-4 text-slate-600 text-sm sm:text-base leading-relaxed">
+
         <p>
-          I’m Steven - a <strong class="text-white">fullstack developer</strong> with experience in
-          developing custom web projects from planning to production.
+          I help businesses improve their websites so they don’t just look good — they actually bring in customers.
         </p>
+
         <p>
-          <strong class="text-white">Steven Software</strong> is a solo side-project of mine where I
-          take on freelance work I care about - helping small teams or individuals with their
-          web-based apps!
+          My focus is simple: better structure, better performance, and better conversion rates.
         </p>
+
         <p>
-          By day, I’m a full-time developer at <strong class="text-white">Samvima</strong>, where I
-          work on a wide range of projects used across Sweden's public sector — including apps for
-          preschools (Förskoleappen) and vocational education (yhadmin).
+          The goal of every project is the same — <strong class="text-slate-900">more qualified inquiries through your website.</strong>
         </p>
-        <p>
-          Whether you need to modernize a legacy codebase, set up hosting from scratch, or bring a
-          new idea to life — I’d love to help.
-        </p>
+
       </div>
     </div>
 
     <div v-animate="'fade-left'" class="flex justify-center lg:justify-start w-full lg:w-auto">
-      <img 
-        src="/IMG_20240824_171927816_HDR_2.jpg"
-        class="w-40 h-40 sm:w-64 sm:h-64 lg:w-[500px] lg:h-[500px] rounded-full border-4 border-white shadow-xl object-cover"
-        alt="Steven"
-      />
+      <img src="/IMG_20240824_171927816_HDR_2.jpg"
+           class="w-44 h-44 sm:w-64 sm:h-64 lg:w-[500px] lg:h-[500px] rounded-full border-4 border-slate-200 shadow-md object-cover"
+           alt="Steven" />
     </div>
   </div>
 
-  <div class="w-full flex flex-col justify-center gap-10 py-16 px-4 sm:px-6 lg:px-8 bg-[#1a1f31]">
-    <div v-animate="'fade-right'" class="w-full flex flex-col justify-center items-center gap-2 text-center">
-      <RouterLink
-        to="/blog"
-        class="text-white text-3xl sm:text-4xl lg:text-5xl font-bold max-w-[90%] sm:max-w-[800px] hover:text-indigo-200 transition"
-      >
-        Want to know more? Visit my blog!
+  <div class="w-full flex flex-col justify-center gap-12 py-24 px-4 sm:px-6 lg:px-8 bg-slate-50">
+
+    <div v-animate="'fade-right'" class="w-full flex flex-col justify-center items-center gap-3 text-center">
+
+      <RouterLink to="/blog" class="text-slate-900 text-3xl sm:text-4xl lg:text-5xl font-bold max-w-[90%] sm:max-w-[1000px] hover:text-indigo-500 transition">
+        Insights on building better websites & getting more customers
       </RouterLink>
-      <p class="text-gray-400 italic text-sm sm:text-base max-w-[700px]">
-        Latest updates from my very own blog, feel free to visit to get the latest from me!
+
+      <p class="text-slate-600 italic text-sm sm:text-base max-w-[750px]">
+        Practical updates on web development, SEO, and improving conversion rates — based on real client work.
       </p>
     </div>
 
-    <div v-animate="'fade-right'" v-if="isLoadingBlogposts.value" class="w-full h-[200px] sm:h-[320px] flex justify-center items-center">
-      <div
-        class="w-12 h-12 sm:w-16 sm:h-16 border-8 border-indigo-500 border-t-transparent rounded-full animate-spin animate-[pulse_1.2s_ease-in-out_infinite]"
-      ></div>
+    <div v-animate="'fade-right'" v-if="isLoadingBlogposts.value" class="w-full h-[240px] sm:h-[340px] flex justify-center items-center">
+      <div class="w-12 h-12 sm:w-16 sm:h-16 border-8 border-indigo-500 border-t-transparent rounded-full animate-spin"></div>
     </div>
 
     <div v-animate="'fade-right'" v-else class="relative w-full flex justify-center items-center">
-      <button
-        v-if="blogPosts.length > 2"
-        @click="scrollLeft"
-        class="hidden sm:flex text-white hover:text-indigo-200 hover:cursor-pointer transition z-10 p-2"
-      >
+
+      <button v-if="blogPosts.length > 2"
+              @click="scrollLeft"
+              class="hidden sm:flex text-slate-900 hover:text-indigo-600 transition z-10 p-3 cursor-pointer">
         <ChevronLeft class="w-8 h-8 sm:w-12 sm:h-12" />
       </button>
 
-      <div v-animate="'fade-right'" 
-        ref="carousel"
-        :class="[
-          'flex overflow-x-auto sm:overflow-hidden scroll-smooth gap-5 w-full max-w-[1020px] px-2',
-          blogPosts.length < 2 ? 'justify-center' : 'justify-start',
-        ]"
+      <div ref="carousel"
+           :class="[
+           'flex overflow-x-auto sm:overflow-hidden scroll-smooth gap-6 w-full max-w-[1100px] px-2' ,
+           blogPosts.length < 2 ? 'justify-center' : 'justify-start',
+      ]"
+    >
+      <RouterLink
+        v-for="blog in blogPosts"
+        :key="blog.id"
+        :to="`/blog/${blog.id}`"
+        class="shadow-md border border-slate-200 shrink-0 w-[85%] sm:w-[420px] lg:w-[520px]
+               h-[260px] sm:h-[340px]
+               flex flex-col justify-between
+               p-6 sm:p-8 rounded-lg
+               bg-white hover:shadow-xl hover:brightness-105 transition"
       >
-        <RouterLink
-          :to="`/blog/${blog.id}`"
-          v-for="blog in blogPosts"
-          :key="blog.id"
-          class="shrink-0 w-[85%] sm:w-[400px] lg:w-[500px] h-[250px] sm:h-[320px] border border-blue-900 text-white flex flex-col justify-between p-6 sm:p-8 rounded-md hover:cursor-pointer hover:brightness-110 transition"
-          style="
-            background: radial-gradient(50% 50% at 50% 50%, #1a1f31 0%, #141a2a 40%, #0b0f1a 100%);
-          "
-        >
-          <div>
-            <p class="text-xl sm:text-2xl font-bold pb-2">{{ blog.title }}</p>
-            <p class="text-xs text-gray-400">{{ formatDateTime(blog.createdAt) }}</p>
-          </div>
-          <div class="prose prose-invert mt-4 text-sm line-clamp-3">
-            {{ blog.summary }}
-          </div>
-          <RouterLink
-            :to="`/blog/${blog.id}`"
-            class="mt-auto self-end text-sm font-semibold hover:text-indigo-200 transition hover:underline"
-          >
-            Read more..
-          </RouterLink>
-        </RouterLink>
-      </div>
+        <div>
+          <p class="text-xl sm:text-2xl font-bold pb-2 text-slate-900">
+            {{ blog.title }}
+          </p>
 
-      <button
-        v-if="blogPosts.length > 2"
-        @click="scrollRight"
-        class="hidden sm:flex text-white hover:text-indigo-200 hover:cursor-pointer transition z-10 p-2"
-      >
+          <p class="text-xs text-slate-500">
+            {{ formatDateTime(blog.createdAt) }}
+          </p>
+        </div>
+
+        <div class="text-sm text-slate-600 line-clamp-3 mt-4">
+          {{ blog.summary }}
+        </div>
+
+        <div class="mt-4 text-sm font-semibold text-indigo-600 hover:underline">
+          Read more →
+        </div>
+      </RouterLink>
+    </div>
+
+      <button v-if="blogPosts.length > 2"
+              @click="scrollRight"
+              class="hidden sm:flex text-slate-900 hover:text-indigo-600 transition z-10 p-3 cursor-pointer">
         <ChevronRight class="w-8 h-8 sm:w-12 sm:h-12" />
       </button>
+
     </div>
   </div>
 
@@ -276,6 +356,11 @@
   const contactSection = ref(null);
   const carousel = ref(null);
   const cardWidth = ref(520);
+  const videoReady = ref(false);
+
+  const onVideoReady = () => {
+    videoReady.value = true;
+  };
 
   const getBlogs = async () => {
     isLoadingBlogposts.value = true;
@@ -327,9 +412,10 @@
 <style>
   [data-animate] {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translate3d(0, 30px, 0);
     transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
     will-change: transform, opacity;
+    contain: layout paint;
   }
 
   [data-animate].in-view {
