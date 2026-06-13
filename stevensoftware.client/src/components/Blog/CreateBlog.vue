@@ -1,10 +1,8 @@
 <template>
-  <div class="py-10 px-4 text-white flex flex-col items-center justify-center gap-8">
-    <div class="flex flex-col max-w-screen-lg w-full px-4 py-8 md:p-8 rounded-xl shadow-xl"
-      style="background: radial-gradient(50% 50% at 50% 50%, #202534 0%, #1a1f2e 40%, #141925 100%)"
-    >
-      <div class="flex justify-between mb-8 border-b border-slate-700 pb-4">
-        <h1 class="text-2xl md:text-4xl font-bold">Create new blog post</h1>
+  <div class="py-[76px] px-4 text-slate-900 flex flex-col items-center justify-center gap-8 bg-slate-100">
+    <div class="flex flex-col max-w-screen-lg w-full px-4 py-10 mt-6 md:p-8 rounded-xl shadow-md bg-white border border-slate-200">
+      <div class="flex justify-between mb-8 border-b border-slate-200 pb-4">
+        <h1 class="text-2xl md:text-4xl font-bold text-slate-900">Create new blog post</h1>
       </div>
 
       <div class="bg-yellow-500/70 rounded-md p-4 mb-6 text-slate-900">
@@ -18,95 +16,83 @@
       </div>
 
       <form @submit.prevent="createBlogPost">
+
         <div class="flex flex-col mb-4">
-          <ImageUpload existingImage="" @uploaded="handleImageUpload" @removed="handleImageRemoval"/>
+          <ImageUpload existingImage="" @uploaded="handleImageUpload" @removed="handleImageRemoval" />
         </div>
 
         <div class="flex flex-col mb-4">
-          <label class="font-semibold text-slate-400 mb-2" for="blogTitle">Title*</label>
-          <input
-            v-model="title"
-            @blur="titleBlur"
-            :class="[
-              'w-full bg-slate-800 text-slate-100 px-4 py-2 rounded-md focus:outline-none focus:ring-2',
-              titleError ? 'border-red-500 ring-red-500' : 'border-slate-700 focus:ring-indigo-500',
+          <label class="font-semibold text-slate-600 mb-2" for="blogTitle">Title*</label>
+          <input v-model="title"
+                 @blur="titleBlur"
+                 :class="[
+              'w-full bg-white text-slate-900 px-4 py-2 rounded-md focus:outline-none focus:ring-2 border',
+              titleError ? 'border-red-500 ring-red-500' : 'border-slate-200 focus:ring-slate-400',
             ]"
-            type="text"
-            id="blogTitle"
-            placeholder="Blog title"
-          />
-          <p v-if="titleError" class="text-red-400 text-sm mt-1">{{ titleError }}</p>
+                 type="text"
+                 id="blogTitle"
+                 placeholder="Blog title" />
+          <p v-if="titleError" class="text-red-500 text-sm mt-1">{{ titleError }}</p>
         </div>
 
         <div class="flex flex-col mb-4">
-          <label class="font-semibold text-slate-400 mb-2" for="blogSummary">Summary*</label>
-          <textarea
-            v-model="summary"
-            @blur="summaryBlur"
-            rows="3"
-            :class="[
-              'w-full bg-slate-800 text-slate-100 px-4 py-2 rounded-md focus:outline-none focus:ring-2',
-              summaryError
-                ? 'border-red-500 ring-red-500'
-                : 'border-slate-700 focus:ring-indigo-500',
+          <label class="font-semibold text-slate-600 mb-2" for="blogSummary">Summary*</label>
+          <textarea v-model="summary"
+                    @blur="summaryBlur"
+                    rows="3"
+                    :class="[
+              'w-full bg-white text-slate-900 px-4 py-2 rounded-md focus:outline-none focus:ring-2 border',
+              summaryError ? 'border-red-500 ring-red-500' : 'border-slate-200 focus:ring-slate-400',
             ]"
-            type="text"
-            id="blogSummary"
-            placeholder="Blog summary"
-          ></textarea>
-          <p v-if="summaryError" class="text-red-400 text-sm mt-1">{{ summaryError }}</p>
+                    id="blogSummary"
+                    placeholder="Blog summary"></textarea>
+          <p v-if="summaryError" class="text-red-500 text-sm mt-1">{{ summaryError }}</p>
         </div>
 
         <div class="flex flex-col mb-4">
-          <label class="font-semibold text-slate-400 mb-2" for="blogContent">Content*</label>
-          <textarea
-            v-model="content"
-            @blur="contentBlur"
-            rows="15"
-            :class="[
-              'w-full bg-slate-800 text-slate-100 px-4 py-2 rounded-md focus:outline-none focus:ring-2',
-              contentError
-                ? 'border-red-500 ring-red-500'
-                : 'border-slate-700 focus:ring-indigo-500',
+          <label class="font-semibold text-slate-600 mb-2" for="blogContent">Content*</label>
+          <textarea v-model="content"
+                    @blur="contentBlur"
+                    rows="15"
+                    :class="[
+              'w-full bg-white text-slate-900 px-4 py-2 rounded-md focus:outline-none focus:ring-2 border',
+              contentError ? 'border-red-500 ring-red-500' : 'border-slate-200 focus:ring-slate-400',
             ]"
-            id="blogContent"
-            placeholder="Blog content"
-          ></textarea>
-          <p v-if="contentError" class="text-red-400 text-sm mt-1">{{ contentError }}</p>
+                    id="blogContent"
+                    placeholder="Blog content"></textarea>
+          <p v-if="contentError" class="text-red-500 text-sm mt-1">{{ contentError }}</p>
         </div>
 
-        <div class="flex justify-between pt-8 mt-8 border-slate-700 border-t">
-          <RouterLink
-            to="/blog"
-            class="text-lg cursor-pointer font-semibold text-white bg-slate-700 hover:bg-slate-600 px-5 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-slate-500 transition"
-          >
+        <div class="flex justify-between pt-8 mt-8 border-t border-slate-200">
+          <RouterLink to="/blog"
+                      class="text-lg font-semibold text-white bg-slate-700 hover:bg-slate-600 px-5 py-2 rounded-md transition">
             Back
           </RouterLink>
 
           <button type="submit"
-            class="text-lg cursor-pointer font-semibold text-white bg-gradient-to-r from-indigo-500 to-blue-500 hover:from-indigo-600 hover:to-blue-600 px-5 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
-          >
+                  class="text-lg font-semibold text-white bg-indigo-600 hover:bg-indigo-700 px-5 py-2 rounded-md transition">
             Save
           </button>
         </div>
       </form>
     </div>
 
-    <div class="flex flex-col max-w-screen-lg w-full px-4 py-8 md:p-8 rounded-xl shadow-xl"
-      style="background: radial-gradient(50% 50% at 50% 50%, #202534 0%, #1a1f2e 40%, #141925 100%)"
-    >
-      <div class="flex justify-between mb-8 border-b border-slate-700 pb-4">
-        <h1 class="text-2xl md:text-4xl font-bold">Preview of blog post</h1>
+    <div class="flex flex-col max-w-screen-lg w-full px-4 py-8 md:p-8 rounded-xl shadow-md bg-white border border-slate-200">
+      <div class="flex justify-between mb-8 border-b border-slate-200 pb-4">
+        <h1 class="text-2xl md:text-4xl font-bold text-slate-900">Preview of blog post</h1>
       </div>
 
       <div class="mb-4">
-        <div class="mb-2 text-2xl md:text-4xl font-bold text-white whitespace-pre-line">{{ title ?? '' }}</div>
+        <div class="mb-2 text-2xl md:text-4xl font-bold text-slate-900 whitespace-pre-line">
+          {{ title ?? '' }}
+        </div>
       </div>
 
       <div>
-        <div class="prose prose-invert max-w-none" v-html="renderedContent"></div>
+        <div class="prose max-w-none prose-slate" v-html="renderedContent"></div>
       </div>
     </div>
+
   </div>
 </template>
 

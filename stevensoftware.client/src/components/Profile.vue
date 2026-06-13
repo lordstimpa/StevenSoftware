@@ -1,153 +1,143 @@
 <template>
-  <div class="flex-1 flex justify-center items-center mb-30 text-white py-10 px-4">
-    <div class="flex flex-col justify-center px-4 py-8 md:p-8 rounded-xl shadow-xl max-w-screen-lg w-full"
-      style="background: radial-gradient(50% 50% at 50% 50%, #202534 0%, #1a1f2e 40%, #141925 100%)"
-    >
-      <div class="mb-8 border-b border-slate-700 pb-4">
-        <h1 class="text-2xl md:text-4xl font-bold">
+  <div class="flex-1 flex justify-center items-center mb-30 py-10 px-4 bg-slate-100 text-slate-900">
+    <div class="flex flex-col justify-center px-4 py-8 md:p-8 rounded-xl shadow-md max-w-screen-lg w-full bg-white border border-slate-200">
+
+      <div class="mb-8 border-b border-slate-200 pb-4">
+        <h1 class="text-2xl md:text-4xl font-bold text-slate-900">
           <span v-if="!isEditingPassword">Profile</span>
           <span v-else>Edit Password</span>
         </h1>
       </div>
 
       <form @submit="updateUser" v-if="!isEditingPassword" class="flex flex-col gap-10">
+
         <div class="flex flex-col md:flex-row gap-10">
           <div class="flex flex-col w-full">
-            <label class="font-semibold text-slate-400 mb-1" for="firstName">First name</label>
-            <input
-              class="bg-slate-800 text-slate-100 px-4 py-2 border border-slate-700 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
-              type="text"
-              id="firstName"
-              v-model="user.firstName"
-              placeholder="John"
-            />
+            <label class="font-semibold text-slate-600 mb-1" for="firstName">First name</label>
+            <input class="bg-white text-slate-900 px-4 py-2 border border-slate-200 rounded-md focus:outline-none focus:ring-2 focus:ring-slate-400"
+                   type="text"
+                   id="firstName"
+                   v-model="user.firstName"
+                   placeholder="John" />
           </div>
 
           <div class="flex flex-col w-full">
-            <label class="font-semibold text-slate-400 mb-1" for="lastName">Last name</label>
-            <input
-              class="bg-slate-800 text-slate-100 px-4 py-2 border border-slate-700 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
-              type="text"
-              id="lastName"
-              v-model="user.lastName"
-              placeholder="Doe"
-            />
+            <label class="font-semibold text-slate-600 mb-1" for="lastName">Last name</label>
+            <input class="bg-white text-slate-900 px-4 py-2 border border-slate-200 rounded-md focus:outline-none focus:ring-2 focus:ring-slate-400"
+                   type="text"
+                   id="lastName"
+                   v-model="user.lastName"
+                   placeholder="Doe" />
           </div>
         </div>
 
         <div class="flex flex-col gap-10">
-          <div class="flex flex-row justify-between pb-10 border-b border-slate-700 gap-10">
+
+          <div class="flex flex-row justify-between pb-10 border-b border-slate-200 gap-10">
+
             <div class="flex flex-col w-full">
-              <label class="font-semibold text-slate-400 mb-1">Email</label>
-              <p v-if="!isEditingEmail" class="font-semibold">{{ user.email }}</p>
-              <input
-                v-if="isEditingEmail"
-                type="text"
-                class="w-full bg-slate-800 text-slate-100 px-4 py-2 border border-slate-700 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                v-model="user.email"
-                placeholder="email@hotmail.com"
-              />
+              <label class="font-semibold text-slate-600 mb-1">Email</label>
+
+              <p v-if="!isEditingEmail" class="font-semibold text-slate-900">
+                {{ user.email }}
+              </p>
+
+              <input v-if="isEditingEmail"
+                     type="text"
+                     class="w-full bg-white text-slate-900 px-4 py-2 border border-slate-200 rounded-md focus:outline-none focus:ring-2 focus:ring-slate-400"
+                     v-model="user.email"
+                     placeholder="email@hotmail.com" />
             </div>
 
             <div class="flex justify-end w-full items-end">
-              <button
-                type="button"
-                @click="toggleChangeEmail"
-                class="p-2 cursor-pointer text-indigo-300 text hover:text-indigo-200 transition hover:underline"
-              >
+              <button type="button"
+                      @click="toggleChangeEmail"
+                      class="p-2 cursor-pointer text-indigo-500 hover:text-slate-700 transition hover:underline">
                 <span v-if="!isEditingEmail">Change email</span>
                 <span v-else>Back</span>
               </button>
             </div>
+
           </div>
 
           <div class="flex flex-row justify-between items-end">
+
             <div>
-              <p class="font-semibold text-slate-400 mb-1">Password</p>
-              <p class="font-semibold">••••••••</p>
+              <p class="font-semibold text-slate-600 mb-1">Password</p>
+              <p class="font-semibold text-slate-900">••••••••</p>
             </div>
-            <button
-              type="button"
-              @click="toggleChangePassword"
-              class="p-2 cursor-pointer text-indigo-300 hover:text-indigo-200 transition hover:underline"
-            >
+
+            <button type="button"
+                    @click="toggleChangePassword"
+                    class="p-2 cursor-pointer text-indigo-500 hover:text-slate-700 transition hover:underline">
               Change password
             </button>
+
           </div>
+
         </div>
 
         <div class="flex justify-end">
-          <button
-            type="submit"
-            class="text-lg cursor-pointer font-semibold text-white bg-gradient-to-r from-indigo-500 to-blue-500 hover:from-indigo-600 hover:to-blue-600 px-5 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
-          >
+          <button type="submit"
+                  class="text-lg font-semibold text-white bg-indigo-600 hover:bg-indigo-700 px-5 py-2 rounded-md transition cursor-pointer">
             Save
           </button>
         </div>
+
       </form>
 
       <form @submit="changePassword" v-if="isEditingPassword" class="flex flex-col gap-10">
+
         <div class="flex flex-col w-full">
-          <label class="font-semibold text-slate-400 mb-1" for="currentPassword"
-            >Current password</label
-          >
-          <input
-            class="bg-slate-800 text-slate-100 px-4 py-2 border border-slate-700 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
-            type="password"
-            id="currentPassword"
-            v-model="currentPassword"
-            placeholder="••••••••"
-          />
+          <label class="font-semibold text-slate-600 mb-1" for="currentPassword">Current password</label>
+          <input class="bg-white text-slate-900 px-4 py-2 border border-slate-200 rounded-md focus:outline-none focus:ring-2 focus:ring-slate-400"
+                 type="password"
+                 id="currentPassword"
+                 v-model="currentPassword"
+                 placeholder="••••••••" />
         </div>
 
         <div class="flex flex-col w-full">
-          <label class="font-semibold text-slate-400 mb-1" for="newPassword">New password</label>
-          <input
-            class="bg-slate-800 text-slate-100 px-4 py-2 border border-slate-700 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
-            type="password"
-            id="newPassword"
-            v-model="newPassword"
-            placeholder="••••••••"
-          />
+          <label class="font-semibold text-slate-600 mb-1" for="newPassword">New password</label>
+          <input class="bg-white text-slate-900 px-4 py-2 border border-slate-200 rounded-md focus:outline-none focus:ring-2 focus:ring-slate-400"
+                 type="password"
+                 id="newPassword"
+                 v-model="newPassword"
+                 placeholder="••••••••" />
         </div>
 
         <div class="flex flex-col w-full">
-          <label class="font-semibold text-slate-400 mb-1" for="confirmPassword"
-            >Confirm password</label
-          >
-          <input
-            class="bg-slate-800 text-slate-100 px-4 py-2 border border-slate-700 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
-            type="password"
-            id="confirmPassword"
-            v-model="confirmPassword"
-            placeholder="••••••••"
-          />
+          <label class="font-semibold text-slate-600 mb-1" for="confirmPassword">Confirm password</label>
+          <input class="bg-white text-slate-900 px-4 py-2 border border-slate-200 rounded-md focus:outline-none focus:ring-2 focus:ring-slate-400"
+                 type="password"
+                 id="confirmPassword"
+                 v-model="confirmPassword"
+                 placeholder="••••••••" />
         </div>
 
         <div class="flex justify-between w-full">
-          <button
-            type="button"
-            @click="toggleChangePassword"
-            class="text-lg cursor-pointer font-semibold text-white bg-slate-700 hover:bg-slate-600 px-5 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-slate-500 transition"
-          >
+
+          <button type="button"
+                  @click="toggleChangePassword"
+                  class="text-lg font-semibold text-white bg-slate-700 hover:bg-slate-600 px-5 py-2 rounded-md transition">
             Back
           </button>
-          <button
-            type="submit"
-            class="text-lg cursor-pointer font-semibold text-white bg-gradient-to-r from-indigo-500 to-blue-500 hover:from-indigo-600 hover:to-blue-600 px-5 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
-          >
+
+          <button type="submit"
+                  class="text-lg font-semibold text-white bg-indigo-600 hover:bg-indigo-700 px-5 py-2 rounded-md transition">
             Save
           </button>
+
         </div>
+
       </form>
+
     </div>
   </div>
 
-  <Toast
-    :message="toastMessage"
-    v-model:visible="displayToast"
-    @update:visible="displayToast = $event"
-  />
+  <Toast :message="toastMessage"
+         v-model:visible="displayToast"
+         @update:visible="displayToast = $event" />
 </template>
 
 <script setup>
