@@ -99,7 +99,7 @@
       return;
     }
 
-    const response = await post(`${import.meta.env.VITE_API_URL}/account/login`, {
+    const response = await post(`${import.meta.env.VITE_API_URL}/api/account/login`, {
       email: email.value,
       password: password.value,
       recaptchaToken: captchaToken,

@@ -44,9 +44,6 @@
         <div class="hidden md:flex flex-col gap-6 w-3/10 h-full relative pl-8">
           <CircleDot class="absolute top-0 translate-y-[4px] -left-2 w-4 h-4 text-slate-400" />
           <p class="font-medium">{{ formatDateTime(blogPost.createdAt) }}</p>
-          <p class="text-slate-400 text-sm w-auto self-start border-slate-700 border p-2 rounded-sm">
-            {{ blogPost.author.firstName }}
-          </p>
         </div>
 
         <div class="w-full md:w-7/10 h-full rounded-sm">
@@ -111,7 +108,7 @@
     isLoadingBlogposts.value = true;
     const token = localStorage.getItem('jwt');
     const response = await get(
-      `${import.meta.env.VITE_API_URL}/blog/getblogposts?pageNumber=${pageNum ?? currentPageNumber.value}`,
+      `${import.meta.env.VITE_API_URL}/api/blog/getblogposts?pageNumber=${pageNum ?? currentPageNumber.value}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -120,11 +117,11 @@
     );
 
     if (response) {
-      blogPosts.value = response.data.blogPosts;
-      currentPageNumber.value = response.data.currentPage;
+      blogPosts.value = response.blogPosts;
+      currentPageNumber.value = pageNum ?? currentPageNumber.value;
 
-      totalBlogPosts.value = response.data.totalCount;
-      totalPages.value = totalBlogPosts.value === 0 ? 1 : Math.ceil(totalBlogPosts.value / 10);
+      totalBlogPosts.value = response.totalCount;
+      totalPages.value = Math.ceil(totalBlogPosts.value / 10);
     }
     isLoadingBlogposts.value = false;
   };

@@ -134,7 +134,7 @@
       return;
     }
 
-    const response = await post(`${import.meta.env.VITE_API_URL}/mail/sendmail`, {
+    const response = await post(`${import.meta.env.VITE_API_URL}/api/mail/sendmail`, {
       firstName: values.firstName,
       lastName: values.lastName ?? '',
       email: values.email,

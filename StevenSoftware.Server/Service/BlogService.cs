@@ -3,6 +3,7 @@ using StevenSoftware.Server.Database;
 using StevenSoftware.Server.Helper;
 using StevenSoftware.Server.Models;
 using StevenSoftware.Server.Models.Dto;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace StevenSoftware.Server.Service
 {
@@ -10,28 +11,35 @@ namespace StevenSoftware.Server.Service
     {
         private readonly ApplicationDbContext _dbContext;
         private readonly MediaService _mediaService;
+        private readonly IMemoryCache _cache;
         private readonly ILogger<BlogService> _logger;
 
-        public BlogService(ApplicationDbContext dbContext, MediaService mediaService, ILogger<BlogService> logger)
+        public BlogService(ApplicationDbContext dbContext, MediaService mediaService, IMemoryCache cache, ILogger<BlogService> logger)
         {
             _dbContext = dbContext;
             _mediaService = mediaService;
+            _cache = cache;
             _logger = logger;
         }
 
+        private const string BlogListCacheKey = "blogposts_list";
+        private const string BlogPostCacheKeyPrefix = "blogpost_";
+
         public async Task<ServiceResult<BlogPostGetDto>> GetBlogPostById(int blogPostId, CancellationToken cancellationToken)
         {
+            var cacheKey = $"{BlogPostCacheKeyPrefix}{blogPostId}";
+
+            if (_cache.TryGetValue(cacheKey, out BlogPostGetDto cached))
+                return ServiceResult<BlogPostGetDto>.Ok(cached, "Fetched from cache.");
+
             var blogPost = await _dbContext.BlogPosts
                 .Include(x => x.Author)
                 .FirstOrDefaultAsync(x => x.Id == blogPostId, cancellationToken);
 
             if (blogPost == null)
-            {
-                _logger.LogWarning("Blog post with ID {BlogPostId} not found", blogPostId);
                 return ServiceResult<BlogPostGetDto>.Fail("Blog post could not be found.");
-            }
 
-            var blogPostGetDto = new BlogPostGetDto()
+            var dto = new BlogPostGetDto
             {
                 Id = blogPost.Id,
                 Title = blogPost.Title,
@@ -46,7 +54,9 @@ namespace StevenSoftware.Server.Service
                 }
             };
 
-            return ServiceResult<BlogPostGetDto>.Ok(blogPostGetDto, "Successfully fetched blog post.");
+            _cache.Set(cacheKey, dto, TimeSpan.FromMinutes(10));
+
+            return ServiceResult<BlogPostGetDto>.Ok(dto, "Fetched from DB.");
         }
 
         public async Task<BlogPost?> GetBlogPostModelById(int blogPostId, CancellationToken cancellationToken)
@@ -59,25 +69,22 @@ namespace StevenSoftware.Server.Service
 
         public async Task<ServiceResult<BlogPostGetListDto>> GetBlogPosts(int pageNumber, CancellationToken cancellationToken)
         {
+            var cacheKey = $"{BlogListCacheKey}_page_{pageNumber}";
+
+            if (_cache.TryGetValue(cacheKey, out BlogPostGetListDto cached))
+                return ServiceResult<BlogPostGetListDto>.Ok(cached, "Fetched from cache.");
+
             var totalCount = await _dbContext.BlogPosts.CountAsync(cancellationToken);
+
             if (totalCount <= 0)
-            {
-                _logger.LogWarning("No blog posts found");
                 return ServiceResult<BlogPostGetListDto>.Fail("Blog posts could not be found.");
-            }
 
             var blogPosts = await _dbContext.BlogPosts
                 .Include(x => x.Author)
                 .OrderByDescending(x => x.CreatedAt)
-                .Skip((pageNumber -1) * 10)
+                .Skip((pageNumber - 1) * 10)
                 .Take(10)
                 .ToListAsync(cancellationToken);
-
-            if (blogPosts == null)
-            {
-                _logger.LogWarning("Blog posts could not be found on page {PageNumber}", pageNumber);
-                return ServiceResult<BlogPostGetListDto>.Fail("Blog posts could not be found.");
-            }
 
             var blogPostDtos = blogPosts.Select(post => new BlogPostGetDto
             {
@@ -94,14 +101,16 @@ namespace StevenSoftware.Server.Service
                 }
             }).ToList();
 
-            var blogPostGetListDto = new BlogPostGetListDto
+            var result = new BlogPostGetListDto
             {
                 BlogPosts = blogPostDtos,
                 TotalCount = totalCount,
                 CurrentPage = pageNumber,
             };
 
-            return ServiceResult<BlogPostGetListDto>.Ok(blogPostGetListDto, "Successfully fetched blog posts.");
+            _cache.Set(cacheKey, result, TimeSpan.FromMinutes(5));
+
+            return ServiceResult<BlogPostGetListDto>.Ok(result, "Fetched from DB.");
         }
 
         public async Task<ServiceResult<BlogPostGetDto>> UpdateBlogPost(BlogPostUpdateDto blogPostDto, string userId, CancellationToken cancellationToken)
@@ -125,6 +134,7 @@ namespace StevenSoftware.Server.Service
 
                 _dbContext.Update(existingBlogPost);
                 await _dbContext.SaveChangesAsync(cancellationToken);
+                InvalidateBlogCache(existingBlogPost.Id);
 
                 var blogPostGetDto = new BlogPostGetDto()
                 {
@@ -158,6 +168,7 @@ namespace StevenSoftware.Server.Service
 
                 _dbContext.BlogPosts.Add(newBlogPost);
                 await _dbContext.SaveChangesAsync(cancellationToken);
+                InvalidateBlogCache(newBlogPost.Id);
 
                 var blogPostGetDto = new BlogPostGetDto()
                 {
@@ -193,6 +204,7 @@ namespace StevenSoftware.Server.Service
 
             _dbContext.BlogPosts.Remove(blogPost);
             var affectedRow = await _dbContext.SaveChangesAsync(cancellationToken);
+            InvalidateBlogCache(blogPost.Id);
 
             if (affectedRow == 0)
             {
@@ -219,6 +231,19 @@ namespace StevenSoftware.Server.Service
             };
 
             return ServiceResult<BlogPostGetDto>.Ok(blogPostGetDto, "Successfully deleted blog post.");
+        }
+
+        private void InvalidateBlogCache(int? blogPostId = null)
+        {
+            for (int i = 1; i <= 50; i++)
+            {
+                _cache.Remove($"{BlogListCacheKey}_page_{i}");
+            }
+
+            if (blogPostId.HasValue)
+            {
+                _cache.Remove($"{BlogPostCacheKeyPrefix}{blogPostId}");
+            }
         }
     }
 }

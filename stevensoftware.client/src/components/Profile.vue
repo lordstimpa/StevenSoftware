@@ -187,7 +187,7 @@
 
     const token = localStorage.getItem('jwt');
     const response = await post(
-      `${import.meta.env.VITE_API_URL}/account/updateUser`,
+      `${import.meta.env.VITE_API_URL}/api/account/updateUser`,
       {
         firstName: user.value.firstName,
         lastName: user.value.lastName,
@@ -213,7 +213,7 @@
     if (newPassword.value === confirmPassword.value) {
       const token = localStorage.getItem('jwt');
       const response = await post(
-        `${import.meta.env.VITE_API_URL}/account/updateuserpassword`,
+        `${import.meta.env.VITE_API_URL}/api/account/updateuserpassword`,
         {
           currentPassword: currentPassword.value,
           newPassword: newPassword.value,

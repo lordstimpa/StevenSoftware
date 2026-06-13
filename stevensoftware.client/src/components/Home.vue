@@ -1,34 +1,42 @@
 <template>
-  <div
-    class="w-full flex flex-col-reverse lg:flex-row justify-center items-center h-auto lg:h-[920px] gap-10 lg:gap-10 py-10 px-4"
-    style="background: radial-gradient(50% 50% at 50% 50%, #1a1f31 0%, #141a2a 40%, #0b0f1a 100%)"
-  >
-    <div class="flex flex-col justify-center gap-10 lg:w-[550px] text-center lg:text-left">
-      <h1 class="text-left text-4xl sm:text-5xl lg:text-6xl font-bold text-white">
-        Steven Software
-      </h1>
-      <div class="border-l-3 p-5 flex flex-col gap-10 border-white">
-        <div class="text-white space-y-2">
-          <p class="text-lg text-left sm:text-xl">“From Code to Deployment.”</p>
-          <p class="text-lg text-left sm:text-xl">Fullstack Web Dev with .Net, Vue, and more.</p>
-        </div>
-        <div class="flex justify-end lg:justify-start">
-          <button
-            @click="scrollToContact"
-            class="text-lg cursor-pointer font-semibold text-white bg-gradient-to-r from-indigo-500 to-blue-500 hover:from-indigo-600 hover:to-blue-600 px-6 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
-          >
-            Contact Me
-          </button>
+  <div class="relative w-full flex flex-col-reverse lg:flex-row justify-center items-center gap-10 py-10 px-4 overflow-hidden min-h-[600px]" style="height: calc(100vh - 76px);">
+
+    <video class="absolute inset-0 w-full h-full object-cover z-0" autoplay muted loop playsinline preload="auto">
+      <source src="/hero-bg.mp4" type="video/mp4" />
+    </video>
+
+    <div class="absolute inset-0 z-10 pointer-events-none">
+      <div class="absolute inset-0 bg-black/60"></div>
+      <div class="absolute inset-0 bg-gradient-to-r from-black via-transparent to-black"></div>
+      <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/40"></div>
+    </div>
+    <div class="relative z-20 flex flex-col-reverse lg:flex-row justify-center items-center w-full gap-10">
+
+      <div class="flex flex-col justify-center gap-10 lg:w-[550px] text-center lg:text-left">
+        <h1 class="text-left text-4xl sm:text-5xl lg:text-6xl font-bold text-white">
+          Steven Software
+        </h1>
+
+        <div class="border-l-3 p-5 flex flex-col gap-10 border-white">
+          <div class="text-white space-y-2">
+            <p class="text-lg text-left sm:text-xl">“From Code to Deployment.”</p>
+            <p class="text-lg text-left sm:text-xl">Fullstack Web Dev with .Net, Vue, and more.</p>
+          </div>
+
+          <div class="flex justify-end lg:justify-start">
+            <button @click="scrollToContact"
+                    class="text-lg cursor-pointer font-semibold text-white bg-gradient-to-r from-indigo-500 to-blue-500 hover:from-indigo-600 hover:to-blue-600 px-6 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 transition">
+              Contact Me
+            </button>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="flex justify-center lg:w-[550px] lg:justify-center lg:items-center">
-      <img
-        src="../assets/undraw_stars_5pgw.svg"
-        class="w-[300px] md:w-[400px] lg:w-[500px]"
-        alt="Hero Illustration"
-      />
+      <div class="flex justify-center lg:w-[550px] lg:justify-center lg:items-center">
+        <img src="/undraw_stars_5pgw.svg"
+             class="w-[300px] md:w-[400px] lg:w-[500px]"
+             alt="Hero Illustration" />
+      </div>
     </div>
   </div>
 
@@ -36,7 +44,7 @@
     class="w-full flex flex-wrap justify-center items-center gap-6 py-10 px-6"
     style="background: #141a2a"
   >
-    <div
+    <div v-animate
       class="border text-white border-indigo-900 w-full sm:w-[270px] h-[230px] flex flex-col justify-evenly p-6 rounded-md shadow-xl"
       style="background: #1a1f31"
     >
@@ -47,7 +55,7 @@
       </p>
     </div>
 
-    <div
+    <div v-animate
       class="border text-white border-green-900 w-full sm:w-[270px] h-[230px] flex flex-col justify-evenly p-6 rounded-md shadow-xl"
       style="background: #1a1f31"
     >
@@ -58,7 +66,8 @@
       </p>
     </div>
 
-    <div class="border text-white border-blue-900 w-full sm:w-[270px] h-[230px] flex flex-col justify-evenly p-6 rounded-md shadow-xl"
+    <div v-animate
+      class="border text-white border-blue-900 w-full sm:w-[270px] h-[230px] flex flex-col justify-evenly p-6 rounded-md shadow-xl"
       style="background: #1a1f31"
     >
       <p class="text-2xl font-bold">DevOps & Hosting</p>
@@ -68,7 +77,7 @@
       </p>
     </div>
 
-    <div
+    <div v-animate
       class="border text-white border-yellow-900 w-full sm:w-[270px] h-[230px] flex flex-col justify-evenly p-6 rounded-md shadow-xl"
       style="background: #1a1f31"
     >
@@ -81,7 +90,7 @@
   </div>
 
   <div class="w-full flex flex-col justify-evenly py-16 px-6 bg-[#0b0f1a]">
-    <div class="w-full flex flex-col justify-center items-center gap-4 mb-12">
+    <div v-animate="'fade-up'" class="w-full flex flex-col justify-center items-center gap-4 mb-12">
       <p class="text-white text-4xl sm:text-5xl md:text-6xl font-bold text-center">
         How does it work?
       </p>
@@ -91,44 +100,44 @@
     </div>
 
     <div class="flex flex-col md:flex-row justify-center items-center gap-8 md:gap-6 flex-wrap">
-      <div class="flex flex-col items-center gap-3 w-full sm:w-[250px]">
-        <img src="../assets/undraw_talking-on-the-phone_lc9v.svg" class="w-20 h-20 sm:w-28 sm:h-28" />
+      <div v-animate="'fade-up'" class="flex flex-col items-center gap-3 w-full sm:w-[250px]">
+        <img src="/undraw_talking-on-the-phone_lc9v.svg" class="w-20 h-20 sm:w-28 sm:h-28" />
         <p class="text-white text-xl text-center">1. Tell Me What You Need</p>
         <p class="text-gray-300 italic text-center text-sm sm:text-base">
           You reach out with your idea, problem, or project goals.
         </p>
       </div>
 
-      <div class="hidden md:flex items-center justify-center h-[140px]">
-        <img src="../assets/Arrow 2.svg" class="w-12 h-12" />
+      <div v-animate="'fade-up'" class="hidden md:flex items-center justify-center h-[140px]">
+        <img src="/Arrow 2.svg" class="w-12 h-12" />
       </div>
 
-      <div class="flex flex-col items-center gap-3 w-full sm:w-[250px]">
-        <img src="../assets/Group 267.svg" class="w-20 h-20 sm:w-28 sm:h-28" />
+      <div v-animate="'fade-up'" class="flex flex-col items-center gap-3 w-full sm:w-[250px]">
+        <img src="/Group 267.svg" class="w-20 h-20 sm:w-28 sm:h-28" />
         <p class="text-white text-xl text-center">2. Get a Custom Quote</p>
         <p class="text-gray-300 italic text-center text-sm sm:text-base">
           You’ll receive a clear scope, timeline, and price.
         </p>
       </div>
 
-      <div class="hidden md:flex items-center justify-center h-[140px]">
-        <img src="../assets/Arrow 2.svg" class="w-12 h-12" />
+      <div v-animate="'fade-up'" class="hidden md:flex items-center justify-center h-[140px]">
+        <img src="/Arrow 2.svg" class="w-12 h-12" />
       </div>
 
-      <div class="flex flex-col items-center gap-3 w-full sm:w-[250px]">
-        <img src="../assets/Group 268.svg" class="w-20 h-20 sm:w-28 sm:h-28" />
+      <div v-animate="'fade-up'" class="flex flex-col items-center gap-3 w-full sm:w-[250px]">
+        <img src="/Group 268.svg" class="w-20 h-20 sm:w-28 sm:h-28" />
         <p class="text-white text-xl text-center">3. Development Begins</p>
         <p class="text-gray-300 italic text-center text-sm sm:text-base">
           I get to work — keeping you updated along the way.
         </p>
       </div>
 
-      <div class="hidden md:flex items-center justify-center h-[140px]">
-        <img src="../assets/Arrow 2.svg" class="w-12 h-12" />
+      <div v-animate="'fade-up'" class="hidden md:flex items-center justify-center h-[140px]">
+        <img src="/Arrow 2.svg" class="w-12 h-12" />
       </div>
 
-      <div class="flex flex-col items-center gap-3 w-full sm:w-[250px]">
-        <img src="../assets/Group 269.svg" class="w-20 h-20 sm:w-28 sm:h-28" />
+      <div v-animate="'fade-up'" class="flex flex-col items-center gap-3 w-full sm:w-[250px]">
+        <img src="/Group 269.svg" class="w-20 h-20 sm:w-28 sm:h-28" />
         <p class="text-white text-xl text-center">4. Launch & Support</p>
         <p class="text-gray-300 italic text-center text-sm sm:text-base">
           Your project goes live — and I help you get it there.
@@ -138,7 +147,7 @@
   </div>
 
   <div class="w-full flex flex-col-reverse lg:flex-row justify-center items-center gap-10 lg:gap-20 py-16 px-6 bg-[#141a2a]">
-    <div
+    <div v-animate="'fade-left'"
       class="border text-white border-blue-900 w-full lg:w-[550px] flex flex-col rounded-md p-8 sm:p-10 gap-8 shadow-xl"
       style="background: radial-gradient(50% 50% at 50% 50%, #1a1f31 0%, #141a2a 40%, #0b0f1a 100%)"
     >
@@ -171,9 +180,9 @@
       </div>
     </div>
 
-    <div class="flex justify-center lg:justify-start w-full lg:w-auto">
-      <img
-        src="../assets/IMG_20240824_171927816_HDR_2.jpg"
+    <div v-animate="'fade-left'" class="flex justify-center lg:justify-start w-full lg:w-auto">
+      <img 
+        src="/IMG_20240824_171927816_HDR_2.jpg"
         class="w-40 h-40 sm:w-64 sm:h-64 lg:w-[500px] lg:h-[500px] rounded-full border-4 border-white shadow-xl object-cover"
         alt="Steven"
       />
@@ -181,7 +190,7 @@
   </div>
 
   <div class="w-full flex flex-col justify-center gap-10 py-16 px-4 sm:px-6 lg:px-8 bg-[#1a1f31]">
-    <div class="w-full flex flex-col justify-center items-center gap-2 text-center">
+    <div v-animate="'fade-right'" class="w-full flex flex-col justify-center items-center gap-2 text-center">
       <RouterLink
         to="/blog"
         class="text-white text-3xl sm:text-4xl lg:text-5xl font-bold max-w-[90%] sm:max-w-[800px] hover:text-indigo-200 transition"
@@ -193,13 +202,13 @@
       </p>
     </div>
 
-    <div v-if="isLoadingBlogposts.value" class="w-full h-[200px] sm:h-[320px] flex justify-center items-center">
+    <div v-animate="'fade-right'" v-if="isLoadingBlogposts.value" class="w-full h-[200px] sm:h-[320px] flex justify-center items-center">
       <div
         class="w-12 h-12 sm:w-16 sm:h-16 border-8 border-indigo-500 border-t-transparent rounded-full animate-spin animate-[pulse_1.2s_ease-in-out_infinite]"
       ></div>
     </div>
 
-    <div v-else class="relative w-full flex justify-center items-center">
+    <div v-animate="'fade-right'" v-else class="relative w-full flex justify-center items-center">
       <button
         v-if="blogPosts.length > 2"
         @click="scrollLeft"
@@ -208,7 +217,7 @@
         <ChevronLeft class="w-8 h-8 sm:w-12 sm:h-12" />
       </button>
 
-      <div
+      <div v-animate="'fade-right'" 
         ref="carousel"
         :class="[
           'flex overflow-x-auto sm:overflow-hidden scroll-smooth gap-5 w-full max-w-[1020px] px-2',
@@ -250,7 +259,7 @@
     </div>
   </div>
 
-  <div ref="contactSection">
+  <div v-animate="'fade-up'" ref="contactSection">
       <Contact />
   </div>
 </template>
@@ -272,7 +281,7 @@
     isLoadingBlogposts.value = true;
     const token = localStorage.getItem('jwt');
     const response = await get(
-      `${import.meta.env.VITE_API_URL}/blog/getblogposts?pageNumber=${1}`,
+      `${import.meta.env.VITE_API_URL}/api/blog/getblogposts?pageNumber=${1}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -281,7 +290,7 @@
     );
 
     if (response) {
-      blogPosts.value = response.data.blogPosts;
+      blogPosts.value = response.blogPosts;
     }
     isLoadingBlogposts.value = false;
   };
@@ -306,3 +315,49 @@
     getBlogs();
   });
 </script>
+
+<style>
+  [data-animate] {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: transform, opacity;
+  }
+
+  [data-animate].in-view {
+    opacity: 1;
+  }
+
+  [data-animate="fade-up"] {
+    transform: translateY(30px);
+  }
+
+  [data-animate="fade-up"].in-view {
+    transform: translateY(0);
+  }
+
+  [data-animate="fade-left"] {
+    transform: translateX(-40px);
+  }
+
+  [data-animate="fade-left"].in-view {
+    transform: translateX(0);
+  }
+
+  [data-animate="fade-right"] {
+    transform: translateX(40px);
+  }
+
+  [data-animate="fade-right"].in-view {
+    transform: translateX(0);
+  }
+
+  /* reduce motion support */
+  @media (prefers-reduced-motion: reduce) {
+    [data-animate] {
+      transition: none;
+      transform: none;
+      opacity: 1;
+    }
+  }
+</style>

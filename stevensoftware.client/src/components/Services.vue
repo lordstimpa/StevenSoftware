@@ -79,13 +79,13 @@
             </ul> 
           </div>
           <div class="flex justify-center w-full sm:w-5/12 mb-6 sm:mt-6 sm:mb-0 md:mt-0">
-            <img src="../assets/undraw_talking-on-the-phone_lc9v.svg" class="w-40 h-40 sm:w-50 sm:h-50" />
+            <img src="/undraw_talking-on-the-phone_lc9v.svg" class="w-40 h-40 sm:w-50 sm:h-50" />
           </div>
         </div>
 
         <div class="w-full lg:w-10/12 flex flex-col sm:flex-row justify-between md:gap-8 py-6 md:py-12 md:pl-8 md:p-12 rounded-tl-[200px] md:border-t md:border-l">
           <div class="flex justify-center w-full sm:w-5/12 mb-6 md:mb-0">
-            <img src="../assets/Group 267.svg" class="w-40 h-40 sm:w-50 sm:h-50" />
+            <img src="/Group 267.svg" class="w-40 h-40 sm:w-50 sm:h-50" />
           </div>
           <div class="flex flex-col justify-center items-center md:items-start w-full md:w-7/12 sm:ml-12">
             <p class="text-white font-semibold text-xl md:text-3xl">2. Get a Custom Quote</p>
@@ -114,13 +114,13 @@
             </ul>
           </div>
           <div class="flex justify-center w-full sm:w-5/12 mt-6 md:mt-0">
-            <img src="../assets/Group 268.svg" class="w-40 h-40 sm:w-50 sm:h-50" />
+            <img src="/Group 268.svg" class="w-40 h-40 sm:w-50 sm:h-50" />
           </div>
         </div>
 
         <div class="w-full lg:w-10/12 flex flex-col sm:flex-row justify-between md:gap-8 py-6 md:py-12 md:pl-8 md:p-12 rounded-tl-[200px] md:border-t md:border-l">
           <div class="flex justify-center w-full sm:w-5/12 mb-6 md:mb-0">
-            <img src="../assets/Group 269.svg" class="w-40 h-40 sm:w-50 sm:h-50" />
+            <img src="/Group 269.svg" class="w-40 h-40 sm:w-50 sm:h-50" />
           </div>
           <div class="flex flex-col justify-center items-center md:items-start w-full md:w-7/12 sm:ml-12">
             <p class="text-white font-semibold text-xl md:text-3xl">4. Launch & Support</p>

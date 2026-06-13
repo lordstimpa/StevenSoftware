@@ -1,7 +1,8 @@
-﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using StevenSoftware.Server.Models.Dto;
+using System.Threading.Tasks;
 using StevenSoftware.Server.Service;
+using StevenSoftware.Server.Models.Dto;
 using System.Security.Claims;
 
 namespace StevenSoftware.Server.Controllers
@@ -22,23 +23,21 @@ namespace StevenSoftware.Server.Controllers
         public async Task<IActionResult> GetBlogPost(int id, CancellationToken cancellationToken)
         {
             var result = await _blogService.GetBlogPostById(id, cancellationToken);
-
             if (!result.Success)
-                return BadRequest(new { result.Message });
+                return NotFound(result.Message);
 
-            return Ok(result);
+            return Ok(result.Data);
         }
 
         [AllowAnonymous]
         [HttpGet("getblogposts")]
-        public  async Task<IActionResult> GetBlogPosts(int pageNumber, CancellationToken cancellationToken)
+        public async Task<IActionResult> GetBlogPosts(int pageNumber, CancellationToken cancellationToken)
         {
             var result = await _blogService.GetBlogPosts(pageNumber, cancellationToken);
-
             if (!result.Success)
-                return BadRequest(new { result.Message });
+                return NotFound(result.Message);
 
-            return Ok(result);
+            return Ok(result.Data);
         }
 
         [Authorize]
@@ -47,14 +46,13 @@ namespace StevenSoftware.Server.Controllers
         {
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             if (string.IsNullOrEmpty(userId))
-                return BadRequest(new { Message = "User ID not found." });
+                return Unauthorized();
 
             var result = await _blogService.UpdateBlogPost(blogDto, userId, cancellationToken);
-
             if (!result.Success)
-                return BadRequest(new { result.Message });
+                return BadRequest(result.Message);
 
-            return Ok(result);
+            return Ok(result.Data);
         }
 
         [Authorize]
@@ -63,14 +61,13 @@ namespace StevenSoftware.Server.Controllers
         {
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             if (string.IsNullOrEmpty(userId))
-                return BadRequest(new { Message = "User ID not found." });
+                return Unauthorized();
 
             var result = await _blogService.DeleteBlogPost(id, userId, cancellationToken);
-
             if (!result.Success)
-                return BadRequest(new { result.Message });
+                return NotFound(result.Message);
 
-            return Ok(result);
+            return Ok(result.Data);
         }
     }
 }

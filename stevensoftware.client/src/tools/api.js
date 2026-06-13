@@ -3,9 +3,12 @@ import axios from 'axios';
 const get = async (url, config = {}) => {
   try {
     const response = await axios.get(url, config);
-    return response.status === 200 ? response.data : null;
+    return response.data; // Return only data
   } catch (error) {
     console.error(error);
+    if (error.response && error.response.data && error.response.data.message) {
+      return { error: true, message: error.response.data.message };
+    }
     return null;
   }
 };
@@ -13,24 +16,25 @@ const get = async (url, config = {}) => {
 const post = async (url, data = {}, config = {}) => {
   try {
     const response = await axios.post(url, data, config);
-    return response.data;
+    return response.data; // Return only data
   } catch (error) {
     console.error(error);
-
     if (error.response && error.response.data && error.response.data.message) {
       return { error: true, message: error.response.data.message };
     }
-
-    return { error: true, message: 'An unexpected error occurred.' };
+    return null;
   }
 };
 
 const _delete = async (url, config = {}) => {
   try {
     const response = await axios.delete(url, config);
-    return response.status === 200 ? response.data : null;
+    return response.data; // Return only data
   } catch (error) {
     console.error(error);
+    if (error.response && error.response.data && error.response.data.message) {
+      return { error: true, message: error.response.data.message };
+    }
     return null;
   }
 };

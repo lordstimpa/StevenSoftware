@@ -14,7 +14,7 @@ export const useUserStore = defineStore('user', {
       const token = localStorage.getItem('jwt');
 
       if (token) {
-        const response = await get(`${import.meta.env.VITE_API_URL}/account/getuser`, {
+        const response = await get(`${import.meta.env.VITE_API_URL}/api/account/getuser`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
