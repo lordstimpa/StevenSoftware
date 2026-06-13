@@ -106,9 +106,12 @@
 
   const getBlogs = async (pageNum) => {
     isLoadingBlogposts.value = true;
+
     const token = localStorage.getItem('jwt');
+
     const response = await get(
-      `${import.meta.env.VITE_API_URL}/api/blog/getblogposts?pageNumber=${pageNum ?? currentPageNumber.value}`,
+      `${import.meta.env.VITE_API_URL}/api/blog/getblogposts?pageNumber=${pageNum ?? currentPageNumber.value
+      }`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -116,13 +119,21 @@
       }
     );
 
-    if (response) {
-      blogPosts.value = response.blogPosts;
-      currentPageNumber.value = pageNum ?? currentPageNumber.value;
-
-      totalBlogPosts.value = response.totalCount;
-      totalPages.value = Math.ceil(totalBlogPosts.value / 10);
+    if (!response.success) {
+      blogPosts.value = [];
+      totalBlogPosts.value = 0;
+      totalPages.value = 1;
+      isLoadingBlogposts.value = false;
+      return;
     }
+
+    const data = response.data;
+
+    blogPosts.value = data.blogPosts ?? [];
+    totalBlogPosts.value = data.totalCount ?? 0;
+    totalPages.value = Math.max(1, Math.ceil(totalBlogPosts.value / 10));
+    currentPageNumber.value = pageNum ?? currentPageNumber.value;
+
     isLoadingBlogposts.value = false;
   };
 

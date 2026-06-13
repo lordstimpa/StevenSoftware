@@ -18,6 +18,18 @@
   const userStore = useUserStore();
 
   onMounted(() => {
-    userStore.fetchUser();
+    const token = localStorage.getItem('jwt');
+
+    if (token) {
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      const isExpired = payload.exp * 1000 < Date.now();
+
+      if (!isExpired) {
+        userStore.fetchUser();
+      } else {
+        localStorage.removeItem('jwt');
+        userStore.user = null;
+      }
+    }
   });
 </script>

@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
 using StevenSoftware.Server.Service;
 using StevenSoftware.Server.Models.Dto;
 using System.Security.Claims;
@@ -23,10 +22,7 @@ namespace StevenSoftware.Server.Controllers
         public async Task<IActionResult> GetBlogPost(int id, CancellationToken cancellationToken)
         {
             var result = await _blogService.GetBlogPostById(id, cancellationToken);
-            if (!result.Success)
-                return NotFound(result.Message);
-
-            return Ok(result.Data);
+            return Ok(result);
         }
 
         [AllowAnonymous]
@@ -34,10 +30,7 @@ namespace StevenSoftware.Server.Controllers
         public async Task<IActionResult> GetBlogPosts(int pageNumber, CancellationToken cancellationToken)
         {
             var result = await _blogService.GetBlogPosts(pageNumber, cancellationToken);
-            if (!result.Success)
-                return NotFound(result.Message);
-
-            return Ok(result.Data);
+            return Ok(result);
         }
 
         [Authorize]
@@ -52,7 +45,7 @@ namespace StevenSoftware.Server.Controllers
             if (!result.Success)
                 return BadRequest(result.Message);
 
-            return Ok(result.Data);
+            return Ok(result);
         }
 
         [Authorize]
@@ -67,7 +60,7 @@ namespace StevenSoftware.Server.Controllers
             if (!result.Success)
                 return NotFound(result.Message);
 
-            return Ok(result.Data);
+            return Ok(result);
         }
     }
 }

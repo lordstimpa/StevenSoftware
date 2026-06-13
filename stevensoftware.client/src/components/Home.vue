@@ -279,9 +279,11 @@
 
   const getBlogs = async () => {
     isLoadingBlogposts.value = true;
+
     const token = localStorage.getItem('jwt');
+
     const response = await get(
-      `${import.meta.env.VITE_API_URL}/api/blog/getblogposts?pageNumber=${1}`,
+      `${import.meta.env.VITE_API_URL}/api/blog/getblogposts?pageNumber=1`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -289,9 +291,15 @@
       }
     );
 
-    if (response) {
-      blogPosts.value = response.blogPosts;
+    if (!response?.success) {
+      blogPosts.value = [];
+      isLoadingBlogposts.value = false;
+      return;
     }
+
+    const data = response.data;
+
+    blogPosts.value = data.blogPosts ?? [];
     isLoadingBlogposts.value = false;
   };
 

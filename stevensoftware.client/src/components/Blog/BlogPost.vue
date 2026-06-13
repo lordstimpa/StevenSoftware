@@ -1,5 +1,5 @@
 <template>
-  <div v-if="blogPost" class="py-10 px-4 text-white flex justify-center w-full">
+  <div v-if="!isLoading && blogPost" class="py-10 px-4 text-white flex justify-center w-full">
     <div class="flex flex-col px-4 py-8 md:p-8 rounded-xl shadow-xl max-w-screen-xl w-full"
       style="background: radial-gradient(50% 50% at 50% 50%, #202534 0%, #1a1f2e 40%, #141925 100%)"
     >
@@ -282,16 +282,26 @@
 
   const getBlogPost = async () => {
     isLoading.value = true;
-    const token = localStorage.getItem('jwt');
-    const response = await get(`${import.meta.env.VITE_API_URL}/api/blog/getblogpost/${blogPostId}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
 
-    if (response) {
-      blogPost.value = response;
+    const token = localStorage.getItem('jwt');
+
+    const response = await get(
+      `${import.meta.env.VITE_API_URL}/api/blog/getblogpost/${blogPostId}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    if (!response?.success) {
+      blogPost.value = null;
+      isLoading.value = false;
+      return;
     }
+
+    blogPost.value = response.data;
+
     isLoading.value = false;
   };
 
