@@ -1,0 +1,211 @@
+{
+  "hero": {
+    "title_start": "Get a website that brings you more",
+    "title_highlight": "leads",
+    "subtitle": "I help businesses grow their online presence with simple, effective websites that turn visitors into customers.",
+    "problem": "Many websites get traffic but fail to turn visitors into real enquiries.",
+    "benefits": {
+      "1": "Attract more of the right visitors",
+      "2": "Turn visits into real leads",
+      "3": "Build a stronger online presence",
+      "4": "Easy to use on any device"
+    },
+    "cta_primary": "Get more leads",
+    "cta_secondary": "Let’s talk",
+    "disclaimer": "*Focused on growth, not just design"
+  },
+  "home": {
+    "lead_driven_web_development": "Lead-Driven Web Development",
+    "lead_driven_web_development_description": "I build modern websites and web apps designed to do one thing: turn visitors into paying customers. Fast, responsive, and conversion-focused from day one.",
+    "website_optimization_upgrades": "Website Optimization & Upgrades",
+    "website_optimization_upgrades_description": "If your site feels outdated or underperforming, I modernize it into a fast, credible system that builds trust and increases inquiries.",
+    "seo_performance_growth": "SEO & Performance Growth",
+    "seo_performance_growth_description": "Get found on Google and load faster than competitors. I improve rankings, speed, and structure so more customers actually discover you.",
+    "conversion_contact_systems": "Conversion & Contact Systems",
+    "conversion_contact_systems_description": "I set up smart contact forms, landing pages, and funnels that remove friction and turn traffic into real business inquiries.",
+    "how_it_works": "How it works",
+    "how_it_works_description": "A simple process to improve your website and turn it into a consistent source of leads.",
+    "step_01_title": "You tell me what’s going on",
+    "step_01_description": "We look at your current website, goals, and what’s stopping you from getting more leads.",
+    "step_02_title": "I identify what’s blocking growth",
+    "step_02_description": "I analyze your site, SEO, structure, and conversion flow to find what’s costing you customers.",
+    "step_03_title": "Improvements are made",
+    "step_03_description": "Your website gets upgraded with better design, structure, speed, and conversion flow.",
+    "step_04_title": "More leads start coming in",
+    "step_04_description": "Your website becomes a system that attracts and converts visitors into real inquiries.",
+    "why_work_with_me": "Why work with me?",
+    "why_work_with_me_description": "A focused approach to turning websites into consistent sources of leads.",
+    "why_work_with_me_paragraph_1": "I help businesses improve their websites so they don’t just look good — they actually bring in customers.",
+    "why_work_with_me_paragraph_2": "My focus is simple: better structure, better performance, and better conversion rates.",
+    "why_work_with_me_paragraph_3": "The goal of every project is the same — more qualified inquiries through your website.",
+    "insights_title": "Insights on building better websites & getting more customers",
+    "insights_description": "Practical updates on web development, SEO, and improving conversion rates — based on real client work."
+  },
+  "case_studies": {
+    "title": "Case Studies",
+    "description": "Explore Steven Software’s portfolio of web development projects, showcasing .NET, Vue, React, and more."
+  },
+  "case_study": {
+    "read": "Read",
+    "close": "Close",
+
+    "steven_1": "I created this website to serve as a homebase for myself where I can share my thoughts and ideas and also display my projects and professional work.",
+    "steven_2": "It is a complete full-stack project, featuring a proper deployment pipeline, hosting setup, APIs, web server, and custom domain.",
+    "steven_3": "Website is hosted on my very own homelab which I maintain and develop.",
+
+    "gaming_1": "This project was developed for a gaming association that I am a part of. Goal was to provide a platform for sharing tournaments, events, and news with members.",
+    "gaming_2": "Facebook API was used to fully integrate medias, posts and events into the website.",
+    "gaming_3": "Website was fully up and running on Azure but we lacked the funds to keep it online."
+  },
+  "contact": {
+    "title": "Let’s build something that actually brings you customers",
+    "subtitle": "Tell me what you’re working on — I’ll respond with clear next steps, ideas, and what it would take to improve your website’s performance.",
+
+    "benefit_1": "Free initial review",
+    "benefit_2": "No obligation",
+    "benefit_3": "Response within 1–2 days",
+
+    "first_name": "First name",
+    "last_name": "Last name",
+    "email": "Email",
+    "message_label": "What are you trying to improve?",
+
+    "first_name_placeholder": "John",
+    "last_name_placeholder": "Doe",
+    "message_placeholder": "Example: I want more leads from my website...",
+
+    "submit": "Get my free website review",
+    "sending": "Sending...",
+
+    "footer_note": "I’ll look at your website (or idea) and tell you exactly what’s blocking conversions."
+  },
+  "footer": {
+    "copyright": "© {year} Steven Software. Proudly hosted on my own server."
+  },
+  "services": {
+    "title": "Services",
+    "subtitle": "What I help you with",
+    "intro": "I take websites that aren’t performing and turn them into systems that bring in steady leads and customers.",
+
+    "hero_title": "Your website should bring you customers — not just exist",
+    "hero_description": "Most websites look fine, but don’t actually convert visitors into inquiries. I fix that by improving clarity, trust, speed, and the path from visit to contact.",
+
+    "focus_title": "What I focus on:",
+    "focus_1": "Make your offer instantly clear within seconds",
+    "focus_2": "Build trust through structure and modern design",
+    "focus_3": "Improve speed so people don’t leave early",
+    "focus_4": "Guide visitors naturally toward contacting you",
+
+    "card_1_title": "Fix Underperforming Websites",
+    "card_1_desc": "If your site feels outdated, confusing, or slow — I restructure and modernize it so it finally works for your business.",
+
+    "card_2_title": "Make Your Site Reliable & Fast",
+    "card_2_desc": "I handle the technical side so your website loads quickly, runs smoothly, and doesn’t break when you need it most.",
+
+    "card_3_title": "Small Improvements That Matter",
+    "card_3_desc": "From fixes to new pages, I help you improve your website step by step — without unnecessary complexity.",
+
+    "how_title": "How it works",
+    "how_description": "A simple process to understand your website and turn it into something that brings in more customers.",
+
+    "step_1_title": "1. You tell me what’s going on",
+    "step_1_sub": "We look at your current website, goals, and what feels like it’s not working.",
+    "step_1_b1": "What your website is supposed to achieve",
+    "step_1_b2": "Where you're currently losing visitors",
+    "step_1_b3": "What success looks like for you",
+
+    "step_2_title": "2. I find what’s holding you back",
+    "step_2_sub": "I review your site and identify what’s stopping visitors from becoming customers.",
+    "step_2_b1": "Clarity of your message and offer",
+    "step_2_b2": "How easy it is to contact you",
+    "step_2_b3": "Speed, structure, and user experience",
+
+    "step_3_title": "3. Your website gets improved",
+    "step_3_sub": "Changes are made to make your website clearer, faster, and more effective.",
+    "step_3_b1": "Better structure and layout",
+    "step_3_b2": "Stronger messaging and flow",
+    "step_3_b3": "Improved performance and usability",
+
+    "step_4_title": "4. More inquiries start coming in",
+    "step_4_sub": "Your website starts working as a system that attracts and converts visitors.",
+    "step_4_b1": "More people understand what you offer",
+    "step_4_b2": "More visitors take action",
+    "step_4_b3": "More qualified leads reach out"
+  },
+  "blog": {
+    "title": "Blog",
+    "total_posts": "Total blog posts",
+    "create_post": "Create Blog Post",
+    "no_posts": "Currently there are no published blog posts. Please check back later.",
+    "edit": "Edit",
+    "delete": "Delete",
+    "created": "Created",
+    "updated": "Updated",
+    "author_prefix": "Freelance Fullstack Developer —",
+    "cover_image": "Cover image",
+    "title_field": "Title*",
+    "summary_field": "Summary*",
+    "content_field": "Content*",
+    "title_placeholder": "Blog title",
+    "cancel": "Cancel",
+    "save": "Save",
+    "back_to_list": "Back to all blog posts",
+    "delete_title": "Delete blog post",
+    "delete_confirm": "Are you sure you want to delete the blog post?",
+    "close": "Close",
+    "markdown_hint_1": "Content supports Markdown syntax — like *italic*, **bold**, etc.",
+    "markdown_hint_2": "See a markdown",
+    "markdown_link": "cheat sheet"
+  },
+  "blogCard": {
+    "read": "Read",
+    "updated": "Updated"
+  },
+  "login": {
+    "title": "Login",
+    "email": "Email",
+    "emailPlaceholder": "email@hotmail.com",
+    "password": "Password",
+    "passwordPlaceholder": "••••••••",
+    "invalidEmail": "Please enter a valid email address.",
+    "captchaRequired": "Please complete the CAPTCHA.",
+    "button": "Login"
+  },
+  "navbar": {
+    "brand": "Steven Software",
+    "services": "Services",
+    "caseStudies": "Case Studies",
+    "blog": "Blog",
+    "call": "Call",
+    "email": "Email",
+    "home": "Home",
+    "logout": "Logout",
+    "logoutTitle": "Logout",
+    "logoutConfirm": "Are you sure you want to logout?",
+    "close": "Close"
+  },
+  "profile": {
+    "profileTitle": "Profile",
+    "editPasswordTitle": "Edit Password",
+
+    "firstName": "First name",
+    "lastName": "Last name",
+    "email": "Email",
+    "password": "Password",
+
+    "firstNamePlaceholder": "John",
+    "lastNamePlaceholder": "Doe",
+    "passwordPlaceholder": "••••••••",
+
+    "changeEmail": "Change email",
+    "changePassword": "Change password",
+    "back": "Back",
+    "save": "Save",
+
+    "currentPassword": "Current password",
+    "newPassword": "New password",
+    "confirmPassword": "Confirm password",
+
+    "errorConfirmPassword": "Could not confirm new password"
+  }
+}

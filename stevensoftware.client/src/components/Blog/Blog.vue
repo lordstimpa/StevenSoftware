@@ -4,9 +4,12 @@
 
       <div class="flex justify-between mb-8 border-b border-slate-200 pb-4">
         <div class="flex flex-col gap-2">
-          <h1 class="text-4xl md:text-5xl font-bold text-slate-900">Blog</h1>
+          <h1 class="text-4xl md:text-5xl font-bold text-slate-900">
+            {{ t('blog.title') }}
+          </h1>
+
           <p class="text-s md:text-md text-slate-500">
-            Total blogposts: {{ totalBlogPosts }}
+            {{ t('blog.total_posts') }}: {{ totalBlogPosts }}
           </p>
         </div>
 
@@ -15,14 +18,14 @@
                       to="/createblog"
                       class="flex items-center gap-1 text-lg cursor-pointer font-semibold text-white bg-indigo-600 hover:bg-indigo-700 px-5 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-slate-500 transition">
             <Plus class="w-5 h-5" />
-            Create Blog Post
+            {{ t('blog.create_post') }}
           </RouterLink>
         </div>
       </div>
 
       <div v-if="totalBlogPosts <= 0 && !isLoadingBlogposts">
         <div class="bg-yellow-400/60 rounded-md p-4 mb-6 text-slate-900">
-          <p>Currently there are no published blogposts. Come back in the nearest future.</p>
+          <p>{{ t('blog.no_posts') }}</p>
         </div>
       </div>
 
@@ -35,6 +38,7 @@
            class="relative flex gap-4 border-slate-200 md:border-l pt-8 pb-8">
         <div class="hidden md:flex flex-col gap-6 w-3/10 h-full relative pl-8">
           <CircleDot class="absolute top-0 translate-y-[4px] -left-2 w-4 h-4 text-slate-400" />
+
           <p class="font-medium text-slate-700">
             {{ formatDateTime(blogPost.createdAt) }}
           </p>
@@ -65,7 +69,7 @@
         <ChevronRight @click="currentPageNumber < totalPages && getBlogs(currentPageNumber + 1)"
                       class="w-8 h-8 hover:cursor-pointer text-slate-600 hover:text-slate-900 transition"
                       :class="{
-            'text-slate-300 cursor-default': currentPageNumber === totalPages || totalPages === 1,
+            'text-slate-300 cursor-default': currentPageNumber === totalPages || totalPages === 1
           }" />
       </div>
 
@@ -82,6 +86,9 @@
   import { storeToRefs } from 'pinia';
   import { Plus, CircleDot, ChevronLeft, ChevronRight } from 'lucide-vue-next';
   import { formatDateTime } from '../../tools/helpers.js';
+  import { useI18n } from 'vue-i18n'
+
+  const { t } = useI18n()
 
   const isLoadingBlogposts = ref(false);
   const blogPosts = ref([]);
@@ -130,27 +137,61 @@
   });
 
   useHead({
-    title: 'Blog | Steven Software',
+    title: 'Blog | Steven Software – Web Development That Drives Results',
+
     meta: [
       {
         name: 'description',
-        content: 'Read the latest blog posts about web development, .Net, Vue, DevOps, and custom software from Steven Software.',
+        content:
+          'Practical insights on Vue, .NET, web performance, SEO, and conversion optimization. Learn how to build fast websites that generate real business results.',
       },
-      { property: 'og:type', content: 'website' },
-      { property: 'og:title', content: 'Blog | Steven Software – Custom Software Development' },
+      {
+        name: 'keywords',
+        content:
+          'web development blog, vue js blog, .net developer blog, full stack development Sweden, webbutvecklare Sverige, web performance optimization, seo optimization Sweden, conversion optimization, modern web apps, frontend performance, backend development tips',
+      },
+      {
+        property: 'og:type',
+        content: 'website',
+      },
+      {
+        property: 'og:title',
+        content: 'Blog | Steven Software – Websites That Convert & Perform',
+      },
       {
         property: 'og:description',
-        content: 'Read the latest blog posts about web development, .Net, Vue, DevOps, and custom software from Steven Software.',
+        content:
+          'Insights on building fast, SEO-optimized websites with Vue and .NET that actually generate traffic, leads, and customers.',
       },
-      { property: 'og:url', content: 'https://stevensoftware.se/blog' },
-      { property: 'og:image', content: 'https://stevensoftware.se/2025-08-28.png' },
-      { name: 'twitter:card', content: 'summary_large_image' },
-      { name: 'twitter:title', content: 'Blog | Steven Software – Custom Software Development' },
+      {
+        property: 'og:url',
+        content: 'https://stevensoftware.se/blog',
+      },
+      {
+        property: 'og:image',
+        content: 'https://stevensoftware.se/2025-08-28.png',
+      },
+      {
+        property: 'og:site_name',
+        content: 'Steven Software',
+      },
+      {
+        name: 'twitter:card',
+        content: 'summary_large_image',
+      },
+      {
+        name: 'twitter:title',
+        content: 'Blog | Steven Software – Web Development That Works',
+      },
       {
         name: 'twitter:description',
-        content: 'Read the latest blog posts about web development, .Net, Vue, DevOps, and custom software from Steven Software.',
+        content:
+          'Learn Vue, .NET, SEO, and performance optimization techniques that turn websites into lead-generating systems.',
       },
-      { name: 'twitter:image', content: 'https://stevensoftware.se/2025-08-28.png' },
+      {
+        name: 'twitter:image',
+        content: 'https://stevensoftware.se/2025-08-28.png',
+      },
     ],
   });
 </script>

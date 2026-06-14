@@ -4,6 +4,7 @@
        tabindex="0"
        @keyup.enter="goToPost"
        class="border border-slate-200 rounded p-4 md:p-6 cursor-pointer shadow-md hover:scale-102 hover:brightness-105 transition bg-white">
+
     <img v-if="props.blogPost.coverImage"
          :src="`${baseUrl}${props.blogPost.coverImage}`"
          alt="Cover image"
@@ -20,33 +21,36 @@
     <div class="flex flex-col md:flex-row justify-between items-end">
       <RouterLink to="/blog"
                   class="mb-4 md:mb-0 text-md cursor-pointer font-semibold text-white bg-indigo-600 hover:bg-indigo-700 px-5 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-slate-300 transition">
-        Read
+        {{ t('blogCard.read') }}
       </RouterLink>
 
       <p class="text-slate-500 text-xs md:text-sm font-medium">
-        Updated: {{ formatDateTime(props.blogPost.updatedAt) }}
+        {{ t('blogCard.updated') }}: {{ formatDateTime(props.blogPost.updatedAt) }}
       </p>
     </div>
+
   </div>
 </template>
 
 <script setup>
-  import { useRouter } from 'vue-router';
-  import { formatDateTime } from '../../tools/helpers.js';
+  import { useRouter } from 'vue-router'
+  import { useI18n } from 'vue-i18n'
+  import { formatDateTime } from '../../tools/helpers.js'
 
-  const router = useRouter();
+  const { t } = useI18n()
+  const router = useRouter()
 
   const props = defineProps({
     blogPost: Object,
     user: Object,
-  });
+  })
 
-  const baseUrl = import.meta.env.VITE_URL;
+  const baseUrl = import.meta.env.VITE_URL
 
   const goToPost = () => {
     router.push({
       name: 'BlogPost',
       params: { blogPostId: props.blogPost.id },
-    });
-  };
+    })
+  }
 </script>
