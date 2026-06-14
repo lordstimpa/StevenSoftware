@@ -112,22 +112,22 @@
 
       <div class="px-5 py-6 border-b border-white/10">
         <p class="text-lg font-semibold leading-snug">
-          Let’s build something great together.
+          {{ $t('navbar.ctaTitle') }}
         </p>
 
         <p class="text-sm text-slate-400 mt-2">
-          Web development • Design • Performance focused
+          {{ $t('navbar.ctaSubtitle') }}
         </p>
 
         <div class="flex gap-3 mt-4">
           <a href="mailto:steven.dalfall@gmail.com"
              class="flex-1 text-center bg-indigo-600 hover:bg-indigo-700 transition px-4 py-2 rounded-lg font-semibold">
-            Email me
+            {{ $t('navbar.emailMe') }}
           </a>
 
           <a href="tel:+46739700463"
              class="flex-1 text-center bg-slate-800 hover:bg-slate-700 transition px-4 py-2 rounded-lg font-semibold border border-white/10">
-            Call
+            {{ $t('navbar.callMe') }}
           </a>
         </div>
       </div>
@@ -161,16 +161,16 @@
       <div class="mt-auto px-5 py-5 border-t border-white/10">
         <div class="bg-gradient-to-r from-indigo-600 to-blue-600 p-4 rounded-xl">
           <p class="font-semibold">
-            Need a website?
+            {{ $t('navbar.needWebsite') }}
           </p>
 
           <p class="text-sm text-white/80 mt-1">
-            I respond within 24h.
+            {{ $t('navbar.responseTime') }}
           </p>
 
           <a href="mailto:steven.dalfall@gmail.com"
              class="inline-block mt-3 bg-white text-slate-900 font-semibold px-4 py-2 rounded-lg hover:bg-slate-100 transition">
-            Get in touch
+            {{ $t('navbar.getInTouch') }}
           </a>
         </div>
       </div>
