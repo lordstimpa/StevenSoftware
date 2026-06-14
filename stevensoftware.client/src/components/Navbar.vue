@@ -50,8 +50,9 @@
         </button>
       </div>
 
-      <div v-if="user?.userName" class="hidden lg:flex gap-8">
-        <RouterLink to="/profile" class="text-lg p-2 rounded-md text-white font-semibold hover:text-slate-300 transition">
+      <div v-if="user?.userName" class="hidden lg:flex items-center gap-8">
+        <RouterLink to="/profile"
+                    class="text-lg p-2 rounded-md text-white font-semibold hover:text-slate-300 transition">
           {{ user.userName }}
         </RouterLink>
 
@@ -70,27 +71,112 @@
         </button>
       </div>
 
-      <button @click="toggleMenu" class="lg:hidden w-8 h-8 flex items-center justify-center text-white">
-        <Menu v-show="!mobileOpen" class="w-7 h-7" />
-        <X v-show="mobileOpen" class="w-7 h-7" />
+      <div class="lg:hidden flex gap-8 items-center">
+        <button @click="toggleLanguage"
+                class="w-9 h-9 flex items-center justify-center rounded-md hover:bg-white/10 transition text-xl cursor-pointer">
+          <transition name="fade" mode="out-in">
+            <span :key="locale">
+              {{ locale === 'en' ? '🇬🇧' : '🇸🇪' }}
+            </span>
+          </transition>
+        </button>
+
+        <button @click="toggleMenu" class="w-8 h-8 flex items-center justify-center text-white">
+          <Menu v-show="!mobileOpen" class="w-7 h-7" />
+          <X v-show="mobileOpen" class="w-7 h-7" />
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <aside class="fixed top-0 right-0 z-50 h-full w-80 bg-slate-900 text-white
+         transform transition-transform duration-300 ease-out"
+         :class="mobileOpen ? 'translate-x-0' : 'translate-x-full'">
+    <div class="relative h-[76px] flex items-center justify-end px-5 gap-8 border-b border-white/10">
+      <button @click="toggleLanguage"
+              class="w-9 h-9 flex items-center justify-center rounded-md hover:bg-white/10 transition text-xl cursor-pointer">
+        <transition name="fade" mode="out-in">
+          <span :key="locale">
+            {{ locale === 'en' ? '🇬🇧' : '🇸🇪' }}
+          </span>
+        </transition>
+      </button>
+
+      <button @click="closeMenuInstant"
+              class="w-9 h-9 flex items-center justify-center rounded-md hover:bg-white/10 transition">
+        <X class="w-6 h-6" />
       </button>
     </div>
-  </div>
 
-  <div class="overflow-hidden w-full z-50 bg-slate-900"
-       :class="[
-          mobileOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0',
-          animateMenu ? 'transition-all duration-500' : ''
-        ]">
+    <div class="flex flex-col h-[calc(100%-76px)]">
 
-    <div class="flex flex-col items-center justify-center gap-8 text-white p-10 bg-slate-800">
-      <RouterLink to="/" @click="closeMenuInstant">{{ $t('navbar.home') }}</RouterLink>
-      <RouterLink to="/services" @click="closeMenuInstant">{{ $t('navbar.services') }}</RouterLink>
-      <RouterLink to="/case-studies" @click="closeMenuInstant">{{ $t('navbar.caseStudies') }}</RouterLink>
-      <RouterLink to="/blog" @click="closeMenuInstant">{{ $t('navbar.blog') }}</RouterLink>
+      <div class="px-5 py-6 border-b border-white/10">
+        <p class="text-lg font-semibold leading-snug">
+          Let’s build something great together.
+        </p>
+
+        <p class="text-sm text-slate-400 mt-2">
+          Web development • Design • Performance focused
+        </p>
+
+        <div class="flex gap-3 mt-4">
+          <a href="mailto:steven.dalfall@gmail.com"
+             class="flex-1 text-center bg-indigo-600 hover:bg-indigo-700 transition px-4 py-2 rounded-lg font-semibold">
+            Email me
+          </a>
+
+          <a href="tel:+46739700463"
+             class="flex-1 text-center bg-slate-800 hover:bg-slate-700 transition px-4 py-2 rounded-lg font-semibold border border-white/10">
+            Call
+          </a>
+        </div>
+      </div>
+
+      <div class="flex flex-col items-end gap-2 px-5 py-6 text-right">
+        <RouterLink to="/"
+                    @click="closeMenuInstant"
+                    class="py-2 px-3 rounded-md hover:bg-white/10 transition">
+          {{ $t('navbar.home') }}
+        </RouterLink>
+
+        <RouterLink to="/services"
+                    @click="closeMenuInstant"
+                    class="py-2 px-3 rounded-md hover:bg-white/10 transition">
+          {{ $t('navbar.services') }}
+        </RouterLink>
+
+        <RouterLink to="/case-studies"
+                    @click="closeMenuInstant"
+                    class="py-2 px-3 rounded-md hover:bg-white/10 transition">
+          {{ $t('navbar.caseStudies') }}
+        </RouterLink>
+
+        <RouterLink to="/blog"
+                    @click="closeMenuInstant"
+                    class="py-2 px-3 rounded-md hover:bg-white/10 transition">
+          {{ $t('navbar.blog') }}
+        </RouterLink>
+      </div>
+
+      <div class="mt-auto px-5 py-5 border-t border-white/10">
+        <div class="bg-gradient-to-r from-indigo-600 to-blue-600 p-4 rounded-xl">
+          <p class="font-semibold">
+            Need a website?
+          </p>
+
+          <p class="text-sm text-white/80 mt-1">
+            I respond within 24h.
+          </p>
+
+          <a href="mailto:steven.dalfall@gmail.com"
+             class="inline-block mt-3 bg-white text-slate-900 font-semibold px-4 py-2 rounded-lg hover:bg-slate-100 transition">
+            Get in touch
+          </a>
+        </div>
+      </div>
+
     </div>
-  </div>
-
+  </aside>
   <Modal v-model="showModal" :title="$t('navbar.logoutTitle')">
     <template #body>
       <p>{{ $t('navbar.logoutConfirm') }}</p>
