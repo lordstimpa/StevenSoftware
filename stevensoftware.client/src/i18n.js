@@ -4,10 +4,12 @@ import sv from './locales/sv.json'
 
 function getInitialLocale() {
   const saved = localStorage.getItem('lang')
-  if (saved) return saved
 
-  const locale = navigator.language || navigator.userLanguage
-  return locale.toLowerCase().startsWith('sv') ? 'sv' : 'en'
+  if (saved === 'en' || saved === 'sv') {
+    return saved
+  }
+
+  return navigator.language.toLowerCase().startsWith('sv') ? 'sv' : 'en'
 }
 
 const i18n = createI18n({
