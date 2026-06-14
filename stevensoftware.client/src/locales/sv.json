@@ -195,7 +195,14 @@
     "logout": "Logga ut",
     "logoutTitle": "Logga ut",
     "logoutConfirm": "Är du säker på att du vill logga ut?",
-    "close": "Stäng"
+    "close": "Stäng",
+    "ctaTitle": "Låt oss bygga något riktigt bra tillsammans.",
+    "ctaSubtitle": "Webbutveckling • Design • Prestanda",
+    "needWebsite": "Behöver du en hemsida?",
+    "responseTime": "Jag svarar inom 24h.",
+    "emailMe": "Maila mig",
+    "callMe": "Ring",
+    "getInTouch": "Kontakta mig"
   },
   "profile": {
     "profileTitle": "Profil",

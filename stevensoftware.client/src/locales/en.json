@@ -182,7 +182,14 @@
     "logout": "Logout",
     "logoutTitle": "Logout",
     "logoutConfirm": "Are you sure you want to logout?",
-    "close": "Close"
+    "close": "Close",
+    "ctaTitle": "Let’s build something great together.",
+    "ctaSubtitle": "Web development • Design • Performance focused",
+    "needWebsite": "Need a website?",
+    "responseTime": "I respond within 24h.",
+    "emailMe": "Email me",
+    "callMe": "Call",
+    "getInTouch": "Get in touch"
   },
   "profile": {
     "profileTitle": "Profile",
