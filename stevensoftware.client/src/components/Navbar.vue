@@ -89,10 +89,11 @@
     </div>
   </div>
 
-  <aside class="fixed top-0 right-0 z-50 h-full w-80 bg-slate-900 text-white
-         transform transition-transform duration-300 ease-out"
+  <aside class="fixed top-0 right-0 z-50 h-dvh w-80 bg-slate-900 text-white
+         flex flex-col transform transition-transform duration-300 ease-out"
          :class="mobileOpen ? 'translate-x-0' : 'translate-x-full'">
-    <div class="relative h-[76px] flex items-center justify-end px-5 gap-8 border-b border-white/10">
+
+    <div class="h-[76px] shrink-0 flex items-center justify-end px-5 gap-8 border-b border-white/10">
       <button @click="toggleLanguage"
               class="w-9 h-9 flex items-center justify-center rounded-md hover:bg-white/10 transition text-xl cursor-pointer">
         <transition name="fade" mode="out-in">
@@ -108,8 +109,7 @@
       </button>
     </div>
 
-    <div class="flex flex-col h-[calc(100%-76px)]">
-
+    <div class="flex-1 overflow-y-auto flex flex-col">
       <div class="px-5 py-6 border-b border-white/10">
         <p class="text-lg font-semibold leading-snug">
           {{ $t('navbar.ctaTitle') }}
@@ -133,27 +133,19 @@
       </div>
 
       <div class="flex flex-col items-end gap-2 px-5 py-6 text-right">
-        <RouterLink to="/"
-                    @click="closeMenuInstant"
-                    class="py-2 px-3 rounded-md hover:bg-white/10 transition">
+        <RouterLink to="/" @click="closeMenuInstant" class="py-2 px-3 rounded-md hover:bg-white/10 transition">
           {{ $t('navbar.home') }}
         </RouterLink>
 
-        <RouterLink to="/services"
-                    @click="closeMenuInstant"
-                    class="py-2 px-3 rounded-md hover:bg-white/10 transition">
+        <RouterLink to="/services" @click="closeMenuInstant" class="py-2 px-3 rounded-md hover:bg-white/10 transition">
           {{ $t('navbar.services') }}
         </RouterLink>
 
-        <RouterLink to="/case-studies"
-                    @click="closeMenuInstant"
-                    class="py-2 px-3 rounded-md hover:bg-white/10 transition">
+        <RouterLink to="/case-studies" @click="closeMenuInstant" class="py-2 px-3 rounded-md hover:bg-white/10 transition">
           {{ $t('navbar.caseStudies') }}
         </RouterLink>
 
-        <RouterLink to="/blog"
-                    @click="closeMenuInstant"
-                    class="py-2 px-3 rounded-md hover:bg-white/10 transition">
+        <RouterLink to="/blog" @click="closeMenuInstant" class="py-2 px-3 rounded-md hover:bg-white/10 transition">
           {{ $t('navbar.blog') }}
         </RouterLink>
       </div>
@@ -177,6 +169,7 @@
 
     </div>
   </aside>
+
   <Modal v-model="showModal" :title="$t('navbar.logoutTitle')">
     <template #body>
       <p>{{ $t('navbar.logoutConfirm') }}</p>
