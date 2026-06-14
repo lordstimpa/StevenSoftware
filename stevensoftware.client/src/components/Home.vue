@@ -134,7 +134,6 @@
   </div>
 
   <div class="w-full flex flex-col justify-center py-28 px-6 bg-slate-50">
-
     <div v-animate="'fade-up'"
          class="w-full flex flex-col justify-center items-center gap-5 mb-20">
 
@@ -147,8 +146,7 @@
       </p>
     </div>
 
-    <div class="flex flex-col md:flex-row justify-center items-stretch gap-10 md:gap-6">
-
+    <div class="flex flex-col lg:flex-row justify-center items-center gap-10 lg:gap-6">
       <div v-animate="'fade-up'"
            class="flex flex-col items-center text-center gap-3 w-full sm:w-[250px]">
 
@@ -167,8 +165,8 @@
         </p>
       </div>
 
-      <div class="hidden md:flex items-center justify-center opacity-40">
-        <img src="/Arrow 2.svg" class="w-10 h-10" />
+      <div v-animate="'fade-up'" class="hidden lg:flex items-center justify-center opacity-60">
+        <img src="/Arrow 2.svg" class="w-10 h-10 invert" />
       </div>
 
       <div v-animate="'fade-up'"
@@ -189,8 +187,8 @@
         </p>
       </div>
 
-      <div class="hidden md:flex items-center justify-center opacity-40">
-        <img src="/Arrow 2.svg" class="w-10 h-10" />
+      <div v-animate="'fade-up'" class="hidden lg:flex items-center justify-center opacity-60">
+        <img src="/Arrow 2.svg" class="w-10 h-10 invert" />
       </div>
 
       <div v-animate="'fade-up'"
@@ -211,8 +209,8 @@
         </p>
       </div>
 
-      <div class="hidden md:flex items-center justify-center opacity-40">
-        <img src="/Arrow 2.svg" class="w-10 h-10" />
+      <div v-animate="'fade-up'" class="hidden lg:flex items-center justify-center opacity-60">
+        <img src="/Arrow 2.svg" class="w-10 h-10 invert" />
       </div>
 
       <div v-animate="'fade-up'"
