@@ -25,104 +25,109 @@
     <div class="relative z-20 flex flex-col-reverse lg:flex-row justify-center items-center w-full gap-8 lg:gap-10">
 
       <div class="flex flex-col justify-center gap-5 w-full lg:w-[650px]
-                text-center lg:text-left
-                bg-black/50 backdrop-blur-lg
-                border border-white/10
-                rounded-2xl p-5 sm:p-8 lg:p-10 shadow-2xl">
+              text-center lg:text-left
+              bg-black/50 backdrop-blur-lg
+              border border-white/10
+              rounded-2xl p-5 sm:p-8 lg:p-10 shadow-2xl">
 
         <h1 class="text-3xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight">
-          Turn Your Website Into a <span class="text-indigo-400">Lead Machine</span>
+          {{ $t('hero.title_start') }}
+          <span class="text-indigo-600">
+            {{ $t('hero.title_highlight') }}
+          </span>
         </h1>
 
         <div class="flex flex-col gap-4">
+
           <p class="text-base sm:text-lg lg:text-xl font-medium text-slate-100">
-            I help businesses turn their website into a consistent source of customers —
-            through better design, SEO, and conversion-focused improvements.
+            {{ $t('hero.subtitle') }}
           </p>
 
           <p class="text-base sm:text-lg lg:text-xl text-slate-200">
-            If your site isn’t generating leads, it’s not working hard enough.
+            {{ $t('hero.problem') }}
           </p>
 
           <div class="bg-white/5 border border-white/10 rounded-lg p-3 sm:p-4">
             <p class="text-xs sm:text-sm lg:text-base text-slate-200 leading-relaxed">
-              ✔ Modern websites that build trust instantly<br />
-              ✔ Contact forms that actually get inquiries<br />
-              ✔ SEO improvements that bring organic traffic<br />
-              ✔ Performance upgrades for better rankings
+              ✔ {{ $t('hero.benefits.1') }}<br />
+              ✔ {{ $t('hero.benefits.2') }}<br />
+              ✔ {{ $t('hero.benefits.3') }}<br />
+              ✔ {{ $t('hero.benefits.4') }}
             </p>
           </div>
 
           <div class="flex flex-col sm:flex-row gap-3 w-full">
-            <button @click="scrollToContact" class="w-full sm:flex-1 text-base sm:text-lg font-semibold text-white bg-indigo-600 hover:bg-indigo-700 px-5 py-3 rounded-md transition shadow-lg cursor-pointer">
-              Get More Leads
+
+            <button @click="scrollToContact"
+                    class="w-full sm:flex-1 text-base sm:text-lg font-semibold text-white bg-indigo-600 hover:bg-indigo-700 px-5 py-3 rounded-md transition shadow-lg cursor-pointer">
+              {{ $t('hero.cta_primary') }}
             </button>
 
-            <a href="mailto:steven.dalfall@gmail.com" class="w-full sm:flex-1 text-base sm:text-lg font-semibold text-white/90 border border-white/20 hover:bg-white/10 px-5 py-3 rounded-md transition cursor-pointer text-center">
-              Send a Quick Email
+            <a href="mailto:steven.dalfall@gmail.com"
+               class="w-full sm:flex-1 text-base sm:text-lg font-semibold text-white/90 border border-white/20 hover:bg-white/10 px-5 py-3 rounded-md transition cursor-pointer text-center">
+              {{ $t('hero.cta_secondary') }}
             </a>
 
           </div>
 
           <p class="text-slate-300 text-xs sm:text-sm italic">
-            No pressure — I’ll tell you what’s holding your site back.
+            {{ $t('hero.disclaimer') }}
           </p>
+
         </div>
       </div>
-      <div class="hidden lg:flex justify-center w-[550px]">
-      </div>
 
+      <div class="hidden lg:flex justify-center w-[550px]"></div>
     </div>
   </div>
 
   <div class="w-full flex flex-wrap justify-center items-stretch gap-10 py-24 px-6 bg-slate-100">
 
     <div v-animate
-         class="border border-slate-200 w-full sm:w-[270px] flex flex-col justify-start p-7 rounded-md shadow-md bg-white hover:shadow-lg transition min-h-[260px]">
+         class="border border-slate-200 w-full sm:w-[300px] flex flex-col justify-start p-7 rounded-md shadow-md bg-white hover:shadow-lg transition min-h-[260px]">
 
       <p class="text-2xl font-bold text-slate-900 leading-tight">
-        Lead-Driven Web Development
+        {{ $t('home.lead_driven_web_development') }}
       </p>
 
       <p class="text-sm text-slate-600 mt-2 leading-relaxed">
-        I build modern websites and web apps designed to do one thing: turn visitors into paying customers.
-        Fast, responsive, and conversion-focused from day one.
+        {{ $t('home.lead_driven_web_development_description') }}
       </p>
     </div>
 
     <div v-animate
-         class="border border-slate-200 w-full sm:w-[270px] flex flex-col justify-start p-7 rounded-md shadow-md bg-white hover:shadow-lg transition min-h-[260px]">
+         class="border border-slate-200 w-full sm:w-[300px] flex flex-col justify-start p-7 rounded-md shadow-md bg-white hover:shadow-lg transition min-h-[260px]">
 
       <p class="text-2xl font-bold text-slate-900 leading-tight">
-        Website Optimization & Upgrades
+        {{ $t('home.website_optimization_upgrades') }}
       </p>
 
       <p class="text-sm text-slate-600 mt-2 leading-relaxed">
-        If your site feels outdated or underperforming, I modernize it into a fast, credible system that builds trust and increases inquiries.
+        {{ $t('home.website_optimization_upgrades_description') }}
       </p>
     </div>
 
     <div v-animate
-         class="border border-slate-200 w-full sm:w-[270px] flex flex-col justify-start p-7 rounded-md shadow-md bg-white hover:shadow-lg transition min-h-[260px]">
+         class="border border-slate-200 w-full sm:w-[300px] flex flex-col justify-start p-7 rounded-md shadow-md bg-white hover:shadow-lg transition min-h-[260px]">
 
       <p class="text-2xl font-bold text-slate-900 leading-tight">
-        SEO & Performance Growth
+        {{ $t('home.seo_performance_growth') }}
       </p>
 
       <p class="text-sm text-slate-600 mt-2 leading-relaxed">
-        Get found on Google and load faster than competitors. I improve rankings, speed, and structure so more customers actually discover you.
+        {{ $t('home.seo_performance_growth_description') }}
       </p>
     </div>
 
     <div v-animate
-         class="border border-slate-200 w-full sm:w-[270px] flex flex-col justify-start p-7 rounded-md shadow-md bg-white hover:shadow-lg transition min-h-[260px]">
+         class="border border-slate-200 w-full sm:w-[300px] flex flex-col justify-start p-7 rounded-md shadow-md bg-white hover:shadow-lg transition min-h-[260px]">
 
       <p class="text-2xl font-bold text-slate-900 leading-tight">
-        Conversion & Contact Systems
+        {{ $t('home.conversion_contact_systems') }}
       </p>
 
       <p class="text-sm text-slate-600 mt-2 leading-relaxed">
-        I set up smart contact forms, landing pages, and funnels that remove friction and turn traffic into real business inquiries.
+        {{ $t('home.conversion_contact_systems_description') }}
       </p>
     </div>
 
@@ -134,11 +139,11 @@
          class="w-full flex flex-col justify-center items-center gap-5 mb-20">
 
       <p class="text-slate-900 text-4xl sm:text-5xl md:text-6xl font-bold text-center">
-        How it works
+        {{ $t('home.how_it_works') }}
       </p>
 
       <p class="text-slate-600 text-center max-w-2xl text-lg">
-        A simple process to improve your website and turn it into a consistent source of leads.
+        {{ $t('home.how_it_works_description') }}
       </p>
     </div>
 
@@ -154,11 +159,11 @@
         <p class="text-indigo-600 font-bold text-sm tracking-wider">STEP 01</p>
 
         <p class="text-slate-900 text-xl font-semibold leading-tight">
-          You Tell Me What’s Going On
+          {{ $t('home.step_01_title') }}
         </p>
 
         <p class="text-slate-600 text-sm leading-relaxed">
-          We look at your current website, goals, and what’s stopping you from getting more leads.
+          {{ $t('home.step_01_description') }}
         </p>
       </div>
 
@@ -176,11 +181,11 @@
         <p class="text-indigo-600 font-bold text-sm tracking-wider">STEP 02</p>
 
         <p class="text-slate-900 text-xl font-semibold leading-tight">
-          I Identify What’s Blocking Growth
+          {{ $t('home.step_02_title') }}
         </p>
 
         <p class="text-slate-600 text-sm leading-relaxed">
-          I analyze your site, SEO, structure, and conversion flow to find what’s costing you customers.
+          {{ $t('home.step_02_description') }}
         </p>
       </div>
 
@@ -198,11 +203,11 @@
         <p class="text-indigo-600 font-bold text-sm tracking-wider">STEP 03</p>
 
         <p class="text-slate-900 text-xl font-semibold leading-tight">
-          Improvements Are Made
+          {{ $t('home.step_03_title') }}
         </p>
 
         <p class="text-slate-600 text-sm leading-relaxed">
-          Your website gets upgraded with better design, structure, speed, and conversion flow.
+          {{ $t('home.step_03_description') }}
         </p>
       </div>
 
@@ -220,11 +225,11 @@
         <p class="text-indigo-600 font-bold text-sm tracking-wider">STEP 04</p>
 
         <p class="text-slate-900 text-xl font-semibold leading-tight">
-          More Leads Start Coming In
+          {{ $t('home.step_04_title') }}
         </p>
 
         <p class="text-slate-600 text-sm leading-relaxed">
-          Your website becomes a system that attracts and converts visitors into real inquiries.
+          {{ $t('home.step_04_description') }}
         </p>
       </div>
 
@@ -237,26 +242,26 @@
 
       <div class="flex flex-col gap-2 mb-4">
         <p class="text-slate-900 text-3xl sm:text-4xl md:text-5xl text-center font-bold">
-          Why work with me?
+          {{ $t('home.why_work_with_me') }}
         </p>
 
         <p class="text-slate-600 text-sm sm:text-base italic text-center">
-          A focused approach to turning websites into consistent sources of leads.
+          {{ $t('home.why_work_with_me_description') }}
         </p>
       </div>
 
       <div class="flex flex-col gap-4 text-slate-600 text-sm sm:text-base leading-relaxed">
 
         <p>
-          I help businesses improve their websites so they don’t just look good — they actually bring in customers.
+          {{ $t('home.why_work_with_me_paragraph_1') }}
         </p>
 
         <p>
-          My focus is simple: better structure, better performance, and better conversion rates.
+          {{ $t('home.why_work_with_me_paragraph_2') }}
         </p>
 
         <p>
-          The goal of every project is the same — <strong class="text-slate-900">more qualified inquiries through your website.</strong>
+          {{ $t('home.why_work_with_me_paragraph_3') }}
         </p>
 
       </div>
@@ -274,11 +279,11 @@
     <div v-animate="'fade-right'" class="w-full flex flex-col justify-center items-center gap-3 text-center">
 
       <RouterLink to="/blog" class="text-slate-900 text-3xl sm:text-4xl lg:text-5xl font-bold max-w-[90%] sm:max-w-[1000px] hover:text-indigo-500 transition">
-        Insights on building better websites & getting more customers
+        {{ $t('home.insights_title') }}
       </RouterLink>
 
       <p class="text-slate-600 italic text-sm sm:text-base max-w-[750px]">
-        Practical updates on web development, SEO, and improving conversion rates — based on real client work.
+        {{ $t('home.insights_description') }}
       </p>
     </div>
 
@@ -345,6 +350,7 @@
 </template>
 
 <script setup>
+  import { useHead } from '@vueuse/head';
   import { ref, onMounted } from 'vue';
   import { get } from '../tools/api';
   import { ChevronLeft, ChevronRight } from 'lucide-vue-next';
@@ -406,6 +412,61 @@
 
   onMounted(() => {
     getBlogs();
+  });
+
+  useHead({
+    title: 'High-Performance Web Development That Converts | Steven Software',
+
+    meta: [
+      {
+        name: 'description',
+        content:
+          'I build fast, SEO-optimized web applications in Vue and .NET that turn visitors into customers. Focused on performance, conversions, and real business growth.',
+      },
+      {
+        name: 'keywords',
+        content:
+          'web developer Sweden, webbutvecklare Sverige, Vue.js developer Sweden, Vue utvecklare Sverige, .NET developer Sweden, .NET utvecklare Sverige, fullstack developer Stockholm, frilans webbutvecklare, freelance web developer Sweden, SEO optimization Sweden, website performance optimization, conversion optimization Sweden, skapa hemsida företag, modern webbplats företag, software development services Sweden, hire web developer Sweden',
+      },
+      {
+        property: 'og:title',
+        content: 'Web Development That Drives Leads & Revenue',
+      },
+      {
+        property: 'og:description',
+        content:
+          'Fast, modern websites built to rank higher, load faster, and convert more visitors into paying customers.',
+      },
+      {
+        property: 'og:type',
+        content: 'website',
+      },
+      {
+        property: 'og:image',
+        content: '/og-home.jpg',
+      },
+      {
+        property: 'og:site_name',
+        content: 'Steven Software',
+      },
+      {
+        name: 'twitter:card',
+        content: 'summary_large_image',
+      },
+      {
+        name: 'twitter:title',
+        content: 'Web Development That Converts Visitors Into Customers',
+      },
+      {
+        name: 'twitter:description',
+        content:
+          'Vue + .NET development focused on performance, SEO, and conversion optimization.',
+      },
+      {
+        name: 'twitter:image',
+        content: '/og-home.jpg',
+      },
+    ],
   });
 </script>
 

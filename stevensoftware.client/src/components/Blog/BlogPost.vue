@@ -4,14 +4,19 @@
 
       <div class="flex justify-between mb-8 border-b border-slate-200 pb-4">
         <div class="flex flex-col gap-2">
-          <h1 class="text-4xl md:text-5xl font-bold text-slate-900 mb-2">Blog</h1>
+          <h1 class="text-4xl md:text-5xl font-bold text-slate-900 mb-2">
+            {{ t('blog.title') }}
+          </h1>
 
           <div class="flex gap-2 text-s md:text-md text-slate-500">
             <RouterLink to="/blog" class="cursor-pointer text-indigo-600 hover:text-slate-900 transition hover:underline">
-              Blog
+              {{ t('blog.title') }}
             </RouterLink>
+
             <span class="text-slate-400">></span>
-            <RouterLink :to="`/blog/${blogPostId}`" class="cursor-pointer text-indigo-600 hover:text-slate-900 transition hover:underline">
+
+            <RouterLink :to="`/blog/${blogPostId}`"
+                        class="cursor-pointer text-indigo-600 hover:text-slate-900 transition hover:underline">
               {{ blogPost.title }}
             </RouterLink>
           </div>
@@ -29,12 +34,15 @@
             </MenuButton>
 
             <MenuItems class="absolute right-0 flex flex-col gap-2 w-30 border p-2 m-2 rounded border-slate-200 bg-white shadow-md">
-              <MenuItem v-slot="{ active }" class="text-left p-2 cursor-pointer text-slate-700 hover:bg-slate-100 rounded">
-                <span @click.stop="toggleEditMode">Edit</span>
+
+              <MenuItem class="text-left p-2 cursor-pointer text-slate-700 hover:bg-slate-100 rounded">
+                <span @click.stop="toggleEditMode">{{ t('blog.edit') }}</span>
               </MenuItem>
-              <MenuItem v-slot="{ active }" class="text-left p-2 cursor-pointer text-red-600 hover:bg-red-50 rounded">
-                <span @click.stop="showModal = true">Delete</span>
+
+              <MenuItem class="text-left p-2 cursor-pointer text-red-600 hover:bg-red-50 rounded">
+                <span @click.stop="showModal = true">{{ t('blog.delete') }}</span>
               </MenuItem>
+
             </MenuItems>
           </Menu>
         </div>
@@ -46,23 +54,28 @@
 
         <div class="mb-8 pb-4 border-b border-slate-200">
           <div class="w-full flex flex-col md:flex-row justify-between">
+
             <div>
               <h1 class="pb-4 text-2xl md:text-4xl text-slate-900">
                 {{ blogPost.title }}
               </h1>
+
               <p class="text-slate-500 text-xs md:text-sm italic mt-2">
-                Freelance Fullstack Developer — <span class="text-slate-900">Steven Software</span>
+                {{ t('blog.author_prefix') }}
+                <span class="text-slate-900">Steven Software</span>
               </p>
             </div>
 
             <div class="flex flex-col gap-2 w-full md:w-80 mt-8 md:mt-0">
               <p class="text-right text-slate-500 font-medium text-xs md:text-sm">
-                Created: {{ formatDateTime(blogPost.createdAt) }}
+                {{ t('blog.created') }}: {{ formatDateTime(blogPost.createdAt) }}
               </p>
+
               <p class="text-right text-slate-500 font-medium text-xs md:text-sm">
-                Updated: {{ formatDateTime(blogPost.updatedAt) }}
+                {{ t('blog.updated') }}: {{ formatDateTime(blogPost.updatedAt) }}
               </p>
             </div>
+
           </div>
         </div>
 
@@ -72,55 +85,71 @@
       <form v-else @submit.prevent="updateBlogPost">
 
         <div class="bg-yellow-400/60 rounded-md p-4 mb-6 text-slate-900">
-          <p>Content supports **Markdown** syntax — like *italic*, **bold**, etc.</p>
+          <p>{{ t('blog.markdown_hint_1') }}</p>
+
           <p>
-            See a markdown
+            {{ t('blog.markdown_hint_2') }}
             <a class="underline font-bold text-slate-900"
                href="https://www.markdownguide.org/cheat-sheet/"
                target="_blank">
-              cheat sheet
+              {{ t('blog.markdown_link') }}
             </a>
           </p>
         </div>
 
         <div class="flex flex-col">
-          <label class="font-semibold text-slate-600 mb-2 pt-2">Cover image</label>
+          <label class="font-semibold text-slate-600 mb-2 pt-2">
+            {{ t('blog.cover_image') }}
+          </label>
+
           <ImageUpload :existing-image="blogPost?.coverImage"
                        @uploaded="handleImageUpload"
                        @removed="handleImageRemoval" />
         </div>
 
         <div class="flex flex-col pb-4">
-          <label class="font-semibold text-slate-600 mb-2 pt-2">Title*</label>
+          <label class="font-semibold text-slate-600 mb-2 pt-2">
+            {{ t('blog.title_field') }}
+          </label>
+
           <input :class="[
               'bg-white text-slate-900 px-4 py-2 border rounded-md focus:outline-none focus:ring-2',
               titleError ? 'border-red-500 ring-red-500' : 'border-slate-200 focus:ring-slate-400',
             ]"
                  type="text"
                  v-model="title"
-                 placeholder="Blog title" />
+                 :placeholder="t('blog.title_placeholder')" />
+
           <p v-if="titleError" class="text-red-500 text-sm mt-1">{{ titleError }}</p>
         </div>
 
         <div class="flex flex-col mb-4">
-          <label class="font-semibold text-slate-600 mb-2">Summary*</label>
+          <label class="font-semibold text-slate-600 mb-2">
+            {{ t('blog.summary_field') }}
+          </label>
+
           <textarea v-model="summary"
                     rows="3"
                     :class="[
               'w-full bg-white text-slate-900 px-4 py-2 rounded-md focus:outline-none focus:ring-2 border',
               summaryError ? 'border-red-500 ring-red-500' : 'border-slate-200 focus:ring-slate-400',
-            ]"></textarea>
+            ]" />
+
           <p v-if="summaryError" class="text-red-500 text-sm mt-1">{{ summaryError }}</p>
         </div>
 
         <div class="flex flex-col mb-8 pb-8 border-b border-slate-200">
-          <label class="font-semibold text-slate-600 mb-2">Content*</label>
+          <label class="font-semibold text-slate-600 mb-2">
+            {{ t('blog.content_field') }}
+          </label>
+
           <textarea v-model="content"
                     rows="15"
                     :class="[
               'bg-white text-slate-900 px-4 py-2 border rounded-md focus:outline-none focus:ring-2',
               contentError ? 'border-red-500 ring-red-500' : 'border-slate-200 focus:ring-slate-400',
-            ]"></textarea>
+            ]" />
+
           <p v-if="contentError" class="text-red-500 text-sm mt-1">{{ contentError }}</p>
         </div>
 
@@ -128,42 +157,47 @@
           <button type="button"
                   class="text-lg font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 px-5 py-2 rounded-md transition"
                   @click="toggleEditMode">
-            Cancel
+            {{ t('blog.cancel') }}
           </button>
 
           <button type="submit"
                   class="text-lg font-semibold text-white bg-indigo-600 hover:bg-indigo-700 px-5 py-2 rounded-md transition">
-            Save
+            {{ t('blog.save') }}
           </button>
         </div>
+
       </form>
 
       <div class="mt-10 pt-6 border-t border-slate-200 flex justify-center">
         <RouterLink to="/blog"
                     class="inline-flex items-center gap-2 text-indigo-600 hover:text-slate-900 transition font-semibold">
-          <span>← Back to all blog posts</span>
+          <span>{{ t('blog.back_to_list') }}</span>
         </RouterLink>
       </div>
+
     </div>
   </div>
 
-  <Modal v-model="showModal" title="Delete blog post">
+  <Modal v-model="showModal" :title="t('blog.delete_title')">
+
     <template #body>
-      <p class="text-slate-700">Are you sure you want to delete the blog post?</p>
+      <p class="text-slate-700">{{ t('blog.delete_confirm') }}</p>
     </template>
 
     <template #footer>
       <div class="flex justify-between">
         <button @click="showModal = false"
                 class="text-lg font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 px-5 py-2 rounded-md transition">
-          Close
+          {{ t('blog.close') }}
         </button>
+
         <button @click="deleteBlogPost()"
                 class="text-lg font-semibold text-white bg-indigo-600 hover:bg-indigo-700 px-5 py-2 rounded-md transition">
-          Delete
+          {{ t('blog.delete') }}
         </button>
       </div>
     </template>
+
   </Modal>
 </template>
 
@@ -183,6 +217,9 @@
   import { formatDateTime } from '../../tools/helpers.js';
   import Modal from '../Modal.vue';
   import ImageUpload from '../ImageUpload.vue';
+  import { useI18n } from 'vue-i18n'
+
+  const { t } = useI18n()
 
   const showModal = ref(false);
   const isEditMode = ref(false);
@@ -325,22 +362,40 @@
   });
 
   watch(blogPost, (post) => {
-    if (post) {
-      useHead({
-        title: post.title + ' | Steven Software',
-        meta: [
-          { name: 'description', content: post.summary || 'Read this blog on Steven Software' },
-          { name: 'keywords', content: 'web development, vue, .net, fullstack, software, blog' },
-          { property: 'og:title', content: post.title },
-          { property: 'og:description', content: post.summary },
-          { property: 'og:type', content: 'article' },
-          { property: 'og:image', content: post.coverImage ? `${baseUrl}${post.coverImage}` : '' },
-          { name: 'twitter:card', content: 'summary_large_image' },
-          { name: 'twitter:title', content: post.title },
-          { name: 'twitter:description', content: post.summary },
-          { name: 'twitter:image', content: post.coverImage ? `${baseUrl}${post.coverImage}` : '' },
-        ],
-      });
-    }
+    if (!post) return;
+
+    const title = `${post.title} | Steven Software - Web Development Insights`;
+    const description =
+      post.summary?.trim() ||
+      'Practical web development insights on Vue, .NET, performance, SEO, and building better software products that convert and scale.';
+
+    const image = post.coverImage ? `${baseUrl}${post.coverImage}` : `${baseUrl}/og-default.jpg`;
+
+    useHead({
+      title,
+      meta: [
+        {
+          name: 'description',
+          content: description.length > 160
+            ? description.slice(0, 157) + '...'
+            : description,
+        },
+        {
+          name: 'keywords',
+          content:
+            'vue js, vue developer Sweden, .net development, full stack developer Sweden, webbutvecklare Sverige, web performance optimization, seo optimization Sweden, conversion optimization, software engineering blog, modern web apps, hire web developer Sweden',
+        },
+        { property: 'og:title', content: post.title },
+        { property: 'og:description', content: description },
+        { property: 'og:type', content: 'article' },
+        { property: 'og:image', content: image },
+        { property: 'og:site_name', content: 'Steven Software' },
+
+        { name: 'twitter:card', content: 'summary_large_image' },
+        { name: 'twitter:title', content: post.title },
+        { name: 'twitter:description', content: description },
+        { name: 'twitter:image', content: image },
+      ],
+    });
   });
 </script>

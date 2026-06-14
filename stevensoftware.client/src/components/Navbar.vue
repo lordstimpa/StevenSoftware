@@ -8,35 +8,46 @@
           ]" />
 
     <div class="relative w-full lg:w-11/12 flex justify-between items-center p-4">
-
       <div class="flex justify-between gap-8">
+
         <RouterLink to="/" class="text-lg p-2 rounded-md text-white font-semibold hover:text-slate-300 transition">
-          Steven Software
+          {{ $t('navbar.brand') }}
         </RouterLink>
 
         <span class="hidden lg:inline-block text-lg text-white p-2">|</span>
 
         <RouterLink to="/services" class="hidden lg:inline-block text-lg p-2 rounded-md text-white font-semibold hover:text-slate-300 transition">
-          Services
+          {{ $t('navbar.services') }}
         </RouterLink>
 
         <RouterLink to="/case-studies" class="hidden lg:inline-block text-lg p-2 rounded-md text-white font-semibold hover:text-slate-300 transition">
-          Case Studies
+          {{ $t('navbar.caseStudies') }}
         </RouterLink>
 
         <RouterLink to="/blog" class="hidden lg:inline-block text-lg p-2 rounded-md text-white font-semibold hover:text-slate-300 transition">
-          Blog
+          {{ $t('navbar.blog') }}
         </RouterLink>
       </div>
 
       <div v-if="!user?.userName" class="hidden lg:flex gap-4">
-        <a href="tel:+46739700463" class="flex items-center gap-2 text-lg p-2 rounded-md text-white font-semibold hover:text-slate-300 transition">
-          <span>Call</span>
+        <a href="tel:+46739700463"
+           class="flex items-center gap-2 text-lg p-2 rounded-md text-white font-semibold hover:text-slate-300 transition">
+          {{ $t('navbar.call') }}
         </a>
 
-        <a href="mailto:steven.dalfall@gmail.com" class="flex items-center gap-2 text-lg font-semibold text-white bg-indigo-600 hover:bg-indigo-700 px-5 py-2 rounded-3xl transition">
-          <span>Email</span>
+        <a href="mailto:steven.dalfall@gmail.com"
+           class="flex items-center gap-2 text-lg font-semibold text-white bg-indigo-600 hover:bg-indigo-700 px-5 py-2 rounded-3xl transition">
+          {{ $t('navbar.email') }}
         </a>
+
+        <button @click="toggleLanguage"
+                class="w-9 h-9 flex items-center justify-center rounded-md hover:bg-white/10 transition text-xl cursor-pointer">
+          <transition name="fade" mode="out-in">
+            <span :key="locale">
+              {{ locale === 'en' ? '🇬🇧' : '🇸🇪' }}
+            </span>
+          </transition>
+        </button>
       </div>
 
       <div v-if="user?.userName" class="hidden lg:flex gap-8">
@@ -44,8 +55,18 @@
           {{ user.userName }}
         </RouterLink>
 
-        <button @click="showModal = true" class="text-lg font-semibold text-white bg-indigo-600 hover:bg-indigo-700 px-5 py-2 rounded-3xl transition cursor-pointer">
-          Logout
+        <button @click="showModal = true"
+                class="text-lg font-semibold text-white bg-indigo-600 hover:bg-indigo-700 px-5 py-2 rounded-3xl transition cursor-pointer">
+          {{ $t('navbar.logout') }}
+        </button>
+
+        <button @click="toggleLanguage"
+                class="w-9 h-9 flex items-center justify-center rounded-md hover:bg-white/10 transition text-xl cursor-pointer">
+          <transition name="fade" mode="out-in">
+            <span :key="locale">
+              {{ locale === 'en' ? '🇬🇧' : '🇸🇪' }}
+            </span>
+          </transition>
         </button>
       </div>
 
@@ -53,7 +74,6 @@
         <Menu v-show="!mobileOpen" class="w-7 h-7" />
         <X v-show="mobileOpen" class="w-7 h-7" />
       </button>
-
     </div>
   </div>
 
@@ -62,26 +82,30 @@
           mobileOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0',
           animateMenu ? 'transition-all duration-500' : ''
         ]">
+
     <div class="flex flex-col items-center justify-center gap-8 text-white p-10 bg-slate-800">
-      <RouterLink to="/" @click="closeMenuInstant">Home</RouterLink>
-      <RouterLink to="/services" @click="closeMenuInstant">Services</RouterLink>
-      <RouterLink to="/case-studies" @click="closeMenuInstant">Case Studies</RouterLink>
-      <RouterLink to="/blog" @click="closeMenuInstant">Blog</RouterLink>
+      <RouterLink to="/" @click="closeMenuInstant">{{ $t('navbar.home') }}</RouterLink>
+      <RouterLink to="/services" @click="closeMenuInstant">{{ $t('navbar.services') }}</RouterLink>
+      <RouterLink to="/case-studies" @click="closeMenuInstant">{{ $t('navbar.caseStudies') }}</RouterLink>
+      <RouterLink to="/blog" @click="closeMenuInstant">{{ $t('navbar.blog') }}</RouterLink>
     </div>
   </div>
 
-  <Modal v-model="showModal" title="Logout">
+  <Modal v-model="showModal" :title="$t('navbar.logoutTitle')">
     <template #body>
-      <p>Are you sure you want to logout?</p>
+      <p>{{ $t('navbar.logoutConfirm') }}</p>
     </template>
 
     <template #footer>
       <div class="flex justify-between">
-        <button @click="showModal = false" class="text-lg cursor-pointer font-semibold text-white bg-slate-700 hover:bg-slate-600 px-5 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-slate-500 transition">
-          Close
+        <button @click="showModal = false"
+                class="text-lg cursor-pointer font-semibold text-white bg-slate-700 hover:bg-slate-600 px-5 py-2 rounded-md transition">
+          {{ $t('navbar.close') }}
         </button>
-        <button @click="logout" class="text-lg cursor-pointer font-semibold text-white bg-gradient-to-r from-indigo-500 to-blue-500 hover:from-indigo-600 hover:to-blue-600 px-5 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 transition">
-          Logout
+
+        <button @click="logout"
+                class="text-lg cursor-pointer font-semibold text-white bg-gradient-to-r from-indigo-500 to-blue-500 hover:from-indigo-600 hover:to-blue-600 px-5 py-2 rounded-md transition">
+          {{ $t('navbar.logout') }}
         </button>
       </div>
     </template>
@@ -89,51 +113,69 @@
 </template>
 
 <script setup>
-  import { ref, nextTick, onMounted, onUnmounted, computed } from 'vue';
-  import { useRoute } from 'vue-router';
-  import { storeToRefs } from 'pinia';
-  import { useUserStore } from '@/stores/UserStore';
+  import { ref, nextTick, onMounted, onUnmounted, computed } from 'vue'
+  import { useRoute } from 'vue-router'
+  import { storeToRefs } from 'pinia'
+  import { useUserStore } from '@/stores/UserStore'
   import { Menu, X } from 'lucide-vue-next'
-  import Modal from './Modal.vue';
+  import i18n, { setLanguage } from '@/i18n'
+  import Modal from './Modal.vue'
 
-  const userStore = useUserStore();
-  const { user } = storeToRefs(userStore);
+  const locale = computed(() => i18n.global.locale.value)
 
-  const route = useRoute();
-  const isHome = computed(() => route.path === '/');
+  const userStore = useUserStore()
+  const { user } = storeToRefs(userStore)
 
-  const scrolled = ref(false);
-  const showModal = ref(false);
-  const mobileOpen = ref(false);
-  const animateMenu = ref(false);
+  const route = useRoute()
+  const isHome = computed(() => route.path === '/')
+
+  const scrolled = ref(false)
+  const showModal = ref(false)
+  const mobileOpen = ref(false)
+  const animateMenu = ref(false)
 
   const logout = () => {
-    userStore.logout();
-    window.location.href = '/';
-  };
+    userStore.logout()
+    window.location.href = '/'
+  }
+
+  const toggleLanguage = () => {
+    const next = locale.value === 'en' ? 'sv' : 'en'
+    setLanguage(next)
+  }
 
   const toggleMenu = () => {
-    animateMenu.value = true;
-    mobileOpen.value = !mobileOpen.value;
-  };
+    animateMenu.value = true
+    mobileOpen.value = !mobileOpen.value
+  }
 
   const handleScroll = () => {
-    if (!isHome.value) return;
-    scrolled.value = window.scrollY > 10;
-  };
+    if (!isHome.value) return
+    scrolled.value = window.scrollY > 10
+  }
 
   const closeMenuInstant = async () => {
-    animateMenu.value = false;
-    await nextTick();
-    mobileOpen.value = false;
-  };
+    animateMenu.value = false
+    await nextTick()
+    mobileOpen.value = false
+  }
 
   onMounted(() => {
-    handleScroll();
-    window.addEventListener('scroll', handleScroll);
-  });
+    handleScroll()
+    window.addEventListener('scroll', handleScroll)
+  })
 
   onUnmounted(() => {
-    window.removeEventListener('scroll', handleScroll);
-  });
+    window.removeEventListener('scroll', handleScroll)
+  })
 </script>
+
+<style>
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity 0.2s ease;
+  }
+
+  .fade-enter-from, .fade-leave-to {
+    opacity: 0;
+  }
+</style>

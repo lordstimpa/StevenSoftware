@@ -4,8 +4,8 @@
 
       <div class="mb-8 border-b border-slate-200 pb-4">
         <h1 class="text-2xl md:text-4xl font-bold text-slate-900">
-          <span v-if="!isEditingPassword">Profile</span>
-          <span v-else>Edit Password</span>
+          <span v-if="!isEditingPassword">{{ t.profileTitle }}</span>
+          <span v-else>{{ t.editPasswordTitle }}</span>
         </h1>
       </div>
 
@@ -13,21 +13,19 @@
 
         <div class="flex flex-col md:flex-row gap-10">
           <div class="flex flex-col w-full">
-            <label class="font-semibold text-slate-600 mb-1" for="firstName">First name</label>
+            <label class="font-semibold text-slate-600 mb-1">{{ t.firstName }}</label>
             <input class="bg-white text-slate-900 px-4 py-2 border border-slate-200 rounded-md focus:outline-none focus:ring-2 focus:ring-slate-400"
                    type="text"
-                   id="firstName"
                    v-model="user.firstName"
-                   placeholder="John" />
+                   :placeholder="t.firstNamePlaceholder" />
           </div>
 
           <div class="flex flex-col w-full">
-            <label class="font-semibold text-slate-600 mb-1" for="lastName">Last name</label>
+            <label class="font-semibold text-slate-600 mb-1">{{ t.lastName }}</label>
             <input class="bg-white text-slate-900 px-4 py-2 border border-slate-200 rounded-md focus:outline-none focus:ring-2 focus:ring-slate-400"
                    type="text"
-                   id="lastName"
                    v-model="user.lastName"
-                   placeholder="Doe" />
+                   :placeholder="t.lastNamePlaceholder" />
           </div>
         </div>
 
@@ -36,7 +34,7 @@
           <div class="flex flex-row justify-between pb-10 border-b border-slate-200 gap-10">
 
             <div class="flex flex-col w-full">
-              <label class="font-semibold text-slate-600 mb-1">Email</label>
+              <label class="font-semibold text-slate-600 mb-1">{{ t.email }}</label>
 
               <p v-if="!isEditingEmail" class="font-semibold text-slate-900">
                 {{ user.email }}
@@ -46,15 +44,15 @@
                      type="text"
                      class="w-full bg-white text-slate-900 px-4 py-2 border border-slate-200 rounded-md focus:outline-none focus:ring-2 focus:ring-slate-400"
                      v-model="user.email"
-                     placeholder="email@hotmail.com" />
+                     placeholder="mail@hotmail.com" />
             </div>
 
             <div class="flex justify-end w-full items-end">
               <button type="button"
                       @click="toggleChangeEmail"
                       class="p-2 cursor-pointer text-indigo-500 hover:text-slate-700 transition hover:underline">
-                <span v-if="!isEditingEmail">Change email</span>
-                <span v-else>Back</span>
+                <span v-if="!isEditingEmail">{{ t.changeEmail }}</span>
+                <span v-else>{{ t.back }}</span>
               </button>
             </div>
 
@@ -63,14 +61,14 @@
           <div class="flex flex-row justify-between items-end">
 
             <div>
-              <p class="font-semibold text-slate-600 mb-1">Password</p>
+              <p class="font-semibold text-slate-600 mb-1">{{ t.password }}</p>
               <p class="font-semibold text-slate-900">••••••••</p>
             </div>
 
             <button type="button"
                     @click="toggleChangePassword"
                     class="p-2 cursor-pointer text-indigo-500 hover:text-slate-700 transition hover:underline">
-              Change password
+              {{ t.changePassword }}
             </button>
 
           </div>
@@ -80,7 +78,7 @@
         <div class="flex justify-end">
           <button type="submit"
                   class="text-lg font-semibold text-white bg-indigo-600 hover:bg-indigo-700 px-5 py-2 rounded-md transition cursor-pointer">
-            Save
+            {{ t.save }}
           </button>
         </div>
 
@@ -89,30 +87,27 @@
       <form @submit="changePassword" v-if="isEditingPassword" class="flex flex-col gap-10">
 
         <div class="flex flex-col w-full">
-          <label class="font-semibold text-slate-600 mb-1" for="currentPassword">Current password</label>
+          <label class="font-semibold text-slate-600 mb-1">{{ t.currentPassword }}</label>
           <input class="bg-white text-slate-900 px-4 py-2 border border-slate-200 rounded-md focus:outline-none focus:ring-2 focus:ring-slate-400"
                  type="password"
-                 id="currentPassword"
                  v-model="currentPassword"
-                 placeholder="••••••••" />
+                 :placeholder="t.passwordPlaceholder" />
         </div>
 
         <div class="flex flex-col w-full">
-          <label class="font-semibold text-slate-600 mb-1" for="newPassword">New password</label>
+          <label class="font-semibold text-slate-600 mb-1">{{ t.newPassword }}</label>
           <input class="bg-white text-slate-900 px-4 py-2 border border-slate-200 rounded-md focus:outline-none focus:ring-2 focus:ring-slate-400"
                  type="password"
-                 id="newPassword"
                  v-model="newPassword"
-                 placeholder="••••••••" />
+                 :placeholder="t.passwordPlaceholder" />
         </div>
 
         <div class="flex flex-col w-full">
-          <label class="font-semibold text-slate-600 mb-1" for="confirmPassword">Confirm password</label>
+          <label class="font-semibold text-slate-600 mb-1">{{ t.confirmPassword }}</label>
           <input class="bg-white text-slate-900 px-4 py-2 border border-slate-200 rounded-md focus:outline-none focus:ring-2 focus:ring-slate-400"
                  type="password"
-                 id="confirmPassword"
                  v-model="confirmPassword"
-                 placeholder="••••••••" />
+                 :placeholder="t.passwordPlaceholder" />
         </div>
 
         <div class="flex justify-between w-full">
@@ -120,12 +115,12 @@
           <button type="button"
                   @click="toggleChangePassword"
                   class="text-lg font-semibold text-white bg-slate-700 hover:bg-slate-600 px-5 py-2 rounded-md transition">
-            Back
+            {{ t.back }}
           </button>
 
           <button type="submit"
                   class="text-lg font-semibold text-white bg-indigo-600 hover:bg-indigo-700 px-5 py-2 rounded-md transition">
-            Save
+            {{ t.save }}
           </button>
 
         </div>
@@ -141,41 +136,65 @@
 </template>
 
 <script setup>
-  import { onMounted, ref } from 'vue';
-  import { storeToRefs } from 'pinia';
-  import { post } from '../tools/api';
-  import { useUserStore } from '../stores/UserStore';
-  import Toast from '../components/Toast.vue';
+  import { onMounted, ref } from 'vue'
+  import { storeToRefs } from 'pinia'
+  import { post } from '../tools/api'
+  import { useUserStore } from '../stores/UserStore'
+  import Toast from '../components/Toast.vue'
 
-  const userStore = useUserStore();
-  const { user } = storeToRefs(userStore);
+  const t = {
+    profileTitle: 'Profile',
+    editPasswordTitle: 'Edit Password',
 
-  const currentPassword = ref('');
-  const newPassword = ref('');
-  const confirmPassword = ref('');
+    firstName: 'First name',
+    lastName: 'Last name',
+    email: 'Email',
+    password: 'Password',
 
-  const isEditingEmail = ref(false);
-  const isEditingPassword = ref(false);
+    firstNamePlaceholder: 'John',
+    lastNamePlaceholder: 'Doe',
+    emailPlaceholder: 'email@hotmail.com',
+    passwordPlaceholder: '••••••••',
 
-  const displayToast = ref(false);
-  const toastMessage = ref('');
+    changeEmail: 'Change email',
+    changePassword: 'Change password',
+    back: 'Back',
+    save: 'Save',
+
+    currentPassword: 'Current password',
+    newPassword: 'New password',
+    confirmPassword: 'Confirm password',
+  }
+
+  const userStore = useUserStore()
+  const { user } = storeToRefs(userStore)
+
+  const currentPassword = ref('')
+  const newPassword = ref('')
+  const confirmPassword = ref('')
+
+  const isEditingEmail = ref(false)
+  const isEditingPassword = ref(false)
+
+  const displayToast = ref(false)
+  const toastMessage = ref('')
 
   onMounted(() => {
-    userStore.fetchUser();
-  });
+    userStore.fetchUser()
+  })
 
   function toggleChangeEmail() {
-    isEditingEmail.value = isEditingEmail.value ? false : true;
+    isEditingEmail.value = !isEditingEmail.value
   }
 
   function toggleChangePassword() {
-    isEditingPassword.value = isEditingPassword.value ? false : true;
+    isEditingPassword.value = !isEditingPassword.value
   }
 
   const updateUser = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
-    const token = localStorage.getItem('jwt');
+    const token = localStorage.getItem('jwt')
     const response = await post(
       `${import.meta.env.VITE_API_URL}/api/account/updateUser`,
       {
@@ -184,24 +203,23 @@
         email: user.value.email,
       },
       {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+        headers: { Authorization: `Bearer ${token}` },
       }
-    );
+    )
 
     if (response) {
-      isEditingEmail.value = false;
-      displayToast.value = true;
-      toastMessage.value = response.message;
+      isEditingEmail.value = false
+      displayToast.value = true
+      toastMessage.value = response.message
     }
-  };
+  }
 
   const changePassword = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
     if (newPassword.value === confirmPassword.value) {
-      const token = localStorage.getItem('jwt');
+      const token = localStorage.getItem('jwt')
+
       const response = await post(
         `${import.meta.env.VITE_API_URL}/api/account/updateuserpassword`,
         {
@@ -209,20 +227,18 @@
           newPassword: newPassword.value,
         },
         {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+          headers: { Authorization: `Bearer ${token}` },
         }
-      );
+      )
 
       if (response) {
-        isEditingPassword.value = false;
-        displayToast.value = true;
-        toastMessage.value = response.message;
+        isEditingPassword.value = false
+        displayToast.value = true
+        toastMessage.value = response.message
       }
     } else {
-      displayToast.value = true;
-      toastMessage.value = 'Could not confirm new password';
+      displayToast.value = true
+      toastMessage.value = 'Could not confirm new password'
     }
-  };
+  }
 </script>

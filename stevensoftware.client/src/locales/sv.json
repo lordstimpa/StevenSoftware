@@ -1,0 +1,224 @@
+{
+  "hero": {
+    "title_start": "Få en webbplats som ger dig fler",
+    "title_highlight": "kundförfrågningar",
+    "subtitle": "Jag hjälper företag att växa sin närvaro online med enkla och effektiva webbplatser som omvandlar besökare till kunder.",
+    "problem": "Många webbplatser får trafik men lyckas inte omvandla besökare till riktiga förfrågningar.",
+    "benefits": {
+      "1": "Attrahera fler rätt besökare",
+      "2": "Förvandla besök till riktiga leads",
+      "3": "Bygg en starkare närvaro online",
+      "4": "Fungerar smidigt på alla enheter"
+    },
+    "cta_primary": "Få fler leads",
+    "cta_secondary": "Låt oss prata",
+    "disclaimer": "*Fokus på tillväxt, inte bara design"
+  },
+  "home": {
+    "lead_driven_web_development": "Lead-driven webbutveckling",
+    "lead_driven_web_development_description": "Jag bygger moderna webbplatser och webbappar som är designade för ett enda syfte: att omvandla besökare till betalande kunder. Snabba, responsiva och konverteringsfokuserade från dag ett.",
+
+    "website_optimization_upgrades": "Webbplatsoptimering & uppgraderingar",
+    "website_optimization_upgrades_description": "Om din webbplats känns föråldrad eller underpresterar moderniserar jag den till ett snabbt och trovärdigt system som bygger förtroende och ökar antalet förfrågningar.",
+
+    "seo_performance_growth": "SEO & prestandaförbättring",
+    "seo_performance_growth_description": "Bli hittad på Google och få snabbare laddningstider än dina konkurrenter. Jag förbättrar ranking, hastighet och struktur så att fler kunder faktiskt hittar dig.",
+
+    "conversion_contact_systems": "Konvertering & kontaktsystem",
+    "conversion_contact_systems_description": "Jag sätter upp smarta kontaktformulär, landningssidor och funnels som minskar friktion och omvandlar trafik till faktiska affärsförfrågningar.",
+
+    "how_it_works": "Så här fungerar det",
+    "how_it_works_description": "En enkel process för att förbättra din webbplats och göra den till en stabil källa till leads.",
+
+    "step_01_title": "Du berättar vad som inte fungerar",
+    "step_01_description": "Vi tittar på din nuvarande webbplats, dina mål och vad som hindrar dig från att få fler leads.",
+
+    "step_02_title": "Jag identifierar vad som blockerar tillväxt",
+    "step_02_description": "Jag analyserar din webbplats, SEO, struktur och konverteringsflöde för att hitta vad som kostar dig kunder.",
+
+    "step_03_title": "Förbättringar genomförs",
+    "step_03_description": "Din webbplats uppgraderas med bättre design, struktur, hastighet och konverteringsflöde.",
+
+    "step_04_title": "Fler leads börjar komma in",
+    "step_04_description": "Din webbplats blir ett system som attraherar och konverterar besökare till faktiska förfrågningar.",
+
+    "why_work_with_me": "Varför arbeta med mig?",
+    "why_work_with_me_description": "Ett fokuserat arbetssätt för att göra webbplatser till stabila källor för leads.",
+
+    "why_work_with_me_paragraph_1": "Jag hjälper företag att förbättra sina webbplatser så att de inte bara ser bra ut — utan faktiskt genererar kunder.",
+
+    "why_work_with_me_paragraph_2": "Mitt fokus är enkelt: bättre struktur, bättre prestanda och bättre konverteringsgrad.",
+
+    "why_work_with_me_paragraph_3": "Målet med varje projekt är detsamma — fler kvalificerade förfrågningar via din webbplats.",
+
+    "insights_title": "Insikter om att bygga bättre webbplatser och få fler kunder",
+    "insights_description": "Praktiska uppdateringar om webbutveckling, SEO och förbättring av konverteringsgrad — baserat på verkliga kundprojekt."
+  },
+  "case_studies": {
+    "title": "Fallstudier",
+    "description": "Utforska projekt från Steven Software och se exempel på lösningar byggda med .NET, Vue, React och andra moderna tekniker."
+  },
+  "case_study": {
+    "read": "Läs mer",
+    "close": "Stäng",
+
+    "steven_1": "Jag skapade den här webbplatsen som en bas där jag kan dela tankar och idéer samt visa mina projekt och mitt professionella arbete.",
+    "steven_2": "Det är ett komplett fullstack-projekt med riktig deploymentspipeline, hosting, API:er, webbserver och egen domän.",
+    "steven_3": "Webbplatsen hostas i mitt eget homelab som jag själv underhåller och utvecklar.",
+
+    "gaming_1": "Det här projektet utvecklades för en gamingförening som jag är del av. Målet var att skapa en plattform för turneringar, events och nyheter.",
+    "gaming_2": "Facebook API användes för att integrera media, inlägg och events direkt på webbplatsen.",
+    "gaming_3": "Webbplatsen var fullt live på Azure men vi saknade finansiering för att hålla den online."
+  },
+  "contact": {
+    "title": "Låt oss bygga något som faktiskt ger dig kunder",
+    "subtitle": "Berätta vad du jobbar på — jag återkommer med tydliga nästa steg, idéer och vad som krävs för att förbättra din webbplats.",
+
+    "benefit_1": "Gratis initial genomgång",
+    "benefit_2": "Ingen förpliktelse",
+    "benefit_3": "Svar inom 1–2 dagar",
+
+    "first_name": "Förnamn",
+    "last_name": "Efternamn",
+    "email": "E-post",
+    "message_label": "Vad vill du förbättra?",
+
+    "first_name_placeholder": "John",
+    "last_name_placeholder": "Doe",
+    "message_placeholder": "Exempel: Jag vill få fler leads från min webbplats...",
+
+    "submit": "Få min kostnadsfria webbplatsanalys",
+    "sending": "Skickar...",
+
+    "footer_note": "Jag tittar på din webbplats (eller idé) och berättar exakt vad som hindrar konverteringar."
+  },
+  "footer": {
+    "copyright": "© {year} Steven Software. Stolt hostad på min egen server."
+  },
+  "services": {
+    "title": "Tjänster",
+    "subtitle": "Vad jag hjälper dig med",
+    "intro": "Jag tar webbplatser som inte presterar och gör dem till system som genererar leads och kunder.",
+
+    "hero_title": "Din webbplats ska ge dig kunder — inte bara finnas",
+    "hero_description": "Många webbplatser ser bra ut men konverterar inte besökare till förfrågningar. Jag förbättrar tydlighet, förtroende, hastighet och vägen från besök till kontakt.",
+
+    "focus_title": "Vad jag fokuserar på:",
+    "focus_1": "Gör ditt erbjudande tydligt inom sekunder",
+    "focus_2": "Bygg förtroende genom struktur och modern design",
+    "focus_3": "Förbättra hastighet så att besökare stannar",
+    "focus_4": "Led besökare naturligt till kontakt",
+
+    "card_1_title": "Fixa underpresterande webbplatser",
+    "card_1_desc": "Om din sida känns gammal, rörig eller långsam moderniserar jag den så att den faktiskt fungerar för ditt företag.",
+
+    "card_2_title": "Gör din webbplats snabb och stabil",
+    "card_2_desc": "Jag tar hand om det tekniska så att din webbplats laddar snabbt och fungerar stabilt när du behöver det som mest.",
+
+    "card_3_title": "Små förbättringar som gör skillnad",
+    "card_3_desc": "Från mindre fixar till nya sidor hjälper jag dig steg för steg utan onödig komplexitet.",
+
+    "how_title": "Så här fungerar det",
+    "how_description": "En enkel process för att förstå din webbplats och göra den till något som genererar fler kunder.",
+
+    "step_1_title": "1. Du berättar vad som inte fungerar",
+    "step_1_sub": "Vi tittar på din nuvarande webbplats, mål och vad som känns som det inte fungerar.",
+    "step_1_b1": "Vad din webbplats ska uppnå",
+    "step_1_b2": "Var du tappar besökare",
+    "step_1_b3": "Hur framgång ser ut för dig",
+
+    "step_2_title": "2. Jag hittar vad som håller dig tillbaka",
+    "step_2_sub": "Jag analyserar din webbplats och identifierar vad som hindrar besökare från att bli kunder.",
+    "step_2_b1": "Tydlighet i ditt erbjudande",
+    "step_2_b2": "Hur enkelt det är att kontakta dig",
+    "step_2_b3": "Hastighet, struktur och användarupplevelse",
+
+    "step_3_title": "3. Din webbplats förbättras",
+    "step_3_sub": "Förändringar görs för att göra din webbplats tydligare, snabbare och mer effektiv.",
+    "step_3_b1": "Bättre struktur och layout",
+    "step_3_b2": "Starkare budskap och flöde",
+    "step_3_b3": "Bättre prestanda och användbarhet",
+
+    "step_4_title": "4. Fler förfrågningar börjar komma in",
+    "step_4_sub": "Din webbplats börjar fungera som ett system som attraherar och konverterar besökare.",
+    "step_4_b1": "Fler förstår vad du erbjuder",
+    "step_4_b2": "Fler tar kontakt",
+    "step_4_b3": "Fler kvalificerade leads hör av sig"
+  },
+  "blog": {
+    "title": "Blogg",
+    "total_posts": "Totalt antal blogginlägg",
+    "create_post": "Skapa blogginlägg",
+    "no_posts": "Det finns inga publicerade blogginlägg just nu. Kom tillbaka senare.",
+    "edit": "Redigera",
+    "delete": "Ta bort",
+    "created": "Skapad",
+    "updated": "Uppdaterad",
+    "author_prefix": "Frilans fullstackutvecklare —",
+    "cover_image": "Omslagsbild",
+    "title_field": "Titel*",
+    "summary_field": "Sammanfattning*",
+    "content_field": "Innehåll*",
+    "title_placeholder": "Bloggtitel",
+    "cancel": "Avbryt",
+    "save": "Spara",
+    "back_to_list": "Tillbaka till alla blogginlägg",
+    "delete_title": "Ta bort blogginlägg",
+    "delete_confirm": "Är du säker på att du vill ta bort blogginlägget?",
+    "close": "Stäng",
+    "markdown_hint_1": "Innehållet stödjer Markdown-syntax — som *kursiv*, **fet**, osv.",
+    "markdown_hint_2": "Se ett markdown",
+    "markdown_link": "fusklapp"
+  },
+  "blogCard": {
+    "read": "Läs",
+    "updated": "Uppdaterad"
+  },
+  "login": {
+    "title": "Logga in",
+    "email": "E-post",
+    "emailPlaceholder": "email@hotmail.com",
+    "password": "Lösenord",
+    "passwordPlaceholder": "••••••••",
+    "invalidEmail": "Ange en giltig e-postadress.",
+    "captchaRequired": "Vänligen slutför CAPTCHA.",
+    "button": "Logga in"
+  },
+  "navbar": {
+    "brand": "Steven Software",
+    "services": "Tjänster",
+    "caseStudies": "Fallstudier",
+    "blog": "Blogg",
+    "call": "Ring",
+    "email": "E-post",
+    "home": "Hem",
+    "logout": "Logga ut",
+    "logoutTitle": "Logga ut",
+    "logoutConfirm": "Är du säker på att du vill logga ut?",
+    "close": "Stäng"
+  },
+  "profile": {
+    "profileTitle": "Profil",
+    "editPasswordTitle": "Ändra lösenord",
+
+    "firstName": "Förnamn",
+    "lastName": "Efternamn",
+    "email": "E-post",
+    "password": "Lösenord",
+
+    "firstNamePlaceholder": "John",
+    "lastNamePlaceholder": "Doe",
+    "passwordPlaceholder": "••••••••",
+
+    "changeEmail": "Ändra e-post",
+    "changePassword": "Ändra lösenord",
+    "back": "Tillbaka",
+    "save": "Spara",
+
+    "currentPassword": "Nuvarande lösenord",
+    "newPassword": "Nytt lösenord",
+    "confirmPassword": "Bekräfta lösenord",
+
+    "errorConfirmPassword": "Kunde inte bekräfta nytt lösenord"
+  }
+}

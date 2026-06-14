@@ -5,13 +5,9 @@
       <div class="flex justify-between mb-8 border-b border-slate-200 pb-4">
         <div class="flex flex-col gap-2">
           <h1 class="text-4xl lg:text-5xl font-bold text-slate-900">
-            Case Studies
+            {{ $t('case_studies.title') }}
           </h1>
         </div>
-      </div>
-
-      <div v-if="false" class="w-full h-[600px] flex justify-center items-center">
-        <div class="w-16 h-16 border-8 border-indigo-500 border-t-transparent rounded-full animate-spin animate-[pulse_1.2s_ease-in-out_infinite]"></div>
       </div>
 
       <div class="relative flex gap-4 border-slate-200 lg:border-l pt-8 pb-8">
@@ -67,23 +63,57 @@
   import { useUserStore } from '../../stores/UserStore';
   import { storeToRefs } from 'pinia';
   import { CircleDot } from 'lucide-vue-next';
+  import { useI18n } from 'vue-i18n';
   import CaseStudiesCard from './CaseStudiesCard.vue';
   import Contact from '../Contact.vue';
 
   const userStore = useUserStore();
   const { user } = storeToRefs(userStore);
+  const { t } = useI18n();
 
   useHead({
-    title: 'Case Studies | Steven Software',
+    title: 'Case Studies | Web Development Results That Drive Growth - Steven Software',
+
     meta: [
-      { name: 'description', content: 'Explore Steven Software’s portfolio of web development projects, showcasing .NET, Vue, React, and more.' },
-      { name: 'keywords', content: 'web development, case studies, portfolio, Vue, React, .NET, fullstack developer' },
-      { property: 'og:title', content: 'Case Studies | Steven Software' },
-      { property: 'og:description', content: 'Explore Steven Software’s portfolio of web development projects, showcasing .NET, Vue, React, and more.' },
-      { property: 'og:type', content: 'website' },
-      { name: 'twitter:card', content: 'summary_large_image' },
-      { name: 'twitter:title', content: 'Case Studies | Steven Software' },
-      { name: 'twitter:description', content: 'Explore Steven Software’s portfolio of web development projects, showcasing .NET, Vue, React, and more.' },
+      {
+        name: 'description',
+        content:
+          t('case_studies.description') ||
+          'Real case studies from Vue and .NET projects showing how I help businesses improve performance, SEO, and conversions with modern web development.',
+      },
+      {
+        name: 'keywords',
+        content:
+          'web development case studies, Vue case studies, .NET case studies, full stack developer Sweden, webbutvecklare Sverige, website performance optimization, SEO case studies, conversion optimization results, freelance web developer Sweden, portfolio web developer Stockholm',
+      },
+      {
+        property: 'og:title',
+        content:
+          'Case Studies | Real Web Development Results & Projects',
+      },
+      {
+        property: 'og:description',
+        content:
+          'Explore real Vue & .NET case studies showing measurable improvements in performance, SEO, and conversion rates for businesses.',
+      },
+      {
+        property: 'og:type',
+        content: 'website',
+      },
+
+      {
+        name: 'twitter:card',
+        content: 'summary_large_image',
+      },
+      {
+        name: 'twitter:title',
+        content: 'Case Studies | Real Web Development Results',
+      },
+      {
+        name: 'twitter:description',
+        content:
+          'Vue & .NET case studies focused on performance, SEO, and conversion improvements.',
+      },
     ],
   });
 </script>

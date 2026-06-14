@@ -1,94 +1,53 @@
-# StevenSoftware - AI EXECUTION CONTRACT
+# AI EXECUTION CONTRACT (SIMPLIFIED)
 
-This file defines strict rules for any AI-assisted code changes in this repository.
+## 1. CORE RULE
 
----
+You are a code-editing system.
 
-## 1. CORE PRINCIPLE (MOST IMPORTANT)
+You must only output:
+- unified diff OR
+- full file replacement OR
+- "NO FILE CHANGES MADE"
 
-The AI must ONLY make changes that are explicitly requested.
-
-- Do NOT refactor code unless explicitly asked
-- Do NOT rename endpoints, methods, or DTOs unless explicitly asked
-- Do NOT remove existing logic unless required to implement the requested change
-- Do NOT "improve", "clean up", or "modernize" unrelated code
-- Do NOT change architecture decisions unless explicitly instructed
-
-If something must be changed to complete the requested task, it is allowed ONLY if it is directly required for that task.
+No explanations unless explicitly requested.
 
 ---
 
-## 2. SAFE CHANGE RULE
+## 2. CHANGE RULE
 
-All changes must satisfy:
-
-- Minimal diff principle (smallest possible change)
-- Localized edits only (do not touch unrelated files or logic)
-- Preserve existing API contracts unless explicitly told otherwise
-- Preserve database, caching, and authentication logic unless explicitly told otherwise
+- Make the smallest possible change
+- Do not refactor unrelated code
+- Do not rename or restructure unless required
+- Do not improve code beyond the request
 
 ---
 
-## 3. API RULES (ABSOLUTE)
+## 3. SAFETY RULE
 
-- Do not change HTTP methods (GET/POST/PUT/DELETE) unless requested
-- Do not rename endpoints unless requested
-- Do not change request/response DTO shapes unless requested
-- Do not change authentication behavior unless requested
-
----
-
-## 4. BACKEND RULES (.NET)
-
-- Keep controllers thin
-- Do not move logic between layers unless requested
-- Do not remove IMemoryCache or similar infrastructure unless requested
-- Preserve service and repository structure unless explicitly asked to change
+If multiple solutions exist:
+- choose the simplest
+- do not guess architectural improvements
+- do not modify unrelated files
 
 ---
 
-## 5. FRONTEND RULES (VUE)
+## 4. FRONTEND (Vue)
 
-- Do not change API usage patterns unless required
-- Respect existing response shapes
-- Do not refactor components unless requested
-
----
-
-## 6. CHANGE INTERPRETATION RULE
-
-If a request is ambiguous:
-
-- Prefer the smallest possible change
-- Ask a clarification question instead of guessing
-- Never perform architectural refactors as a "best guess"
+- Keep Composition API style
+- Do not restructure components
+- Only change what is required
 
 ---
 
-## 7. WHEN CHANGES ARE ALLOWED TO REMOVE/REPLACE CODE
+## 5. BACKEND (.NET)
 
-Only if ALL conditions are true:
-
-- It is required to implement the requested feature
-- There is no way to implement it without modifying that code
-- The change is minimal and directly related to the request
+- Do not change architecture
+- Do not change DTOs or endpoints unless required
+- Keep changes localized
 
 ---
 
-## 8. BUSINESS CONTEXT (REFERENCE ONLY)
+## 6. FINAL RULE
 
-- Lead generation website
-- SEO-focused marketing platform
-- Software development services
-
-These are guiding priorities, NOT reasons to modify code unless explicitly requested.
-
----
-
-## 9. FINAL RULE
-
-When executing tasks:
-
-- Follow instructions exactly
-- Prefer correctness over creativity
-- Never surprise the user with unrelated changes
+Never describe changes.
+Only output actual file modifications.

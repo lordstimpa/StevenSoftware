@@ -1,22 +1,24 @@
 <template>
   <div class="w-full flex flex-col justify-center items-center py-24 px-4 sm:px-6 lg:px-8 gap-14 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950">
+
     <div class="flex flex-col gap-6 text-center max-w-3xl">
 
       <h2 class="text-white text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight">
-        Let’s build something that actually brings you customers
+        {{ t('contact.title') }}
       </h2>
 
       <p class="text-slate-300 text-base sm:text-lg">
-        Tell me what you’re working on — I’ll respond with clear next steps, ideas, and what it would take to improve your website’s performance.
+        {{ t('contact.subtitle') }}
       </p>
 
       <div class="flex flex-col sm:flex-row gap-3 justify-center text-sm text-slate-400">
-        <span>✔ Free initial review</span>
+        <span>✔ {{ t('contact.benefit_1') }}</span>
         <span class="hidden sm:block">•</span>
-        <span>✔ No obligation</span>
+        <span>✔ {{ t('contact.benefit_2') }}</span>
         <span class="hidden sm:block">•</span>
-        <span>✔ Response within 1–2 days</span>
+        <span>✔ {{ t('contact.benefit_3') }}</span>
       </div>
+
     </div>
 
     <form @submit.prevent="sendMail" class="flex flex-col gap-5 w-full max-w-3xl">
@@ -32,32 +34,32 @@
       <div class="flex flex-col sm:flex-row gap-5">
 
         <div class="flex flex-col w-full">
-          <label class="font-semibold text-slate-300 mb-2">First name*</label>
+          <label class="font-semibold text-slate-300 mb-2">{{ t('contact.first_name') }}*</label>
           <input v-model="firstName" @blur="firstNameBlur" type="text"
-                 placeholder="John" :class="inputClass(firstNameError)" />
+                 :placeholder="t('contact.first_name_placeholder')" :class="inputClass(firstNameError)" />
           <p v-if="firstNameError" class="text-red-400 text-sm mt-1">{{ firstNameError }}</p>
         </div>
 
         <div class="flex flex-col w-full">
-          <label class="font-semibold text-slate-300 mb-2">Last name</label>
+          <label class="font-semibold text-slate-300 mb-2">{{ t('contact.last_name') }}</label>
           <input v-model="lastName" @blur="lastNameBlur" type="text"
-                 placeholder="Doe" :class="inputClass(lastNameError)" />
+                 :placeholder="t('contact.last_name_placeholder')" :class="inputClass(lastNameError)" />
           <p v-if="lastNameError" class="text-red-400 text-sm mt-1">{{ lastNameError }}</p>
         </div>
 
       </div>
 
       <div class="flex flex-col">
-        <label class="font-semibold text-slate-300 mb-2">Email*</label>
+        <label class="font-semibold text-slate-300 mb-2">{{ t('contact.email') }}*</label>
         <input v-model="email" @blur="emailBlur" type="email"
-               placeholder="email@example.com" :class="inputClass(emailError)" />
+               placeholder="email@hotmail.com" :class="inputClass(emailError)" />
         <p v-if="emailError" class="text-red-400 text-sm mt-1">{{ emailError }}</p>
       </div>
 
       <div class="flex flex-col">
-        <label class="font-semibold text-slate-300 mb-2">What are you trying to improve?</label>
+        <label class="font-semibold text-slate-300 mb-2">{{ t('contact.message_label') }}</label>
         <textarea v-model="message" @blur="messageBlur" rows="6"
-                  placeholder="Example: I want more leads from my website..."
+                  :placeholder="t('contact.message_placeholder')"
                   :class="inputClass(messageError)" />
         <p v-if="messageError" class="text-red-400 text-sm mt-1">{{ messageError }}</p>
       </div>
@@ -75,14 +77,16 @@
                 class="text-lg font-semibold text-white bg-indigo-600 hover:bg-indigo-700
                      px-6 py-3 rounded-md transition shadow-lg
                      disabled:opacity-50 disabled:cursor-not-allowed">
-          <span v-if="isSubmitting">Sending...</span>
-          <span v-else>Get My Free Website Review</span>
+
+          <span v-if="isSubmitting">{{ t('contact.sending') }}</span>
+          <span v-else>{{ t('contact.submit') }}</span>
+
         </button>
 
       </div>
 
       <p class="text-slate-400 text-sm italic text-center">
-        I’ll look at your website (or idea) and tell you exactly what’s blocking conversions.
+        {{ t('contact.footer_note') }}
       </p>
 
     </form>
@@ -94,6 +98,9 @@
   import { post } from '../tools/api'
   import { useForm, useField } from 'vee-validate'
   import * as yup from 'yup'
+  import { useI18n } from 'vue-i18n'
+
+  const { t } = useI18n()
 
   const recaptchaSiteKey = import.meta.env.VITE_RECAPTCHA_SITE_KEY
 

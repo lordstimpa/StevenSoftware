@@ -27,7 +27,7 @@
       </h1>
 
       <button class="hover:cursor-pointer absolute text-md bottom-4 right-4 font-semibold text-white bg-indigo-600 hover:bg-indigo-700 px-5 py-2 rounded-md transition z-10">
-        {{ showContent ? 'Close' : 'Read' }}
+        {{ showContent ? t('case_study.close') : t('case_study.read') }}
       </button>
 
       <transition name="fade-slide">
@@ -36,17 +36,35 @@
           <div v-if="props.caseStudyId == 1"
                class="bg-white/95 border border-slate-200 text-left backdrop-blur-md p-6 m-6 rounded-lg shadow-lg flex flex-col gap-4">
             <p class="font-semibold text-2xl text-slate-900">Steven Software</p>
-            <p class="text-sm text-slate-600">I created this website to serve as a homebase for myself where I can share my thoughts and ideas and also display my projects and professional work.</p>
-            <p class="text-sm text-slate-600">It is a complete full-stack project, featuring a proper deployment pipeline, hosting setup, APIs, web server, and custom domain.</p>
-            <p class="text-sm text-slate-600">Website is hosted on my very own homelab which I maintain and develop.</p>
+
+            <p class="text-sm text-slate-600">
+              {{ t('case_study.steven_1') }}
+            </p>
+
+            <p class="text-sm text-slate-600">
+              {{ t('case_study.steven_2') }}
+            </p>
+
+            <p class="text-sm text-slate-600">
+              {{ t('case_study.steven_3') }}
+            </p>
           </div>
 
           <div v-if="props.caseStudyId == 2"
                class="bg-white/95 border border-slate-200 text-left backdrop-blur-md p-6 m-6 rounded-lg shadow-lg flex flex-col gap-4">
             <p class="font-semibold text-2xl text-slate-900">Gaming Association Website</p>
-            <p class="text-sm text-slate-600">This project was developed for a gaming association that I am a part of. Goal was to provide a platform for sharing tournaments, events, and news with members.</p>
-            <p class="text-sm text-slate-600">Facebook API was used to fully integrate medias, posts and events into the website.</p>
-            <p class="text-sm text-slate-600">Website was fully up and running on Azure but we lacked the funds to keep it online.</p>
+
+            <p class="text-sm text-slate-600">
+              {{ t('case_study.gaming_1') }}
+            </p>
+
+            <p class="text-sm text-slate-600">
+              {{ t('case_study.gaming_2') }}
+            </p>
+
+            <p class="text-sm text-slate-600">
+              {{ t('case_study.gaming_3') }}
+            </p>
           </div>
         </div>
       </transition>
@@ -65,9 +83,15 @@
         <div v-if="props.caseStudyId == 1"
              class="bg-white border border-slate-200 text-left p-6 m-6 rounded-lg shadow-sm flex flex-col gap-4">
           <p class="font-semibold text-2xl text-slate-900">Steven Software</p>
-          <p class="text-sm text-slate-600">I created this website to serve as a homebase for myself where I can share my thoughts and ideas and also display my projects and professional work.</p>
-          <p class="text-sm text-slate-600">It is a complete full-stack project, featuring a proper deployment pipeline, hosting setup, APIs, web server, and custom domain.</p>
-          <p class="text-sm text-slate-600">Website is hosted on my very own homelab which I maintain and develop.</p>
+          <p class="text-sm text-slate-600">
+            {{ t('case_study.steven_1') }}
+          </p>
+          <p class="text-sm text-slate-600">
+            {{ t('case_study.steven_2') }}
+          </p>
+          <p class="text-sm text-slate-600">
+            {{ t('case_study.steven_3') }}
+          </p>
 
           <div class="flex flex-wrap gap-2">
             <p class="text-slate-700 bg-slate-100 border border-slate-200 px-3 py-2 rounded-md">.NET</p>
@@ -79,10 +103,15 @@
 
         <div v-if="props.caseStudyId == 2"
              class="bg-white border border-slate-200 text-left p-6 m-6 rounded-lg shadow-sm flex flex-col gap-4">
-          <p class="font-semibold text-2xl text-slate-900">Gaming Association Website</p>
-          <p class="text-sm text-slate-600">This project was developed for a gaming association that I am a part of. Goal was to provide a platform for sharing tournaments, events, and news with members.</p>
-          <p class="text-sm text-slate-600">Facebook API was used to fully integrate medias, posts and events into the website.</p>
-          <p class="text-sm text-slate-600">Website was fully up and running on Azure but we lacked the funds to keep it online.</p>
+          <p class="text-sm text-slate-600">
+            {{ t('case_study.gaming_1') }}
+          </p>
+          <p class="text-sm text-slate-600">
+            {{ t('case_study.gaming_2') }}
+          </p>
+          <p class="text-sm text-slate-600">
+            {{ t('case_study.gaming_3') }}
+          </p>
 
           <div class="flex flex-wrap gap-2">
             <p class="text-slate-700 bg-slate-100 border border-slate-200 px-3 py-2 rounded-md">.NET</p>
@@ -100,11 +129,14 @@
 
 <script setup>
   import { ref } from 'vue'
+  import { useI18n } from 'vue-i18n'
+
+  const { t } = useI18n()
 
   const props = defineProps({
     user: Object,
     caseStudyId: Number
-  });
+  })
 
   const showContent = ref(false)
 
