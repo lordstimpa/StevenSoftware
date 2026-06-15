@@ -51,9 +51,14 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowSpecificOrigin", policy =>
     {
-        policy.WithOrigins("http://localhost:5173", "https://localhost:60064", "https://stevensoftware.se")
-              .AllowAnyHeader()
-              .AllowAnyMethod();
+        policy.WithOrigins(
+            "http://localhost:5173",
+            "https://localhost:60064",
+            "https://stevensoftware.se",
+            "https://www.stevensoftware.se"
+        )
+        .AllowAnyHeader()
+        .AllowAnyMethod();
     });
 });
 
@@ -116,14 +121,21 @@ using (var scope = app.Services.CreateScope())
 
 Console.WriteLine($"Running in {builder.Environment.EnvironmentName} environment");
 
-app.UseStaticFiles();
-app.UseCors("AllowSpecificOrigin");
-app.UseSwagger();
-app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "StevenSoftware API v1"));
 app.UseHttpsRedirection();
+
+app.UseStaticFiles();
+
+app.UseRouting();
+
+app.UseCors("AllowSpecificOrigin");
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.UseSwagger();
+app.UseSwaggerUI(c =>
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "StevenSoftware API v1")
+);
 
 app.MapControllers();
 
