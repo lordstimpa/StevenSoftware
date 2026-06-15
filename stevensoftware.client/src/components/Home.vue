@@ -5,13 +5,17 @@
       <video ref="heroVideo"
              class="w-full h-full object-cover transition-[opacity,filter,transform] duration-[2000ms] ease-out"
              :class="videoReady
-            ? 'opacity-100 blur-0 scale-100'
-            : 'opacity-0 blur-md scale-105'"
+              ? 'opacity-100 blur-0 scale-100'
+              : 'opacity-0 blur-md scale-105'"
              autoplay
              muted
              loop
              playsinline
              preload="auto"
+             controlslist="nodownload noplaybackrate nofullscreen noremoteplayback"
+             disablepictureinpicture
+             disableremoteplayback
+             @contextmenu.prevent
              @loadeddata="onVideoReady">
         <source src="/hero-bg.mp4" type="video/mp4" />
       </video>
@@ -22,32 +26,31 @@
       <div class="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/60"></div>
     </div>
 
-    <div class="relative z-20 flex flex-col-reverse lg:flex-row justify-center items-center w-full gap-8 lg:gap-10">
+    <div class="relative z-20 flex flex-col-reverse lg:flex-row justify-center items-center w-full gap-6 lg:gap-10">
+      <div class="flex flex-col justify-center gap-4 w-full lg:w-[650px]
+          text-center lg:text-left
+          bg-black/50 backdrop-blur-lg
+          border border-white/10
+          rounded-2xl p-4 sm:p-8 lg:p-10 shadow-2xl">
 
-      <div class="flex flex-col justify-center gap-5 w-full lg:w-[650px]
-              text-center lg:text-left
-              bg-black/50 backdrop-blur-lg
-              border border-white/10
-              rounded-2xl p-5 sm:p-8 lg:p-10 shadow-2xl">
-
-        <h1 class="text-3xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight">
+        <h1 class="text-2xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight">
           {{ $t('hero.title_start') }}
           <span class="text-indigo-600">
             {{ $t('hero.title_highlight') }}
           </span>
         </h1>
 
-        <div class="flex flex-col gap-4">
+        <div class="flex flex-col gap-3">
 
-          <p class="text-base sm:text-lg lg:text-xl font-medium text-slate-100">
+          <p class="text-sm sm:text-lg lg:text-xl font-medium text-slate-100">
             {{ $t('hero.subtitle') }}
           </p>
 
-          <p class="text-base sm:text-lg lg:text-xl text-slate-200">
+          <p class="text-sm sm:text-lg lg:text-xl text-slate-200">
             {{ $t('hero.problem') }}
           </p>
 
-          <div class="bg-white/5 border border-white/10 rounded-lg p-3 sm:p-4">
+          <div class="bg-white/5 border border-white/10 rounded-lg p-2 sm:p-4">
             <p class="text-xs sm:text-sm lg:text-base text-slate-200 leading-relaxed">
               ✔ {{ $t('hero.benefits.1') }}<br />
               ✔ {{ $t('hero.benefits.2') }}<br />
@@ -59,30 +62,28 @@
           <div class="flex flex-col sm:flex-row gap-3 w-full">
 
             <button @click="scrollToContact"
-                    class="w-full sm:flex-1 text-base sm:text-lg font-semibold text-white bg-indigo-600 hover:bg-indigo-700 px-5 py-3 rounded-md transition shadow-lg cursor-pointer">
+                    class="w-full sm:flex-1 text-sm sm:text-lg font-semibold text-white bg-indigo-600 hover:bg-indigo-700 px-4 py-2.5 sm:px-5 sm:py-3 rounded-md transition shadow-lg cursor-pointer">
               {{ $t('hero.cta_primary') }}
             </button>
 
             <a href="mailto:steven.dalfall@gmail.com"
-               class="w-full sm:flex-1 text-base sm:text-lg font-semibold text-white/90 border border-white/20 hover:bg-white/10 px-5 py-3 rounded-md transition cursor-pointer text-center">
+               class="hidden sm:block sm:flex-1 text-lg font-semibold text-white/90 border border-white/20 hover:bg-white/10 px-5 py-3 rounded-md transition cursor-pointer text-center">
               {{ $t('hero.cta_secondary') }}
             </a>
 
           </div>
 
-          <p class="text-slate-300 text-xs sm:text-sm italic">
+          <p class="text-[11px] sm:text-sm italic text-slate-300">
             {{ $t('hero.disclaimer') }}
           </p>
 
         </div>
       </div>
-
       <div class="hidden lg:flex justify-center w-[550px]"></div>
     </div>
   </div>
 
   <div class="w-full flex flex-wrap justify-center items-stretch gap-10 py-24 px-6 bg-slate-100">
-
     <div v-animate
          class="border border-slate-200 w-full sm:w-[300px] flex flex-col justify-start p-7 rounded-md shadow-md bg-white hover:shadow-lg transition min-h-[260px]">
 

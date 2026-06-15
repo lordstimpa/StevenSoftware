@@ -1,7 +1,6 @@
 <template>
-  <div v-if="!isLoading && blogPost" class="py-[76px] px-4 text-slate-900 flex justify-center w-full bg-slate-100">
-    <div class="flex flex-col max-w-screen-lg w-full px-4 py-10 mt-6 md:p-8 rounded-xl shadow-md bg-white border border-slate-200">
-
+  <div v-if="!isLoading && blogPost" class="w-full min-h-screen bg-slate-100 py-[76px] px-4 text-slate-900">
+    <div class="mx-auto flex flex-col max-w-screen-lg w-full px-4 py-10 mt-6 md:p-8 rounded-xl shadow-md bg-white border border-slate-200">
       <div class="flex justify-between mb-8 border-b border-slate-200 pb-4">
         <div class="flex flex-col gap-2">
           <h1 class="text-4xl md:text-5xl font-bold text-slate-900 mb-2">
