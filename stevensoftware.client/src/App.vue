@@ -1,5 +1,8 @@
 <template>
-  <div class="w-full min-h-screen flex flex-col bg-slate-100">
+  <div class="relative w-full min-h-screen flex flex-col bg-slate-100">
+
+    <div class="fixed inset-0 bg-slate-100 -z-10"></div>
+
     <Navbar />
     <RouterView />
   </div>
@@ -53,9 +56,3 @@
     }
   });
 </script>
-
-<style>
-  html, body {
-    overflow-x: hidden;
-  }
-</style>

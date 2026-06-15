@@ -78,10 +78,11 @@
                 enter-to-class="max-h-[1000px] opacity-100"
                 leave-from-class="max-h-[1000px] opacity-100"
                 leave-to-class="max-h-0 opacity-0">
-      <div v-if="showContent" class="lg:hidden text-slate-700 flex flex-col gap-4 overflow-hidden w-full">
+      <div v-if="showContent"
+           class="lg:hidden text-slate-700 flex flex-col gap-4 overflow-hidden w-full px-4 py-5">
 
         <div v-if="props.caseStudyId == 1"
-             class="bg-white border border-slate-200 text-left p-6 m-6 rounded-lg shadow-sm flex flex-col gap-4">
+             class="text-left flex flex-col gap-4 lg:bg-white lg:border lg:border-slate-200 lg:p-6 lg:m-6 lg:rounded-lg lg:shadow-sm">
           <p class="font-semibold text-2xl text-slate-900">Steven Software</p>
           <p class="text-sm text-slate-600">
             {{ t('case_study.steven_1') }}
@@ -102,7 +103,7 @@
         </div>
 
         <div v-if="props.caseStudyId == 2"
-             class="bg-white border border-slate-200 text-left p-6 m-6 rounded-lg shadow-sm flex flex-col gap-4">
+             class="text-left flex flex-col gap-4 lg:bg-white lg:border lg:border-slate-200 lg:p-6 lg:m-6 lg:rounded-lg lg:shadow-sm">
           <p class="text-sm text-slate-600">
             {{ t('case_study.gaming_1') }}
           </p>
