@@ -26,112 +26,92 @@
       <div class="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/60"></div>
     </div>
 
-    <div class="relative z-20 flex flex-col-reverse lg:flex-row justify-center items-center w-full gap-6 lg:gap-10">
-      <div class="flex flex-col justify-center gap-4 w-full lg:w-[650px]
-          text-center lg:text-left
-          bg-black/50 backdrop-blur-lg
-          border border-white/10
-          rounded-2xl p-4 sm:p-8 lg:p-10 shadow-2xl">
+    <div v-animate class="absolute inset-0 z-20 flex items-center justify-center px-6 text-center">
+      <div class="max-w-5xl">
 
-        <h1 class="text-2xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight">
-          {{ $t('hero.title_start') }}
-          <span class="text-indigo-600">
-            {{ $t('hero.title_highlight') }}
+        <h1 class="text-6xl sm:text-6xl lg:text-8xl font-extrabold text-white leading-none tracking-tight">
+          {{ $t('hero.headline_part_1') }}
+          <span class="text-indigo-500">
+            {{ $t('hero.headline_highlight') }}
           </span>
         </h1>
 
-        <div class="flex flex-col gap-3">
+        <p class="mt-6 text-xl sm:text-2xl text-white font-semibold max-w-2xl mx-auto">
+          {{ $t('hero.subtitle') }}
+        </p>
 
-          <p class="text-sm sm:text-lg lg:text-xl font-medium text-slate-100">
-            {{ $t('hero.subtitle') }}
-          </p>
+        <div class="mt-10 flex flex-col sm:flex-row gap-4 justify-center items-center w-full">
 
-          <p class="text-sm sm:text-lg lg:text-xl text-slate-200">
-            {{ $t('hero.problem') }}
-          </p>
+          <button @click="goToContact()"
+                  class="w-50 px-8 py-4 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-lg rounded-md transition shadow-lg cursor-pointer">
+            {{ $t('hero.cta_primary') }}
+          </button>
 
-          <div class="bg-white/5 border border-white/10 rounded-lg p-2 sm:p-4">
-            <p class="text-xs sm:text-sm lg:text-base text-slate-200 leading-relaxed">
-              ✔ {{ $t('hero.benefits.1') }}<br />
-              ✔ {{ $t('hero.benefits.2') }}<br />
-              ✔ {{ $t('hero.benefits.3') }}<br />
-              ✔ {{ $t('hero.benefits.4') }}
-            </p>
-          </div>
-
-          <div class="flex flex-col sm:flex-row gap-3 w-full">
-
-            <button @click="scrollToContact"
-                    class="w-full sm:flex-1 text-sm sm:text-lg font-semibold text-white bg-indigo-600 hover:bg-indigo-700 px-4 py-2.5 sm:px-5 sm:py-3 rounded-md transition shadow-lg cursor-pointer">
-              {{ $t('hero.cta_primary') }}
-            </button>
-
-            <a href="mailto:steven.dalfall@gmail.com"
-               class="hidden sm:block sm:flex-1 text-lg font-semibold text-white/90 border border-white/20 hover:bg-white/10 px-5 py-3 rounded-md transition cursor-pointer text-center">
-              {{ $t('hero.cta_secondary') }}
-            </a>
-
-          </div>
-
-          <p class="text-[11px] sm:text-sm italic text-slate-300">
-            {{ $t('hero.disclaimer') }}
-          </p>
-
+          <RouterLink to="/case-studies"
+                      class="w-50 px-8 py-4 text-white border border-white/40 hover:bg-white/10 text-lg rounded-md transition text-center cursor-pointer">
+            {{ $t('hero.cta_secondary') }}
+          </RouterLink>
         </div>
       </div>
-      <div class="hidden lg:flex justify-center w-[550px]"></div>
     </div>
   </div>
 
-  <div class="w-full flex flex-wrap justify-center items-stretch gap-10 py-24 px-6 bg-slate-100">
-    <div v-animate
-         class="border border-slate-200 w-full sm:w-[300px] flex flex-col justify-start p-7 rounded-md shadow-md bg-white hover:shadow-lg transition min-h-[260px]">
+  <div class="w-full flex flex-col items-center justify-center py-24 px-6 bg-slate-100">
+    <div v-animate class="text-center max-w-3xl mb-14">
 
-      <p class="text-2xl font-bold text-slate-900 leading-tight">
-        {{ $t('home.lead_driven_web_development') }}
+      <p class="text-sm uppercase tracking-widest text-indigo-600 font-semibold">
+        {{ $t('case_studies.overview_tag') }}
       </p>
 
-      <p class="text-sm text-slate-600 mt-2 leading-relaxed">
-        {{ $t('home.lead_driven_web_development_description') }}
+      <h2 class="text-4xl sm:text-5xl font-bold text-slate-900 mt-3">
+        {{ $t('case_studies.overview_title') }}
+      </h2>
+
+      <p class="text-slate-600 mt-4 text-lg">
+        {{ $t('case_studies.overview_subtitle') }}
       </p>
+
     </div>
 
-    <div v-animate
-         class="border border-slate-200 w-full sm:w-[300px] flex flex-col justify-start p-7 rounded-md shadow-md bg-white hover:shadow-lg transition min-h-[260px]">
+    <div class="w-full max-w-6xl grid grid-cols-1 md:grid-cols-3 gap-8">
 
-      <p class="text-2xl font-bold text-slate-900 leading-tight">
-        {{ $t('home.website_optimization_upgrades') }}
-      </p>
+      <div v-animate class="bg-white border border-slate-200 rounded-2xl p-8 shadow-sm hover:shadow-lg transition">
+        <p class="text-indigo-600 font-semibold text-sm tracking-widest">
+          {{ $t('case_studies.cards.strategy.tag') }}
+        </p>
+        <h3 class="text-xl font-bold text-slate-900 mt-2">
+          {{ $t('case_studies.cards.strategy.title') }}
+        </h3>
+        <p class="text-slate-600 mt-3 text-sm">
+          {{ $t('case_studies.cards.strategy.description') }}
+        </p>
+      </div>
 
-      <p class="text-sm text-slate-600 mt-2 leading-relaxed">
-        {{ $t('home.website_optimization_upgrades_description') }}
-      </p>
+      <div v-animate class="bg-white border border-slate-200 rounded-2xl p-8 shadow-sm hover:shadow-lg transition">
+        <p class="text-indigo-600 font-semibold text-sm tracking-widest">
+          {{ $t('case_studies.cards.performance.tag') }}
+        </p>
+        <h3 class="text-xl font-bold text-slate-900 mt-2">
+          {{ $t('case_studies.cards.performance.title') }}
+        </h3>
+        <p class="text-slate-600 mt-3 text-sm">
+          {{ $t('case_studies.cards.performance.description') }}
+        </p>
+      </div>
+
+      <div v-animate class="bg-white border border-slate-200 rounded-2xl p-8 shadow-sm hover:shadow-lg transition">
+        <p class="text-indigo-600 font-semibold text-sm tracking-widest">
+          {{ $t('case_studies.cards.conversion.tag') }}
+        </p>
+        <h3 class="text-xl font-bold text-slate-900 mt-2">
+          {{ $t('case_studies.cards.conversion.title') }}
+        </h3>
+        <p class="text-slate-600 mt-3 text-sm">
+          {{ $t('case_studies.cards.conversion.description') }}
+        </p>
+      </div>
+
     </div>
-
-    <div v-animate
-         class="border border-slate-200 w-full sm:w-[300px] flex flex-col justify-start p-7 rounded-md shadow-md bg-white hover:shadow-lg transition min-h-[260px]">
-
-      <p class="text-2xl font-bold text-slate-900 leading-tight">
-        {{ $t('home.seo_performance_growth') }}
-      </p>
-
-      <p class="text-sm text-slate-600 mt-2 leading-relaxed">
-        {{ $t('home.seo_performance_growth_description') }}
-      </p>
-    </div>
-
-    <div v-animate
-         class="border border-slate-200 w-full sm:w-[300px] flex flex-col justify-start p-7 rounded-md shadow-md bg-white hover:shadow-lg transition min-h-[260px]">
-
-      <p class="text-2xl font-bold text-slate-900 leading-tight">
-        {{ $t('home.conversion_contact_systems') }}
-      </p>
-
-      <p class="text-sm text-slate-600 mt-2 leading-relaxed">
-        {{ $t('home.conversion_contact_systems_description') }}
-      </p>
-    </div>
-
   </div>
 
   <div class="w-full flex flex-col justify-center py-28 px-6 bg-slate-50">
@@ -273,78 +253,226 @@
     </div>
   </div>
 
-  <div class="w-full flex flex-col justify-center gap-12 py-24 px-4 sm:px-6 lg:px-8 bg-slate-50">
+  <div v-animate class="animate-wrapper">
+    <div class="w-full flex flex-col items-center justify-center py-28 px-6 bg-slate-50">
+      <div class="text-center mb-16 max-w-2xl">
+        <h2 class="text-4xl sm:text-5xl font-bold text-slate-900">
+          {{ $t('pricing.title') }}
+        </h2>
 
-    <div v-animate="'fade-right'" class="w-full flex flex-col justify-center items-center gap-3 text-center">
+        <p class="text-slate-600 mt-3">
+          {{ $t('pricing.subtitle') }}
+        </p>
+      </div>
 
-      <RouterLink to="/blog" class="text-slate-900 text-3xl sm:text-4xl lg:text-5xl font-bold max-w-[90%] sm:max-w-[1000px] hover:text-indigo-500 transition">
-        {{ $t('home.insights_title') }}
-      </RouterLink>
+      <div class="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div class="bg-white border border-slate-200/70 rounded-xl p-8 shadow-sm
+          hover:-translate-y-1 hover:shadow-xl transition-all duration-300
+          flex flex-col w-full max-w-md mx-auto">
 
-      <p class="text-slate-600 italic text-sm sm:text-base max-w-[750px]">
-        {{ $t('home.insights_description') }}
-      </p>
-    </div>
+          <h3 class="text-2xl font-bold text-slate-900">
+            {{ $t('pricing.starter.title') }}
+          </h3>
 
-    <div v-animate="'fade-right'" v-if="isLoadingBlogposts.value" class="w-full h-[240px] sm:h-[340px] flex justify-center items-center">
-      <div class="w-12 h-12 sm:w-16 sm:h-16 border-8 border-indigo-500 border-t-transparent rounded-full animate-spin"></div>
-    </div>
-
-    <div v-animate="'fade-right'" v-else class="relative w-full flex justify-center items-center">
-
-      <button v-if="blogPosts.length > 2"
-              @click="scrollLeft"
-              class="hidden sm:flex text-slate-900 hover:text-indigo-600 transition z-10 p-3 cursor-pointer">
-        <ChevronLeft class="w-8 h-8 sm:w-12 sm:h-12" />
-      </button>
-
-      <div ref="carousel"
-           :class="[
-           'flex overflow-x-auto sm:overflow-hidden scroll-smooth gap-6 w-full max-w-[1100px] px-2' ,
-           blogPosts.length < 2 ? 'justify-center' : 'justify-start',
-      ]"
-    >
-      <RouterLink
-        v-for="blog in blogPosts"
-        :key="blog.id"
-        :to="`/blog/${blog.id}`"
-        class="shadow-md border border-slate-200 shrink-0 w-[85%] sm:w-[420px] lg:w-[520px]
-               h-[260px] sm:h-[340px]
-               flex flex-col justify-between
-               p-6 sm:p-8 rounded-lg
-               bg-white hover:shadow-xl hover:brightness-105 transition"
-      >
-        <div>
-          <p class="text-xl sm:text-2xl font-bold pb-2 text-slate-900">
-            {{ blog.title }}
+          <p class="text-slate-600 mt-2">
+            {{ $t('pricing.starter.description') }}
           </p>
 
-          <p class="text-xs text-slate-500">
-            {{ formatDateTime(blog.createdAt) }}
+          <p class="text-3xl font-bold text-slate-900 mt-6">
+            {{ $t('pricing.starter.price') }}
           </p>
+
+          <div class="mt-6 text-sm space-y-2 flex-1">
+            <p class="text-slate-900">✔ {{ $t('pricing.features.starter.1') }}</p>
+            <p class="text-slate-900">✔ {{ $t('pricing.features.starter.2') }}</p>
+            <p class="text-slate-900">✔ {{ $t('pricing.features.starter.3') }}</p>
+            <p class="text-slate-900">✔ {{ $t('pricing.features.starter.4') }}</p>
+            <p class="text-slate-900">✔ {{ $t('pricing.features.starter.5') }}</p>
+
+            <p class="text-slate-400 opacity-40">✔ {{ $t('pricing.features.shared.1') }}</p>
+            <p class="text-slate-400 opacity-40">✔ {{ $t('pricing.features.shared.2') }}</p>
+            <p class="text-slate-400 opacity-40">✔ {{ $t('pricing.features.shared.3') }}</p>
+            <p class="text-slate-400 opacity-40">✔ {{ $t('pricing.features.shared.4') }}</p>
+            <p class="text-slate-400 opacity-40">✔ {{ $t('pricing.features.shared.5') }}</p>
+            <p class="text-slate-400 opacity-40">✔ {{ $t('pricing.features.shared.6') }}</p>
+          </div>
+
+          <button @click="goToContact('essential')"
+                  class="mt-8 w-full bg-slate-900 text-white py-3 rounded-md hover:bg-slate-800 transition cursor-pointer">
+            {{ $t('pricing.starter.cta') }}
+          </button>
         </div>
 
-        <div class="text-sm text-slate-600 line-clamp-3 mt-4">
-          {{ blog.summary }}
+        <div class="relative overflow-visible rounded-xl p-8 flex flex-col
+          border border-indigo-300
+          bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900
+          shadow-xl hover:shadow-indigo-500/20 hover:-translate-y-1
+          transition-all duration-300
+          w-full max-w-md mx-auto">
+          <div class="absolute inset-0 bg-gradient-to-tr from-indigo-500/10 via-transparent to-cyan-500/10 rounded-xl"></div>
+          <div class="absolute -top-3 left-1/2 -translate-x-1/2 z-20">
+            <span class="bg-indigo-500 text-white text-xs px-3 py-1 rounded-full shadow-lg border border-indigo-300/30">
+              {{ $t('pricing.business.badge') }}
+            </span>
+          </div>
+
+          <div class="relative flex flex-col h-full">
+            <h3 class="text-2xl font-bold text-white">
+              {{ $t('pricing.business.title') }}
+            </h3>
+
+            <p class="text-slate-300 mt-2">
+              {{ $t('pricing.business.description') }}
+            </p>
+
+            <p class="text-3xl font-bold text-white mt-6">
+              {{ $t('pricing.business.price') }}
+            </p>
+
+            <div class="mt-6 text-sm space-y-2 flex-1">
+              <p class="text-white">✔ {{ $t('pricing.features.business.1') }}</p>
+              <p class="text-white">✔ {{ $t('pricing.features.business.2') }}</p>
+              <p class="text-white">✔ {{ $t('pricing.features.business.3') }}</p>
+              <p class="text-white">✔ {{ $t('pricing.features.business.4') }}</p>
+              <p class="text-white">✔ {{ $t('pricing.features.business.5') }}</p>
+
+              <p class="text-white">✔ {{ $t('pricing.features.shared.1') }}</p>
+              <p class="text-white">✔ {{ $t('pricing.features.shared.2') }}</p>
+
+              <p class="text-slate-400 opacity-40">✔ {{ $t('pricing.features.shared.3') }}</p>
+              <p class="text-slate-400 opacity-40">✔ {{ $t('pricing.features.shared.4') }}</p>
+              <p class="text-slate-400 opacity-40">✔ {{ $t('pricing.features.shared.5') }}</p>
+              <p class="text-slate-400 opacity-40">✔ {{ $t('pricing.features.shared.6') }}</p>
+            </div>
+
+            <button @click="goToContact('business')"
+                    class="mt-8 w-full bg-indigo-500 text-white py-3 rounded-md hover:bg-indigo-600 hover:shadow-lg transition-all duration-300 cursor-pointer">
+              {{ $t('pricing.business.cta') }}
+            </button>
+          </div>
         </div>
 
-        <div class="mt-4 text-sm font-semibold text-indigo-600 hover:underline">
-          Read more →
+        <div class="relative overflow-hidden rounded-2xl p-8 flex flex-col
+          border border-violet-200/40
+          shadow-lg hover:-translate-y-1 hover:shadow-xl
+          transition-all duration-300
+          bg-gradient-to-br from-violet-50 via-white to-fuchsia-50
+          w-full max-w-md mx-auto">
+          <div class="absolute -bottom-32 -left-32 w-72 h-72 bg-fuchsia-300/20 blur-3xl rounded-full"></div>
+
+          <h3 class="text-2xl font-bold text-slate-900 relative">
+            {{ $t('pricing.custom.title') }}
+          </h3>
+
+          <p class="text-slate-600 mt-2 relative">
+            {{ $t('pricing.custom.description') }}
+          </p>
+
+          <p class="text-3xl font-bold text-violet-700 mt-6 relative">
+            {{ $t('pricing.custom.price') }}
+          </p>
+
+          <div class="mt-6 text-sm space-y-2 flex-1 relative">
+            <p class="text-slate-800">✔ {{ $t('pricing.features.custom.1') }}</p>
+            <p class="text-slate-800">✔ {{ $t('pricing.features.custom.2') }}</p>
+            <p class="text-slate-800">✔ {{ $t('pricing.features.custom.3') }}</p>
+            <p class="text-slate-800">✔ {{ $t('pricing.features.custom.4') }}</p>
+            <p class="text-slate-800">✔ {{ $t('pricing.features.custom.5') }}</p>
+
+            <p class="text-slate-800">✔ {{ $t('pricing.features.shared.1') }}</p>
+            <p class="text-slate-800">✔ {{ $t('pricing.features.shared.2') }}</p>
+            <p class="text-slate-800">✔ {{ $t('pricing.features.shared.3') }}</p>
+            <p class="text-slate-800">✔ {{ $t('pricing.features.shared.4') }}</p>
+            <p class="text-slate-800">✔ {{ $t('pricing.features.shared.5') }}</p>
+            <p class="text-slate-800">✔ {{ $t('pricing.features.shared.6') }}</p>
+          </div>
+
+          <button @click="goToContact('custom')"
+                  class="relative mt-8 w-full py-3 rounded-lg text-white font-semibold
+             bg-gradient-to-r from-violet-600 via-purple-600 to-fuchsia-600
+             hover:from-violet-500 hover:to-fuchsia-500
+             shadow-md hover:shadow-xl transition cursor-pointer">
+            {{ $t('pricing.custom.cta') }}
+          </button>
+
         </div>
-      </RouterLink>
-    </div>
-
-      <button v-if="blogPosts.length > 2"
-              @click="scrollRight"
-              class="hidden sm:flex text-slate-900 hover:text-indigo-600 transition z-10 p-3 cursor-pointer">
-        <ChevronRight class="w-8 h-8 sm:w-12 sm:h-12" />
-      </button>
-
+      </div>
     </div>
   </div>
 
-  <div v-animate="'fade-up'" ref="contactSection">
-      <Contact />
+  <div class="bg-slate-950" ref="contactSection">
+    <div v-animate="'fade-up'">
+      <Contact :selectedPlan="selectedPlan" />
+    </div>
+
+    <div class="w-full flex flex-col justify-center gap-12 py-24 px-4 sm:px-6 lg:px-8 bg-transparent">
+
+      <div v-animate="'fade-right'" class="w-full flex flex-col justify-center items-center gap-3 text-center">
+
+        <RouterLink to="/blog" class="text-slate-50 text-3xl sm:text-4xl lg:text-5xl font-bold max-w-[90%] sm:max-w-[1000px] hover:text-indigo-400 transition">
+          {{ $t('home.insights_title') }}
+        </RouterLink>
+
+        <p class="text-slate-400 italic text-sm sm:text-base max-w-[750px]">
+          {{ $t('home.insights_description') }}
+        </p>
+      </div>
+
+      <div v-animate="'fade-right'" v-if="isLoadingBlogposts.value" class="w-full h-[240px] sm:h-[340px] flex justify-center items-center">
+        <div class="w-12 h-12 sm:w-16 sm:h-16 border-8 border-indigo-500 border-t-transparent rounded-full animate-spin"></div>
+      </div>
+
+      <div v-animate="'fade-right'" v-else class="relative w-full flex justify-center items-center">
+
+        <button v-if="blogPosts.length > 2"
+                @click="scrollLeft"
+                class="hidden sm:flex text-slate-400 hover:text-indigo-400 transition z-10 p-3 cursor-pointer">
+          <ChevronLeft class="w-8 h-8 sm:w-12 sm:h-12" />
+        </button>
+
+        <div ref="carousel"
+              :class="[
+              'flex overflow-x-auto sm:overflow-hidden scroll-smooth gap-6 w-full max-w-[1100px] px-2' ,
+              blogPosts.length < 2 ? 'justify-center' : 'justify-start',
+          ]"
+        >
+          <RouterLink
+            v-for="blog in blogPosts"
+            :key="blog.id"
+            :to="`/blog/${blog.id}`"
+            class="shadow-md border-t border-slate-800 shrink-0 w-[85%] sm:w-[420px] lg:w-[520px]
+                  h-[260px] sm:h-[340px]
+                  flex flex-col justify-between
+                  p-6 sm:p-8 rounded-lg
+                  bg-slate-900 hover:shadow-xl hover:brightness-105 transition"
+          >
+            <div>
+              <p class="text-xl sm:text-2xl font-bold pb-2 text-white">
+                {{ blog.title }}
+              </p>
+
+              <p class="text-xs text-slate-500">
+                {{ formatDateTime(blog.createdAt) }}
+              </p>
+            </div>
+
+            <div class="text-sm text-slate-300 line-clamp-3 mt-4">
+              {{ blog.summary }}
+            </div>
+
+            <div class="mt-4 text-sm font-semibold text-indigo-500 hover:underline">
+              Read more →
+            </div>
+          </RouterLink>
+        </div>
+
+        <button v-if="blogPosts.length > 2"
+                @click="scrollRight"
+                class="hidden sm:flex text-slate-400 hover:text-indigo-400 transition z-10 p-3 cursor-pointer">
+          <ChevronRight class="w-8 h-8 sm:w-12 sm:h-12" />
+        </button>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -356,12 +484,22 @@
   import { formatDateTime } from '../tools/helpers.js';
   import Contact from "./Contact.vue"
 
+  const contactSection = ref(null);
+  const selectedPlan = ref('')
   const isLoadingBlogposts = ref(false);
   const blogPosts = ref([]);
-  const contactSection = ref(null);
   const carousel = ref(null);
   const cardWidth = ref(520);
   const videoReady = ref(false);
+
+  const goToContact = (plan = '') => {
+    selectedPlan.value = plan
+
+    contactSection.value?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start'
+    })
+  }
 
   const onVideoReady = () => {
     videoReady.value = true;
@@ -403,10 +541,6 @@
     if (carousel.value) {
       carousel.value.scrollBy({ left: cardWidth.value, behavior: 'smooth' });
     }
-  };
-
-  const scrollToContact = () => {
-    contactSection.value?.scrollIntoView({ behavior: 'smooth' });
   };
 
   onMounted(() => {

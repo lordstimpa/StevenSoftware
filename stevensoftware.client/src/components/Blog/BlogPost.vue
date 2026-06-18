@@ -1,202 +1,153 @@
 <template>
-  <div v-if="!isLoading && blogPost" class="w-full min-h-screen bg-slate-100 py-[76px] px-4 text-slate-900">
-    <div class="mx-auto flex flex-col max-w-screen-lg w-full px-4 py-10 mt-6 md:p-8 rounded-xl shadow-md bg-white border border-slate-200">
-      <div class="flex justify-between mb-8 border-b border-slate-200 pb-4">
-        <div class="flex flex-col gap-2">
-          <h1 class="text-4xl md:text-5xl font-bold text-slate-900 mb-2">
-            {{ t('blog.title') }}
+  <div class="w-full min-h-screen bg-slate-100 text-slate-900">
+    <div class="relative w-full flex justify-center px-6 py-36 lg:py-46 overflow-hidden">
+      <div class="absolute inset-0 bg-slate-950"></div>
+
+      <div v-animate class="relative z-10 max-w-5xl text-center flex flex-col gap-6">
+        <div class="flex flex-col gap-4">
+
+          <h1 class="min-h-[3.5rem] sm:min-h-[5rem] lg:min-h-[6rem] flex items-center justify-center text-center">
+
+            <span v-if="isLoading"
+                  class="block h-10 sm:h-16 lg:h-20 w-3/4 mx-auto bg-slate-700/40 rounded animate-pulse">
+            </span>
+
+            <span v-else
+                  class="text-4xl sm:text-6xl lg:text-7xl font-bold text-white leading-tight">
+              {{ blogPost?.title }}
+            </span>
+
           </h1>
 
-          <div class="flex gap-2 text-s md:text-md text-slate-500">
-            <RouterLink to="/blog" class="cursor-pointer text-indigo-600 hover:text-slate-900 transition hover:underline">
-              {{ t('blog.title') }}
-            </RouterLink>
+          <div class="min-h-[1.5rem] flex items-center justify-center">
 
-            <span class="text-slate-400">></span>
+            <span v-if="isLoading"
+                  class="block h-6 w-1/2 mx-auto bg-slate-700/30 rounded animate-pulse">
+            </span>
 
-            <RouterLink :to="`/blog/${blogPostId}`"
-                        class="cursor-pointer text-indigo-600 hover:text-slate-900 transition hover:underline">
-              {{ blogPost.title }}
-            </RouterLink>
-          </div>
-        </div>
-      </div>
-
-      <div v-if="!isEditMode" class="flex flex-col">
-
-        <div class="flex w-full justify-end mb-6">
-          <Menu v-if="user?.email" as="div" class="relative inline-block text-left">
-            <MenuButton as="button"
-                        @click.stop
-                        class="cursor-pointer w-10 h-10 flex items-center justify-center rounded-full hover:border hover:border-slate-200 hover:bg-slate-100">
-              <EllipsisVertical class="w-7 h-7 text-slate-600" />
-            </MenuButton>
-
-            <MenuItems class="absolute right-0 flex flex-col gap-2 w-30 border p-2 m-2 rounded border-slate-200 bg-white shadow-md">
-
-              <MenuItem class="text-left p-2 cursor-pointer text-slate-700 hover:bg-slate-100 rounded">
-                <span @click.stop="toggleEditMode">{{ t('blog.edit') }}</span>
-              </MenuItem>
-
-              <MenuItem class="text-left p-2 cursor-pointer text-red-600 hover:bg-red-50 rounded">
-                <span @click.stop="showModal = true">{{ t('blog.delete') }}</span>
-              </MenuItem>
-
-            </MenuItems>
-          </Menu>
-        </div>
-
-        <img v-if="blogPost.coverImage"
-             :src="`${baseUrl}${blogPost.coverImage}`"
-             alt="Cover image"
-             class="w-full h-64 object-cover mb-8 rounded-md border border-slate-200" />
-
-        <div class="mb-8 pb-4 border-b border-slate-200">
-          <div class="w-full flex flex-col md:flex-row justify-between">
-
-            <div>
-              <h1 class="pb-4 text-2xl md:text-4xl text-slate-900">
-                {{ blogPost.title }}
-              </h1>
-
-              <p class="text-slate-500 text-xs md:text-sm italic mt-2">
-                {{ t('blog.author_prefix') }}
-                <span class="text-slate-900">Steven Software</span>
-              </p>
-            </div>
-
-            <div class="flex flex-col gap-2 w-full md:w-80 mt-8 md:mt-0">
-              <p class="text-right text-slate-500 font-medium text-xs md:text-sm">
-                {{ t('blog.created') }}: {{ formatDateTime(blogPost.createdAt) }}
-              </p>
-
-              <p class="text-right text-slate-500 font-medium text-xs md:text-sm">
-                {{ t('blog.updated') }}: {{ formatDateTime(blogPost.updatedAt) }}
-              </p>
-            </div>
+            <p v-else class="text-slate-200 text-lg sm:text-xl max-w-3xl mx-auto">
+              {{ t('blog.author_prefix') }}
+              <span class="text-slate-50 font-semibold">Steven Software</span>
+            </p>
 
           </div>
         </div>
-
-        <div class="pb-10 prose max-w-none text-slate-700" v-html="renderedContent"></div>
       </div>
-
-      <form v-else @submit.prevent="updateBlogPost">
-
-        <div class="bg-yellow-400/60 rounded-md p-4 mb-6 text-slate-900">
-          <p>{{ t('blog.markdown_hint_1') }}</p>
-
-          <p>
-            {{ t('blog.markdown_hint_2') }}
-            <a class="underline font-bold text-slate-900"
-               href="https://www.markdownguide.org/cheat-sheet/"
-               target="_blank">
-              {{ t('blog.markdown_link') }}
-            </a>
-          </p>
-        </div>
-
-        <div class="flex flex-col">
-          <label class="font-semibold text-slate-600 mb-2 pt-2">
-            {{ t('blog.cover_image') }}
-          </label>
-
-          <ImageUpload :existing-image="blogPost?.coverImage"
-                       @uploaded="handleImageUpload"
-                       @removed="handleImageRemoval" />
-        </div>
-
-        <div class="flex flex-col pb-4">
-          <label class="font-semibold text-slate-600 mb-2 pt-2">
-            {{ t('blog.title_field') }}
-          </label>
-
-          <input :class="[
-              'bg-white text-slate-900 px-4 py-2 border rounded-md focus:outline-none focus:ring-2',
-              titleError ? 'border-red-500 ring-red-500' : 'border-slate-200 focus:ring-slate-400',
-            ]"
-                 type="text"
-                 v-model="title"
-                 :placeholder="t('blog.title_placeholder')" />
-
-          <p v-if="titleError" class="text-red-500 text-sm mt-1">{{ titleError }}</p>
-        </div>
-
-        <div class="flex flex-col mb-4">
-          <label class="font-semibold text-slate-600 mb-2">
-            {{ t('blog.summary_field') }}
-          </label>
-
-          <textarea v-model="summary"
-                    rows="3"
-                    :class="[
-              'w-full bg-white text-slate-900 px-4 py-2 rounded-md focus:outline-none focus:ring-2 border',
-              summaryError ? 'border-red-500 ring-red-500' : 'border-slate-200 focus:ring-slate-400',
-            ]" />
-
-          <p v-if="summaryError" class="text-red-500 text-sm mt-1">{{ summaryError }}</p>
-        </div>
-
-        <div class="flex flex-col mb-8 pb-8 border-b border-slate-200">
-          <label class="font-semibold text-slate-600 mb-2">
-            {{ t('blog.content_field') }}
-          </label>
-
-          <textarea v-model="content"
-                    rows="15"
-                    :class="[
-              'bg-white text-slate-900 px-4 py-2 border rounded-md focus:outline-none focus:ring-2',
-              contentError ? 'border-red-500 ring-red-500' : 'border-slate-200 focus:ring-slate-400',
-            ]" />
-
-          <p v-if="contentError" class="text-red-500 text-sm mt-1">{{ contentError }}</p>
-        </div>
-
-        <div class="flex justify-between">
-          <button type="button"
-                  class="text-lg font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 px-5 py-2 rounded-md transition"
-                  @click="toggleEditMode">
-            {{ t('blog.cancel') }}
-          </button>
-
-          <button type="submit"
-                  class="text-lg font-semibold text-white bg-indigo-600 hover:bg-indigo-700 px-5 py-2 rounded-md transition">
-            {{ t('blog.save') }}
-          </button>
-        </div>
-
-      </form>
-
-      <div class="mt-10 pt-6 border-t border-slate-200 flex justify-center">
-        <RouterLink to="/blog"
-                    class="inline-flex items-center gap-2 text-indigo-600 hover:text-slate-900 transition font-semibold">
-          <span>{{ t('blog.back_to_list') }}</span>
-        </RouterLink>
-      </div>
-
     </div>
+
+    <div v-animate class="w-full flex justify-center px-4 py-16">
+      <div class="w-full max-w-5xl bg-white border border-slate-200 rounded-2xl shadow-md overflow-hidden">
+        <div class="px-6 pt-6 pb-4 border-b border-slate-200 flex flex-col gap-4">
+          <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+
+            <RouterLink to="/blog" class="text-indigo-700 hover:text-slate-900 font-semibold transition text-sm sm:text-base">
+              ← {{ t('blog.back_to_list') }}
+            </RouterLink>
+
+            <Menu v-if="user?.email" as="div" class="relative self-end sm:self-auto">
+              <MenuButton as="button"
+                          class="w-10 h-10 flex items-center justify-center rounded-full border border-slate-200 hover:bg-slate-100 transition cursor-pointer">
+                <EllipsisVertical class="w-6 h-6 text-slate-700" />
+              </MenuButton>
+
+              <MenuItems class="absolute right-0 mt-2 w-44 bg-white border border-slate-200 rounded-md shadow-md p-1 z-20 focus:outline-none">
+                <MenuItem v-slot="{ active }">
+                  <button @click="toggleEditMode"
+                          class="w-full text-left px-3 py-2 rounded-md text-slate-800 text-sm cursor-pointer"
+                          :class="active ? 'bg-slate-100' : ''">
+                    {{ t('blog.edit') }}
+                  </button>
+                </MenuItem>
+
+                <MenuItem v-slot="{ active }">
+                  <button @click="showModal = true"
+                          class="w-full text-left px-3 py-2 rounded-md text-red-600 text-sm cursor-pointer"
+                          :class="active ? 'bg-red-50' : ''">
+                    {{ t('blog.delete') }}
+                  </button>
+                </MenuItem>
+              </MenuItems>
+            </Menu>
+
+          </div>
+
+          <div class="flex flex-col gap-2">
+            <h1 class="text-2xl sm:text-4xl md:text-5xl font-bold text-slate-900 leading-tight">
+              {{ blogPost?.title }}
+            </h1>
+
+            <p class="text-slate-700 text-sm">
+              {{ t('blog.author_prefix') }}
+              <span class="text-slate-900 font-semibold">Steven Software</span>
+            </p>
+          </div>
+
+          <div v-if="blogPost?.coverImage" class="w-full mt-4">
+            <img :src="imageUrl"
+                 class="w-full max-h-[420px] object-cover rounded-xl border border-slate-200" />
+          </div>
+
+          <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 text-sm text-slate-600 pt-2">
+            <template v-if="isLoading">
+              <div class="h-4 w-32 bg-slate-200 rounded animate-pulse"></div>
+              <div class="h-4 w-32 bg-slate-200 rounded animate-pulse"></div>
+            </template>
+
+            <template v-else>
+              <p>
+                <span class="font-medium text-slate-800">{{ t('blog.created') }}:</span>
+                {{ formatDateTime(blogPost?.createdAt) }}
+              </p>
+
+              <p>
+                <span class="font-medium text-slate-800">{{ t('blog.updated') }}:</span>
+                {{ formatDateTime(blogPost?.updatedAt) }}
+              </p>
+            </template>
+          </div>
+        </div>
+
+        <div class="px-6 py-8">
+          <div v-if="isLoading" class="space-y-3">
+            <div class="h-4 w-full bg-slate-200 rounded animate-pulse"></div>
+            <div class="h-4 w-11/12 bg-slate-200 rounded animate-pulse"></div>
+            <div class="h-4 w-10/12 bg-slate-200 rounded animate-pulse"></div>
+            <div class="h-4 w-9/12 bg-slate-200 rounded animate-pulse"></div>
+          </div>
+
+          <div v-else
+               class="prose max-w-none text-slate-800"
+               v-html="renderedContent"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-10 flex justify-center pb-16">
+      <RouterLink to="/blog" class="text-indigo-700 hover:text-slate-900 font-semibold transition">
+        ← {{ t('blog.back_to_list') }}
+      </RouterLink>
+    </div>
+
   </div>
 
   <Modal v-model="showModal" :title="t('blog.delete_title')">
-
     <template #body>
-      <p class="text-slate-700">{{ t('blog.delete_confirm') }}</p>
+      <p class="text-slate-800">{{ t('blog.delete_confirm') }}</p>
     </template>
 
     <template #footer>
       <div class="flex justify-between">
         <button @click="showModal = false"
-                class="text-lg font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 px-5 py-2 rounded-md transition">
+                class="text-slate-800 bg-slate-100 hover:bg-slate-200 px-5 py-2 rounded-md font-semibold transition">
           {{ t('blog.close') }}
         </button>
 
         <button @click="deleteBlogPost()"
-                class="text-lg font-semibold text-white bg-indigo-600 hover:bg-indigo-700 px-5 py-2 rounded-md transition">
+                class="text-white bg-indigo-600 hover:bg-indigo-700 px-5 py-2 rounded-md font-semibold transition">
           {{ t('blog.delete') }}
         </button>
       </div>
     </template>
-
   </Modal>
 </template>
 
@@ -216,69 +167,59 @@
   import { formatDateTime } from '../../tools/helpers.js';
   import Modal from '../Modal.vue';
   import ImageUpload from '../ImageUpload.vue';
-  import { useI18n } from 'vue-i18n'
+  import { useI18n } from 'vue-i18n';
 
-  const { t } = useI18n()
+  const { t } = useI18n();
 
   const showModal = ref(false);
   const isEditMode = ref(false);
   const isLoading = ref(false);
+
   const blogPost = ref(null);
   const coverImage = ref('');
+  const imageUrl = ref('');
 
   const userStore = useUserStore();
   const { user } = storeToRefs(userStore);
+
   const route = useRoute();
   const blogPostId = Number(route.params.blogPostId);
-  const baseUrl = import.meta.env.VITE_URL;
+  const baseUrl = import.meta.env.VITE_API_URL;
 
-  // Validation
   const schema = yup.object({
-    title: yup.string().required('Title is required').min(3, 'Title must be at least 3 characters'),
-    summary: yup
-      .string()
-      .required('Summary is required')
-      .min(10, 'Summary must be at least 10 characters')
-      .max(350, 'Summary cannot have more than 350 characters'),
-    content: yup
-      .string()
-      .required('Content is required')
-      .min(10, 'Content must be at least 10 characters'),
+    title: yup.string().required().min(3),
+    summary: yup.string().required().min(10).max(350),
+    content: yup.string().required().min(10),
   });
 
   const { handleSubmit } = useForm({
     validationSchema: schema,
   });
 
-  const { value: title, errorMessage: titleError, handleBlur: titleBlur } = useField('title');
-  const {
-    value: summary,
-    errorMessage: summaryError,
-    handleBlur: summaryBlur,
-  } = useField('summary');
-  const {
-    value: content,
-    errorMessage: contentError,
-    handleBlur: contentBlur,
-  } = useField('content');
+  const { value: title } = useField('title');
+  const { value: summary } = useField('summary');
+  const { value: content } = useField('content');
 
   watch(
     () => blogPost.value,
     (post) => {
-      title.value = post?.title || '';
-      summary.value = post?.summary || '';
-      content.value = post?.content || '';
-      coverImage.value = post?.coverImage || '';
+      if (!post) return;
+      title.value = post.title || '';
+      summary.value = post.summary || '';
+      content.value = post.content || '';
+      coverImage.value = post.coverImage || '';
     },
     { immediate: true }
   );
 
   const renderedContent = computed(() => {
-    return blogPost.value ? DOMPurify.sanitize(marked.parse(blogPost.value.content || '')) : '';
+    return blogPost.value?.content
+      ? DOMPurify.sanitize(marked.parse(blogPost.value.content))
+      : '';
   });
 
   function toggleEditMode() {
-    isEditMode.value = isEditMode.value ? false : true;
+    isEditMode.value = !isEditMode.value;
   }
 
   function handleImageUpload(url) {
@@ -292,30 +233,25 @@
   const getBlogPost = async () => {
     isLoading.value = true;
 
-    const token = localStorage.getItem('jwt');
+    try {
+      const token = localStorage.getItem('jwt');
 
-    const response = await get(
-      `${import.meta.env.VITE_API_URL}/api/blog/getblogpost/${blogPostId}`,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
+      const response = await get(
+        `${import.meta.env.VITE_API_URL}/api/blog/getblogpost/${blogPostId}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
 
-    if (!response?.success) {
-      blogPost.value = null;
+      blogPost.value = response?.success ? response.data : null;
+    } finally {
       isLoading.value = false;
-      return;
     }
-
-    blogPost.value = response.data;
-
-    isLoading.value = false;
   };
 
   const updateBlogPost = handleSubmit(async (values) => {
     const token = localStorage.getItem('jwt');
+
     const response = await post(
       `${import.meta.env.VITE_API_URL}/api/blog/updateblogpost`,
       {
@@ -326,9 +262,7 @@
         coverImage: coverImage.value,
       },
       {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+        headers: { Authorization: `Bearer ${token}` },
       }
     );
 
@@ -340,12 +274,11 @@
 
   const deleteBlogPost = async () => {
     const token = localStorage.getItem('jwt');
+
     const response = await _delete(
       `${import.meta.env.VITE_API_URL}/api/blog/deleteblogpost/${blogPostId}`,
       {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+        headers: { Authorization: `Bearer ${token}` },
       }
     );
 
@@ -364,36 +297,27 @@
     if (!post) return;
 
     const title = `${post.title} | Steven Software - Web Development Insights`;
+
     const description =
       post.summary?.trim() ||
       'Practical web development insights on Vue, .NET, performance, SEO, and building better software products that convert and scale.';
 
-    const image = post.coverImage ? `${baseUrl}${post.coverImage}` : `${baseUrl}/og-default.jpg`;
+    imageUrl.value = post.coverImage
+      ? `${baseUrl}${post.coverImage}`
+      : `${baseUrl}/og-default.jpg`;
 
     useHead({
       title,
       meta: [
         {
           name: 'description',
-          content: description.length > 160
-            ? description.slice(0, 157) + '...'
-            : description,
-        },
-        {
-          name: 'keywords',
           content:
-            'vue js, vue developer Sweden, .net development, full stack developer Sweden, webbutvecklare Sverige, web performance optimization, seo optimization Sweden, conversion optimization, software engineering blog, modern web apps, hire web developer Sweden',
+            description.length > 160
+              ? description.slice(0, 157) + '...'
+              : description,
         },
-        { property: 'og:title', content: post.title },
-        { property: 'og:description', content: description },
-        { property: 'og:type', content: 'article' },
-        { property: 'og:image', content: image },
-        { property: 'og:site_name', content: 'Steven Software' },
-
-        { name: 'twitter:card', content: 'summary_large_image' },
-        { name: 'twitter:title', content: post.title },
-        { name: 'twitter:description', content: description },
-        { name: 'twitter:image', content: image },
+        { property: 'og:image', content: imageUrl.value },
+        { name: 'twitter:image', content: imageUrl.value },
       ],
     });
   });

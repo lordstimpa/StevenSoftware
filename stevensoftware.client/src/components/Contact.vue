@@ -31,11 +31,24 @@
         {{ mailSuccessMessage }}
       </div>
 
-      <div class="flex flex-col sm:flex-row gap-5">
+      <div class="flex flex-col w-full">
+        <label class="font-semibold text-slate-300 mb-2">
+          Package
+        </label>
 
+        <select v-model="selectedPlan" class="bg-[#45567d] text-slate-100 px-4 py-2 border rounded-md focus:outline-none focus:ring-2 border-slate-400/20 focus:ring-slate-500">
+          <option value="">{{ t('contact.plan_not_sure') }}</option>
+          <option value="essential">{{ t('contact.plan_essential') }}</option>
+          <option value="business">{{ t('contact.plan_business') }}</option>
+          <option value="custom">{{ t('contact.plan_custom') }}</option>
+        </select>
+      </div>
+
+
+      <div class="flex flex-col sm:flex-row gap-5">
         <div class="flex flex-col w-full">
           <label class="font-semibold text-slate-300 mb-2">{{ t('contact.first_name') }}*</label>
-          <input v-model="firstName" @blur="firstNameBlur" type="text"
+          <input v-model="firstName" @blur="firstNameBlur" type="text" ref="firstNameInput"
                  :placeholder="t('contact.first_name_placeholder')" :class="inputClass(firstNameError)" />
           <p v-if="firstNameError" class="text-red-400 text-sm mt-1">{{ firstNameError }}</p>
         </div>
@@ -94,16 +107,30 @@
 </template>
 
 <script setup>
-  import { ref, onMounted } from 'vue'
+  import { ref, onMounted, computed, watch } from 'vue'
   import { post } from '../tools/api'
   import { useForm, useField } from 'vee-validate'
   import * as yup from 'yup'
   import { useI18n } from 'vue-i18n'
 
+  const props = defineProps({
+    selectedPlan: {
+      type: String,
+      default: ''
+    }
+  })
+
+  const selectedPlan = computed({
+    get: () => props.selectedPlan,
+    set: (val) => emit('update:selectedPlan', val)
+  })
+
+  const emit = defineEmits(['update:selectedPlan'])
   const { t } = useI18n()
 
   const recaptchaSiteKey = import.meta.env.VITE_RECAPTCHA_SITE_KEY
 
+  const firstNameInput = ref(null)
   const mailSuccessMessage = ref('')
   const mailErrorMessage = ref('')
   const captchaDone = ref(false)
@@ -131,6 +158,10 @@
   const { value: lastName } = useField('lastName')
   const { value: email, errorMessage: emailError, handleBlur: emailBlur } = useField('email')
   const { value: message, errorMessage: messageError, handleBlur: messageBlur } = useField('message')
+
+  watch(() => props.selectedPlan, (val) => {
+    if (val) selectedPlan.value = val
+  })
 
   const inputClass = (error) => [
     'bg-[#45567d] text-slate-100 px-4 py-2 border rounded-md focus:outline-none focus:ring-2 placeholder:text-slate-300',

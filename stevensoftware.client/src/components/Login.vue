@@ -1,5 +1,5 @@
 <template>
-  <div class="flex-1 flex justify-center items-center mb-30 py-10 px-4 bg-slate-100 text-slate-900">
+  <div v-animate class="flex-1 flex justify-center items-center mb-30 py-10 px-4 bg-slate-100 text-slate-900">
     <div class="flex flex-col justify-center p-8 rounded-xl shadow-md w-2xl bg-white border border-slate-200">
 
       <div class="mb-8 text-center border-b border-slate-200 pb-4">
@@ -21,7 +21,7 @@
                  type="email"
                  id="email"
                  v-model="email"
-                 :placeholder="t('login.emailPlaceholder')" />
+                 placeholder="email@hotmail.com" />
         </div>
 
         <p v-show="email && !emailValid" class="text-sm text-red-500 mt-1">

@@ -1,5 +1,5 @@
 <template>
-  <div class="py-[76px] px-4 text-slate-900 flex flex-col items-center justify-center gap-8 bg-slate-100">
+  <div v-animate class="py-[76px] px-4 text-slate-900 flex flex-col items-center justify-center gap-8 bg-slate-100">
     <div class="flex flex-col max-w-screen-lg w-full px-4 py-10 mt-6 md:p-8 rounded-xl shadow-md bg-white border border-slate-200">
       <div class="flex justify-between mb-8 border-b border-slate-200 pb-4">
         <h1 class="text-2xl md:text-4xl font-bold text-slate-900">Create new blog post</h1>

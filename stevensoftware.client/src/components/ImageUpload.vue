@@ -52,7 +52,7 @@
     existingImage: String,
   });
 
-  const baseUrl = import.meta.env.VITE_URL;
+  const baseUrl = import.meta.env.VITE_API_URL;
   const displayToast = ref(false);
   const toastMessage = ref('');
 
@@ -87,7 +87,12 @@
 
   function handleUploadComplete(error, file) {
     if (!error) {
-      const response = JSON.parse(file.serverId);
+      let response;
+      try {
+        response = JSON.parse(file.serverId);
+      } catch {
+        response = { imageUrl: file.serverId };
+      }
       displayToast.value = true;
       toastMessage.value = response.message;
       emit('uploaded', response.imageUrl);
@@ -97,7 +102,12 @@
   const handleFileRemoved = async (error, file) => {
     if (error || !file?.serverId) return;
 
-    const response = JSON.parse(file.serverId);
+    let response;
+    try {
+      response = JSON.parse(file.serverId);
+    } catch {
+      response = { imageUrl: file.serverId };
+    }
     const uploadedFileName = response.imageUrl?.split('/').pop();
     if (!uploadedFileName) return;
 

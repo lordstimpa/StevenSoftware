@@ -1,17 +1,22 @@
 export default {
-  mounted(el, binding) {
-    el.setAttribute('data-animate', binding.value || 'fade-up');
+    mounted(el, binding) {
+      const type = typeof binding.value === 'string' ? binding.value : 'fade-up'
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          el.classList.add('in-view');
-          observer.unobserve(el);
+      el.setAttribute('data-animate', type)
+
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            el.classList.add('in-view')
+            observer.unobserve(el)
+          }
+        },
+        {
+          threshold: 0.1,
+          rootMargin: '0px 0px -120px 0px'
         }
-      },
-      { threshold: 0.15 }
-    );
+      )
 
-    observer.observe(el);
-  }
+      observer.observe(el)
+    }
 };

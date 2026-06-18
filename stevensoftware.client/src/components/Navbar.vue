@@ -1,82 +1,96 @@
 <template>
   <div class="fixed top-0 left-0 right-0 z-50 flex justify-center">
-    <div class="absolute inset-0 border-b border-none backdrop-blur-md transition-colors duration-700 ease-out"
+    <div class="absolute inset-0 backdrop-blur-md transition-colors duration-300 ease-out"
          :class="[
-            isHome
-              ? (scrolled ? 'bg-slate-900/95 shadow-md' : 'bg-transparent')
-              : 'bg-slate-900'
-          ]" />
+              isHome
+                ? (scrolled ? 'bg-slate-900/95 opacity-100' : 'bg-slate-900/0 opacity-0')
+                : 'bg-slate-900/95 opacity-100'
+            ]"
+         />
 
     <div class="relative w-full lg:w-11/12 flex justify-between items-center p-4">
       <div class="flex justify-between gap-8">
 
-        <RouterLink to="/" class="text-lg p-2 rounded-md text-white font-semibold hover:text-slate-300 transition">
+        <RouterLink to="/"
+                    class="text-lg p-2 rounded-md font-semibold transition text-slate-300 hover:text-white">
           {{ $t('navbar.brand') }}
         </RouterLink>
 
         <span class="hidden lg:inline-block text-lg text-white p-2">|</span>
 
-        <RouterLink to="/services" class="hidden lg:inline-block text-lg p-2 rounded-md text-white font-semibold hover:text-slate-300 transition">
+        <RouterLink to="/services"
+                    class="hidden lg:inline-block text-lg p-2 rounded-md font-semibold transition text-slate-300 hover:text-white">
           {{ $t('navbar.services') }}
         </RouterLink>
 
-        <RouterLink to="/case-studies" class="hidden lg:inline-block text-lg p-2 rounded-md text-white font-semibold hover:text-slate-300 transition">
+        <RouterLink to="/case-studies"
+                    class="hidden lg:inline-block text-lg p-2 rounded-md font-semibold transition text-slate-300 hover:text-white">
           {{ $t('navbar.caseStudies') }}
         </RouterLink>
 
-        <RouterLink to="/blog" class="hidden lg:inline-block text-lg p-2 rounded-md text-white font-semibold hover:text-slate-300 transition">
+        <RouterLink to="/blog"
+                    class="hidden lg:inline-block text-lg p-2 rounded-md font-semibold transition text-slate-300 hover:text-white">
           {{ $t('navbar.blog') }}
         </RouterLink>
+
       </div>
 
       <div v-if="!user?.userName" class="hidden lg:flex gap-4">
+        <button @click="toggleLanguage"
+                class="flex items-center gap-2 px-3 py-1.5 rounded-md border border-white/15 bg-white/5 hover:bg-white/10 transition cursor-pointer text-sm font-medium text-white">
+          <transition name="fade" mode="out-in">
+            <span :key="locale" class="text-base leading-none">
+              {{ locale === 'en' ? '🇬🇧 En' : '🇸🇪 Sv' }}
+            </span>
+          </transition>
+        </button>
+
         <a href="mailto:steven.dalfall@gmail.com"
            class="flex items-center gap-2 text-lg font-semibold text-white bg-indigo-600 hover:bg-indigo-700 px-5 py-2 rounded-3xl transition">
           {{ $t('navbar.email') }}
         </a>
-
-        <button @click="toggleLanguage"
-                class="w-9 h-9 flex items-center justify-center rounded-md hover:bg-white/10 transition text-xl cursor-pointer">
-          <transition name="fade" mode="out-in">
-            <span :key="locale">
-              {{ locale === 'en' ? '🇬🇧' : '🇸🇪' }}
-            </span>
-          </transition>
-        </button>
       </div>
 
-      <div v-if="user?.userName" class="hidden lg:flex items-center gap-8">
-        <RouterLink to="/profile"
-                    class="text-lg p-2 rounded-md text-white font-semibold hover:text-slate-300 transition">
-          {{ user.userName }}
-        </RouterLink>
-
-        <button @click="showModal = true"
-                class="text-lg font-semibold text-white bg-indigo-600 hover:bg-indigo-700 px-5 py-2 rounded-3xl transition cursor-pointer">
-          {{ $t('navbar.logout') }}
+      <div v-if="user?.userName" class="hidden lg:flex items-center gap-4 relative">
+        <button @click="userMenuOpen = !userMenuOpen"
+                class="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 transition text-white">
+          <span class="text-sm font-semibold max-w-[140px] truncate">
+            {{ user.userName }}
+          </span>
+          <ChevronDown class="w-4 h-4" />
         </button>
 
+        <div v-if="userMenuOpen"
+             class="absolute right-0 top-12 w-48 bg-slate-900 border border-white/10 rounded-xl shadow-xl overflow-hidden">
+          <RouterLink to="/profile"
+                      class="block px-4 py-3 hover:bg-white/10 transition text-sm text-white"
+                      @click="userMenuOpen = false">
+            Profile
+          </RouterLink>
+
+          <button @click="showModal = true; userMenuOpen = false"
+                  class="w-full text-left px-4 py-3 hover:bg-white/10 transition text-sm text-white">
+            Logout
+          </button>
+        </div>
+
         <button @click="toggleLanguage"
-                class="w-9 h-9 flex items-center justify-center rounded-md hover:bg-white/10 transition text-xl cursor-pointer">
-          <transition name="fade" mode="out-in">
-            <span :key="locale">
-              {{ locale === 'en' ? '🇬🇧' : '🇸🇪' }}
-            </span>
-          </transition>
+                class="px-3 py-1.5 rounded-md border border-white/15 bg-white/5 hover:bg-white/10 transition text-sm text-white">
+          <span>{{ locale === 'en' ? '🇬🇧 En' : '🇸🇪 Sv' }}</span>
         </button>
       </div>
 
       <div class="lg:hidden flex gap-8 items-center">
         <button @click="toggleLanguage"
-                class="w-9 h-9 flex items-center justify-center rounded-md hover:bg-white/10 transition text-xl cursor-pointer">
+                class="flex items-center gap-2 px-3 py-1.5 rounded-md border border-white/15 bg-white/5 hover:bg-white/10 transition cursor-pointer text-sm font-medium text-white">
           <transition name="fade" mode="out-in">
-            <span :key="locale">
-              {{ locale === 'en' ? '🇬🇧' : '🇸🇪' }}
+            <span :key="locale" class="text-base leading-none">
+              {{ locale === 'en' ? '🇬🇧 En' : '🇸🇪 Sv' }}
             </span>
           </transition>
         </button>
 
-        <button @click="toggleMenu" class="w-8 h-8 flex items-center justify-center text-white">
+        <button @click="toggleMenu" class="w-8 h-8 flex items-center justify-center text-white cursor-pointer">
           <Menu v-show="!mobileOpen" class="w-7 h-7" />
           <X v-show="mobileOpen" class="w-7 h-7" />
         </button>
@@ -90,16 +104,16 @@
 
     <div class="h-[76px] shrink-0 flex items-center justify-end px-5 gap-8 border-b border-white/10">
       <button @click="toggleLanguage"
-              class="w-9 h-9 flex items-center justify-center rounded-md hover:bg-white/10 transition text-xl cursor-pointer">
+              class="flex items-center gap-2 px-3 py-1.5 rounded-md border border-white/15 bg-white/5 hover:bg-white/10 transition cursor-pointer text-sm font-medium text-white">
         <transition name="fade" mode="out-in">
-          <span :key="locale">
-            {{ locale === 'en' ? '🇬🇧' : '🇸🇪' }}
+          <span :key="locale" class="text-base leading-none">
+            {{ locale === 'en' ? '🇬🇧 En' : '🇸🇪 Sv' }}
           </span>
         </transition>
       </button>
 
       <button @click="closeMenuInstant"
-              class="w-9 h-9 flex items-center justify-center rounded-md hover:bg-white/10 transition">
+              class="w-9 h-9 flex items-center justify-center rounded-md hover:bg-white/10 transition cursor-pointer">
         <X class="w-6 h-6" />
       </button>
     </div>
@@ -122,22 +136,44 @@
         </div>
       </div>
 
-      <div class="flex flex-col items-end gap-2 px-5 py-6 text-right text-lg">
-        <RouterLink to="/" @click="closeMenuInstant" class="py-3 px-3 rounded-md hover:bg-white/10 transition">
-          {{ $t('navbar.home') }}
-        </RouterLink>
+      <div class="px-5 py-6 flex flex-col gap-2 text-right">
+        <div class="flex flex-col gap-2">
+          <RouterLink to="/" @click="closeMenuInstant"
+                      class="py-3 px-3 rounded-md hover:bg-white/10 transition text-lg">
+            {{ $t('navbar.home') }}
+          </RouterLink>
 
-        <RouterLink to="/services" @click="closeMenuInstant" class="py-3 px-3 rounded-md hover:bg-white/10 transition">
-          {{ $t('navbar.services') }}
-        </RouterLink>
+          <RouterLink to="/services" @click="closeMenuInstant"
+                      class="py-3 px-3 rounded-md hover:bg-white/10 transition text-lg">
+            {{ $t('navbar.services') }}
+          </RouterLink>
 
-        <RouterLink to="/case-studies" @click="closeMenuInstant" class="py-3 px-3 rounded-md hover:bg-white/10 transition">
-          {{ $t('navbar.caseStudies') }}
-        </RouterLink>
+          <RouterLink to="/case-studies" @click="closeMenuInstant"
+                      class="py-3 px-3 rounded-md hover:bg-white/10 transition text-lg">
+            {{ $t('navbar.caseStudies') }}
+          </RouterLink>
 
-        <RouterLink to="/blog" @click="closeMenuInstant" class="py-3 px-3 rounded-md hover:bg-white/10 transition">
-          {{ $t('navbar.blog') }}
-        </RouterLink>
+          <RouterLink to="/blog" @click="closeMenuInstant"
+                      class="py-3 px-3 rounded-md hover:bg-white/10 transition text-lg">
+            {{ $t('navbar.blog') }}
+          </RouterLink>
+        </div>
+
+        <div v-if="user?.userName" class="mt-4 pt-4 border-t border-white/10 flex flex-col gap-2">
+
+          <RouterLink to="/profile"
+                      @click="closeMenuInstant"
+                      class="py-3 px-3 rounded-md hover:bg-white/10 transition text-lg">
+            Profile
+          </RouterLink>
+
+          <button @click="showModal = true; closeMenuInstant()"
+                  class="py-3 px-3 rounded-md hover:bg-white/10 transition text-lg text-right text-red-300 cursor-pointer">
+            Logout
+          </button>
+
+        </div>
+
       </div>
 
       <div class="mt-auto px-5 py-4 border-t border-white/10">
@@ -185,7 +221,7 @@
   import { useRoute } from 'vue-router'
   import { storeToRefs } from 'pinia'
   import { useUserStore } from '@/stores/UserStore'
-  import { Menu, X } from 'lucide-vue-next'
+  import { Menu, X, ChevronDown } from 'lucide-vue-next'
   import i18n, { setLanguage } from '@/i18n'
   import Modal from './Modal.vue'
 
@@ -197,6 +233,7 @@
   const route = useRoute()
   const isHome = computed(() => route.path === '/')
 
+  const userMenuOpen = ref(false)
   const scrolled = ref(false)
   const showModal = ref(false)
   const mobileOpen = ref(false)
@@ -245,5 +282,13 @@
 
   .fade-enter-from, .fade-leave-to {
     opacity: 0;
+  }
+
+  .router-link-active {
+    color: white !important;
+  }
+
+  .router-link-exact-active {
+    color: white !important;
   }
 </style>

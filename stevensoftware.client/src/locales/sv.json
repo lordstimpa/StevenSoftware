@@ -1,18 +1,10 @@
 {
   "hero": {
-    "title_start": "Få en webbplats som ger dig fler",
-    "title_highlight": "kundförfrågningar",
-    "subtitle": "Jag hjälper företag att växa sin närvaro online med enkla och effektiva webbplatser som omvandlar besökare till kunder.",
-    "problem": "Många webbplatser får trafik men lyckas inte omvandla besökare till riktiga förfrågningar.",
-    "benefits": {
-      "1": "Attrahera fler rätt besökare",
-      "2": "Förvandla besök till riktiga leads",
-      "3": "Bygg en starkare närvaro online",
-      "4": "Fungerar smidigt på alla enheter"
-    },
+    "headline_part_1": "Webbsidor som ger dig",
+    "headline_highlight": "fler kunder",
+    "subtitle": "Webbplatser som flyter med dina besökare och omvandlar trafik till riktiga förfrågningar.",
     "cta_primary": "Få fler leads",
-    "cta_secondary": "Låt oss prata",
-    "disclaimer": "*Fokus på tillväxt, inte bara design"
+    "cta_secondary": "Se resultat"
   },
   "home": {
     "lead_driven_web_development": "Lead-driven webbutveckling",
@@ -28,20 +20,19 @@
     "conversion_contact_systems_description": "Jag sätter upp smarta kontaktformulär, landningssidor och funnels som minskar friktion och omvandlar trafik till faktiska affärsförfrågningar.",
 
     "how_it_works": "Så här fungerar det",
-    "how_it_works_description": "En enkel process för att förbättra din webbplats och göra den till en stabil källa till leads.",
+    "how_it_works_description": "En tydlig process oavsett om du behöver en ny webbplats, en uppgradering eller bättre resultat från din nuvarande.",
 
-    "step_01_title": "Du berättar vad som inte fungerar",
-    "step_01_description": "Vi tittar på din nuvarande webbplats, dina mål och vad som hindrar dig från att få fler leads.",
+    "step_01_title": "Vi går igenom dina mål",
+    "step_01_description": "Vi klargör vad du behöver – en ny webbplats, en förbättring eller bättre resultat – och vad som är viktigt för ditt företag.",
 
-    "step_02_title": "Jag identifierar vad som blockerar tillväxt",
-    "step_02_description": "Jag analyserar din webbplats, SEO, struktur och konverteringsflöde för att hitta vad som kostar dig kunder.",
+    "step_02_title": "Vi planerar lösningen",
+    "step_02_description": "Jag tar fram struktur, designriktning och teknisk lösning baserat på dina mål och din målgrupp.",
 
-    "step_03_title": "Förbättringar genomförs",
-    "step_03_description": "Din webbplats uppgraderas med bättre design, struktur, hastighet och konverteringsflöde.",
+    "step_03_title": "Vi bygger och förbättrar",
+    "step_03_description": "Din webbplats skapas eller uppgraderas med fokus på hastighet, design, tydlighet och konvertering.",
 
-    "step_04_title": "Fler leads börjar komma in",
-    "step_04_description": "Din webbplats blir ett system som attraherar och konverterar besökare till faktiska förfrågningar.",
-
+    "step_04_title": "Du börjar se resultat",
+    "step_04_description": "Den färdiga webbplatsen är optimerad för att attrahera besökare och omvandla dem till leads – med möjlighet till fortsatt förbättring.",
     "why_work_with_me": "Varför arbeta med mig?",
     "why_work_with_me_description": "Ett fokuserat arbetssätt för att göra webbplatser till stabila källor för leads.",
 
@@ -54,9 +45,87 @@
     "insights_title": "Insikter om att bygga bättre webbplatser och få fler kunder",
     "insights_description": "Praktiska uppdateringar om webbutveckling, SEO och förbättring av konverteringsgrad — baserat på verkliga kundprojekt."
   },
+  "pricing": {
+    "title": "Enkel prissättning",
+    "subtitle": "Välj ett paket baserat på dina behov. Du kan alltid uppgradera senare.",
+
+    "starter": {
+      "title": "Startwebbplats",
+      "description": "En enkel närvaro online för att snabbt få ditt företag på webben.",
+      "price": "4,000 SEK",
+      "cta": "Kom igång"
+    },
+    "business": {
+      "title": "Företagswebbplats",
+      "description": "Designad för att göra din webbplats till en stabil källa för leads.",
+      "price": "10,000 SEK",
+      "cta": "Låt oss bygga detta",
+      "badge": "Rekommenderas"
+    },
+    "custom": {
+      "title": "Premiumwebbplats",
+      "description": "För avancerade system, e-handel och helt skräddarsydda lösningar.",
+      "price": "20,000+ SEK",
+      "cta": "Få offert"
+    },
+    "features": {
+      "starter": {
+        "1": "1-sidig webbplats",
+        "2": "Responsiv design (mobil + desktop)",
+        "3": "Grundläggande SEO",
+        "4": "Kontaktformulär",
+        "5": "Hosting-setup (konfigureras åt dig)"
+      },
+      "business": {
+        "1": "3–5 sidor webbplats",
+        "2": "Responsiv design (mobil + desktop)",
+        "3": "Grundläggande SEO",
+        "4": "Kontaktformulär",
+        "5": "Hosting-setup (konfigureras åt dig)"
+      },
+      "custom": {
+        "1": "10+ sidor webbplats",
+        "2": "Responsiv design (mobil + desktop)",
+        "3": "Avancerad SEO-optimering",
+        "4": "Kontaktformulär",
+        "5": "Hosting-setup (konfigureras åt dig)"
+      },
+      "shared": {
+        "1": "Konverteringsfokuserad struktur",
+        "2": "Lead-optimering",
+        "3": "Integrationer & tillägg",
+        "4": "E-handel",
+        "5": "Betalningslösningar",
+        "6": "Skräddarsydda backend-system"
+      }
+    }
+  },
   "case_studies": {
-    "title": "Fallstudier",
-    "description": "Utforska projekt från Steven Software och se exempel på lösningar byggda med .NET, Vue, React och andra moderna tekniker."
+    "title": "Case Studies",
+    "description": "Utforska Steven Softwares portfolio av webbutvecklingsprojekt inom .NET, Vue, React och mer.",
+    "hero_note": "Jag letar just nu efter fler projekt — kanske ditt!",
+
+    "overview_tag": "Vad jag gör",
+    "overview_title": "Webbplatser byggda för resultat — inte bara närvaro",
+    "overview_subtitle": "Jag fokuserar på prestanda, konvertering och tydlighet. Allt byggs för att göra besökare till kunder.",
+
+    "cards": {
+      "strategy": {
+        "tag": "Strategi",
+        "title": "Byggt med syfte",
+        "description": "Varje projekt börjar med att förstå dina affärsmål — inte bara design."
+      },
+      "performance": {
+        "tag": "Prestanda",
+        "title": "Snabbt från start",
+        "description": "Optimerat för hastighet, SEO och Core Web Vitals från första dagen."
+      },
+      "conversion": {
+        "tag": "Konvertering",
+        "title": "Designat för att konvertera",
+        "description": "Ren UX och struktur som omvandlar trafik till leads och kunder."
+      }
+    }
   },
   "case_study": {
     "read": "Läs mer",
@@ -71,82 +140,79 @@
     "gaming_3": "Webbplatsen var fullt live på Azure men vi saknade finansiering för att hålla den online."
   },
   "contact": {
-    "title": "Låt oss bygga något som faktiskt ger dig kunder",
-    "subtitle": "Berätta vad du jobbar på — jag återkommer med tydliga nästa steg, idéer och vad som krävs för att förbättra din webbplats.",
+    "title": "Låt oss göra din webbplats till en källa för kunder",
+    "subtitle": "Berätta vad du har idag — jag analyserar din webbplats och visar hur du kan få fler förfrågningar och bättre konvertering.",
 
-    "benefit_1": "Gratis initial genomgång",
-    "benefit_2": "Ingen förpliktelse",
+    "benefit_1": "Kostnadsfri konverteringsanalys",
+    "benefit_2": "Tydliga förbättringsförslag",
     "benefit_3": "Svar inom 1–2 dagar",
 
     "first_name": "Förnamn",
     "last_name": "Efternamn",
     "email": "E-post",
-    "message_label": "Vad vill du förbättra?",
+    "message_label": "Hur kan jag vara till hjälp?",
 
     "first_name_placeholder": "John",
     "last_name_placeholder": "Doe",
-    "message_placeholder": "Exempel: Jag vill få fler leads från min webbplats...",
+    "message_placeholder": "Exempel: Jag behöver en ny webbplats som ger fler kunder...",
 
-    "submit": "Få min kostnadsfria webbplatsanalys",
+    "submit": "Skicka",
     "sending": "Skickar...",
 
-    "footer_note": "Jag tittar på din webbplats (eller idé) och berättar exakt vad som hindrar konverteringar."
+    "footer_note": "Jag visar hur en ny eller förbättrad webbplats kan hjälpa dig att få fler förfrågningar och bättre konvertering.",
+    "plan_not_sure": "Inte säker än",
+    "plan_essential": "Startwebbplats",
+    "plan_business": "Företagswebbplats",
+    "plan_custom": "Premiumwebbplats"
   },
   "footer": {
     "copyright": "© {year} Steven Software. Stolt hostad på min egen server."
   },
   "services": {
-    "title": "Tjänster",
-    "subtitle": "Vad jag hjälper dig med",
-    "intro": "Jag tar webbplatser som inte presterar och gör dem till system som genererar leads och kunder.",
+    "book_consultation": "Boka konsultation",
+    "see_packages": "Se paketen",
 
-    "hero_title": "Din webbplats ska ge dig kunder — inte bara finnas",
-    "hero_description": "Många webbplatser ser bra ut men konverterar inte besökare till förfrågningar. Jag förbättrar tydlighet, förtroende, hastighet och vägen från besök till kontakt.",
 
-    "focus_title": "Vad jag fokuserar på:",
-    "focus_1": "Gör ditt erbjudande tydligt inom sekunder",
-    "focus_2": "Bygg förtroende genom struktur och modern design",
-    "focus_3": "Förbättra hastighet så att besökare stannar",
-    "focus_4": "Led besökare naturligt till kontakt",
+    "intro_tag": "Webbplatser jag bygger",
+    "title": "Från enkla sidor till premium webbsystem",
+    "subtitle": "Jag bygger webbplatser i tre tydliga nivåer beroende på behov — från snabb one-page till kompletta affärsdrivande lösningar.",
 
-    "card_1_title": "Fixa underpresterande webbplatser",
-    "card_1_desc": "Om din sida känns gammal, rörig eller långsam moderniserar jag den så att den faktiskt fungerar för ditt företag.",
+    "starter": {
+      "label": "START",
+      "title": "Onepage webbplats",
+      "description": "En enkel, snabb och effektiv webbplats som presenterar ditt företag tydligt online.",
+      "features": {
+        "1": "Enkel & tydlig struktur",
+        "2": "Snabb lansering",
+        "3": "Kontakt & CTA-fokus"
+      }
+    },
 
-    "card_2_title": "Gör din webbplats snabb och stabil",
-    "card_2_desc": "Jag tar hand om det tekniska så att din webbplats laddar snabbt och fungerar stabilt när du behöver det som mest.",
+    "growth": {
+      "label": "TILLVÄXT",
+      "title": "Företagswebbplats",
+      "description": "En strukturerad webbplats för företag som vill synas bättre och få fler kunder.",
+      "features": {
+        "1": "Flera sidor & tydlig struktur",
+        "2": "SEO-grundad uppbyggnad",
+        "3": "Fokus på leads"
+      }
+    },
 
-    "card_3_title": "Små förbättringar som gör skillnad",
-    "card_3_desc": "Från mindre fixar till nya sidor hjälper jag dig steg för steg utan onödig komplexitet.",
-
-    "how_title": "Så här fungerar det",
-    "how_description": "En enkel process för att förstå din webbplats och göra den till något som genererar fler kunder.",
-
-    "step_1_title": "1. Du berättar vad som inte fungerar",
-    "step_1_sub": "Vi tittar på din nuvarande webbplats, mål och vad som känns som det inte fungerar.",
-    "step_1_b1": "Vad din webbplats ska uppnå",
-    "step_1_b2": "Var du tappar besökare",
-    "step_1_b3": "Hur framgång ser ut för dig",
-
-    "step_2_title": "2. Jag hittar vad som håller dig tillbaka",
-    "step_2_sub": "Jag analyserar din webbplats och identifierar vad som hindrar besökare från att bli kunder.",
-    "step_2_b1": "Tydlighet i ditt erbjudande",
-    "step_2_b2": "Hur enkelt det är att kontakta dig",
-    "step_2_b3": "Hastighet, struktur och användarupplevelse",
-
-    "step_3_title": "3. Din webbplats förbättras",
-    "step_3_sub": "Förändringar görs för att göra din webbplats tydligare, snabbare och mer effektiv.",
-    "step_3_b1": "Bättre struktur och layout",
-    "step_3_b2": "Starkare budskap och flöde",
-    "step_3_b3": "Bättre prestanda och användbarhet",
-
-    "step_4_title": "4. Fler förfrågningar börjar komma in",
-    "step_4_sub": "Din webbplats börjar fungera som ett system som attraherar och konverterar besökare.",
-    "step_4_b1": "Fler förstår vad du erbjuder",
-    "step_4_b2": "Fler tar kontakt",
-    "step_4_b3": "Fler kvalificerade leads hör av sig"
+    "premium": {
+      "label": "PREMIUM",
+      "title": "Skräddarsydda webbsystem",
+      "description": "Avancerade lösningar för företag som behöver mer än en vanlig webbplats.",
+      "features": {
+        "1": "Avancerad UX & struktur",
+        "2": "Optimerad prestanda",
+        "3": "Skräddarsydd funktionalitet"
+      }
+    }
   },
   "blog": {
     "title": "Blogg",
+    "title_note": "Insikter om hur man bygger snabba, moderna webbplatser som lockar besökare och omvandlar dem till kunder.",
     "total_posts": "Totalt antal blogginlägg",
     "create_post": "Skapa blogginlägg",
     "no_posts": "Det finns inga publicerade blogginlägg just nu. Kom tillbaka senare.",

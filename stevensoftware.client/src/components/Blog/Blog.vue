@@ -1,76 +1,88 @@
 <template>
-  <div class="py-[76px] px-4 text-slate-900 flex justify-center w-full bg-slate-100">
-    <div class="mt-6 flex flex-col px-4 py-10 md:p-10 rounded-2xl shadow-md max-w-screen-xl w-full bg-white border border-slate-200">
+  <div class="w-full bg-slate-100 text-slate-900">
 
-      <div class="flex justify-between mb-8 border-b border-slate-200 pb-4">
-        <div class="flex flex-col gap-2">
-          <h1 class="text-4xl md:text-5xl font-bold text-slate-900">
-            {{ t('blog.title') }}
-          </h1>
+    <div class="relative w-full flex justify-center px-6 py-36 lg:py-46 overflow-hidden">
+      <div class="absolute inset-0 bg-slate-950"></div>
+      <div v-animate class="relative z-10 max-w-5xl text-center flex flex-col gap-6">
+        <h1 class="text-4xl sm:text-6xl lg:text-7xl font-bold text-white leading-tight">
+          {{ t('blog.title') }}
+        </h1>
 
-          <p class="text-s md:text-md text-slate-500">
+        <p class="text-slate-300 text-lg sm:text-xl max-w-3xl mx-auto">
+          {{ t('blog.title_note') }}
+        </p>
+
+      </div>
+    </div>
+
+    <div v-animate class="w-full flex flex-col items-center justify-center py-28 px-6 bg-slate-100">
+      <div class="w-full max-w-6xl flex justify-between items-end mb-10">
+        <div>
+          <p class="text-slate-700 text-sm tracking-wider uppercase font-medium">
             {{ t('blog.total_posts') }}: {{ totalBlogPosts }}
           </p>
         </div>
 
-        <div class="flex gap-8 items-center">
-          <RouterLink v-if="user?.email"
-                      to="/createblog"
-                      class="flex items-center gap-1 text-lg cursor-pointer font-semibold text-white bg-indigo-600 hover:bg-indigo-700 px-5 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-slate-500 transition">
-            <Plus class="w-5 h-5" />
-            {{ t('blog.create_post') }}
-          </RouterLink>
+        <RouterLink v-if="user?.email"
+                    to="/createblog"
+                    class="flex items-center gap-2 text-sm font-semibold text-white bg-indigo-600 hover:bg-indigo-700 px-5 py-2 rounded-md transition">
+          <Plus class="w-4 h-4" />
+          {{ t('blog.create_post') }}
+        </RouterLink>
+      </div>
+
+      <div v-if="isLoadingBlogposts" class="w-full max-w-6xl h-[400px] flex justify-center items-center">
+        <div class="w-14 h-14 border-4 border-indigo-700 border-t-transparent rounded-full animate-spin"></div>
+      </div>
+
+      <div v-else-if="totalBlogPosts <= 0" class="w-full max-w-6xl">
+        <div class="bg-yellow-400/50 border border-yellow-300 rounded-md p-4 text-slate-900">
+          {{ t('blog.no_posts') }}
         </div>
       </div>
 
-      <div v-if="totalBlogPosts <= 0 && !isLoadingBlogposts">
-        <div class="bg-yellow-400/60 rounded-md p-4 mb-6 text-slate-900">
-          <p>{{ t('blog.no_posts') }}</p>
+      <div v-else class="w-full max-w-6xl flex flex-col gap-10 lg:border-l-2 lg:border-slate-300/60">
+        <div v-for="blogPost in blogPosts"
+             :key="blogPost.id"
+             class="flex flex-col lg:flex-row gap-6 lg:gap-10">
+
+          <div class="hidden lg:flex flex-col w-1/3 relative pl-8 text-slate-700">
+            <CircleDot class="absolute top-2 -left-[9px] w-4 h-4 text-slate-400" />
+
+            <p class="text-slate-700 font-medium text-sm tracking-wider uppercase">
+              {{ formatDateTime(blogPost.createdAt) }}
+            </p>
+          </div>
+
+          <div class="w-full lg:w-2/3">
+            <BlogPostCard :blogPost="blogPost" :user="user" />
+          </div>
+
         </div>
       </div>
 
-      <div v-if="isLoadingBlogposts" class="w-full h-[600px] flex justify-center items-center">
-        <div class="w-16 h-16 border-8 border-indigo-500 border-t-transparent rounded-full animate-spin"></div>
-      </div>
+      <div class="w-full max-w-6xl flex justify-center mt-16 gap-4 border-t border-slate-200 pt-8">
 
-      <div v-else
-           v-for="blogPost in blogPosts"
-           class="relative flex gap-4 border-slate-200 md:border-l pt-8 pb-8">
-        <div class="hidden md:flex flex-col gap-6 w-3/10 h-full relative pl-8">
-          <CircleDot class="absolute top-0 translate-y-[4px] -left-2 w-4 h-4 text-slate-400" />
-
-          <p class="font-medium text-slate-700">
-            {{ formatDateTime(blogPost.createdAt) }}
-          </p>
-        </div>
-
-        <div class="w-full md:w-7/10 h-full rounded-sm">
-          <BlogPostCard :blogPost="blogPost" :user="user" />
-        </div>
-      </div>
-
-      <div class="flex justify-center pt-8 gap-6 border-slate-200 border-t">
         <ChevronLeft @click="currentPageNumber > 1 && getBlogs(currentPageNumber - 1)"
-                     class="w-8 h-8 hover:cursor-pointer text-slate-600 hover:text-slate-900 transition"
-                     :class="{ 'text-slate-300 cursor-default': currentPageNumber === 1 || totalPages === 1 }" />
+                     class="w-7 h-7 cursor-pointer transition"
+                     :class="currentPageNumber === 1 ? 'text-slate-300' : 'text-slate-600 hover:text-slate-900'" />
 
-        <div v-for="page in totalPages" :key="page">
-          <button @click="getBlogs(page)"
-                  :disabled="page === currentPageNumber"
-                  class="text-xl transition px-2 hover:cursor-pointer"
-                  :class="{
-              'underline font-bold text-slate-900': page === currentPageNumber,
-              'text-slate-500 hover:text-slate-900': page !== currentPageNumber
-            }">
+        <div class="flex gap-2">
+          <button v-for="page in totalPages"
+                  :key="page"
+                  @click="getBlogs(page)"
+                  class="px-3 py-1 rounded-md text-sm transition"
+                  :class="page === currentPageNumber
+              ? 'bg-slate-900 text-white'
+              : 'text-slate-600 hover:text-slate-900'">
             {{ page }}
           </button>
         </div>
 
         <ChevronRight @click="currentPageNumber < totalPages && getBlogs(currentPageNumber + 1)"
-                      class="w-8 h-8 hover:cursor-pointer text-slate-600 hover:text-slate-900 transition"
-                      :class="{
-            'text-slate-300 cursor-default': currentPageNumber === totalPages || totalPages === 1
-          }" />
+                      class="w-7 h-7 cursor-pointer transition"
+                      :class="currentPageNumber === totalPages ? 'text-slate-300' : 'text-slate-600 hover:text-slate-900'" />
+
       </div>
 
     </div>

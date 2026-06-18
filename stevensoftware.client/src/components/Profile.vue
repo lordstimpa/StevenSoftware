@@ -1,5 +1,5 @@
 <template>
-  <div class="flex-1 flex justify-center items-center mb-30 py-10 px-4 bg-slate-100 text-slate-900">
+  <div v-animate class="flex-1 flex justify-center items-center mb-30 py-10 px-4 bg-slate-100 text-slate-900">
     <div class="flex flex-col justify-center px-4 py-8 md:p-8 rounded-xl shadow-md max-w-screen-lg w-full bg-white border border-slate-200">
 
       <div class="mb-8 border-b border-slate-200 pb-4">

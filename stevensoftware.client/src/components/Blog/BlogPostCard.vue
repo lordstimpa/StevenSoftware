@@ -3,7 +3,7 @@
        role="button"
        tabindex="0"
        @keyup.enter="goToPost"
-       class="border border-slate-200 rounded p-4 md:p-6 cursor-pointer shadow-md hover:scale-102 hover:brightness-105 transition bg-white">
+       class="bg-white border border-slate-200 rounded-2xl shadow-md p-4 md:p-6 cursor-pointer shadow-md hover:scale-102 hover:brightness-105 transition bg-white">
 
     <img v-if="props.blogPost.coverImage"
          :src="`${baseUrl}${props.blogPost.coverImage}`"
@@ -45,7 +45,7 @@
     user: Object,
   })
 
-  const baseUrl = import.meta.env.VITE_URL
+  const baseUrl = import.meta.env.VITE_API_URL
 
   const goToPost = () => {
     router.push({
