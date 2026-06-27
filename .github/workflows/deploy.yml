@@ -27,9 +27,14 @@ jobs:
         run: |
           ssh -o StrictHostKeyChecking=no stimpadalfall@ssh.stevensoftware.se << 'EOF'
             cd stevensoftware/app/
+
             git pull origin main
-            docker-compose down
+
+            docker compose down
+
             docker image rm stevensoftware/vue:latest || true
-            docker-compose build --no-cache vue-frontend
-            docker-compose up -d
+
+            docker compose build --no-cache vue-frontend
+
+            docker compose up -d
           EOF
