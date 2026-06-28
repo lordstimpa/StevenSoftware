@@ -2,12 +2,10 @@
   <div class="fixed top-0 left-0 right-0 z-50 flex justify-center">
     <div class="absolute inset-0 backdrop-blur-md transition-colors duration-300 ease-out"
          :class="[
-              isHome
-                ? (scrolled ? 'bg-slate-900/95 opacity-100' : 'bg-slate-900/0 opacity-0')
-                : 'bg-slate-900/95 opacity-100'
-            ]"
-         />
-
+            isHome
+              ? (scrolled ? 'bg-slate-900/95' : 'bg-transparent')
+              : 'bg-slate-900/95'
+          ]" />
     <div class="relative w-full lg:w-11/12 flex justify-between items-center p-4">
       <div class="flex justify-between gap-8">
 
