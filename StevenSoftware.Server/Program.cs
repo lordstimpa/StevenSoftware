@@ -108,6 +108,12 @@ builder.Services.AddScoped<SeedingService>();
 
 var app = builder.Build();
 
+var uploadsPath = Path.Combine("/var/www/uploads");
+if (!Directory.Exists(uploadsPath))
+{
+    Directory.CreateDirectory(uploadsPath);
+}
+
 using (var scope = app.Services.CreateScope())
 {
     var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
