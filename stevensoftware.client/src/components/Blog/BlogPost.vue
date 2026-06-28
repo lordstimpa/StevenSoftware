@@ -115,7 +115,7 @@
             <div class="h-4 w-9/12 bg-slate-200 rounded animate-pulse"></div>
           </div>
 
-          <div class="prose" v-html="renderedContent"></div>
+          <div class="prose max-w-none" v-html="renderedContent"></div>
         </div>
       </div>
     </div>
