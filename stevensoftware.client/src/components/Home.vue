@@ -31,7 +31,7 @@
 
         <h1 class="text-6xl sm:text-6xl lg:text-8xl font-extrabold text-white leading-none tracking-tight">
           {{ $t('hero.headline_part_1') }}
-          <span class="text-indigo-500">
+          <span class="bg-gradient-to-r from-indigo-400 to-violet-500 bg-clip-text text-transparent">
             {{ $t('hero.headline_highlight') }}
           </span>
         </h1>
