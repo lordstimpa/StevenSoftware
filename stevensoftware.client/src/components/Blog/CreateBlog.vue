@@ -2,7 +2,7 @@
   <div v-animate class="py-[76px] px-4 text-slate-900 flex flex-col items-center justify-center gap-8 bg-slate-100">
     <div class="flex flex-col max-w-screen-lg w-full px-4 py-10 mt-6 md:p-8 rounded-xl shadow-md bg-white border border-slate-200">
       <div class="flex justify-between mb-8 border-b border-slate-200 pb-4">
-        <h1 class="text-2xl md:text-4xl font-bold text-slate-900">Create new blog post</h1>
+        <h1 class="text-2xl md:text-4xl font-bold text-slate-900">{{ isEditMode ? 'Edit blog post' : 'Create new blog post' }}</h1>
       </div>
 
       <div class="bg-yellow-500/70 rounded-md p-4 mb-6 text-slate-900">
@@ -18,7 +18,7 @@
       <form @submit.prevent="createBlogPost">
 
         <div class="flex flex-col mb-4">
-          <ImageUpload existingImage="" @uploaded="handleImageUpload" @removed="handleImageRemoval" />
+          <ImageUpload :existingImage="coverImage" @uploaded="handleImageUpload" @removed="handleImageRemoval" />
         </div>
 
         <div class="flex flex-col mb-4">
@@ -97,27 +97,37 @@
 </template>
 
 <script setup>
-  import { ref, computed } from 'vue';
-  import { post } from '../../tools/api.js';
-  import { useRouter } from 'vue-router';
+  import { ref, computed, watch } from 'vue';
+  import { post, get } from '../../tools/api.js';
+  import { useRouter, useRoute } from 'vue-router';
   import { useForm, useField } from 'vee-validate';
   import * as yup from 'yup';
   import { marked } from 'marked';
   import DOMPurify from 'dompurify';
   import ImageUpload from '../ImageUpload.vue';
 
+  const route = useRoute();
+  const router = useRouter();
+
+  const blogPost = ref(null);
+  const isLoading = ref(false);
+  const coverImage = ref('');
+
+  const id = route.query.mode === 'edit' ? Number(route.query.id) : 0;
+  const blogPostId = computed(() => route.query.id);
+  const mode = computed(() => route.query.mode);
+  const isEditMode = computed(() => mode.value === 'edit');
+
   const schema = yup.object({
-    title: yup.string().required('Title is required').min(3, 'Title must be at least 3 characters'),
-    summary: yup.string().required('Summary is required').min(10, 'Summary must be at least 10 characters').max(350, 'Summary cannot have more than 350 characters'),
-    content: yup.string().required('Content is required').min(10, 'Content must be at least 10 characters'),
+    title: yup.string().required().min(3),
+    summary: yup.string().required().min(10).max(350),
+    content: yup.string().required().min(10),
   });
 
-  const router = useRouter();
   const { handleSubmit } = useForm({
     validationSchema: schema,
   });
 
-  const coverImage = ref('');
   const { value: title, errorMessage: titleError, handleBlur: titleBlur } = useField('title');
   const { value: summary, errorMessage: summaryError, handleBlur: summaryBlur } = useField('summary');
   const { value: content, errorMessage: contentError, handleBlur: contentBlur } = useField('content');
@@ -126,38 +136,75 @@
     content.value ? DOMPurify.sanitize(marked.parse(content.value)) : ''
   );
 
+  async function getBlogPost(id) {
+    if (!id) return;
+
+    isLoading.value = true;
+
+    try {
+      const token = localStorage.getItem('jwt');
+
+      const response = await get(
+        `${import.meta.env.VITE_API_URL}/api/blog/getblogpost/${id}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+
+      const post = response?.data;
+      blogPost.value = post;
+
+      if (!post) return;
+
+      title.value = post.title ?? '';
+      summary.value = post.summary ?? '';
+      content.value = post.content ?? '';
+      coverImage.value = post.coverImage ?? '';
+    } finally {
+      isLoading.value = false;
+    }
+  }
+
+  watch(blogPostId, (id) => {
+    if (isEditMode.value && id) {
+      getBlogPost(id);
+    }
+  },
+    { immediate: true }
+  );
+
   const createBlogPost = handleSubmit(async (values) => {
     const token = localStorage.getItem('jwt');
+
     const response = await post(
       `${import.meta.env.VITE_API_URL}/api/blog/updateblogpost`,
       {
-        id: 0,
+        id: route.query.mode === 'edit' ? Number(route.query.id) : 0,
         title: values.title,
         summary: values.summary,
         content: values.content,
         coverImage: coverImage.value,
       },
       {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+        headers: { Authorization: `Bearer ${token}` },
       }
     );
 
-    if (response) {
-      router.push({
-        path: '/blog',
-      });
-    } else {
-      alert('Blog post creation failed.');
+    const savedId = response?.data?.id || response?.id;
+
+    if (!savedId) {
+      router.push('/blog');
+      return;
     }
+
+    router.push(`/blog/${savedId}`);
   });
 
   function handleImageUpload(url) {
     coverImage.value = url;
   }
 
-    function handleImageRemoval() {
+  function handleImageRemoval() {
     coverImage.value = '';
   }
 </script>

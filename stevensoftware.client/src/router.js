@@ -15,6 +15,7 @@ const routes = [
   { path: '/case-studies', name: 'CaseStudies', component: CaseStudies },
   { path: '/blog', name: 'Blog', component: Blog },
   { path: '/blog/:blogPostId', name: 'BlogPost', component: BlogPost, props: true },
+  { path: '/blog/edit/:blogPostId', name: 'EditBlog',  component: CreateBlog, props: route => ({ blogPostId: route.params.blogPostId, mode: 'edit' })},
   { path: '/createblog', name: 'CreateBlog', component: CreateBlog },
   { path: '/services', name: 'Services', component: Services }
 ];
