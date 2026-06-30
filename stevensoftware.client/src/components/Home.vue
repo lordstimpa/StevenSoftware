@@ -3,7 +3,7 @@
     <div class="absolute inset-0 bg-slate-950 z-0"></div>
     <div class="absolute inset-0 z-0">
       <video ref="heroVideo"
-             class="w-full h-full object-cover transition-[opacity,filter,transform] duration-[2000ms] ease-out"
+             class="absolute inset-0 w-full h-full object-cover pointer-events-none transition-[opacity,filter,transform] duration-[2000ms] ease-out"
              :class="videoReady
               ? 'opacity-100 blur-0 scale-100'
               : 'opacity-0 blur-md scale-105'"
@@ -11,8 +11,8 @@
              muted
              loop
              playsinline
+             webkit-playsinline="true"
              preload="auto"
-             controlslist="nodownload noplaybackrate nofullscreen noremoteplayback"
              disablepictureinpicture
              disableremoteplayback
              @contextmenu.prevent
@@ -44,7 +44,7 @@
 
           <button @click="goToContact()"
                   class="w-50 px-8 py-4 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-lg rounded-md transition shadow-lg cursor-pointer">
-            {{ $t('hero.cta_primary') }}
+            {{ $t('hero.cta_primary') }}re
           </button>
 
           <RouterLink to="/case-studies"
@@ -461,7 +461,7 @@
             </div>
 
             <div class="mt-4 text-sm font-semibold text-indigo-500 hover:underline">
-              Read more →
+              {{ blog.read_more }} →
             </div>
           </RouterLink>
         </div>

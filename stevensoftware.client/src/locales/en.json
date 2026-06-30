@@ -147,7 +147,7 @@
     "last_name_placeholder": "Doe",
     "message_placeholder": "Example: I need a new website that brings in more customers...",
 
-    "submit": "Skicka",
+    "submit": "Send",
     "sending": "Sending...",
 
     "footer_note": "I’ll show you how a new or improved website can help you attract more inquiries and convert more visitors into customers.",
@@ -223,7 +223,8 @@
     "close": "Close",
     "markdown_hint_1": "Content supports Markdown syntax — like *italic*, **bold**, etc.",
     "markdown_hint_2": "See a markdown",
-    "markdown_link": "cheat sheet"
+    "markdown_link": "cheat sheet",
+    "read_more": "Read more"
   },
   "blogCard": {
     "read": "Read",

@@ -234,7 +234,8 @@
     "close": "Stäng",
     "markdown_hint_1": "Innehållet stödjer Markdown-syntax — som *kursiv*, **fet**, osv.",
     "markdown_hint_2": "Se ett markdown",
-    "markdown_link": "fusklapp"
+    "markdown_link": "fusklapp",
+    "read_more": "Läs mer"
   },
   "blogCard": {
     "read": "Läs",
