@@ -44,7 +44,7 @@
 
           <button @click="goToContact()"
                   class="w-50 px-8 py-4 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-lg rounded-md transition shadow-lg cursor-pointer">
-            {{ $t('hero.cta_primary') }}re
+            {{ $t('hero.cta_primary') }}
           </button>
 
           <RouterLink to="/case-studies"

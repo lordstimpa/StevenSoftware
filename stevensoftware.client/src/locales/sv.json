@@ -111,17 +111,17 @@
 
     "cards": {
       "strategy": {
-        "tag": "Strategi",
+        "tag": "STRATEGI",
         "title": "Byggt med syfte",
         "description": "Varje projekt börjar med att förstå dina affärsmål — inte bara design."
       },
       "performance": {
-        "tag": "Prestanda",
+        "tag": "PRESTANDA",
         "title": "Snabbt från start",
         "description": "Optimerat för hastighet, SEO och Core Web Vitals från första dagen."
       },
       "conversion": {
-        "tag": "Konvertering",
+        "tag": "KONVERTERING",
         "title": "Designat för att konvertera",
         "description": "Ren UX och struktur som omvandlar trafik till leads och kunder."
       }

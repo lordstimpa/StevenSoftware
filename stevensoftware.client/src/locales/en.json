@@ -102,17 +102,17 @@
 
     "cards": {
       "strategy": {
-        "tag": "Strategy",
+        "tag": "STRATEGY",
         "title": "Built with purpose",
         "description": "Every project starts with understanding your business goals — not just design."
       },
       "performance": {
-        "tag": "Performance",
+        "tag": "PERFORMANCE",
         "title": "Fast by default",
         "description": "Optimized for speed, SEO and Core Web Vitals from day one."
       },
       "conversion": {
-        "tag": "Conversion",
+        "tag": "CONVERSION",
         "title": "Designed to convert",
         "description": "Clean UX and structure that turns traffic into leads and customers."
       }
